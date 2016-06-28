@@ -2,7 +2,7 @@
 // Created by Ivan Shynkarenka on 26.05.2016.
 //
 
-#include "cppbenchmark.h"
+#include "benchmark/cppbenchmark.h"
 
 #include "template/class.h"
 
