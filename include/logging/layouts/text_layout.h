@@ -11,6 +11,7 @@
 
 #include "logging/layout.h"
 
+#include <string>
 #include <vector>
 
 namespace CppLogging {
@@ -28,19 +29,31 @@ namespace CppLogging {
     - {Year}/{UtcYear} - converted to the local/UTC four-digits year (e.g. "1997")
     - {Month}/{UtcMonth} - converted to the local/UTC two-digits month (e.g. "07")
     - {Day}/{UtcDay} - converted to the local/UTC two-digits day (e.g. "16")
+    - {Hour}/{UtcHour} - converted to the local/UTC two-digits hour (e.g. "19")
+    - {Minute}/{UtcMinute} - converted to the local/UTC two-digits minute (e.g. "20")
+    - {Second}/{UtcSecond} - converted to the local/UTC two-digits second (e.g. "30")
+    - {Milli}/{UtcMilli} - converted to the local/UTC three-digits millisecond (e.g. "123")
+    - {Micro}/{UtcMicro} - converted to the local/UTC three-digits microsecond (e.g. "123")
+    - {Nano}/{UtcNano} - converted to the local/UTC three-digits nanosecond (e.g. "789")
+    - {Timezone}/{UtcTimezone} - converted to the local/UTC timezone suffix (e.g. "+01:00"/"Z")
+    - {Thread} - converted to the thread Id (e.g. "0x0028F3D8")
+    - {Level} - converted to the logging level
+    - {Logger} - converted to the logger name
+    - {Message} - converted to the log message
+    - {EndLine} - converted to the end line suffix (e.g. Unix "\n" or Windows "\r\n")
 
     Not thread-safe.
 */
-class BinaryLayout
+class TextLayout : public Layout
 {
 public:
-    BinaryLayout() : _buffer(1024) {}
-    BinaryLayout(const BinaryLayout&) = delete;
-    BinaryLayout(BinaryLayout&&) = default;
-    ~BinaryLayout();
+    TextLayout(const std::string& layout = "{UtcDateTime} [{Thread}] {Level} {Logger} - {Message}{EndLine}") : _buffer(1024) {}
+    TextLayout(const TextLayout&) = delete;
+    TextLayout(TextLayout&&) = default;
+    ~TextLayout() = default;
 
-    BinaryLayout& operator=(const BinaryLayout&) = delete;
-    BinaryLayout& operator=(BinaryLayout&&) = default;
+    TextLayout& operator=(const TextLayout&) = delete;
+    TextLayout& operator=(TextLayout&&) = default;
 
     //! Layout the given logging record into a raw buffer
     /*!
@@ -50,9 +63,9 @@ public:
     std::pair<void*, size_t> LayoutRecord(const Record& record) override;
 
 private:
-    std::vector<char> _buffer;
+    std::vector<uint8_t> _buffer;
 };
 
 } // namespace CppLogging
 
-#endif // CPPLOGGING_BINARY_LAYOUT_H
+#endif // CPPLOGGING_TEXT_LAYOUT_H

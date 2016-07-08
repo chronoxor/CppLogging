@@ -22,13 +22,13 @@ namespace CppLogging {
 
     Not thread-safe.
 */
-class BinaryLayout
+class BinaryLayout : public Layout
 {
 public:
     BinaryLayout() : _buffer(1024) {}
     BinaryLayout(const BinaryLayout&) = delete;
     BinaryLayout(BinaryLayout&&) = default;
-    ~BinaryLayout();
+    ~BinaryLayout() = default;
 
     BinaryLayout& operator=(const BinaryLayout&) = delete;
     BinaryLayout& operator=(BinaryLayout&&) = default;
@@ -41,7 +41,7 @@ public:
     std::pair<void*, size_t> LayoutRecord(const Record& record) override;
 
 private:
-    std::vector<char> _buffer;
+    std::vector<uint8_t> _buffer;
 };
 
 } // namespace CppLogging

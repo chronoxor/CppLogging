@@ -32,11 +32,12 @@ add_subdirectory("modules")
 include_directories("include")
 include_directories("modules/catch/single_include")
 include_directories("modules/CppBenchmark/include")
+include_directories("modules/CppCommon/include")
 
 # Library
 file(GLOB_RECURSE SOURCE_FILES "source/*.cpp")
 add_library(cpplogging ${SOURCE_FILES})
-target_link_libraries(cpplogging)
+target_link_libraries(cpplogging cppcommon)
 list(APPEND INSTALL_TARGETS cpplogging)
 
 # Full module components: examples, tests and install

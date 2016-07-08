@@ -10,6 +10,8 @@
 #define CPPLOGGING_RECORD_H
 
 #include "logging/level.h"
+#include "system/timestamp.h"
+#include "threads/thread.h"
 
 #include <utility>
 
@@ -33,68 +35,33 @@ namespace CppLogging {
 class Record
 {
 public:
-    Record() = default;
-    Record(const Record&) = default;
-    Record(Record&&) = default;
-    ~Record() = default;
+    //! Timestamp of the logging record
+    uint64_t timestamp;
+    //! Thread Id of the logging record
+    uint64_t thread;
+    //! Level of the logging record
+    Level level;
+    //! Logger name of the logging record
+    std::pair<char*, uint8_t>  logger;
+    //! Message of the logging record
+    std::pair<char*, uint16_t> message;
+    //! Buffer of the logging record
+    std::pair<void*, uint32_t> buffer;
 
-    Record& operator=(const Record&) = default;
-    Record& operator=(Record&&) = default;
+    Record() noexcept
+        : timestamp(CppCommon::timestamp()),
+          thread(CppCommon::Thread::CurrentThreadId()),
+          level(Level::INFO),
+          logger(nullptr, 0),
+          message(nullptr, 0),
+          buffer(nullptr, 0)
+    {}
+    Record(const Record&) noexcept = default;
+    Record(Record&&) noexcept = default;
+    ~Record() noexcept = default;
 
-    //! Get the timestamp of the logging record
-    uint64_t timestamp() const { return _timestamp; }
-    //! Get the parent thread Id of the logging record
-    uint64_t thread() const { return _thread; }
-    //! Get the level of the logging record
-    Level level() const { return _level; }
-    //! Get the parent logger of the logging record
-    std::pair<char*, size_t> logger() const { return _logger; }
-    //! Get the message of the logging record
-    std::pair<char*, size_t> message() const { return _message; }
-    //! Get the buffer of the logging record
-    std::pair<void*, size_t> buffer() const { return _buffer; }
-
-    //! Get the logging record size
-    size_t size() const { return sizeof(uint64_t) + sizeof(uint64_t) + sizeof(Level) + _logger.second + _message.second + _buffer.second; }
-
-    //! Set the timestamp of the logging record
-    /*!
-         \param timestamp - Timestamp of the logging record
-    */
-    void SetTimestamp(uint64_t timestamp) { _timestamp = timestamp; }
-    //! Set the parent thread Id of the logging record
-    /*!
-         \param thread - Parent thread Id of the logging record
-    */
-    void SetThread(uint64_t thread) { _thread = thread; }
-    //! Set the level of the logging record
-    /*!
-         \param level - Level of the logging record
-    */
-    void SetLevel(Level level) { _level = level; }
-    //! Set the parent logger of the logging record
-    /*!
-         \param logger - Parent logger of the logging record
-    */
-    void SetLogger(const std::pair<char*, size_t>& logger) { _logger = logger; }
-    //! Set the message of the logging record
-    /*!
-         \param message - Message of the logging record
-    */
-    void SetMessage(const std::pair<char*, size_t>& message) { _message = message; }
-    //! Set the buffer of the logging record
-    /*!
-         \param buffer - Buffer of the logging record
-    */
-    void SetBuffer(const std::pair<void*, size_t>& buffer) { _buffer = buffer; }
-
-private:
-    uint64_t _timestamp;
-    uint64_t _thread;
-    Level _level;
-    std::pair<char*, size_t> _logger;
-    std::pair<char*, size_t> _message;
-    std::pair<void*, size_t> _buffer;
+    Record& operator=(const Record&) noexcept = default;
+    Record& operator=(Record&&) noexcept = default;
 };
 
 } // namespace CppLogging

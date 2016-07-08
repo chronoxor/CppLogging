@@ -10,3 +10,6 @@
 [submodule "modules/CppBenchmark"]
 	path = modules/CppBenchmark
 	url = git@github.com:chronoxor/CppBenchmark.git
+[submodule "modules/CppCommon"]
+	path = modules/CppCommon
+	url = git@bitbucket.org:chronoxor/CppCommon.git
