@@ -49,7 +49,6 @@ bool operator==(const Record& record1, const Record& record2)
         return false;
     if (record1.level != record2.level)
         return false;
-/*
     if (record1.logger.second != record2.logger.second)
         return false;
     if (std::strncmp(record1.logger.first, record2.logger.first, record1.logger.second) != 0)
@@ -62,7 +61,6 @@ bool operator==(const Record& record1, const Record& record2)
         return false;
     if (std::memcmp(record1.buffer.first, record2.buffer.first, record1.buffer.second) != 0)
         return false;
-*/
     return true;
 }
 
