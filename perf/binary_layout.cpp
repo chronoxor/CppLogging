@@ -6,6 +6,8 @@
 
 #include "logging/layouts/binary_layout.h"
 
+using namespace CppLogging;
+
 const int iterations = 10000000;
 
 char logger[] = "Test logger";
@@ -23,8 +25,8 @@ public:
     }
 
 protected:
-    CppLogging::BinaryLayout layout;
-    CppLogging::Record record;
+    BinaryLayout layout;
+    Record record;
 };
 
 BENCHMARK_FIXTURE(LayoutFixture, "BinaryLayout", iterations)
