@@ -16,17 +16,16 @@ uint8_t buffer[1024];
 
 class LayoutFixture
 {
-public:
+protected:
+    BinaryLayout layout;
+    Record record;
+
     LayoutFixture()
     {
         record.logger = std::make_pair(logger, (uint8_t)std::strlen(logger));
         record.message = std::make_pair(message, (uint16_t)std::strlen(message));
         record.buffer = std::make_pair(buffer, (uint32_t)sizeof(buffer));
     }
-
-protected:
-    BinaryLayout layout;
-    Record record;
 };
 
 BENCHMARK_FIXTURE(LayoutFixture, "BinaryLayout", iterations)
