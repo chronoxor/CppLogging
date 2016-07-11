@@ -10,8 +10,8 @@
 #define CPPLOGGING_RECORD_H
 
 #include "logging/level.h"
-#include "system/timestamp.h"
 #include "threads/thread.h"
+#include "time/timestamp.h"
 
 #include <utility>
 
