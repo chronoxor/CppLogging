@@ -49,7 +49,7 @@ public:
     std::pair<void*, uint32_t> buffer;
 
     Record() noexcept
-        : timestamp(CppCommon::Timestamp::current()),
+        : timestamp(CppCommon::Timestamp::utc()),
           thread(CppCommon::Thread::CurrentThreadId()),
           level(Level::INFO),
           logger(nullptr, 0),
