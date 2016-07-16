@@ -6,6 +6,8 @@
 
 #include "logging/layouts/binary_layout.h"
 
+#include <cstring>
+
 using namespace CppLogging;
 
 const int iterations = 10000000;
