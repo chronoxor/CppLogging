@@ -6,6 +6,8 @@
 
 #include "logging/layouts/binary_layout.h"
 
+#include <cstring>
+
 using namespace CppLogging;
 
 Record ParseBinaryLayout(const std::pair<void*, size_t>& layout)
