@@ -11,6 +11,7 @@
 
 #include "logging/layout.h"
 
+#include <memory>
 #include <string>
 #include <vector>
 
@@ -47,10 +48,10 @@ namespace CppLogging {
 class TextLayout : public Layout
 {
 public:
-    TextLayout(const std::string& layout = "{UtcDateTime} [{Thread}] {Level} {Logger} - {Message}{EndLine}") : _buffer(1024) {}
+    TextLayout(const std::string& layout = "{UtcDateTime} [{Thread}] {Level} {Logger} - {Message}{EndLine}");
     TextLayout(const TextLayout&) = delete;
     TextLayout(TextLayout&&) = default;
-    ~TextLayout() = default;
+    ~TextLayout();
 
     TextLayout& operator=(const TextLayout&) = delete;
     TextLayout& operator=(TextLayout&&) = default;
@@ -63,7 +64,8 @@ public:
     std::pair<void*, size_t> LayoutRecord(const Record& record) override;
 
 private:
-    std::vector<uint8_t> _buffer;
+    class Impl;
+    std::unique_ptr<Impl> _pimpl;
 };
 
 } // namespace CppLogging

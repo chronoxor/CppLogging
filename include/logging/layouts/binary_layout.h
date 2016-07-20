@@ -11,6 +11,7 @@
 
 #include "logging/layout.h"
 
+#include <memory>
 #include <vector>
 
 namespace CppLogging {
@@ -25,10 +26,10 @@ namespace CppLogging {
 class BinaryLayout : public Layout
 {
 public:
-    BinaryLayout() : _buffer(1024) {}
+    BinaryLayout();
     BinaryLayout(const BinaryLayout&) = delete;
     BinaryLayout(BinaryLayout&&) = default;
-    ~BinaryLayout() = default;
+    ~BinaryLayout();
 
     BinaryLayout& operator=(const BinaryLayout&) = delete;
     BinaryLayout& operator=(BinaryLayout&&) = default;
@@ -41,7 +42,8 @@ public:
     std::pair<void*, size_t> LayoutRecord(const Record& record) override;
 
 private:
-    std::vector<uint8_t> _buffer;
+    class Impl;
+    std::unique_ptr<Impl> _pimpl;
 };
 
 } // namespace CppLogging
