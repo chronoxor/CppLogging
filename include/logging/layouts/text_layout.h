@@ -20,7 +20,7 @@ namespace CppLogging {
 //! Logging text layout
 /*!
     Text layout converts the given logging record into the text string
-    using a given template. Text layout template is a string with a
+    using a given pattern. Text layout pattern is a string with a
     special placeholders provided inside curly brackets ("{}").
 
     Supported placeholders:
@@ -48,7 +48,11 @@ namespace CppLogging {
 class TextLayout : public Layout
 {
 public:
-    TextLayout(const std::string& layout = "{UtcDateTime} [{Thread}] {Level} {Logger} - {Message}{EndLine}");
+    //! Initialize text layout with a given pattern
+    /*!
+         \param pattern - Layout pattern
+    */
+    TextLayout(const std::string& pattern = "{UtcDateTime} [{Thread}] {Level} {Logger} - {Message}{EndLine}");
     TextLayout(const TextLayout&) = delete;
     TextLayout(TextLayout&&) = default;
     ~TextLayout();
