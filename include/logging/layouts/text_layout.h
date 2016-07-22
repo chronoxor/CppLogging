@@ -24,19 +24,19 @@ namespace CppLogging {
     special placeholders provided inside curly brackets ("{}").
 
     Supported placeholders:
-    - {DateTime}/{UtcDateTime} - converted to the local/UTC date & time (e.g. "1997-07-16T19:20:30.123+01:00"/"1997-07-16T19:20:30.123Z")
-    - {Date}/{UtcDate} - converted to the local/UTC date (e.g. "1997-07-16")
-    - {Time}/{UtcTime} - converted to the local/UTC time (e.g. "19:20:30.123+01:00"/"19:20:30.123Z")
-    - {Year}/{UtcYear} - converted to the local/UTC four-digits year (e.g. "1997")
-    - {Month}/{UtcMonth} - converted to the local/UTC two-digits month (e.g. "07")
-    - {Day}/{UtcDay} - converted to the local/UTC two-digits day (e.g. "16")
-    - {Hour}/{UtcHour} - converted to the local/UTC two-digits hour (e.g. "19")
-    - {Minute}/{UtcMinute} - converted to the local/UTC two-digits minute (e.g. "20")
-    - {Second}/{UtcSecond} - converted to the local/UTC two-digits second (e.g. "30")
-    - {Milli}/{UtcMilli} - converted to the local/UTC three-digits millisecond (e.g. "123")
-    - {Micro}/{UtcMicro} - converted to the local/UTC three-digits microsecond (e.g. "123")
-    - {Nano}/{UtcNano} - converted to the local/UTC three-digits nanosecond (e.g. "789")
-    - {Timezone}/{UtcTimezone} - converted to the local/UTC timezone suffix (e.g. "+01:00"/"Z")
+    - {UtcDateTime}/{LocalDateTime} - converted to the UTC/local date & time (e.g. "1997-07-16T19:20:30.123Z"/"1997-07-16T19:20:30.123+01:00")
+    - {UtcDate}/{LocalDate} - converted to the UTC/local date (e.g. "1997-07-16")
+    - {Time}/{LocalTime} - converted to the UTC/local time (e.g. "19:20:30.123Z"/"19:20:30.123+01:00")
+    - {UtcYear}/{LocalYear} - converted to the UTC/local four-digits year (e.g. "1997")
+    - {UtcMonth}/{LocalMonth} - converted to the UTC/local two-digits month (e.g. "07")
+    - {UtcDay}/{LocalDay} - converted to the UTC/local two-digits day (e.g. "16")
+    - {UtcHour}/{LocalHour} - converted to the UTC/local two-digits hour (e.g. "19")
+    - {UtcMinute}/{LocalMinute} - converted to the UTC/local two-digits minute (e.g. "20")
+    - {UtcSecond}/{LocalSecond} - converted to the UTC/local two-digits second (e.g. "30")
+    - {UtcTimezone}/{LocalTimezone} - converted to the UTC/local timezone suffix (e.g. "+01:00"/"Z")
+    - {Millisecond} - converted to the three-digits millisecond (e.g. "123")
+    - {Microsecond} - converted to the three-digits microsecond (e.g. "123")
+    - {Nanosecond} - converted to the three-digits nanosecond (e.g. "789")
     - {Thread} - converted to the thread Id (e.g. "0x0028F3D8")
     - {Level} - converted to the logging level
     - {Logger} - converted to the logger name

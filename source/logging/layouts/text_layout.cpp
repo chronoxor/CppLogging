@@ -8,6 +8,8 @@
 
 #include "logging/layouts/text_layout.h"
 
+#include "time/timezone.h"
+
 namespace CppLogging {
 
 class TextLayout::Impl
@@ -15,19 +17,6 @@ class TextLayout::Impl
     enum class PlaceholderType
     {
         String,
-        DateTime,
-        Date,
-        Time,
-        Year,
-        Month,
-        Day,
-        Hour,
-        Minute,
-        Second,
-        Milli,
-        Micro,
-        Nano,
-        TimeZone,
         UtcDateTime,
         UtcDate,
         UtcTime,
@@ -37,10 +26,20 @@ class TextLayout::Impl
         UtcHour,
         UtcMinute,
         UtcSecond,
-        UtcMilli,
-        UtcMicro,
-        UtcNano,
-        UtcTimeZone,
+        UtcTimezone,
+        LocalDateTime,
+        LocalDate,
+        LocalTime,
+        LocalYear,
+        LocalMonth,
+        LocalDay,
+        LocalHour,
+        LocalMinute,
+        LocalSecond,
+        LocalTimezone,
+        Millisecond,
+        Microsecond,
+        Nanosecond,
         Thread,
         Level,
         Logger,
@@ -112,20 +111,163 @@ public:
     std::pair<void*, size_t> LayoutRecord(const Record& record)
     {
         static bool cache_initizlied = false;
+        static bool cache_time_required = false;
+        static bool cache_utc_required = false;
+        static bool cache_local_required = false;
+        static bool cache_timezone_required = false;
+        static bool cache_millisecond_required = false;
+        static bool cache_microsecond_required = false;
+        static bool cache_nanosecond_required = false;
+        static uint64_t cache_seconds = 0;
+        static uint64_t cache_millisecond = 0;
+        static uint64_t cache_microsecond = 0;
+        static uint64_t cache_nanosecond = 0;
+        static std::string cache_utc_datetime_str = "1970-01-01T01:01:01.000Z";
+        static std::string cache_utc_date_str = "1970-01-01";
+        static std::string cache_utc_time_str = "01:01:01.000Z";
+        static std::string cache_utc_year_str = "1970";
+        static std::string cache_utc_month_str = "01";
+        static std::string cache_utc_day_str = "01";
+        static std::string cache_utc_hour_str = "00";
+        static std::string cache_utc_minute_str = "00";
+        static std::string cache_utc_second_str = "00";
+        static std::string cache_local_datetime_str = "1970-01-01T01:01:01.000+00:00";
+        static std::string cache_local_date_str = "1970-01-01";
+        static std::string cache_local_time_str = "01:01:01.000+00:00";
+        static std::string cache_local_year_str = "1970";
+        static std::string cache_local_month_str = "01";
+        static std::string cache_local_day_str = "01";
+        static std::string cache_local_hour_str = "00";
+        static std::string cache_local_minute_str = "00";
+        static std::string cache_local_second_str = "00";
+        static std::string cache_timezone_str = "00:00";
+        static std::string cache_millisecond_str = "000";
+        static std::string cache_microsecond_str = "000";
+        static std::string cache_nanosecond_str = "000";
         static bool cache_thread_required = false;
         static uint64_t cache_thread = 0;
-        static std::string cache_thread_str = ConvertThread(cache_thread);
+        static std::string cache_thread_str = "0x00000000";
         static bool cache_level_required = false;
-        static Level cache_level = Level::NONE;
-        static std::string cache_level_str = ConvertLevel(cache_level);
+        static Level cache_level = Level::FATAL;
+        static std::string cache_level_str = "FATAL";
 
+        // Update time cache
+        if (cache_time_required || !cache_initizlied)
+        {
+            CppCommon::Timestamp timestamp(record.timestamp);
+            uint64_t seconds = timestamp.seconds();
+            int millisecond = timestamp.milliseconds() % 1000;
+            int microsecond = timestamp.microseconds() % 1000;
+            int nanosecond = timestamp.nanoseconds() % 1000;
+
+            if (nanosecond != cache_nanosecond)
+            {
+                cache_nanosecond = nanosecond;
+
+                // Update nanosecond cache values
+                if (cache_nanosecond_required || !cache_initizlied)
+                    ConvertNumber(cache_nanosecond_str, nanosecond, 3);
+            }
+
+            if (microsecond != cache_microsecond)
+            {
+                cache_microsecond = microsecond;
+
+                // Update microsecond cache values
+                if (cache_microsecond_required || !cache_initizlied)
+                    ConvertNumber(cache_microsecond_str, microsecond, 3);
+            }
+
+            if (millisecond != cache_millisecond)
+            {
+                cache_millisecond = millisecond;
+
+                // Update millisecond cache values
+                if (cache_millisecond_required || !cache_initizlied)
+                    ConvertNumber(cache_millisecond_str, millisecond, 3);
+            }
+
+            if (seconds != cache_seconds)
+            {
+                cache_seconds = seconds;
+
+                // Update time zone cache values
+                if (cache_timezone_required || !cache_initizlied)
+                {
+                    CppCommon::Timezone local;
+                    ConvertTimezone(cache_timezone_str, local.total().minutes());
+                }
+
+                // Update UTC time cache values
+                if (cache_utc_required || !cache_initizlied)
+                {
+                    CppCommon::UtcTime utc(timestamp);
+                    ConvertNumber(cache_utc_year_str, utc.year(), 4);
+                    ConvertNumber(cache_utc_month_str, utc.month(), 2);
+                    ConvertNumber(cache_utc_day_str, utc.day(), 2);
+                    ConvertNumber(cache_utc_hour_str, utc.hour(), 2);
+                    ConvertNumber(cache_utc_minute_str, utc.minute(), 2);
+                    ConvertNumber(cache_utc_second_str, utc.second(), 2);
+
+                    cache_utc_date_str = cache_utc_year_str;
+                    cache_utc_date_str += '-';
+                    cache_utc_date_str += cache_utc_month_str;
+                    cache_utc_date_str += '-';
+                    cache_utc_date_str += cache_utc_day_str;
+
+                    cache_utc_time_str = cache_utc_hour_str;
+                    cache_utc_time_str += ':';
+                    cache_utc_time_str += cache_utc_minute_str;
+                    cache_utc_time_str += ':';
+                    cache_utc_time_str += cache_utc_second_str;
+                    cache_utc_time_str += '.';
+                    cache_utc_time_str += cache_millisecond_str;
+                    cache_utc_time_str += 'Z';
+
+                    cache_utc_datetime_str = cache_utc_date_str;
+                    cache_utc_datetime_str += 'T';
+                    cache_utc_datetime_str += cache_utc_time_str;
+                }
+
+                // Update local time cache values
+                if (cache_local_required || !cache_initizlied)
+                {
+                    CppCommon::LocalTime local(timestamp);
+                    ConvertNumber(cache_local_year_str, local.year(), 4);
+                    ConvertNumber(cache_local_month_str, local.month(), 2);
+                    ConvertNumber(cache_local_day_str, local.day(), 2);
+                    ConvertNumber(cache_local_hour_str, local.hour(), 2);
+                    ConvertNumber(cache_local_minute_str, local.minute(), 2);
+                    ConvertNumber(cache_local_second_str, local.second(), 2);
+
+                    cache_local_date_str = cache_local_year_str;
+                    cache_local_date_str += '-';
+                    cache_local_date_str += cache_local_month_str;
+                    cache_local_date_str += '-';
+                    cache_local_date_str += cache_local_day_str;
+
+                    cache_local_time_str = cache_local_hour_str;
+                    cache_local_time_str += ':';
+                    cache_local_time_str += cache_local_minute_str;
+                    cache_local_time_str += ':';
+                    cache_local_time_str += cache_local_second_str;
+                    cache_local_time_str += '.';
+                    cache_local_time_str += cache_millisecond_str;
+                    cache_local_time_str += cache_timezone_str;
+
+                    cache_local_datetime_str = cache_local_date_str;
+                    cache_local_datetime_str += 'T';
+                    cache_local_datetime_str += cache_local_time_str;
+                }
+            }
+        }
         // Update thread cache
         if (cache_thread_required || !cache_initizlied)
         {
             if (record.thread != cache_thread)
             {
                 cache_thread = record.thread;
-                cache_thread_str = ConvertThread(cache_thread);
+                ConvertThread(cache_thread_str, cache_thread);
             }
         }
         // Update level cache
@@ -134,7 +276,7 @@ public:
             if (record.level != cache_level)
             {
                 cache_level = record.level;
-                cache_level_str = ConvertLevel(cache_level);
+                ConvertLevel(cache_level_str, cache_level);
             }
         }
         cache_initizlied = true;
@@ -149,15 +291,271 @@ public:
             {
                 case PlaceholderType::String:
                 {
-                    // Output a pattern string
+                    // Output pattern string
                     size_t size = _buffer.size();
                     _buffer.resize(size + placeholder.value.size());
                     std::memcpy(_buffer.data() + size, placeholder.value.c_str(), placeholder.value.size());
                     break;
                 }
+                case PlaceholderType::UtcDateTime:
+                {
+                    // Output UTC date & time string
+                    size_t size = _buffer.size();
+                    _buffer.resize(size + cache_utc_datetime_str.size());
+                    std::memcpy(_buffer.data() + size, cache_utc_datetime_str.c_str(), cache_utc_datetime_str.size());
+                    // Set the corresponding cache required flag
+                    cache_time_required = true;
+                    cache_utc_required = true;
+                    cache_millisecond_required = true;
+                    break;
+                }
+                case PlaceholderType::UtcDate:
+                {
+                    // Output UTC date string
+                    size_t size = _buffer.size();
+                    _buffer.resize(size + cache_utc_date_str.size());
+                    std::memcpy(_buffer.data() + size, cache_utc_date_str.c_str(), cache_utc_date_str.size());
+                    // Set the corresponding cache required flag
+                    cache_time_required = true;
+                    cache_utc_required = true;
+                    break;
+                }
+                case PlaceholderType::UtcTime:
+                {
+                    // Output UTC time string
+                    size_t size = _buffer.size();
+                    _buffer.resize(size + cache_utc_time_str.size());
+                    std::memcpy(_buffer.data() + size, cache_utc_time_str.c_str(), cache_utc_time_str.size());
+                    // Set the corresponding cache required flag
+                    cache_time_required = true;
+                    cache_utc_required = true;
+                    cache_millisecond_required = true;
+                    break;
+                }
+                case PlaceholderType::UtcYear:
+                {
+                    // Output UTC year string
+                    size_t size = _buffer.size();
+                    _buffer.resize(size + cache_utc_year_str.size());
+                    std::memcpy(_buffer.data() + size, cache_utc_year_str.c_str(), cache_utc_year_str.size());
+                    // Set the corresponding cache required flag
+                    cache_time_required = true;
+                    cache_utc_required = true;
+                    break;
+                }
+                case PlaceholderType::UtcMonth:
+                {
+                    // Output UTC month string
+                    size_t size = _buffer.size();
+                    _buffer.resize(size + cache_utc_month_str.size());
+                    std::memcpy(_buffer.data() + size, cache_utc_month_str.c_str(), cache_utc_month_str.size());
+                    // Set the corresponding cache required flag
+                    cache_time_required = true;
+                    cache_utc_required = true;
+                    break;
+                }
+                case PlaceholderType::UtcDay:
+                {
+                    // Output UTC day string
+                    size_t size = _buffer.size();
+                    _buffer.resize(size + cache_utc_day_str.size());
+                    std::memcpy(_buffer.data() + size, cache_utc_day_str.c_str(), cache_utc_day_str.size());
+                    // Set the corresponding cache required flag
+                    cache_time_required = true;
+                    cache_utc_required = true;
+                    break;
+                }
+                case PlaceholderType::UtcHour:
+                {
+                    // Output UTC hour string
+                    size_t size = _buffer.size();
+                    _buffer.resize(size + cache_utc_hour_str.size());
+                    std::memcpy(_buffer.data() + size, cache_utc_hour_str.c_str(), cache_utc_hour_str.size());
+                    // Set the corresponding cache required flag
+                    cache_time_required = true;
+                    cache_utc_required = true;
+                    break;
+                }
+                case PlaceholderType::UtcMinute:
+                {
+                    // Output UTC minute string
+                    size_t size = _buffer.size();
+                    _buffer.resize(size + cache_utc_minute_str.size());
+                    std::memcpy(_buffer.data() + size, cache_utc_minute_str.c_str(), cache_utc_minute_str.size());
+                    // Set the corresponding cache required flag
+                    cache_time_required = true;
+                    cache_utc_required = true;
+                    break;
+                }
+                case PlaceholderType::UtcSecond:
+                {
+                    // Output UTC second string
+                    size_t size = _buffer.size();
+                    _buffer.resize(size + cache_utc_second_str.size());
+                    std::memcpy(_buffer.data() + size, cache_utc_second_str.c_str(), cache_utc_second_str.size());
+                    // Set the corresponding cache required flag
+                    cache_time_required = true;
+                    cache_utc_required = true;
+                    break;
+                }
+                case PlaceholderType::UtcTimezone:
+                {
+                    // Output UTC time zone string
+                    size_t size = _buffer.size();
+                    _buffer.resize(size + 1);
+                    std::memcpy(_buffer.data() + size, "Z", 1);
+                    break;
+                }
+                case PlaceholderType::LocalDateTime:
+                {
+                    // Output local date & time string
+                    size_t size = _buffer.size();
+                    _buffer.resize(size + cache_local_datetime_str.size());
+                    std::memcpy(_buffer.data() + size, cache_local_datetime_str.c_str(), cache_local_datetime_str.size());
+                    // Set the corresponding cache required flag
+                    cache_time_required = true;
+                    cache_local_required = true;
+                    cache_timezone_required = true;
+                    cache_millisecond_required = true;
+                    break;
+                }
+                case PlaceholderType::LocalDate:
+                {
+                    // Output local date string
+                    size_t size = _buffer.size();
+                    _buffer.resize(size + cache_local_date_str.size());
+                    std::memcpy(_buffer.data() + size, cache_local_date_str.c_str(), cache_local_date_str.size());
+                    // Set the corresponding cache required flag
+                    cache_time_required = true;
+                    cache_local_required = true;
+                    break;
+                }
+                case PlaceholderType::LocalTime:
+                {
+                    // Output local time string
+                    size_t size = _buffer.size();
+                    _buffer.resize(size + cache_local_time_str.size());
+                    std::memcpy(_buffer.data() + size, cache_local_time_str.c_str(), cache_local_time_str.size());
+                    // Set the corresponding cache required flag
+                    cache_time_required = true;
+                    cache_local_required = true;
+                    cache_timezone_required = true;
+                    cache_millisecond_required = true;
+                    break;
+                }
+                case PlaceholderType::LocalYear:
+                {
+                    // Output local year string
+                    size_t size = _buffer.size();
+                    _buffer.resize(size + cache_local_year_str.size());
+                    std::memcpy(_buffer.data() + size, cache_local_year_str.c_str(), cache_local_year_str.size());
+                    // Set the corresponding cache required flag
+                    cache_time_required = true;
+                    cache_local_required = true;
+                    break;
+                }
+                case PlaceholderType::LocalMonth:
+                {
+                    // Output local month string
+                    size_t size = _buffer.size();
+                    _buffer.resize(size + cache_local_month_str.size());
+                    std::memcpy(_buffer.data() + size, cache_local_month_str.c_str(), cache_local_month_str.size());
+                    // Set the corresponding cache required flag
+                    cache_time_required = true;
+                    cache_local_required = true;
+                    break;
+                }
+                case PlaceholderType::LocalDay:
+                {
+                    // Output local day string
+                    size_t size = _buffer.size();
+                    _buffer.resize(size + cache_local_day_str.size());
+                    std::memcpy(_buffer.data() + size, cache_local_day_str.c_str(), cache_local_day_str.size());
+                    // Set the corresponding cache required flag
+                    cache_time_required = true;
+                    cache_local_required = true;
+                    break;
+                }
+                case PlaceholderType::LocalHour:
+                {
+                    // Output local hour string
+                    size_t size = _buffer.size();
+                    _buffer.resize(size + cache_local_hour_str.size());
+                    std::memcpy(_buffer.data() + size, cache_local_hour_str.c_str(), cache_local_hour_str.size());
+                    // Set the corresponding cache required flag
+                    cache_time_required = true;
+                    cache_local_required = true;
+                    break;
+                }
+                case PlaceholderType::LocalMinute:
+                {
+                    // Output local minute string
+                    size_t size = _buffer.size();
+                    _buffer.resize(size + cache_local_minute_str.size());
+                    std::memcpy(_buffer.data() + size, cache_local_minute_str.c_str(), cache_local_minute_str.size());
+                    // Set the corresponding cache required flag
+                    cache_time_required = true;
+                    cache_local_required = true;
+                    break;
+                }
+                case PlaceholderType::LocalSecond:
+                {
+                    // Output local second string
+                    size_t size = _buffer.size();
+                    _buffer.resize(size + cache_local_second_str.size());
+                    std::memcpy(_buffer.data() + size, cache_local_second_str.c_str(), cache_local_second_str.size());
+                    // Set the corresponding cache required flag
+                    cache_time_required = true;
+                    cache_local_required = true;
+                    break;
+                }
+                case PlaceholderType::LocalTimezone:
+                {
+                    // Output local time zone string
+                    size_t size = _buffer.size();
+                    _buffer.resize(size + cache_timezone_str.size());
+                    std::memcpy(_buffer.data() + size, cache_timezone_str.c_str(), cache_timezone_str.size());
+                    // Set the corresponding cache required flag
+                    cache_time_required = true;
+                    cache_timezone_required = true;
+                    break;
+                }
+                case PlaceholderType::Millisecond:
+                {
+                    // Output millisecond string
+                    size_t size = _buffer.size();
+                    _buffer.resize(size + cache_millisecond_str.size());
+                    std::memcpy(_buffer.data() + size, cache_millisecond_str.c_str(), cache_millisecond_str.size());
+                    // Set the corresponding cache required flag
+                    cache_time_required = true;
+                    cache_millisecond_required = true;
+                    break;
+                }
+                case PlaceholderType::Microsecond:
+                {
+                    // Output microsecond string
+                    size_t size = _buffer.size();
+                    _buffer.resize(size + cache_microsecond_str.size());
+                    std::memcpy(_buffer.data() + size, cache_microsecond_str.c_str(), cache_microsecond_str.size());
+                    // Set the corresponding cache required flag
+                    cache_time_required = true;
+                    cache_microsecond_required = true;
+                    break;
+                }
+                case PlaceholderType::Nanosecond:
+                {
+                    // Output nanosecond string
+                    size_t size = _buffer.size();
+                    _buffer.resize(size + cache_nanosecond_str.size());
+                    std::memcpy(_buffer.data() + size, cache_nanosecond_str.c_str(), cache_nanosecond_str.size());
+                    // Set the corresponding cache required flag
+                    cache_time_required = true;
+                    cache_nanosecond_required = true;
+                    break;
+                }
                 case PlaceholderType::Thread:
                 {
-                    // Output a cached thread Id string
+                    // Output cached thread Id string
                     size_t size = _buffer.size();
                     _buffer.resize(size + cache_thread_str.size());
                     std::memcpy(_buffer.data() + size, cache_thread_str.c_str(), cache_thread_str.size());
@@ -167,7 +565,7 @@ public:
                 }
                 case PlaceholderType::Level:
                 {
-                    // Output a cached level string
+                    // Output cached level string
                     size_t size = _buffer.size();
                     _buffer.resize(size + cache_level_str.size());
                     std::memcpy(_buffer.data() + size, cache_level_str.c_str(), cache_level_str.size());
@@ -177,22 +575,18 @@ public:
                 }
                 case PlaceholderType::Logger:
                 {
-                    // Output a logger string
+                    // Output logger string
                     size_t size = _buffer.size();
                     _buffer.resize(size + record.logger.second);
                     std::memcpy(_buffer.data() + size, record.logger.first, record.logger.second);
-                    // Set the corresponding cache required flag
-                    cache_level_required = true;
                     break;
                 }
                 case PlaceholderType::Message:
                 {
-                    // Output a message string
+                    // Output message string
                     size_t size = _buffer.size();
                     _buffer.resize(size + record.message.second);
                     std::memcpy(_buffer.data() + size, record.message.first, record.message.second);
-                    // Set the corresponding cache required flag
-                    cache_level_required = true;
                     break;
                 }
             }
@@ -225,31 +619,7 @@ private:
         if (placeholder.empty())
             return;
 
-        if (placeholder == "DateTime")
-            _placeholders.push_back(Placeholder(PlaceholderType::DateTime));
-        else if (placeholder == "Date")
-            _placeholders.push_back(Placeholder(PlaceholderType::Date));
-        else if (placeholder == "Time")
-            _placeholders.push_back(Placeholder(PlaceholderType::Time));
-        else if (placeholder == "Year")
-            _placeholders.push_back(Placeholder(PlaceholderType::Year));
-        else if (placeholder == "Month")
-            _placeholders.push_back(Placeholder(PlaceholderType::Month));
-        else if (placeholder == "Day")
-            _placeholders.push_back(Placeholder(PlaceholderType::Day));
-        else if (placeholder == "Hour")
-            _placeholders.push_back(Placeholder(PlaceholderType::Hour));
-        else if (placeholder == "Minute")
-            _placeholders.push_back(Placeholder(PlaceholderType::Minute));
-        else if (placeholder == "Second")
-            _placeholders.push_back(Placeholder(PlaceholderType::Second));
-        else if (placeholder == "Milli")
-            _placeholders.push_back(Placeholder(PlaceholderType::Milli));
-        else if (placeholder == "Nano")
-            _placeholders.push_back(Placeholder(PlaceholderType::Nano));
-        else if (placeholder == "TimeZone")
-            _placeholders.push_back(Placeholder(PlaceholderType::TimeZone));
-        else if (placeholder == "UtcDateTime")
+        if (placeholder == "UtcDateTime")
             _placeholders.push_back(Placeholder(PlaceholderType::UtcDateTime));
         else if (placeholder == "UtcDate")
             _placeholders.push_back(Placeholder(PlaceholderType::UtcDate));
@@ -267,12 +637,34 @@ private:
             _placeholders.push_back(Placeholder(PlaceholderType::UtcMinute));
         else if (placeholder == "UtcSecond")
             _placeholders.push_back(Placeholder(PlaceholderType::UtcSecond));
-        else if (placeholder == "UtcMilli")
-            _placeholders.push_back(Placeholder(PlaceholderType::UtcMilli));
-        else if (placeholder == "UtcNano")
-            _placeholders.push_back(Placeholder(PlaceholderType::UtcNano));
-        else if (placeholder == "UtcTimeZone")
-            _placeholders.push_back(Placeholder(PlaceholderType::UtcTimeZone));
+        else if (placeholder == "UtcTimezone")
+            _placeholders.push_back(Placeholder(PlaceholderType::UtcTimezone));
+        else if (placeholder == "LocalDateTime")
+            _placeholders.push_back(Placeholder(PlaceholderType::LocalDateTime));
+        else if (placeholder == "LocalDate")
+            _placeholders.push_back(Placeholder(PlaceholderType::LocalDate));
+        else if (placeholder == "LocalTime")
+            _placeholders.push_back(Placeholder(PlaceholderType::LocalTime));
+        else if (placeholder == "LocalYear")
+            _placeholders.push_back(Placeholder(PlaceholderType::LocalYear));
+        else if (placeholder == "LocalMonth")
+            _placeholders.push_back(Placeholder(PlaceholderType::LocalMonth));
+        else if (placeholder == "LocalDay")
+            _placeholders.push_back(Placeholder(PlaceholderType::LocalDay));
+        else if (placeholder == "LocalHour")
+            _placeholders.push_back(Placeholder(PlaceholderType::LocalHour));
+        else if (placeholder == "LocalMinute")
+            _placeholders.push_back(Placeholder(PlaceholderType::LocalMinute));
+        else if (placeholder == "LocalSecond")
+            _placeholders.push_back(Placeholder(PlaceholderType::LocalSecond));
+        else if (placeholder == "LocalTimezone")
+            _placeholders.push_back(Placeholder(PlaceholderType::LocalTimezone));
+        else if (placeholder == "Millisecond")
+            _placeholders.push_back(Placeholder(PlaceholderType::Millisecond));
+        else if (placeholder == "Microsecond")
+            _placeholders.push_back(Placeholder(PlaceholderType::Microsecond));
+        else if (placeholder == "Nanosecond")
+            _placeholders.push_back(Placeholder(PlaceholderType::Nanosecond));
         else if (placeholder == "Thread")
             _placeholders.push_back(Placeholder(PlaceholderType::Thread));
         else if (placeholder == "Level")
@@ -291,58 +683,122 @@ private:
             AppendPattern("{" + placeholder + "}");
     }
 
-    std::string ConvertThread(uint64_t thread)
+    void ConvertNumber(std::string& output, int number, int digits)
+    {
+        // Prepare the output string
+        output.clear();
+        output.resize(digits, '0');
+
+        // Calculate the output index
+        size_t index = output.size() - 1;
+
+        // Output digits
+        while ((number >= 10) && (index != 0))
+        {
+            int a = number / 10;
+            int b = number % 10;
+            output[index--] = '0' + (char)b;
+            number = a;
+        }
+
+        // Output the last digit
+        output[index] = '0' + (char)number;
+    }
+
+    void ConvertThread(std::string& output, uint64_t thread)
     {
         const char* digits = "0123456789ABCDEF";
 
-        // Calculate digits count
-        uint64_t number = thread;
-        unsigned count = 0;
-        do
-        {
-            ++count;
-        } while ((number >>= 4) != 0);
+        // Prepare the output string
+        output.clear();
+        output.resize(10, '0');
 
-        // Prepare output string
-        std::string result(10, '0');
-
-        // Calculate output index
-        size_t index = result.size() - 1;
+        // Calculate the output index
+        size_t index = output.size() - 1;
 
         // Output digits
-        number = thread;
         do
         {
-            result[index--] = digits[number & 0x0F];
-        } while ((number >>= 4) != 0);
+            output[index--] = digits[thread & 0x0F];
+        } while (((thread >>= 4) != 0) && (index != 0));
 
         // Output hex prefix
-        result[0] = '0';
-        result[1] = 'x';
-
-        return result;
+        output[0] = '0';
+        output[1] = 'x';
     }
 
-    std::string ConvertLevel(Level level)
+    void ConvertTimezone(std::string& output, int64_t offset)
+    {
+        // Prepare the output string
+        output.clear();
+        output.resize(6, '0');
+
+        // Calculate the output index
+        size_t index = output.size() - 1;
+
+        // Output offset minutes
+        int64_t minutes = offset % 60;
+        if (minutes < 9)
+        {
+            output[index--] = '0' + (char)minutes;
+            --index;
+        }
+        else
+        {
+            output[index--] = '0' + (char)(minutes % 10);
+            minutes /= 10;
+            output[index--] = '0' + (char)minutes;
+        }
+
+        // Output ':' separator
+        output[index--] = ':';
+
+        // Output offset hours
+        int64_t hours = offset / 60;
+        if (hours < 9)
+        {
+            output[index--] = '0' + (char)hours;
+            --index;
+        }
+        else
+        {
+            output[index--] = '0' + (char)(hours % 10);
+            hours /= 10;
+            output[index--] = '0' + (char)hours;
+        }
+
+        // Output minus prefix
+        output[0] = (offset < 0) ? '-' : '+';
+    }
+
+    void ConvertLevel(std::string& output, Level level)
     {
         switch (level)
         {
             case Level::NONE:
-                return "NONE ";
+                output = "NONE ";
+                break;
             case Level::FATAL:
-                return "FATAL";
+                output = "FATAL";
+                break;
             case Level::ERROR:
-                return "ERROR";
+                output = "ERROR";
+                break;
             case Level::WARN:
-                return "WARN ";
+                output = "WARN ";
+                break;
             case Level::INFO:
-                return "INFO ";
+                output = "INFO ";
+                break;
             case Level::DEBUG:
-                return "DEBUG";
+                output = "DEBUG";
+                break;
             case Level::ALL:
-                return "ALL  ";
+                output = "ALL  ";
+                break;
             default:
-                return "<???>";
+                output = "<???>";
+                break;
         }
     }
 };
