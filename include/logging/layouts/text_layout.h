@@ -60,12 +60,8 @@ public:
     TextLayout& operator=(const TextLayout&) = delete;
     TextLayout& operator=(TextLayout&&) = default;
 
-    //! Layout the given logging record into a raw buffer
-    /*!
-         \param record - Logging record
-         \return Raw buffer which contains logging record after the layout operation
-    */
-    std::pair<void*, size_t> LayoutRecord(const Record& record) override;
+    // Implementation of Layout
+    std::pair<void*, size_t> LayoutRecord(Record& record) override;
 
 private:
     class Impl;

@@ -16,7 +16,7 @@ namespace CppLogging {
 //! Logging layout interface
 /*!
     Logging layout takes an instance of a single logging record
-    and convert it into a raw buffer.
+    and convert it into a raw buffer (raw filed will be updated).
 
     Not thread-safe.
 
@@ -28,10 +28,14 @@ class Layout
 public:
     //! Layout the given logging record into a raw buffer
     /*!
+         This method will update the raw filed of the given logging record.
+         If layout was already performed (raw filed is valid) method should
+         return immediately.
+
          \param record - Logging record
          \return Raw buffer which contains logging record after the layout operation
     */
-    virtual std::pair<void*, size_t> LayoutRecord(const Record& record) = 0;
+    virtual std::pair<void*, size_t> LayoutRecord(Record& record) = 0;
 };
 
 } // namespace CppLogging

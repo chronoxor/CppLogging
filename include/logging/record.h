@@ -48,13 +48,17 @@ public:
     //! Buffer of the logging record
     std::pair<void*, uint32_t> buffer;
 
+    //! Record content after layout
+    std::pair<void*, size_t> raw;
+
     Record() noexcept
         : timestamp(CppCommon::Timestamp::utc()),
           thread(CppCommon::Thread::CurrentThreadId()),
           level(Level::INFO),
           logger(nullptr, 0),
           message(nullptr, 0),
-          buffer(nullptr, 0)
+          buffer(nullptr, 0),
+          raw(nullptr, 0)
     {}
     Record(const Record&) noexcept = default;
     Record(Record&&) noexcept = default;

@@ -108,8 +108,12 @@ public:
     {
     }
 
-    std::pair<void*, size_t> LayoutRecord(const Record& record)
+    std::pair<void*, size_t> LayoutRecord(Record& record)
     {
+        // Check if layout is already performed
+        if (record.raw.first != nullptr)
+            return record.raw;
+
         static bool cache_initizlied = false;
         static bool cache_time_required = false;
         static bool cache_utc_required = false;
@@ -608,8 +612,9 @@ public:
             }
         }
 
-        // Return the serialized buffer
-        return std::make_pair(_buffer.data(), _buffer.size());
+        // Update raw field of the logging record and return
+        record.raw = std::make_pair(_buffer.data(), _buffer.size());
+        return record.raw;
     }
 
 private:
@@ -827,7 +832,7 @@ TextLayout::~TextLayout()
 {
 }
 
-std::pair<void*, size_t> TextLayout::LayoutRecord(const Record& record)
+std::pair<void*, size_t> TextLayout::LayoutRecord(Record& record)
 {
     return _pimpl->LayoutRecord(record);
 }
