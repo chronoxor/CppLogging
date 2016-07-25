@@ -20,18 +20,26 @@ class LayoutFixture
 {
 protected:
     BinaryLayout layout;
-    Record record;
+
+    uint8_t slogger;
+    uint16_t smessage;
+    uint16_t sbuffer;
 
     LayoutFixture()
     {
-        record.logger = std::make_pair(logger, (uint8_t)std::strlen(logger));
-        record.message = std::make_pair(message, (uint16_t)std::strlen(message));
-        record.buffer = std::make_pair(buffer, (uint32_t)sizeof(buffer));
+        slogger = (uint8_t)std::strlen(logger);
+        smessage = (uint16_t)std::strlen(message);
+        sbuffer = (uint32_t)sizeof(buffer);
     }
 };
 
 BENCHMARK_FIXTURE(LayoutFixture, "BinaryLayout", iterations)
 {
+    Record record;
+    record.logger = std::make_pair(logger, slogger);
+    record.message = std::make_pair(message, smessage);
+    record.buffer = std::make_pair(buffer, sbuffer);
+
     auto result = layout.LayoutRecord(record);
     context.metrics().AddBytes(result.second);
 }
