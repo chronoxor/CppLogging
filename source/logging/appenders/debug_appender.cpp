@@ -8,8 +8,6 @@
 
 #include "logging/appenders/debug_appender.h"
 
-#include "errors/exceptions.h"
-
 #include <cstdio>
 
 #if defined(_WIN32) || defined(_WIN64)

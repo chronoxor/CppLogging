@@ -18,17 +18,17 @@ namespace CppLogging {
     Logging appender takes an instance of a single logging record
     and store it content in some storage or show it in console.
 
-    Not thread-safe.
+    Thread-safe or not thread-safe.
 
     \see NullAppender
     \see ConsoleAppender
     \see DebugAppender
     \see ErrorAppender
-    \see EventLogAppender
-    \see SysLogAppender
     \see MemoryAppender
+    \see OstreamAppender
     \see FileAppender
     \see RollingFileAppender
+    \see SysLogAppender
 */
 class Appender
 {
@@ -50,12 +50,12 @@ public:
 #include "logging/appenders/console_appender.h"
 #include "logging/appenders/debug_appender.h"
 #include "logging/appenders/error_appender.h"
-/*
-#include "logging/appenders/eventlog_appender.h"
-#include "logging/appenders/syslog_appender.h"
 #include "logging/appenders/memory_appender.h"
+#include "logging/appenders/ostream_appender.h"
+/*
 #include "logging/appenders/file_appender.h"
 #include "logging/appenders/rolling_file_appender.h"
+#include "logging/appenders/syslog_appender.h"
 */
 
 #endif // CPPLOGGING_APPENDER_H

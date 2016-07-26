@@ -8,8 +8,6 @@
 
 #include "logging/appenders/error_appender.h"
 
-#include "errors/exceptions.h"
-
 #include <cstdio>
 
 namespace CppLogging {
