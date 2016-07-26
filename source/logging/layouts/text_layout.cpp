@@ -102,6 +102,9 @@ public:
             AppendPattern(placeholder);
         else
             AppendPattern(subpattern);
+
+        // Addend end of string character
+        AppendPattern(std::string(1, '\0'));
     }
 
     ~Impl()
