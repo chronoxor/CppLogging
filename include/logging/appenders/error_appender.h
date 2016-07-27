@@ -6,8 +6,8 @@
     \copyright MIT License
 */
 
-#ifndef CPPLOGGING_ERROR_APPENDER_H
-#define CPPLOGGING_ERROR_APPENDER_H
+#ifndef CPPLOGGING_APPENDERS_ERROR_APPENDER_H
+#define CPPLOGGING_APPENDERS_ERROR_APPENDER_H
 
 #include "logging/appender.h"
 
@@ -38,4 +38,4 @@ public:
 
 } // namespace CppLogging
 
-#endif // CPPLOGGING_ERROR_APPENDER_H
+#endif // CPPLOGGING_APPENDERS_ERROR_APPENDER_H

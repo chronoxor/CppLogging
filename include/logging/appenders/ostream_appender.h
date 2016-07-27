@@ -6,8 +6,8 @@
     \copyright MIT License
 */
 
-#ifndef CPPLOGGING_OSTREAM_APPENDER_H
-#define CPPLOGGING_OSTREAM_APPENDER_H
+#ifndef CPPLOGGING_APPENDERS_OSTREAM_APPENDER_H
+#define CPPLOGGING_APPENDERS_OSTREAM_APPENDER_H
 
 #include "logging/appender.h"
 
@@ -47,4 +47,4 @@ private:
 
 } // namespace CppLogging
 
-#endif // CPPLOGGING_OSTREAM_APPENDER_H
+#endif // CPPLOGGING_APPENDERS_OSTREAM_APPENDER_H

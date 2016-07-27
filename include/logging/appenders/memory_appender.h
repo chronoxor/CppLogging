@@ -6,8 +6,8 @@
     \copyright MIT License
 */
 
-#ifndef CPPLOGGING_MEMORY_APPENDER_H
-#define CPPLOGGING_MEMORY_APPENDER_H
+#ifndef CPPLOGGING_APPENDERS_MEMORY_APPENDER_H
+#define CPPLOGGING_APPENDERS_MEMORY_APPENDER_H
 
 #include "logging/appender.h"
 
@@ -44,4 +44,4 @@ private:
 
 } // namespace CppLogging
 
-#endif // CPPLOGGING_MEMORY_APPENDER_H
+#endif // CPPLOGGING_APPENDERS_MEMORY_APPENDER_H

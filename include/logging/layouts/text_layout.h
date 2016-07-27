@@ -6,8 +6,8 @@
     \copyright MIT License
 */
 
-#ifndef CPPLOGGING_TEXT_LAYOUT_H
-#define CPPLOGGING_TEXT_LAYOUT_H
+#ifndef CPPLOGGING_LAYOUTS_TEXT_LAYOUT_H
+#define CPPLOGGING_LAYOUTS_TEXT_LAYOUT_H
 
 #include "logging/layout.h"
 
@@ -70,4 +70,4 @@ private:
 
 } // namespace CppLogging
 
-#endif // CPPLOGGING_TEXT_LAYOUT_H
+#endif // CPPLOGGING_LAYOUTS_TEXT_LAYOUT_H
