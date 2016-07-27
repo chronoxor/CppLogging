@@ -8,7 +8,7 @@
 
 #include "logging/appenders/memory_appender.h"
 
-#include <cstdio>
+#include <cstring>
 
 namespace CppLogging {
 
