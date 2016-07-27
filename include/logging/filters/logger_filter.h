@@ -29,7 +29,7 @@ public:
     /*!
          \param pattern - Regular expression pattern
     */
-    LoggerFilter(const std::regex& pattern) : _pattern(pattern) {}
+    explicit LoggerFilter(const std::regex& pattern) : _pattern(pattern) {}
     LoggerFilter(const LoggerFilter&) = delete;
     LoggerFilter(LoggerFilter&&) = default;
     ~LoggerFilter() = default;

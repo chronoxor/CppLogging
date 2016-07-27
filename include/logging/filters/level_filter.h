@@ -29,13 +29,13 @@ public:
     /*!
          \param level - Level value
     */
-    LevelFilter(Level level) : _from(level), _to(level) {}
+    explicit LevelFilter(Level level) : _from(level), _to(level) {}
     //! Initialize level filter with a given level range
     /*!
          \param from - Level from value
          \param to - Level to value
     */
-    LevelFilter(Level from, Level to) : _from(from), _to(to) {}
+    explicit LevelFilter(Level from, Level to) : _from(from), _to(to) {}
     LevelFilter(const LevelFilter&) = delete;
     LevelFilter(LevelFilter&&) = default;
     ~LevelFilter() = default;

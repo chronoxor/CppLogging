@@ -27,7 +27,7 @@ public:
     /*!
          \param capacity - Memory buffer capacity (default is 0)
     */
-    MemoryAppender(size_t capacity = 0) : _buffer(capacity) {}
+    explicit MemoryAppender(size_t capacity = 0) : _buffer(capacity) {}
     MemoryAppender(const MemoryAppender&) = delete;
     MemoryAppender(MemoryAppender&&) = default;
     ~MemoryAppender() = default;

@@ -52,7 +52,7 @@ public:
     /*!
          \param pattern - Layout pattern
     */
-    TextLayout(const std::string& pattern = "{UtcDateTime} [{Thread}] {Level} {Logger} - {Message}{EndLine}");
+    explicit TextLayout(const std::string& pattern = "{UtcDateTime} [{Thread}] {Level} {Logger} - {Message}{EndLine}");
     TextLayout(const TextLayout&) = delete;
     TextLayout(TextLayout&&) = default;
     ~TextLayout();

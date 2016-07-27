@@ -29,7 +29,7 @@ public:
     /*!
          \param pattern - Regular expression pattern
     */
-    MessageFilter(const std::regex& pattern) : _pattern(pattern) {}
+    explicit MessageFilter(const std::regex& pattern) : _pattern(pattern) {}
     MessageFilter(const MessageFilter&) = delete;
     MessageFilter(MessageFilter&&) = default;
     ~MessageFilter() = default;

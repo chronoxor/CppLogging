@@ -29,7 +29,7 @@ public:
     /*!
          \param stream - Output stream
     */
-    OstreamAppender(std::ostream& stream) : _ostream(stream) {}
+    explicit OstreamAppender(std::ostream& stream) : _ostream(stream) {}
     OstreamAppender(const OstreamAppender&) = delete;
     OstreamAppender(OstreamAppender&&) = default;
     ~OstreamAppender() = default;
