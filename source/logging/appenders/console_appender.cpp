@@ -23,25 +23,25 @@ void ConsoleAppender::AppendRecord(Record& record)
     // Setup console color depends on the logging level
     switch (record.level)
     {
-        case NONE:
+        case Level::NONE:
             CppCommon::Console::SetColor(CppCommon::Color::DARKGREY);
             break;
-        case FATAL:
+        case Level::FATAL:
             CppCommon::Console::SetColor(CppCommon::Color::WHITE, CppCommon::Color::RED);
             break;
-        case ERROR:
+        case Level::ERROR:
             CppCommon::Console::SetColor(CppCommon::Color::LIGHTRED);
             break;
-        case WARN:
+        case Level::WARN:
             CppCommon::Console::SetColor(CppCommon::Color::YELLOW);
             break;
-        case INFO:
+        case Level::INFO:
             CppCommon::Console::SetColor(CppCommon::Color::WHITE);
             break;
-        case DEBUG:
+        case Level::DEBUG:
             CppCommon::Console::SetColor(CppCommon::Color::LIGHTMAGENTA);
             break;
-        case ALL:
+        case Level::ALL:
             CppCommon::Console::SetColor(CppCommon::Color::GREY);
             break;
     }
