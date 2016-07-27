@@ -18,11 +18,13 @@ void ErrorAppender::AppendRecord(Record& record)
     if (record.raw.first == nullptr)
         return;
 
+    // Append logging record content
     std::fwrite(record.raw.first, 1, record.raw.second, stderr);
 }
 
 void ErrorAppender::Flush()
 {
+    // Flush stream
     std::fflush(stderr);
 }
 

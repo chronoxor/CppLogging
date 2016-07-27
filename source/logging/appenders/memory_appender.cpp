@@ -24,7 +24,7 @@ void MemoryAppender::AppendRecord(Record& record)
     // Get the buffer start position
     uint8_t* buffer = _buffer.data();
 
-    // Copy logging record into the allocated memory buffer
+    // Copy logging record content into the allocated memory buffer
     std::memcpy(buffer, record.raw.first, record.raw.second);
 }
 

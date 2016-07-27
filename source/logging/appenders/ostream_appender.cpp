@@ -16,11 +16,13 @@ void OstreamAppender::AppendRecord(Record& record)
     if (record.raw.first == nullptr)
         return;
 
+    // Append logging record content
     _ostream.write((char*)record.raw.first, record.raw.second);
 }
 
 void OstreamAppender::Flush()
 {
+    // Flush stream
     _ostream.flush();
 }
 

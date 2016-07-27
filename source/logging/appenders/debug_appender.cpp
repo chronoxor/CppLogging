@@ -23,8 +23,10 @@ void DebugAppender::AppendRecord(Record& record)
         return;
 
 #if defined(_WIN32) || defined(_WIN64)
+    // Append logging record content
     OutputDebugStringA((LPCSTR)record.raw.first);
 #else
+    // Append logging record content
     std::fwrite(record.raw.first, 1, record.raw.second, stdout);
 #endif
 }
@@ -34,6 +36,7 @@ void DebugAppender::Flush()
 #if defined(_WIN32) || defined(_WIN64)
     // Do nothing here...
 #else
+    // Flush stream
     std::fflush(stdout);
 #endif
 }
