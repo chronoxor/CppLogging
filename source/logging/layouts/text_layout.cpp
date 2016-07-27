@@ -10,6 +10,8 @@
 
 #include "time/timezone.h"
 
+#include <cstring>
+
 namespace CppLogging {
 
 class TextLayout::Impl
