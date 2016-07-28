@@ -128,9 +128,9 @@ public:
         static bool cache_microsecond_required = false;
         static bool cache_nanosecond_required = false;
         static uint64_t cache_seconds = 0;
-        static uint64_t cache_millisecond = 0;
-        static uint64_t cache_microsecond = 0;
-        static uint64_t cache_nanosecond = 0;
+        static int cache_millisecond = 0;
+        static int cache_microsecond = 0;
+        static int cache_nanosecond = 0;
         static std::string cache_utc_datetime_str = "1970-01-01T01:01:01.000Z";
         static std::string cache_utc_date_str = "1970-01-01";
         static std::string cache_utc_time_str = "01:01:01.000Z";
@@ -166,9 +166,9 @@ public:
         {
             CppCommon::Timestamp timestamp(record.timestamp);
             uint64_t seconds = timestamp.seconds();
-            uint64_t millisecond = timestamp.milliseconds() % 1000;
-            uint64_t microsecond = timestamp.microseconds() % 1000;
-            uint64_t nanosecond = timestamp.nanoseconds() % 1000;
+            int millisecond = timestamp.milliseconds() % 1000;
+            int microsecond = timestamp.microseconds() % 1000;
+            int nanosecond = timestamp.nanoseconds() % 1000;
 
             if (nanosecond != cache_nanosecond)
             {
