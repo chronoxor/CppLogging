@@ -166,9 +166,9 @@ public:
         {
             CppCommon::Timestamp timestamp(record.timestamp);
             uint64_t seconds = timestamp.seconds();
-            int millisecond = timestamp.milliseconds() % 1000;
-            int microsecond = timestamp.microseconds() % 1000;
-            int nanosecond = timestamp.nanoseconds() % 1000;
+            uint64_t millisecond = timestamp.milliseconds() % 1000;
+            uint64_t microsecond = timestamp.microseconds() % 1000;
+            uint64_t nanosecond = timestamp.nanoseconds() % 1000;
 
             if (nanosecond != cache_nanosecond)
             {
