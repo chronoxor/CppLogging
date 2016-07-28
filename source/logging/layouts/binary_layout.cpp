@@ -9,6 +9,7 @@
 #include "logging/layouts/binary_layout.h"
 
 #include <cstring>
+#include <vector>
 
 namespace CppLogging {
 

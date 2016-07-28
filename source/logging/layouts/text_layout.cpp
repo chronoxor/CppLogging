@@ -11,6 +11,7 @@
 #include "time/timezone.h"
 
 #include <cstring>
+#include <vector>
 
 namespace CppLogging {
 

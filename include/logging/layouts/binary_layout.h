@@ -12,7 +12,6 @@
 #include "logging/layout.h"
 
 #include <memory>
-#include <vector>
 
 namespace CppLogging {
 
