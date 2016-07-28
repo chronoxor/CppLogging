@@ -6,18 +6,18 @@
     \copyright MIT License
 */
 
-#ifndef CPPTEMPLATE_VERSION_H
-#define CPPTEMPLATE_VERSION_H
+#ifndef CPPLOGGING_VERSION_H
+#define CPPLOGGING_VERSION_H
 
 /*!
-    \namespace CppTemplate
-    \brief C++ template project definitions
+    \namespace CppLogging
+    \brief C++ logging project definitions
 */
-namespace CppTemplate {
+namespace CppLogging {
 
 //! Project version
 const char version[] = "1.0.0.0";
 
-} // namespace CppTemplate
+} // namespace CppLogging
 
-#endif // CPPTEMPLATE_VERSION_H
+#endif // CPPLOGGING_VERSION_H

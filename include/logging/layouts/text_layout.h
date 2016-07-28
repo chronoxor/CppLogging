@@ -1,6 +1,6 @@
 /*!
     \file text_layout.h
-    \brief Logging text layout definition
+    \brief Text layout definition
     \author Ivan Shynkarenka
     \date 08.07.2016
     \copyright MIT License
@@ -16,11 +16,11 @@
 
 namespace CppLogging {
 
-//! Logging text layout
+//! Text layout
 /*!
-    Text layout converts the given logging record into the text string
-    using a given pattern. Text layout pattern is a string with a
-    special placeholders provided inside curly brackets ("{}").
+    Text layout converts the given logging record into the text
+    string using a given pattern. Text layout pattern is a string
+    with a special placeholders provided inside curly brackets ("{}").
 
     Supported placeholders:
     - {UtcDateTime}/{LocalDateTime} - converted to the UTC/local date & time (e.g. "1997-07-16T19:20:30.123Z"/"1997-07-16T19:20:30.123+01:00")
@@ -47,7 +47,7 @@ namespace CppLogging {
 class TextLayout : public Layout
 {
 public:
-    //! Initialize text layout with a given pattern
+    //! Initialize text logging layout with a given pattern
     /*!
          \param pattern - Layout pattern
     */

@@ -1,6 +1,6 @@
 /*!
     \file console_appender.cpp
-    \brief Logging console appender implementation
+    \brief Console (stdout) appender implementation
     \author Ivan Shynkarenka
     \date 26.07.2016
     \copyright MIT License

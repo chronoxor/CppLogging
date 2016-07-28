@@ -1,6 +1,6 @@
 /*!
     \file debug_appender.cpp
-    \brief Logging debug appender implementation
+    \brief Debug appender implementation
     \author Ivan Shynkarenka
     \date 26.07.2016
     \copyright MIT License

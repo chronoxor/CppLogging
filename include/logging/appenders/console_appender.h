@@ -1,6 +1,6 @@
 /*!
     \file console_appender.h
-    \brief Logging console appender definition
+    \brief Console (stdout) appender definition
     \author Ivan Shynkarenka
     \date 26.07.2016
     \copyright MIT License
@@ -13,9 +13,9 @@
 
 namespace CppLogging {
 
-//! Logging console appender
+//! Console (stdout) appender
 /*!
-    Logging console appender prints the given logging record into
+    Console appender prints the given logging record into
     the console or system output stream (stdout).
 
     Thread-safe.

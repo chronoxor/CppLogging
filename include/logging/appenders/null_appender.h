@@ -1,6 +1,6 @@
 /*!
     \file null_appender.h
-    \brief Logging null appender definition
+    \brief Null appender definition
     \author Ivan Shynkarenka
     \date 26.07.2016
     \copyright MIT License
@@ -13,9 +13,9 @@
 
 namespace CppLogging {
 
-//! Logging null appender
+//! Null appender
 /*!
-    Logging null appender does nothing with a given logging record.
+    Null appender does nothing with a given logging record.
 
     Thread-safe.
 */

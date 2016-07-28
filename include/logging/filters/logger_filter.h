@@ -1,6 +1,6 @@
 /*!
     \file logger_filter.h
-    \brief Logging logger filter definition
+    \brief Logger filter definition
     \author Ivan Shynkarenka
     \date 27.07.2016
     \copyright MIT License
@@ -15,9 +15,9 @@
 
 namespace CppLogging {
 
-//! Logging logger filter
+//! Logger filter
 /*!
-    Logging logger filters out logging records which logger filed is not matched
+    Logger filters out logging records which logger filed is not matched
     to the given regular expression pattern.
 
     Thread-safe.

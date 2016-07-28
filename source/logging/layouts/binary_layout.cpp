@@ -1,6 +1,6 @@
 /*!
     \file binary_layout.cpp
-    \brief Logging binary layout implementation
+    \brief Binary layout implementation
     \author Ivan Shynkarenka
     \date 08.07.2016
     \copyright MIT License

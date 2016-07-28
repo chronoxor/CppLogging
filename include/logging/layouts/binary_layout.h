@@ -1,6 +1,6 @@
 /*!
     \file binary_layout.h
-    \brief Logging binary layout definition
+    \brief Binary layout definition
     \author Ivan Shynkarenka
     \date 08.07.2016
     \copyright MIT License
@@ -15,7 +15,7 @@
 
 namespace CppLogging {
 
-//! Logging binary layout
+//! Binary layout
 /*!
     Binary layout performs simple memory copy operation to convert
     the given logging record into the plane raw buffer.

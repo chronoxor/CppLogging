@@ -1,6 +1,6 @@
 /*!
     \file debug_appender.h
-    \brief Logging debug appender definition
+    \brief Debug appender definition
     \author Ivan Shynkarenka
     \date 26.07.2016
     \copyright MIT License
@@ -13,10 +13,12 @@
 
 namespace CppLogging {
 
-//! Logging debug appender
+//! Debug appender
 /*!
-    Logging debug appender prints the given logging record into
-    the attached debugger if present.
+    Debug appender prints the given logging record into
+    the attached debugger if present for Windows system.
+    Under Unix systems this appender prints the given
+    logging record into the system error stream (stderr).
 
     Thread-safe.
 */

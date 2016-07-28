@@ -1,6 +1,6 @@
 /*!
     \file memory_appender.h
-    \brief Logging memory appender definition
+    \brief Memory appender definition
     \author Ivan Shynkarenka
     \date 26.07.2016
     \copyright MIT License
@@ -13,9 +13,9 @@
 
 namespace CppLogging {
 
-//! Logging memory appender
+//! Memory appender
 /*!
-    Logging memory appender collects all given logging records into
+    Memory appender collects all given logging records into
     growing memory buffer with the given initial capacity.
 
     Not thread-safe.
@@ -23,7 +23,7 @@ namespace CppLogging {
 class MemoryAppender : public Appender
 {
 public:
-    //! Initialize memory appender with a given capacity
+    //! Initialize the appender with a given capacity
     /*!
          \param capacity - Memory buffer capacity (default is 0)
     */

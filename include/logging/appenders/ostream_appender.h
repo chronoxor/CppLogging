@@ -1,6 +1,6 @@
 /*!
     \file ostream_appender.h
-    \brief Logging std::ostream appender definition
+    \brief Output stream (std::ostream) appender definition
     \author Ivan Shynkarenka
     \date 26.07.2016
     \copyright MIT License
@@ -15,17 +15,17 @@
 
 namespace CppLogging {
 
-//! Logging std::ostream appender
+//! Output stream (std::ostream) appender
 /*!
-    Logging std::ostream appender prints the given logging record into
-    the given instance of std::ostream.
+    Output stream (std::ostream) appender prints the given logging record
+    into the given instance of std::ostream.
 
     Not thread-safe.
 */
 class OstreamAppender : public Appender
 {
 public:
-    //! Initialize std::ostream appender with a given output stream
+    //! Initialize the appender with a given output stream
     /*!
          \param stream - Output stream
     */

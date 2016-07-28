@@ -1,6 +1,6 @@
 /*!
     \file sync_processor.h
-    \brief Logging synchronous processor interface definition
+    \brief Synchronous logging processor definition
     \author Ivan Shynkarenka
     \date 28.07.2016
     \copyright MIT License
@@ -15,9 +15,9 @@
 
 namespace CppLogging {
 
-//! Logging synchronous processor interface
+//! Synchronous logging processor
 /*!
-    Logging synchronous processor process the given logging record
+    Synchronous logging processor process the given logging record
     under with locking a mutex to avoid races in not thread-safe
     layouts, filters and appenders.
 

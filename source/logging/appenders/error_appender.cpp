@@ -1,6 +1,6 @@
 /*!
     \file error_appender.cpp
-    \brief Logging error appender implementation
+    \brief Error (stderr) appender implementation
     \author Ivan Shynkarenka
     \date 26.07.2016
     \copyright MIT License

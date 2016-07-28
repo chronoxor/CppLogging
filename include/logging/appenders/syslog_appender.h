@@ -1,6 +1,6 @@
 /*!
     \file syslog_appender.h
-    \brief Logging syslog appender definition
+    \brief Syslog appender definition
     \author Ivan Shynkarenka
     \date 28.07.2016
     \copyright MIT License
@@ -13,9 +13,9 @@
 
 namespace CppLogging {
 
-//! Logging syslog appender
+//! Syslog appender
 /*!
-    Logging syslog appender forward logging record to the syslog() system call
+    Syslog appender forward logging record to the syslog() system call
     for Unix systems. Under Windows systems this appender does nothing!
 
     Thread-safe.

@@ -1,6 +1,6 @@
 /*!
     \file level_filter.h
-    \brief Logging level filter definition
+    \brief Level filter definition
     \author Ivan Shynkarenka
     \date 27.07.2016
     \copyright MIT License
@@ -15,9 +15,9 @@
 
 namespace CppLogging {
 
-//! Logging level filter
+//! Level filter
 /*!
-    Logging level filters out logging records which level filed is not matched
+    Level filters out logging records which level filed is not matched
     to the given level value or range.
 
     Thread-safe.

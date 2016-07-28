@@ -1,6 +1,6 @@
 /*!
     \file memory_appender.cpp
-    \brief Logging memory appender implementation
+    \brief Memory appender implementation
     \author Ivan Shynkarenka
     \date 26.07.2016
     \copyright MIT License

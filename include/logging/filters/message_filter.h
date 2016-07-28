@@ -1,6 +1,6 @@
 /*!
     \file message_filter.h
-    \brief Logging message filter definition
+    \brief Message filter definition
     \author Ivan Shynkarenka
     \date 27.07.2016
     \copyright MIT License
@@ -15,9 +15,9 @@
 
 namespace CppLogging {
 
-//! Logging message filter
+//! Message filter
 /*!
-    Logging message filters out logging records which message field is not matched
+    Message filters out logging records which message field is not matched
     to the given regular expression pattern.
 
     Thread-safe.

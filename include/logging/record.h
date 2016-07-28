@@ -19,7 +19,7 @@ namespace CppLogging {
 
 //! Logging record
 /*!
-    Encapsulates all required fields of a single logging record:
+    Logging record encapsulates all required fields in a single instance:
     - timestamp
     - thread Id
     - level
@@ -42,11 +42,11 @@ public:
     //! Level of the logging record
     Level level;
     //! Logger name of the logging record
-    std::pair<char*, uint8_t>  logger;
+    std::pair<const char*, uint8_t>  logger;
     //! Message of the logging record
-    std::pair<char*, uint16_t> message;
+    std::pair<const char*, uint16_t> message;
     //! Buffer of the logging record
-    std::pair<void*, uint32_t> buffer;
+    std::pair<const void*, uint32_t> buffer;
 
     //! Record content after layout
     std::pair<void*, size_t> raw;

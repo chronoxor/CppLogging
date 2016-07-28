@@ -1,6 +1,6 @@
 /*!
     \file sync_processor.cpp
-    \brief Logging synchronous processor interface implementation
+    \brief Synchronous logging processor implementation
     \author Ivan Shynkarenka
     \date 28.07.2016
     \copyright MIT License

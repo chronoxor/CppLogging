@@ -1,6 +1,6 @@
 /*!
     \file message_filter.cpp
-    \brief Logging message filter implementation
+    \brief Message filter implementation
     \author Ivan Shynkarenka
     \date 27.07.2016
     \copyright MIT License

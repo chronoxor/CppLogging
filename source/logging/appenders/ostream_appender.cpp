@@ -1,6 +1,6 @@
 /*!
     \file ostream_appender.cpp
-    \brief Logging std::ostream appender implementation
+    \brief Output stream (std::ostream) appender implementation
     \author Ivan Shynkarenka
     \date 26.07.2016
     \copyright MIT License

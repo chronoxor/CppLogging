@@ -1,6 +1,6 @@
 /*!
     \file logger_filter.cpp
-    \brief Logging logger filter implementation
+    \brief Logger filter implementation
     \author Ivan Shynkarenka
     \date 27.07.2016
     \copyright MIT License

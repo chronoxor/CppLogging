@@ -1,6 +1,6 @@
 /*!
     \file text_layout.cpp
-    \brief Logging text layout implementation
+    \brief Text layout implementation
     \author Ivan Shynkarenka
     \date 08.07.2016
     \copyright MIT License

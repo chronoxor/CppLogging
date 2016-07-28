@@ -1,6 +1,6 @@
 /*!
     \file error_appender.h
-    \brief Logging error appender definition
+    \brief Error (stderr) appender definition
     \author Ivan Shynkarenka
     \date 26.07.2016
     \copyright MIT License
@@ -13,9 +13,9 @@
 
 namespace CppLogging {
 
-//! Logging error appender
+//! Error (stderr) appender
 /*!
-    Logging error appender prints the given logging record into
+    Error appender prints the given logging record into
     the console or system error stream (stderr).
 
     Thread-safe.
