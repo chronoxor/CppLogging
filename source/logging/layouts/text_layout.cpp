@@ -116,10 +116,6 @@ public:
 
     std::pair<void*, size_t> LayoutRecord(Record& record)
     {
-        // Check if layout is already performed
-        if (record.raw.first != nullptr)
-            return record.raw;
-
         static bool cache_initizlied = false;
         static bool cache_time_required = false;
         static bool cache_utc_required = false;

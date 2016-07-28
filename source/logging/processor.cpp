@@ -12,23 +12,24 @@ namespace CppLogging {
 
 bool Processor::ProcessRecord(Record& record)
 {
-    // Layout the given logging record
-    for (auto& layout : _layouts)
-        layout->LayoutRecord(record);
+    // Process the given logging record with sub processors
+    for (auto& processor : _processors)
+        if (!processor->ProcessRecord(record))
+            return false;
 
     // Filter the given logging record
     for (auto& filter : _filters)
         if (!filter->FilterRecord(record))
             return false;
 
+    // Layout the given logging record
+    for (auto& layout : _layouts)
+        layout->LayoutRecord(record);
+
     // Append the given logging record
     for (auto& appender : _appenders)
         appender->AppendRecord(record);
 
-    // Process the given logging record with sub processors
-    for (auto& processor : _processors)
-        if (!processor->ProcessRecord(record))
-            return false;
     return true;
 }
 

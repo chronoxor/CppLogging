@@ -26,10 +26,6 @@ public:
 
     std::pair<void*, size_t> LayoutRecord(Record& record)
     {
-        // Check if layout is already performed
-        if (record.raw.first != nullptr)
-            return record.raw;
-
         // Calculate logging record size
         uint32_t size = sizeof(uint64_t) + sizeof(uint64_t) + sizeof(Level) + sizeof(uint8_t) + record.logger.second + sizeof(uint16_t) + record.message.second + sizeof(uint32_t) + record.buffer.second;
 
