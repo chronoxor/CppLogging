@@ -36,7 +36,7 @@ void SyslogAppender::AppendRecord(Record& record)
 
 #if defined(unix) || defined(__unix) || defined(__unix__)
     // Setup syslog priority depends on the logging level
-    int priority = LOG_INFO;
+    int priority;
     switch (record.level)
     {
         case Level::FATAL:
@@ -54,10 +54,13 @@ void SyslogAppender::AppendRecord(Record& record)
         case Level::DEBUG:
             priority = LOG_DEBUG;
             break;
+        default:
+            priority = LOG_INFO;
+            break;
     }
 
     // Append logging record content
-    syslog(priority, "%.*s", (int)record.raw.second, record.raw.first);
+    syslog(priority, "%.*s", (int)record.raw.second, (char*)record.raw.first);
 #endif
 }
 
