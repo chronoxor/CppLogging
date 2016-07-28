@@ -823,7 +823,7 @@ private:
                 output = "ALL  ";
                 break;
             default:
-                output = "<???>";
+                output = "<\?\?\?>";
                 break;
         }
     }
