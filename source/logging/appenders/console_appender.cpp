@@ -27,7 +27,7 @@ void ConsoleAppender::AppendRecord(Record& record)
             CppCommon::Console::SetColor(CppCommon::Color::DARKGREY);
             break;
         case Level::FATAL:
-            CppCommon::Console::SetColor(CppCommon::Color::WHITE, CppCommon::Color::RED);
+            CppCommon::Console::SetColor(CppCommon::Color::WHITE, CppCommon::Color::LIGHTRED);
             break;
         case Level::ERROR:
             CppCommon::Console::SetColor(CppCommon::Color::LIGHTRED);
