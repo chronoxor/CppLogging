@@ -13,18 +13,21 @@ using namespace CppLogging;
 
 const int iterations = 10000;
 
-Logger CreateLogger()
+class ConfigFixture
 {
-    auto sink = std::make_shared<CppLogging::Processor>();
-    sink->layouts().push_back(std::make_shared<CppLogging::TextLayout>());
-    sink->appenders().push_back(std::make_shared<CppLogging::ConsoleAppender>());
-    CppLogging::Config::ConfigLogger("test", sink);
-    return CppLogging::Config::CreateLogger("test");
-}
+protected:
+    ConfigFixture()
+    {
+        auto sink = std::make_shared<CppLogging::Processor>();
+        sink->layouts().push_back(std::make_shared<CppLogging::TextLayout>());
+        sink->appenders().push_back(std::make_shared<CppLogging::ConsoleAppender>());
+        CppLogging::Config::ConfigLogger("test", sink);
+    }
+};
 
-BENCHMARK("ConsoleAppender", iterations)
+BENCHMARK_FIXTURE(ConfigFixture, "ConsoleAppender", iterations)
 {
-    static Logger logger = CreateLogger();
+    static Logger logger = CppLogging::Config::CreateLogger("test");
     logger.Info("Test message");
 }
 

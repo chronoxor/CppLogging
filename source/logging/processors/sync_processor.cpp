@@ -12,9 +12,9 @@ namespace CppLogging {
 
 bool SyncProcessor::ProcessRecord(Record& record)
 {
-    CppCommon::Locker<CppCommon::Mutex> locker(_lock);
+    CppCommon::Locker<CppCommon::CriticalSection> locker(_lock);
 
-    // Process the given loggin record under the mutex lock
+    // Process the given logging record under the critical section lock
     return Processor::ProcessRecord(record);
 }
 

@@ -11,14 +11,14 @@
 
 #include "logging/processor.h"
 
-#include "threads/mutex.h"
+#include "threads/critical_section.h"
 
 namespace CppLogging {
 
 //! Synchronous logging processor
 /*!
     Synchronous logging processor process the given logging record
-    under with locking a mutex to avoid races in not thread-safe
+    under the critical section to avoid races in not thread-safe
     layouts, filters and appenders.
 
     Thread-safe.
@@ -38,7 +38,7 @@ public:
     bool ProcessRecord(Record& record) override;
 
 private:
-    CppCommon::Mutex _lock;
+    CppCommon::CriticalSection _lock;
 };
 
 } // namespace CppLogging

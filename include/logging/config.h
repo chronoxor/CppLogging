@@ -24,10 +24,9 @@ namespace CppLogging {
 class Config
 {
 public:
-    Config() = delete;
     Config(const Config&) = delete;
     Config(Config&&) = delete;
-    ~Config() = delete;
+    ~Config() = default;
 
     Config& operator=(const Config&) = delete;
     Config& operator=(Config&&) = delete;
@@ -63,8 +62,14 @@ public:
     static Logger CreateLogger(const std::string& name);
 
 private:
-    static CppCommon::Mutex _lock;
-    static std::map<std::string, std::shared_ptr<Processor>> _config;
+    CppCommon::CriticalSection _lock;
+    std::map<std::string, std::shared_ptr<Processor>> _config;
+
+    Config() = default;
+
+    //! Get singleton instance
+    static Config& GetInstance()
+    { static Config instance; return instance; }
 };
 
 } // namespace CppLogging
