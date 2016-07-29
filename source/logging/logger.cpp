@@ -68,6 +68,12 @@ void Logger::Fatal(const std::string& fatal)
     Log(Level::FATAL, fatal);
 }
 
+void Logger::Flush()
+{
+    if (_sink)
+        _sink->Flush();
+}
+
 void Logger::Update()
 {
     _sink = Config::CreateLogger(_name)._sink;

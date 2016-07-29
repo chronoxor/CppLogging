@@ -76,6 +76,9 @@ public:
     */
     void Fatal(const std::string& fatal);
 
+    //! Flush the current logger
+    void Flush();
+
     //! Update the current logger sink by taking the most recent one from configuration
     void Update();
 

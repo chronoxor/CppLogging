@@ -20,7 +20,7 @@ void Config::ConfigLogger(const std::shared_ptr<Processor>& sink)
     _config[""] = sink;
 }
 
-void Config::ConfigureLogger(const std::string& name, const std::shared_ptr<Processor>& sink)
+void Config::ConfigLogger(const std::string& name, const std::shared_ptr<Processor>& sink)
 {
     CppCommon::Locker<CppCommon::Mutex> locker(_lock);
 

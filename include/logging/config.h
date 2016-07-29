@@ -42,7 +42,7 @@ public:
          \param name - Logger name
          \param sink - Logging sink processor
     */
-    static void ConfigureLogger(const std::string& name, const std::shared_ptr<Processor>& sink);
+    static void ConfigLogger(const std::string& name, const std::shared_ptr<Processor>& sink);
 
     //! Create default logger
     /*!

@@ -32,7 +32,7 @@ public:
     Processor() = default;
     Processor(const Processor&) = default;
     Processor(Processor&&) = default;
-    virtual ~Processor();
+    virtual ~Processor() = default;
 
     Processor& operator=(const Processor&) = default;
     Processor& operator=(Processor&&) = default;
@@ -59,6 +59,9 @@ public:
          \return 'true' if the logging record was successfully processed, 'false' if the logging record was filtered out
     */
     virtual bool ProcessRecord(Record& record);
+
+    //! Flush the current logging processor
+    virtual void Flush();
 
 private:
     std::vector<std::shared_ptr<Layout>> _layouts;

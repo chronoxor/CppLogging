@@ -33,4 +33,15 @@ bool Processor::ProcessRecord(Record& record)
     return true;
 }
 
+void Processor::Flush()
+{
+    // Flush all sub processors
+    for (auto& processor : _processors)
+        processor->Flush();
+
+    // Flush all appenders
+    for (auto& appender : _appenders)
+        appender->Flush();
+}
+
 } // namespace CppLogging
