@@ -38,13 +38,13 @@ TEST_CASE("Text layout", "[CppLogging]")
 
     TextLayout layout2("{UtcYear}-{UtcMonth}-{UtcDay}T{UtcHour}:{UtcMinute}:{UtcSecond}.{Millisecond}{UtcTimezone} - {Microsecond}.{Nanosecond} - [{Thread}] - {Level} - {Logger} - {Message} - {EndLine}");
     auto result2 = layout2.LayoutRecord(record);
-    REQUIRE(result2.second == std::strlen(utc_sample));
-    REQUIRE(std::memcmp(result2.first, utc_sample, std::strlen(utc_sample)) == 0);
+    REQUIRE(result2.second == std::strlen(utc_sample) + 1);
+    REQUIRE(std::memcmp(result2.first, utc_sample, std::strlen(utc_sample) + 1) == 0);
     record.raw = std::make_pair(nullptr, 0);
 
     TextLayout layout3("{UtcDateTime} - {Microsecond}.{Nanosecond} - [{Thread}] - {Level} - {Logger} - {Message} - {EndLine}");
     auto result3 = layout3.LayoutRecord(record);
-    REQUIRE(result3.second == std::strlen(utc_sample));
-    REQUIRE(std::memcmp(result3.first, utc_sample, std::strlen(utc_sample)) == 0);
+    REQUIRE(result3.second == std::strlen(utc_sample) + 1);
+    REQUIRE(std::memcmp(result3.first, utc_sample, std::strlen(utc_sample) + 1) == 0);
     record.raw = std::make_pair(nullptr, 0);
 }

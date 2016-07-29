@@ -19,7 +19,7 @@ void ErrorAppender::AppendRecord(Record& record)
         return;
 
     // Append logging record content
-    std::fwrite(record.raw.first, 1, record.raw.second, stderr);
+    std::fwrite(record.raw.first, 1, record.raw.second - 1, stderr);
 }
 
 void ErrorAppender::Flush()

@@ -7,11 +7,9 @@
 #include "logging/config.h"
 #include "logging/logger.h"
 
-#include <cstring>
-
 using namespace CppLogging;
 
-const int iterations = 10000;
+const int iterations = 1000000;
 
 class ConfigFixture
 {

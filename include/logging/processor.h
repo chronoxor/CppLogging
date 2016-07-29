@@ -22,9 +22,9 @@ namespace CppLogging {
 
     Thread-safe or not thread-safe.
 
-    \see BufferProcessor
     \see SyncProcessor
     \see AsyncProcessor
+    \see BufferedProcessor
 */
 class Processor
 {
@@ -73,8 +73,8 @@ private:
 } // namespace CppLogging
 
 #include "logging/processors/sync_processor.h"
+#include "logging/processors/buffered_processor.h"
 /*
-#include "logging/processors/buffer_processor.h"
 #include "logging/processors/async_processor.h"
 */
 

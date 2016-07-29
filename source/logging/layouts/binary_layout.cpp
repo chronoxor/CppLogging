@@ -58,7 +58,7 @@ public:
         buffer += record.buffer.second;
 
         // Update raw field of the logging record and return
-        record.raw = std::make_pair(_buffer.data(), _buffer.size());
+        record.raw = std::make_pair(_buffer.data(), (uint32_t)_buffer.size());
         return record.raw;
     }
 

@@ -49,7 +49,7 @@ public:
     std::pair<const void*, uint32_t> buffer;
 
     //! Record content after layout
-    std::pair<void*, size_t> raw;
+    std::pair<void*, uint32_t> raw;
 
     Record() noexcept
         : timestamp(CppCommon::Timestamp::utc()),

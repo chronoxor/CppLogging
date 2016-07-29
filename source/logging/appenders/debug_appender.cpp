@@ -27,7 +27,7 @@ void DebugAppender::AppendRecord(Record& record)
     OutputDebugStringA((LPCSTR)record.raw.first);
 #else
     // Append logging record content
-    std::fwrite(record.raw.first, 1, record.raw.second, stdout);
+    std::fwrite(record.raw.first, 1, record.raw.second - 1, stdout);
 #endif
 }
 

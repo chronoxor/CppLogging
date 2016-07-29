@@ -17,7 +17,7 @@ void OstreamAppender::AppendRecord(Record& record)
         return;
 
     // Append logging record content
-    _ostream.write((char*)record.raw.first, record.raw.second);
+    _ostream.write((char*)record.raw.first, record.raw.second - 1);
 }
 
 void OstreamAppender::Flush()

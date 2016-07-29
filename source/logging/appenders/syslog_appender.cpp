@@ -60,7 +60,7 @@ void SyslogAppender::AppendRecord(Record& record)
     }
 
     // Append logging record content
-    syslog(priority, "%.*s", (int)record.raw.second, (char*)record.raw.first);
+    syslog(priority, "%.*s", (int)record.raw.second - 1, (char*)record.raw.first);
 #endif
 }
 
