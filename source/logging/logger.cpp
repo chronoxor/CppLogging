@@ -8,16 +8,26 @@
 
 #include "logging/logger.h"
 
+#include "logging/config.h"
+
 namespace CppLogging {
 
-Logger::Logger(const std::string& name) : _name(name)
+Logger::Logger() : _name(), _sink(Config::CreateLogger()._sink)
 {
+}
 
+Logger::Logger(const std::string& name) : _name(name), _sink(Config::CreateLogger(name)._sink)
+{
+}
+
+Logger::Logger(const std::string& name, const std::shared_ptr<Processor>& sink) : _name(name), _sink(sink)
+{
 }
 
 void Logger::Log(Record& record)
 {
-    _sink->ProcessRecord(record);
+    if (_sink)
+        _sink->ProcessRecord(record);
 }
 
 void Logger::Log(Level level, const std::string& message)
@@ -60,7 +70,7 @@ void Logger::Fatal(const std::string& fatal)
 
 void Logger::Update()
 {
-
+    _sink = Config::CreateLogger(_name)._sink;
 }
 
 } // namespace CppLogging

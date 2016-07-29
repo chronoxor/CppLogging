@@ -21,12 +21,16 @@ namespace CppLogging {
 */
 class Logger
 {
+    friend class Config;
+
 public:
-    //! Initialize a new default or named logger
+    //! Initialize default logger
+    Logger();
+    //! Initialize named logger
     /*!
-         \param name - Logger name (default is "")
+         \param name - Logger name
     */
-    explicit Logger(const std::string& name = "");
+    explicit Logger(const std::string& name);
     Logger(const Logger&) = default;
     Logger(Logger&&) = default;
     ~Logger() = default;
@@ -78,6 +82,13 @@ public:
 private:
     std::string _name;
     std::shared_ptr<Processor> _sink;
+
+    //! Initialize logger
+    /*!
+         \param name - Logger name
+         \param sink - Logger sink processor
+    */
+    explicit Logger(const std::string& name, const std::shared_ptr<Processor>& sink);
 
     //! Log the given message with a given level
     /*!
