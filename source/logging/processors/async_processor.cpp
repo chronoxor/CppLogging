@@ -24,7 +24,7 @@ AsyncProcessor::AsyncProcessor(bool discard_on_overflow, size_t capacity, size_t
 AsyncProcessor::~AsyncProcessor()
 {
     // Local buffer to store the logging record
-    static thread_local std::vector<uint8_t> local(1);
+    thread_local std::vector<uint8_t> local(1);
 
     // Calculate logging record size
     uint32_t size = sizeof(uint8_t);
@@ -52,7 +52,7 @@ AsyncProcessor::~AsyncProcessor()
 bool AsyncProcessor::ProcessRecord(Record& record)
 {
     // Local buffer to store the logging record
-    static thread_local std::vector<uint8_t> local(1024);
+    thread_local std::vector<uint8_t> local(1024);
 
     // Calculate logging record size
     size_t size = sizeof(uint8_t) + sizeof(uint64_t) + sizeof(uint64_t) + sizeof(Level) + sizeof(uint8_t) + record.logger.second + sizeof(uint16_t) + record.message.second + sizeof(uint32_t) + record.buffer.second + sizeof(uint32_t) + record.raw.second;
@@ -141,7 +141,7 @@ void AsyncProcessor::ProcessBufferedRecords()
     try
     {
         // Local buffer to store the logging record
-		static thread_local std::vector<uint8_t> local(_buffer.capacity());
+        thread_local std::vector<uint8_t> local(_buffer.capacity());
 
         // Waiting strategy parameters
         int spins = 1000;
@@ -254,7 +254,7 @@ void AsyncProcessor::ProcessBufferedRecords()
 void AsyncProcessor::Flush()
 {
     // Local buffer to store the logging record
-    static thread_local std::vector<uint8_t> local(1);
+    thread_local std::vector<uint8_t> local(1);
 
     // Calculate logging record size
     uint32_t size = sizeof(uint8_t);
