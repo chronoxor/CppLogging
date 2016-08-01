@@ -152,7 +152,7 @@ void AsyncProcessor::ProcessBufferedRecords()
         do
         {
             // Read local buffer
-            size_t local_size = _buffer.capacity();
+            size_t local_size = local.size();
             if (_buffer.Dequeue(local.data(), local_size))
             {
                 // Get the local buffer start and end positions
