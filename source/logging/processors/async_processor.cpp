@@ -157,7 +157,7 @@ void AsyncProcessor::ProcessBufferedRecords()
             {
                 // Get the local buffer start and end positions
                 uint8_t* buffer = local.data();
-                uint8_t* end = local.data() + local.size();
+                uint8_t* end = local.data() + local_size;
 
                 // Process all buffered logging records
                 while (buffer < end)
