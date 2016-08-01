@@ -16,7 +16,7 @@ char logger[] = "Test logger";
 char message[] = "Test message";
 uint8_t buffer[1024];
 
-class LayoutFixture
+class BinaryLayoutFixture
 {
 protected:
     BinaryLayout layout;
@@ -25,7 +25,7 @@ protected:
     uint16_t smessage;
     uint16_t sbuffer;
 
-    LayoutFixture()
+    BinaryLayoutFixture()
     {
         slogger = (uint8_t)std::strlen(logger);
         smessage = (uint16_t)std::strlen(message);
@@ -33,7 +33,7 @@ protected:
     }
 };
 
-BENCHMARK_FIXTURE(LayoutFixture, "BinaryLayout", iterations)
+BENCHMARK_FIXTURE(BinaryLayoutFixture, "BinaryLayout", iterations)
 {
     Record record;
     record.logger = std::make_pair(logger, slogger);
