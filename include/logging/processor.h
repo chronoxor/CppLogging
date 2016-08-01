@@ -73,9 +73,7 @@ private:
 } // namespace CppLogging
 
 #include "logging/processors/sync_processor.h"
-#include "logging/processors/buffered_processor.h"
-/*
 #include "logging/processors/async_processor.h"
-*/
+#include "logging/processors/buffered_processor.h"
 
 #endif // CPPLOGGING_PROCESSOR_H

@@ -13,7 +13,7 @@ namespace CppLogging {
 bool BufferedProcessor::ProcessRecord(Record& record)
 {
     // Calculate logging record size
-    uint32_t size = sizeof(uint64_t) + sizeof(uint64_t) + sizeof(Level) + sizeof(uint8_t) + record.logger.second + sizeof(uint16_t) + record.message.second + sizeof(uint32_t) + record.buffer.second + sizeof(uint32_t) + record.raw.second;
+    size_t size = sizeof(uint64_t) + sizeof(uint64_t) + sizeof(Level) + sizeof(uint8_t) + record.logger.second + sizeof(uint16_t) + record.message.second + sizeof(uint32_t) + record.buffer.second + sizeof(uint32_t) + record.raw.second;
 
     // Process all buffered logging records if the buffer limit is reached
     size_t offset = _buffer.size();

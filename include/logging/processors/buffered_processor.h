@@ -26,10 +26,10 @@ class BufferedProcessor : public Processor
 public:
     //! Initialize buffered processor with given size limit and capacity values
     /*!
-         \param limit - Buffer size limit in bytes (default is 100 megabytes)
-         \param capacity - Buffer initial capacity in bytes (default is 10 megabytes)
+         \param limit - Buffer size limit in bytes (default is 128 megabytes)
+         \param capacity - Buffer initial capacity in bytes (default is 16 megabytes)
     */
-    explicit BufferedProcessor(size_t limit = 104857600, size_t capacity = 10485760)
+    explicit BufferedProcessor(size_t limit = 134217728, size_t capacity = 16777216)
         : _limit(limit),
           _buffer(capacity)
     {}
