@@ -38,13 +38,15 @@ protected:
 BENCHMARK_FIXTURE(BinaryConfigFixture, "NullAppender-binary", iterations)
 {
     static Logger logger = CppLogging::Config::CreateLogger("binary");
-    logger.Info("Test message");
+    static std::string message = "Test message";
+    logger.Info(message);
 }
 
 BENCHMARK_FIXTURE(TextConfigFixture, "NullAppender-text", iterations)
 {
     static Logger logger = CppLogging::Config::CreateLogger("text");
-    logger.Info("Test message");
+    static std::string message = "Test message";
+    logger.Info(message);
 }
 
 BENCHMARK_MAIN()
