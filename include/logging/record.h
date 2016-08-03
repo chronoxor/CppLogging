@@ -13,6 +13,8 @@
 #include "threads/thread.h"
 #include "time/timestamp.h"
 
+#include <string>
+#include <vector>
 #include <utility>
 
 namespace CppLogging {
@@ -42,30 +44,30 @@ public:
     //! Level of the logging record
     Level level;
     //! Logger name of the logging record
-    std::pair<const char*, uint8_t>  logger;
+    std::string logger;
     //! Message of the logging record
-    std::pair<const char*, uint16_t> message;
+    std::string message;
     //! Buffer of the logging record
-    std::pair<const void*, uint32_t> buffer;
+    std::vector<uint8_t> buffer;
 
     //! Record content after layout
-    std::pair<void*, uint32_t> raw;
+    std::vector<uint8_t> raw;
 
     Record() noexcept
         : timestamp(CppCommon::Timestamp::utc()),
           thread(CppCommon::Thread::CurrentThreadId()),
           level(Level::INFO),
-          logger(nullptr, 0),
-          message(nullptr, 0),
-          buffer(nullptr, 0),
-          raw(nullptr, 0)
+          logger(32, 0),
+          message(512, 0),
+          buffer(1024, 0),
+          raw(512, 0)
     {}
-    Record(const Record&) noexcept = default;
-    Record(Record&&) noexcept = default;
-    ~Record() noexcept = default;
+    Record(const Record&) = default;
+    Record(Record&&) = default;
+    ~Record() = default;
 
-    Record& operator=(const Record&) noexcept = default;
-    Record& operator=(Record&&) noexcept = default;
+    Record& operator=(const Record&) = default;
+    Record& operator=(Record&&) = default;
 };
 
 } // namespace CppLogging

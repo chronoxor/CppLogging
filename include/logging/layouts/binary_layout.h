@@ -11,8 +11,6 @@
 
 #include "logging/layout.h"
 
-#include <memory>
-
 namespace CppLogging {
 
 //! Binary layout
@@ -25,20 +23,16 @@ namespace CppLogging {
 class BinaryLayout : public Layout
 {
 public:
-    BinaryLayout();
+    BinaryLayout() = default;
     BinaryLayout(const BinaryLayout&) = delete;
     BinaryLayout(BinaryLayout&&) = default;
-    ~BinaryLayout();
+    ~BinaryLayout() = default;
 
     BinaryLayout& operator=(const BinaryLayout&) = delete;
     BinaryLayout& operator=(BinaryLayout&&) = default;
 
     // Implementation of Layout
-    std::pair<void*, size_t> LayoutRecord(Record& record) override;
-
-private:
-    class Impl;
-    std::unique_ptr<Impl> _pimpl;
+    void LayoutRecord(Record& record) override;
 };
 
 } // namespace CppLogging

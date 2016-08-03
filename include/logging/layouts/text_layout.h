@@ -60,7 +60,7 @@ public:
     TextLayout& operator=(TextLayout&&) = default;
 
     // Implementation of Layout
-    std::pair<void*, size_t> LayoutRecord(Record& record) override;
+    void LayoutRecord(Record& record) override;
 
 private:
     class Impl;
