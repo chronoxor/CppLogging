@@ -18,6 +18,47 @@ using namespace CppLogging;
 const uint64_t items_to_produce = 8000000;
 const auto settings = CppBenchmark::Settings().ParamRange(8, 8, [](int from, int to, int& result) { int r = result; result *= 2; return r; });
 
+class RecordEx
+{
+public:
+	//! Timestamp of the logging record
+	uint64_t timestamp;
+	//! Thread Id of the logging record
+	uint64_t thread;
+	//! Level of the logging record
+	Level level;
+
+	char logger[5];
+	char message[16];
+
+	RecordEx() noexcept
+		: timestamp(CppCommon::Timestamp::utc()),
+		thread(CppCommon::Thread::CurrentThreadId()),
+		level(Level::INFO)
+	{}
+	RecordEx(const RecordEx&) noexcept = delete;
+	RecordEx(RecordEx&& r) noexcept
+	{
+		timestamp = std::move(r.timestamp);
+		thread = std::move(r.thread);
+		level = std::move(r.level);
+		std::strcpy(logger, r.logger);
+		std::strcpy(message, r.message);
+	}
+	~RecordEx() noexcept = default;
+
+	RecordEx& operator=(const RecordEx&) noexcept = delete;
+	RecordEx& operator=(RecordEx&& r) noexcept
+	{
+		timestamp = std::move(r.timestamp);
+		thread = std::move(r.thread);
+		level = std::move(r.level);
+		std::strcpy(logger, r.logger);
+		std::strcpy(message, r.message);
+		return *this;
+	}
+};
+
 template<typename T, uint64_t N>
 void test(CppBenchmark::Context& context, const std::function<void()>& wait_strategy)
 {
@@ -53,6 +94,8 @@ void test(CppBenchmark::Context& context, const std::function<void()>& wait_stra
             {
                 // Enqueue using the given waiting strategy
 				T record;
+				std::strcpy(record.logger, "Test");
+				std::strcpy(record.message, "Test message");
                 while (!queue.Enqueue(std::forward<T>(record)))
                     wait_strategy();
             }
@@ -76,7 +119,7 @@ void test(CppBenchmark::Context& context, const std::function<void()>& wait_stra
 
 BENCHMARK("Test", settings)
 {
-    test<Record, 4096>(context, []{ std::this_thread::yield(); });
+    test<RecordEx, 1048576>(context, []{ std::this_thread::yield(); });
 }
 
 BENCHMARK_MAIN()
