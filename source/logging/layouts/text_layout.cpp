@@ -137,6 +137,7 @@ public:
         static std::string cache_utc_hour_str = "00";
         static std::string cache_utc_minute_str = "00";
         static std::string cache_utc_second_str = "00";
+        static std::string cache_utc_timezone_str = "Z";
         static std::string cache_local_datetime_str = "1970-01-01T01:01:01.000+00:00";
         static std::string cache_local_date_str = "1970-01-01";
         static std::string cache_local_time_str = "01:01:01.000+00:00";
@@ -146,7 +147,7 @@ public:
         static std::string cache_local_hour_str = "00";
         static std::string cache_local_minute_str = "00";
         static std::string cache_local_second_str = "00";
-        static std::string cache_timezone_str = "+00:00";
+        static std::string cache_local_timezone_str = "+00:00";
         static std::string cache_millisecond_str = "000";
         static std::string cache_microsecond_str = "000";
         static std::string cache_nanosecond_str = "000";
@@ -205,7 +206,7 @@ public:
                 if (cache_timezone_required || !cache_initizlied)
                 {
                     CppCommon::Timezone local;
-                    ConvertTimezone(cache_timezone_str, local.total().minutes());
+                    ConvertTimezone(cache_local_timezone_str, local.total().minutes());
                     cache_update_datetime = true;
                 }
 
@@ -253,7 +254,7 @@ public:
             cache_utc_time_str += cache_utc_second_str;
             cache_utc_time_str += '.';
             cache_utc_time_str += cache_millisecond_str;
-            cache_utc_time_str += 'Z';
+            cache_utc_time_str += cache_utc_timezone_str;
 
             cache_utc_datetime_str = cache_utc_date_str;
             cache_utc_datetime_str += 'T';
@@ -272,7 +273,7 @@ public:
             cache_local_time_str += cache_local_second_str;
             cache_local_time_str += '.';
             cache_local_time_str += cache_millisecond_str;
-            cache_local_time_str += cache_timezone_str;
+            cache_local_time_str += cache_local_timezone_str;
 
             cache_local_datetime_str = cache_local_date_str;
             cache_local_datetime_str += 'T';
@@ -314,17 +315,13 @@ public:
                 case PlaceholderType::String:
                 {
                     // Output pattern string
-                    size_t size = _buffer.size();
-                    _buffer.resize(size + placeholder.value.size());
-                    std::memcpy(_buffer.data() + size, placeholder.value.c_str(), placeholder.value.size());
+                    _buffer.insert(_buffer.end(), placeholder.value.begin(), placeholder.value.end());
                     break;
                 }
                 case PlaceholderType::UtcDateTime:
                 {
                     // Output UTC date & time string
-                    size_t size = _buffer.size();
-                    _buffer.resize(size + cache_utc_datetime_str.size());
-                    std::memcpy(_buffer.data() + size, cache_utc_datetime_str.c_str(), cache_utc_datetime_str.size());
+                    _buffer.insert(_buffer.end(), cache_utc_datetime_str.begin(), cache_utc_datetime_str.end());
                     // Set the corresponding cache required flag
                     cache_time_required = true;
                     cache_utc_required = true;
@@ -334,9 +331,7 @@ public:
                 case PlaceholderType::UtcDate:
                 {
                     // Output UTC date string
-                    size_t size = _buffer.size();
-                    _buffer.resize(size + cache_utc_date_str.size());
-                    std::memcpy(_buffer.data() + size, cache_utc_date_str.c_str(), cache_utc_date_str.size());
+                    _buffer.insert(_buffer.end(), cache_utc_date_str.begin(), cache_utc_date_str.end());
                     // Set the corresponding cache required flag
                     cache_time_required = true;
                     cache_utc_required = true;
@@ -345,9 +340,7 @@ public:
                 case PlaceholderType::UtcTime:
                 {
                     // Output UTC time string
-                    size_t size = _buffer.size();
-                    _buffer.resize(size + cache_utc_time_str.size());
-                    std::memcpy(_buffer.data() + size, cache_utc_time_str.c_str(), cache_utc_time_str.size());
+                    _buffer.insert(_buffer.end(), cache_utc_time_str.begin(), cache_utc_time_str.end());
                     // Set the corresponding cache required flag
                     cache_time_required = true;
                     cache_utc_required = true;
@@ -357,9 +350,7 @@ public:
                 case PlaceholderType::UtcYear:
                 {
                     // Output UTC year string
-                    size_t size = _buffer.size();
-                    _buffer.resize(size + cache_utc_year_str.size());
-                    std::memcpy(_buffer.data() + size, cache_utc_year_str.c_str(), cache_utc_year_str.size());
+                    _buffer.insert(_buffer.end(), cache_utc_year_str.begin(), cache_utc_year_str.end());
                     // Set the corresponding cache required flag
                     cache_time_required = true;
                     cache_utc_required = true;
@@ -368,9 +359,7 @@ public:
                 case PlaceholderType::UtcMonth:
                 {
                     // Output UTC month string
-                    size_t size = _buffer.size();
-                    _buffer.resize(size + cache_utc_month_str.size());
-                    std::memcpy(_buffer.data() + size, cache_utc_month_str.c_str(), cache_utc_month_str.size());
+                    _buffer.insert(_buffer.end(), cache_utc_month_str.begin(), cache_utc_month_str.end());
                     // Set the corresponding cache required flag
                     cache_time_required = true;
                     cache_utc_required = true;
@@ -379,9 +368,7 @@ public:
                 case PlaceholderType::UtcDay:
                 {
                     // Output UTC day string
-                    size_t size = _buffer.size();
-                    _buffer.resize(size + cache_utc_day_str.size());
-                    std::memcpy(_buffer.data() + size, cache_utc_day_str.c_str(), cache_utc_day_str.size());
+                    _buffer.insert(_buffer.end(), cache_utc_day_str.begin(), cache_utc_day_str.end());
                     // Set the corresponding cache required flag
                     cache_time_required = true;
                     cache_utc_required = true;
@@ -390,9 +377,7 @@ public:
                 case PlaceholderType::UtcHour:
                 {
                     // Output UTC hour string
-                    size_t size = _buffer.size();
-                    _buffer.resize(size + cache_utc_hour_str.size());
-                    std::memcpy(_buffer.data() + size, cache_utc_hour_str.c_str(), cache_utc_hour_str.size());
+                    _buffer.insert(_buffer.end(), cache_utc_hour_str.begin(), cache_utc_hour_str.end());
                     // Set the corresponding cache required flag
                     cache_time_required = true;
                     cache_utc_required = true;
@@ -401,9 +386,7 @@ public:
                 case PlaceholderType::UtcMinute:
                 {
                     // Output UTC minute string
-                    size_t size = _buffer.size();
-                    _buffer.resize(size + cache_utc_minute_str.size());
-                    std::memcpy(_buffer.data() + size, cache_utc_minute_str.c_str(), cache_utc_minute_str.size());
+                    _buffer.insert(_buffer.end(), cache_utc_minute_str.begin(), cache_utc_minute_str.end());
                     // Set the corresponding cache required flag
                     cache_time_required = true;
                     cache_utc_required = true;
@@ -412,9 +395,7 @@ public:
                 case PlaceholderType::UtcSecond:
                 {
                     // Output UTC second string
-                    size_t size = _buffer.size();
-                    _buffer.resize(size + cache_utc_second_str.size());
-                    std::memcpy(_buffer.data() + size, cache_utc_second_str.c_str(), cache_utc_second_str.size());
+                    _buffer.insert(_buffer.end(), cache_utc_second_str.begin(), cache_utc_second_str.end());
                     // Set the corresponding cache required flag
                     cache_time_required = true;
                     cache_utc_required = true;
@@ -423,17 +404,13 @@ public:
                 case PlaceholderType::UtcTimezone:
                 {
                     // Output UTC time zone string
-                    size_t size = _buffer.size();
-                    _buffer.resize(size + 1);
-                    std::memcpy(_buffer.data() + size, "Z", 1);
+                    _buffer.insert(_buffer.end(), cache_utc_timezone_str.begin(), cache_utc_timezone_str.end());
                     break;
                 }
                 case PlaceholderType::LocalDateTime:
                 {
                     // Output local date & time string
-                    size_t size = _buffer.size();
-                    _buffer.resize(size + cache_local_datetime_str.size());
-                    std::memcpy(_buffer.data() + size, cache_local_datetime_str.c_str(), cache_local_datetime_str.size());
+                    _buffer.insert(_buffer.end(), cache_local_datetime_str.begin(), cache_local_datetime_str.end());
                     // Set the corresponding cache required flag
                     cache_time_required = true;
                     cache_local_required = true;
@@ -444,9 +421,7 @@ public:
                 case PlaceholderType::LocalDate:
                 {
                     // Output local date string
-                    size_t size = _buffer.size();
-                    _buffer.resize(size + cache_local_date_str.size());
-                    std::memcpy(_buffer.data() + size, cache_local_date_str.c_str(), cache_local_date_str.size());
+                    _buffer.insert(_buffer.end(), cache_local_date_str.begin(), cache_local_date_str.end());
                     // Set the corresponding cache required flag
                     cache_time_required = true;
                     cache_local_required = true;
@@ -455,9 +430,7 @@ public:
                 case PlaceholderType::LocalTime:
                 {
                     // Output local time string
-                    size_t size = _buffer.size();
-                    _buffer.resize(size + cache_local_time_str.size());
-                    std::memcpy(_buffer.data() + size, cache_local_time_str.c_str(), cache_local_time_str.size());
+                    _buffer.insert(_buffer.end(), cache_local_time_str.begin(), cache_local_time_str.end());
                     // Set the corresponding cache required flag
                     cache_time_required = true;
                     cache_local_required = true;
@@ -468,9 +441,7 @@ public:
                 case PlaceholderType::LocalYear:
                 {
                     // Output local year string
-                    size_t size = _buffer.size();
-                    _buffer.resize(size + cache_local_year_str.size());
-                    std::memcpy(_buffer.data() + size, cache_local_year_str.c_str(), cache_local_year_str.size());
+                    _buffer.insert(_buffer.end(), cache_local_year_str.begin(), cache_local_year_str.end());
                     // Set the corresponding cache required flag
                     cache_time_required = true;
                     cache_local_required = true;
@@ -479,9 +450,7 @@ public:
                 case PlaceholderType::LocalMonth:
                 {
                     // Output local month string
-                    size_t size = _buffer.size();
-                    _buffer.resize(size + cache_local_month_str.size());
-                    std::memcpy(_buffer.data() + size, cache_local_month_str.c_str(), cache_local_month_str.size());
+                    _buffer.insert(_buffer.end(), cache_local_month_str.begin(), cache_local_month_str.end());
                     // Set the corresponding cache required flag
                     cache_time_required = true;
                     cache_local_required = true;
@@ -490,9 +459,7 @@ public:
                 case PlaceholderType::LocalDay:
                 {
                     // Output local day string
-                    size_t size = _buffer.size();
-                    _buffer.resize(size + cache_local_day_str.size());
-                    std::memcpy(_buffer.data() + size, cache_local_day_str.c_str(), cache_local_day_str.size());
+                    _buffer.insert(_buffer.end(), cache_local_day_str.begin(), cache_local_day_str.end());
                     // Set the corresponding cache required flag
                     cache_time_required = true;
                     cache_local_required = true;
@@ -501,9 +468,7 @@ public:
                 case PlaceholderType::LocalHour:
                 {
                     // Output local hour string
-                    size_t size = _buffer.size();
-                    _buffer.resize(size + cache_local_hour_str.size());
-                    std::memcpy(_buffer.data() + size, cache_local_hour_str.c_str(), cache_local_hour_str.size());
+                    _buffer.insert(_buffer.end(), cache_local_hour_str.begin(), cache_local_hour_str.end());
                     // Set the corresponding cache required flag
                     cache_time_required = true;
                     cache_local_required = true;
@@ -512,9 +477,7 @@ public:
                 case PlaceholderType::LocalMinute:
                 {
                     // Output local minute string
-                    size_t size = _buffer.size();
-                    _buffer.resize(size + cache_local_minute_str.size());
-                    std::memcpy(_buffer.data() + size, cache_local_minute_str.c_str(), cache_local_minute_str.size());
+                    _buffer.insert(_buffer.end(), cache_local_minute_str.begin(), cache_local_minute_str.end());
                     // Set the corresponding cache required flag
                     cache_time_required = true;
                     cache_local_required = true;
@@ -523,9 +486,7 @@ public:
                 case PlaceholderType::LocalSecond:
                 {
                     // Output local second string
-                    size_t size = _buffer.size();
-                    _buffer.resize(size + cache_local_second_str.size());
-                    std::memcpy(_buffer.data() + size, cache_local_second_str.c_str(), cache_local_second_str.size());
+                    _buffer.insert(_buffer.end(), cache_local_second_str.begin(), cache_local_second_str.end());
                     // Set the corresponding cache required flag
                     cache_time_required = true;
                     cache_local_required = true;
@@ -534,9 +495,7 @@ public:
                 case PlaceholderType::LocalTimezone:
                 {
                     // Output local time zone string
-                    size_t size = _buffer.size();
-                    _buffer.resize(size + cache_timezone_str.size());
-                    std::memcpy(_buffer.data() + size, cache_timezone_str.c_str(), cache_timezone_str.size());
+                    _buffer.insert(_buffer.end(), cache_local_timezone_str.begin(), cache_local_timezone_str.end());
                     // Set the corresponding cache required flag
                     cache_time_required = true;
                     cache_timezone_required = true;
@@ -545,9 +504,7 @@ public:
                 case PlaceholderType::Millisecond:
                 {
                     // Output millisecond string
-                    size_t size = _buffer.size();
-                    _buffer.resize(size + cache_millisecond_str.size());
-                    std::memcpy(_buffer.data() + size, cache_millisecond_str.c_str(), cache_millisecond_str.size());
+                    _buffer.insert(_buffer.end(), cache_millisecond_str.begin(), cache_millisecond_str.end());
                     // Set the corresponding cache required flag
                     cache_time_required = true;
                     cache_millisecond_required = true;
@@ -556,9 +513,7 @@ public:
                 case PlaceholderType::Microsecond:
                 {
                     // Output microsecond string
-                    size_t size = _buffer.size();
-                    _buffer.resize(size + cache_microsecond_str.size());
-                    std::memcpy(_buffer.data() + size, cache_microsecond_str.c_str(), cache_microsecond_str.size());
+                    _buffer.insert(_buffer.end(), cache_microsecond_str.begin(), cache_microsecond_str.end());
                     // Set the corresponding cache required flag
                     cache_time_required = true;
                     cache_microsecond_required = true;
@@ -567,9 +522,7 @@ public:
                 case PlaceholderType::Nanosecond:
                 {
                     // Output nanosecond string
-                    size_t size = _buffer.size();
-                    _buffer.resize(size + cache_nanosecond_str.size());
-                    std::memcpy(_buffer.data() + size, cache_nanosecond_str.c_str(), cache_nanosecond_str.size());
+                    _buffer.insert(_buffer.end(), cache_nanosecond_str.begin(), cache_nanosecond_str.end());
                     // Set the corresponding cache required flag
                     cache_time_required = true;
                     cache_nanosecond_required = true;
@@ -578,9 +531,7 @@ public:
                 case PlaceholderType::Thread:
                 {
                     // Output cached thread Id string
-                    size_t size = _buffer.size();
-                    _buffer.resize(size + cache_thread_str.size());
-                    std::memcpy(_buffer.data() + size, cache_thread_str.c_str(), cache_thread_str.size());
+                    _buffer.insert(_buffer.end(), cache_thread_str.begin(), cache_thread_str.end());
                     // Set the corresponding cache required flag
                     cache_thread_required = true;
                     break;
@@ -588,9 +539,7 @@ public:
                 case PlaceholderType::Level:
                 {
                     // Output cached level string
-                    size_t size = _buffer.size();
-                    _buffer.resize(size + cache_level_str.size());
-                    std::memcpy(_buffer.data() + size, cache_level_str.c_str(), cache_level_str.size());
+                    _buffer.insert(_buffer.end(), cache_level_str.begin(), cache_level_str.end());
                     // Set the corresponding cache required flag
                     cache_level_required = true;
                     break;

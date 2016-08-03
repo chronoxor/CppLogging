@@ -30,7 +30,7 @@ public:
         uint32_t size = sizeof(uint64_t) + sizeof(uint64_t) + sizeof(Level) + sizeof(uint8_t) + record.logger.second + sizeof(uint16_t) + record.message.second + sizeof(uint32_t) + record.buffer.second;
 
         // Resize the buffer to required size
-        _buffer.resize(size);
+        _buffer.resize(sizeof(uint32_t) + size);
 
         // Get the buffer start position
         uint8_t* buffer = _buffer.data();
