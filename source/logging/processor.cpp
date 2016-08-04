@@ -12,11 +12,6 @@ namespace CppLogging {
 
 bool Processor::ProcessRecord(Record& record)
 {
-    // Process the given logging record with sub processors
-    for (auto& processor : _processors)
-        if (!processor->ProcessRecord(record))
-            return false;
-
     // Filter the given logging record
     for (auto& filter : _filters)
         if (!filter->FilterRecord(record))
@@ -30,18 +25,23 @@ bool Processor::ProcessRecord(Record& record)
     for (auto& appender : _appenders)
         appender->AppendRecord(record);
 
+    // Process the given logging record with sub processors
+    for (auto& processor : _processors)
+        if (!processor->ProcessRecord(record))
+            return false;
+
     return true;
 }
 
 void Processor::Flush()
 {
-    // Flush all sub processors
-    for (auto& processor : _processors)
-        processor->Flush();
-
     // Flush all appenders
     for (auto& appender : _appenders)
         appender->Flush();
+
+    // Flush all sub processors
+    for (auto& processor : _processors)
+        processor->Flush();
 }
 
 } // namespace CppLogging

@@ -38,13 +38,13 @@ protected:
 
 BENCHMARK_THREADS_FIXTURE(BinaryConfigFixture, "SyncProcessor-binary", settings)
 {
-    static Logger logger = CppLogging::Config::CreateLogger("binary");
+    thread_local Logger logger = CppLogging::Config::CreateLogger("binary");
     logger.Info("Test message");
 }
 
 BENCHMARK_THREADS_FIXTURE(TextConfigFixture, "SyncProcessor-text", settings)
 {
-    static Logger logger = CppLogging::Config::CreateLogger("text");
+    thread_local Logger logger = CppLogging::Config::CreateLogger("text");
     logger.Info("Test message");
 }
 

@@ -6,7 +6,6 @@
 
 #include "logging/config.h"
 #include "logging/logger.h"
-#include "logging/processors/async_buffer.h"
 
 #include <functional>
 #include <thread>
@@ -14,67 +13,44 @@
 
 using namespace CppLogging;
 
-const uint64_t items_to_produce = 8000000;
+const uint64_t items_to_produce = 10000000;
 const auto settings = CppBenchmark::Settings().ParamRange(8, 8, [](int from, int to, int& result) { int r = result; result *= 2; return r; });
 
-// Create multiple producers / multiple consumers wait-free ring queue
-AsyncBuffer queue(4096);
-BinaryLayout binarylayout;
-TextLayout textlayout;
-NullAppender nullappender;
+class BinaryConfigFixture
+{
+protected:
+    BinaryConfigFixture()
+    {
+        auto async = std::make_shared<CppLogging::AsyncProcessor>();
+        async->appenders().push_back(std::make_shared<CppLogging::NullAppender>());
+
+        auto binary_sink = std::make_shared<CppLogging::Processor>();
+        binary_sink->layouts().push_back(std::make_shared<CppLogging::TextLayout>());
+        binary_sink->processors().push_back(async);
+
+        CppLogging::Config::ConfigLogger("binary", binary_sink);
+    }
+};
 
 void test(CppBenchmark::Context& context, const std::function<void()>& wait_strategy)
 {
     const int producers_count = context.x();
-    uint64_t crc = 0;
 
-    // Start consumer thread
-    auto consumer = std::thread([&wait_strategy, &crc]()
-    {
-        for (uint64_t i = 0; i < items_to_produce; ++i)
-        {
-			// Dequeue using the given waiting strategy
-			thread_local Record record;
-			while (!queue.Dequeue(record))
-				wait_strategy();
-
-			nullappender.AppendRecord(record);
-
-			// Consume the record
-			crc += record.message.size();
-        }
-    });
+    Logger logger = CppLogging::Config::CreateLogger("binary");
 
     // Start producer threads
     std::vector<std::thread> producers;
     for (int producer = 0; producer < producers_count; ++producer)
     {
-        producers.push_back(std::thread([&wait_strategy, producer, producers_count]()
+        producers.push_back(std::thread([&logger, &wait_strategy, producer, producers_count]()
         {
             uint64_t items = (items_to_produce / producers_count);
             for (uint64_t i = 0; i < items; ++i)
             {
-				char buffer[256];
-				itoa((int)i, buffer, 10);
-
-                // Enqueue using the given waiting strategy
-				thread_local TextLayout layout;
-				thread_local Record record;
-				record.timestamp = CppCommon::Timestamp::utc();
-				record.logger = "Test";
-				record.message = "Test message ";
-				record.message.append(buffer);
-				record.buffer.clear();
-				record.raw.clear();
-				layout.LayoutRecord(record);
-                while (!queue.Enqueue(record))
-                    wait_strategy();
+                logger.Info("Test message");
             }
         }));
     }
-
-    // Wait for the consumer thread
-    consumer.join();
 
     // Wait for all producers threads
     for (auto& producer : producers)
@@ -84,11 +60,9 @@ void test(CppBenchmark::Context& context, const std::function<void()>& wait_stra
     context.metrics().AddIterations(items_to_produce - 1);
     context.metrics().AddItems(items_to_produce);
     context.metrics().AddBytes(items_to_produce * sizeof(Record));
-    context.metrics().SetCustom("Queue.capacity", queue.capacity());
-    context.metrics().SetCustom("CRC", crc);
 }
 
-BENCHMARK("Test", settings)
+BENCHMARK_FIXTURE(BinaryConfigFixture, "AsyncProcessor-binary", settings)
 {
     test(context, []{ std::this_thread::yield(); });
 }
