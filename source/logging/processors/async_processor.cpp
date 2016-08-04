@@ -48,29 +48,9 @@ bool AsyncProcessor::EnqueueRecord(bool discard_on_overflow, Record& record)
         if (discard_on_overflow)
             return false;
 
-        // If the overflow policy is blocking then spin, yield and sleep until the buffer is free
-        int spins = 1000;
-        int yields = 100;
-        int sleep = 1;
-        const int sleeps = 256;
-        do
-        {
-            if (spins-- > 0)
-            {
-                // Spin...
-            }
-            else if (yields-- > 0)
-            {
-                // Yield...
-                CppCommon::Thread::Yield();
-            }
-            else if (sleep < sleeps)
-            {
-                // Sleep...
-                CppCommon::Thread::Sleep(sleep);
-                sleep <<= 1;
-            }
-        } while (!_buffer.Enqueue(record));
+        // If the overflow policy is blocking then yield if the buffer is full
+		while (!_buffer.Enqueue(record))
+			CppCommon::Thread::Yield();
     }
 
     return true;
@@ -86,57 +66,27 @@ void AsyncProcessor::ProcessBufferedRecords()
         // Thread local logger record to process
         thread_local Record record;
 
-        // Waiting strategy parameters
-        int spins = 1000;
-        int yields = 100;
-        int sleep = 1;
-        const int sleeps = 256;
-
-        do
+        while (true)
         {
-            // Dequeue logging record
-            if (_buffer.Dequeue(record))
+            // Dequeue the next logging record or yield if the buffer is empty
+			while (!_buffer.Dequeue(record))
+				CppCommon::Thread::Yield();
+
+            // Handle stop operation record
+            if (record.timestamp == 0)
+                return;
+
+            // Handle flush operation record
+            if (record.timestamp == 1)
             {
-                // Handle stop operation record
-                if (record.timestamp == 0)
-                    return;
-
-                // Handle flush operation record
-                if (record.timestamp == 1)
-                {
-                    // Flush the logging processor
-                    Processor::Flush();
-                    continue;
-                }
-
-                // Process logging record
-                Processor::ProcessRecord(record);
-
-                // Reset waiting strategy parameters
-                spins = 1000;
-                yields = 100;
-                sleep = 1;
+                // Flush the logging processor
+                Processor::Flush();
+                continue;
             }
-            else
-            {
-                // Wait for the next data to process
-                if (spins-- > 0)
-                {
-                    // Spin...
-                }
-                else if (yields-- > 0)
-                {
-                    // Yield...
-                    CppCommon::Thread::Yield();
-                }
-                else if (sleep < sleeps)
-                {
-                    // Sleep...
-                    CppCommon::Thread::Sleep(sleep);
-                    sleep <<= 1;
-                }
-            }
-        } while (true);
+
+            // Process logging record
+            Processor::ProcessRecord(record);
+        }
     }
     catch (...)
     {
