@@ -12,7 +12,24 @@ using namespace CppLogging;
 const int iterations = 1000000;
 const auto settings = CppBenchmark::Settings().Iterations(iterations).ThreadsRange(1, 8, [](int from, int to, int& result) { int r = result; result *= 2; return r; });
 
-class BinaryConfigFixture
+class NullConfigFixture : public virtual CppBenchmark::Fixture
+{
+protected:
+    NullConfigFixture()
+    {
+        auto null_sink = std::make_shared<CppLogging::SyncProcessor>();
+        null_sink->appenders().push_back(std::make_shared<CppLogging::NullAppender>());
+        CppLogging::Config::ConfigLogger("null", null_sink);
+    }
+
+    void Cleanup(CppBenchmark::Context& context) override
+    {
+        // Update benchmark metrics
+        context.metrics().AddIterations(dynamic_cast<const CppBenchmark::ContextThread&>(context).threads() * iterations - 1);
+    }
+};
+
+class BinaryConfigFixture : public virtual CppBenchmark::Fixture
 {
 protected:
     BinaryConfigFixture()
@@ -22,9 +39,15 @@ protected:
         binary_sink->appenders().push_back(std::make_shared<CppLogging::NullAppender>());
         CppLogging::Config::ConfigLogger("binary", binary_sink);
     }
+
+    void Cleanup(CppBenchmark::Context& context) override
+    {
+        // Update benchmark metrics
+        context.metrics().AddIterations(dynamic_cast<const CppBenchmark::ContextThread&>(context).threads() * iterations - 1);
+    }
 };
 
-class TextConfigFixture
+class TextConfigFixture : public virtual CppBenchmark::Fixture
 {
 protected:
     TextConfigFixture()
@@ -34,7 +57,19 @@ protected:
         text_sink->appenders().push_back(std::make_shared<CppLogging::NullAppender>());
         CppLogging::Config::ConfigLogger("text", text_sink);
     }
+
+    void Cleanup(CppBenchmark::Context& context) override
+    {
+        // Update benchmark metrics
+        context.metrics().AddIterations(dynamic_cast<const CppBenchmark::ContextThread&>(context).threads() * iterations - 1);
+    }
 };
+
+BENCHMARK_THREADS_FIXTURE(NullConfigFixture, "SyncProcessor-null", settings)
+{
+    thread_local Logger logger = CppLogging::Config::CreateLogger("null");
+    logger.Info("Test message");
+}
 
 BENCHMARK_THREADS_FIXTURE(BinaryConfigFixture, "SyncProcessor-binary", settings)
 {
