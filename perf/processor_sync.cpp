@@ -12,7 +12,7 @@ using namespace CppLogging;
 const int iterations = 1000000;
 const auto settings = CppBenchmark::Settings().Iterations(iterations).ThreadsRange(1, 8, [](int from, int to, int& result) { int r = result; result *= 2; return r; });
 
-class NullConfigFixture : public virtual CppBenchmark::Fixture
+class NullConfigFixture : public virtual CppBenchmark::FixtureThreads
 {
 protected:
     NullConfigFixture()
@@ -22,10 +22,10 @@ protected:
         CppLogging::Config::ConfigLogger("null", null_sink);
     }
 
-    void Cleanup(CppBenchmark::Context& context) override
+    void Cleanup(CppBenchmark::ContextThread& context) override
     {
         // Update benchmark metrics
-        context.metrics().AddIterations(((CppBenchmark::ContextThread&)context).threads() * iterations - 1);
+        context.metrics().AddIterations(context.threads() * iterations - 1);
     }
 };
 
@@ -40,10 +40,10 @@ protected:
         CppLogging::Config::ConfigLogger("binary", binary_sink);
     }
 
-    void Cleanup(CppBenchmark::Context& context) override
+    void Cleanup(CppBenchmark::ContextThread& context) override
     {
         // Update benchmark metrics
-        context.metrics().AddIterations(dynamic_cast<const CppBenchmark::ContextThread&>(context).threads() * iterations - 1);
+        context.metrics().AddIterations(context.threads() * iterations - 1);
     }
 };
 
@@ -58,10 +58,10 @@ protected:
         CppLogging::Config::ConfigLogger("text", text_sink);
     }
 
-    void Cleanup(CppBenchmark::Context& context) override
+    void Cleanup(CppBenchmark::ContextThread& context) override
     {
         // Update benchmark metrics
-        context.metrics().AddIterations(dynamic_cast<const CppBenchmark::ContextThread&>(context).threads() * iterations - 1);
+        context.metrics().AddIterations(context.threads() * iterations - 1);
     }
 };
 
