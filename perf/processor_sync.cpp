@@ -9,8 +9,8 @@
 
 using namespace CppLogging;
 
-const int iterations = 10000;
-const auto settings = CppBenchmark::Settings().Iterations(iterations).ThreadsRange(2, 2, [](int from, int to, int& result) { int r = result; result *= 2; return r; });
+const int iterations = 1000000;
+const auto settings = CppBenchmark::Settings().Iterations(iterations).ThreadsRange(1, 8, [](int from, int to, int& result) { int r = result; result *= 2; return r; });
 
 class NullConfigFixture : public virtual CppBenchmark::FixtureThreads
 {
@@ -70,7 +70,7 @@ BENCHMARK_THREADS_FIXTURE(NullConfigFixture, "SyncProcessor-null", settings)
     thread_local Logger logger = CppLogging::Config::CreateLogger("null");
     logger.Info("Test message");
 }
-/*
+
 BENCHMARK_THREADS_FIXTURE(BinaryConfigFixture, "SyncProcessor-binary", settings)
 {
     thread_local Logger logger = CppLogging::Config::CreateLogger("binary");
@@ -82,5 +82,5 @@ BENCHMARK_THREADS_FIXTURE(TextConfigFixture, "SyncProcessor-text", settings)
     thread_local Logger logger = CppLogging::Config::CreateLogger("text");
     logger.Info("Test message");
 }
-*/
+
 BENCHMARK_MAIN()
