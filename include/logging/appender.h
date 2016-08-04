@@ -18,8 +18,6 @@ namespace CppLogging {
     Logging appender takes an instance of a single logging record
     and store it content in some storage or show it in console.
 
-    Thread-safe or not thread-safe.
-
     \see NullAppender
     \see ConsoleAppender
     \see DebugAppender

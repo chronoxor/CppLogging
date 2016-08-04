@@ -20,7 +20,7 @@ namespace CppLogging {
     Logging processor takes an instance of a single logging record
     and process it though all child filters, layouts and appenders.
 
-    Thread-safe or not thread-safe.
+    Not thread-safe.
 
     \see SyncProcessor
     \see AsyncProcessor

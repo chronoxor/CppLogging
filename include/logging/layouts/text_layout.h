@@ -42,7 +42,7 @@ namespace CppLogging {
     - {Message} - converted to the log message
     - {EndLine} - converted to the end line suffix (e.g. Unix "\n" or Windows "\r\n")
 
-    Not thread-safe.
+    Thread-safe.
 */
 class TextLayout : public Layout
 {

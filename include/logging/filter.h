@@ -19,8 +19,6 @@ namespace CppLogging {
     performs some checks to detect if the record should be filered
     out and not processed anymore.
 
-    Not thread-safe.
-
     \see LoggerFilter
     \see LevelFilter
     \see MessageFilter

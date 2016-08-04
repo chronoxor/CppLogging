@@ -17,7 +17,7 @@ namespace CppLogging {
 /*!
     Logger is a main interface to produce logging records with a desired level.
 
-    Thread-safe or not thread-safe.
+    Thread-safe or not thread-safe depends on the current logging sink.
 */
 class Logger
 {

@@ -25,7 +25,7 @@ protected:
     void Cleanup(CppBenchmark::Context& context) override
     {
         // Update benchmark metrics
-        context.metrics().AddIterations(dynamic_cast<const CppBenchmark::ContextThread&>(context).threads() * iterations - 1);
+        context.metrics().AddIterations(((CppBenchmark::ContextThread&)context).threads() * iterations - 1);
     }
 };
 

@@ -18,7 +18,7 @@ namespace CppLogging {
     Binary layout performs simple memory copy operation to convert
     the given logging record into the plane raw buffer.
 
-    Not thread-safe.
+    Thread-safe.
 */
 class BinaryLayout : public Layout
 {

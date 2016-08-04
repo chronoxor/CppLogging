@@ -18,8 +18,6 @@ namespace CppLogging {
     Logging layout takes an instance of a single logging record
     and convert it into a raw buffer (raw filed will be updated).
 
-    Not thread-safe.
-
     \see BinaryLayout
     \see TextLayout
 */
