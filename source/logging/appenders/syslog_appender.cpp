@@ -31,7 +31,7 @@ SyslogAppender::~SyslogAppender()
 void SyslogAppender::AppendRecord(Record& record)
 {
     // Skip logging records without layout
-    if (record.raw.first == nullptr)
+    if (record.raw.empty())
         return;
 
 #if defined(unix) || defined(__unix) || defined(__unix__)
@@ -60,7 +60,7 @@ void SyslogAppender::AppendRecord(Record& record)
     }
 
     // Append logging record content
-    syslog(priority, "%.*s", (int)record.raw.second - 1, (char*)record.raw.first);
+    syslog(priority, "%.*s", (int)record.raw.size() - 1, (char*)record.raw.data());
 #endif
 }
 

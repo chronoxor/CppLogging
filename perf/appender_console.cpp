@@ -26,8 +26,7 @@ protected:
 BENCHMARK_FIXTURE(ConsoleConfigFixture, "ConsoleAppender", iterations)
 {
     static Logger logger = CppLogging::Config::CreateLogger("test");
-    static std::string message = "Test message";
-    logger.Info(message);
+    logger.Info("Test message");
 }
 
 BENCHMARK_MAIN()

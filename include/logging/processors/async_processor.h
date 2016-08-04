@@ -11,7 +11,7 @@
 
 #include "logging/processor.h"
 
-#include "threads/mpsc_ring_buffer.h"
+#include "logging/processors/async_buffer.h"
 
 namespace CppLogging {
 
@@ -20,18 +20,21 @@ namespace CppLogging {
     Asynchronous logging processor stores the given logging record
     into thread-safe buffer and process it in the separate thread.
 
+    Please note that asynchronous logging processor moves the given
+    logging record (ProcessRecord() method always returns false)
+    into the buffer!
+
     Thread-safe.
 */
 class AsyncProcessor : public Processor
 {
 public:
-    //! Initialize asynchronous processor with the given overflow policy, capacity and concurrency values
+    //! Initialize asynchronous processor with the given overflow policy and buffer capacity
     /*!
          \param discard_on_overflow - Discard logging records on buffer overflow or block and wait (default is false)
-         \param capacity - Buffer capacity capacity in bytes (must be a power of two) (default is 16 megabytes)
-         \param concurrency - Hardware concurrency (default is std::thread::hardware_concurrency)
+         \param capacity - Buffer capacity in logging records (default is 4096)
     */
-    explicit AsyncProcessor(bool discard_on_overflow = false, size_t capacity = 16777216, size_t concurrency = std::thread::hardware_concurrency());
+    explicit AsyncProcessor(bool discard_on_overflow = false, size_t capacity = 4096);
     AsyncProcessor(const AsyncProcessor&) = delete;
     AsyncProcessor(AsyncProcessor&&) = default;
     virtual ~AsyncProcessor();
@@ -56,10 +59,10 @@ public:
 
 private:
     bool _discard_on_overflow;
-    CppCommon::MPSCRingBuffer _buffer;
+    AsyncBuffer _buffer;
     std::thread _thread;
 
-    bool EnqueueRecord(bool discard_on_overflow, const void* chunk, size_t size);
+    bool EnqueueRecord(bool discard_on_overflow, Record& record);
     void ProcessBufferedRecords();
 };
 

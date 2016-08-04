@@ -53,23 +53,24 @@ public:
     //! Record content after layout
     std::vector<uint8_t> raw;
 
-    Record() noexcept
-        : timestamp(CppCommon::Timestamp::utc()),
-          thread(CppCommon::Thread::CurrentThreadId()),
-          level(Level::INFO),
-          logger(32, 0),
-          message(512, 0),
-          buffer(1024, 0),
-          raw(512, 0)
-    {}
+    Record();
     Record(const Record&) = default;
     Record(Record&&) = default;
     ~Record() = default;
 
     Record& operator=(const Record&) = default;
     Record& operator=(Record&&) = default;
+
+    //! Swap two logging records
+    /*!
+         \param record1 - Logging record
+         \param record2 - Logging record
+    */
+    static void Swap(Record& record1, Record& record2);
 };
 
 } // namespace CppLogging
+
+#include "record.inl"
 
 #endif // CPPLOGGING_RECORD_H

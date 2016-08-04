@@ -15,11 +15,11 @@ namespace CppLogging {
 void ErrorAppender::AppendRecord(Record& record)
 {
     // Skip logging records without layout
-    if (record.raw.first == nullptr)
+    if (record.raw.empty())
         return;
 
     // Append logging record content
-    std::fwrite(record.raw.first, 1, record.raw.second - 1, stderr);
+    std::fwrite(record.raw.data(), 1, record.raw.size() - 1, stderr);
 }
 
 void ErrorAppender::Flush()

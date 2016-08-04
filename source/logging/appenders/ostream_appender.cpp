@@ -13,11 +13,11 @@ namespace CppLogging {
 void OstreamAppender::AppendRecord(Record& record)
 {
     // Skip logging records without layout
-    if (record.raw.first == nullptr)
+    if (record.raw.empty())
         return;
 
     // Append logging record content
-    _ostream.write((char*)record.raw.first, record.raw.second - 1);
+    _ostream.write((char*)record.raw.data(), record.raw.size() - 1);
 }
 
 void OstreamAppender::Flush()

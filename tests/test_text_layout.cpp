@@ -30,9 +30,9 @@ TEST_CASE("Text layout", "[CppLogging]")
 
     TextLayout layout2("{UtcYear}-{UtcMonth}-{UtcDay}T{UtcHour}:{UtcMinute}:{UtcSecond}.{Millisecond}{UtcTimezone} - {Microsecond}.{Nanosecond} - [{Thread}] - {Level} - {Logger} - {Message} - {EndLine}");
     layout2.LayoutRecord(record);
-    REQUIRE(std::string(record.raw.begin(), record.raw.end()) == utc_sample);
+    REQUIRE(std::string(record.raw.begin(), record.raw.end() - 1) == utc_sample);
 
     TextLayout layout3("{UtcDateTime} - {Microsecond}.{Nanosecond} - [{Thread}] - {Level} - {Logger} - {Message} - {EndLine}");
     layout3.LayoutRecord(record);
-	REQUIRE(std::string(record.raw.begin(), record.raw.end()) == utc_sample);
+	REQUIRE(std::string(record.raw.begin(), record.raw.end() - 1) == utc_sample);
 }

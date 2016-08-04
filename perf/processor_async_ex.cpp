@@ -117,7 +117,7 @@ inline bool MPMCRingQueue<T>::Enqueue(T& item)
 			if (_head.compare_exchange_weak(head_sequence, head_sequence + 1, std::memory_order_relaxed))
 			{
 				// Store the item value
-				swap(node->value, item);
+				Record::Swap(node->value, item);
 
 				// Increment the sequence so that the tail knows it's accessible
 				node->sequence.store(head_sequence + 1, std::memory_order_release);
@@ -162,7 +162,7 @@ inline bool MPMCRingQueue<T>::Dequeue(T& item)
 			if (_tail.compare_exchange_weak(tail_sequence, tail_sequence + 1, std::memory_order_relaxed))
 			{
 				// Get the item value
-				swap(item, node->value);
+				Record::Swap(item, node->value);
 
 				// Set the sequence to what the head sequence should be next time around
 				node->sequence.store(tail_sequence + _mask + 1, std::memory_order_release);
@@ -197,6 +197,8 @@ public:
 
 	std::string logger;
 	std::string message;
+	std::vector<uint8_t> buffer;
+	std::vector<uint8_t> raw;
 
 	RecordEx()
 		: timestamp(CppCommon::Timestamp::utc()),
@@ -216,6 +218,8 @@ public:
 		std::swap(r1.level, r2.level);
 		std::swap(r1.logger, r2.logger);
 		std::swap(r1.message, r2.message);
+		std::swap(r1.buffer, r2.buffer);
+		std::swap(r1.raw, r2.raw);
 	}
 
 	RecordEx& operator=(const RecordEx&) = delete;
@@ -223,7 +227,7 @@ public:
 };
 
 // Create multiple producers / multiple consumers wait-free ring queue
-MPMCRingQueue<RecordEx> queue(1048576);
+MPMCRingQueue<Record> queue(4096);
 
 template<typename T, uint64_t N>
 void test(CppBenchmark::Context& context, const std::function<void()>& wait_strategy)
@@ -286,7 +290,7 @@ void test(CppBenchmark::Context& context, const std::function<void()>& wait_stra
 
 BENCHMARK("Test", settings)
 {
-    test<RecordEx, 1048576>(context, []{ std::this_thread::yield(); });
+    test<Record, 4096>(context, []{ std::this_thread::yield(); });
 }
 
 BENCHMARK_MAIN()

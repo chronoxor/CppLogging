@@ -15,17 +15,11 @@ namespace CppLogging {
 void MemoryAppender::AppendRecord(Record& record)
 {
     // Skip logging records without layout
-    if (record.raw.first == nullptr)
+    if (record.raw.empty())
         return;
 
-    // Resize the buffer to required size
-    _buffer.resize(record.raw.second);
-
-    // Get the buffer start position
-    uint8_t* buffer = _buffer.data();
-
-    // Copy logging record content into the allocated memory buffer
-    std::memcpy(buffer, record.raw.first, record.raw.second);
+    // Append logging record content into the allocated memory buffer
+    _buffer.insert(_buffer.end(), record.raw.begin(), record.raw.end());
 }
 
 } // namespace CppLogging

@@ -38,43 +38,37 @@ public:
     Logger& operator=(const Logger&) = default;
     Logger& operator=(Logger&&) = default;
 
-    //! Log the given logging record
-    /*!
-         \param record - Logging record
-    */
-    void Log(Record& record);
-
     //! Log debug message
     /*!
          Will log only in debug mode!
 
          \param debug - Debug message
     */
-    void Debug(const std::string& debug);
+    void Debug(const char* debug);
 
     //! Log information message
     /*!
          \param info - Information message
     */
-    void Info(const std::string& info);
+    void Info(const char* info);
 
     //! Log warning message
     /*!
          \param warn - Warning message
     */
-    void Warn(const std::string& warn);
+    void Warn(const char* warn);
 
     //! Log error message
     /*!
          \param error - Error message
     */
-    void Error(const std::string& error);
+    void Error(const char* error);
 
     //! Log fatal message
     /*!
          \param fatal - Fatal message
     */
-    void Fatal(const std::string& fatal);
+    void Fatal(const char* fatal);
 
     //! Flush the current logger
     void Flush();
@@ -98,7 +92,7 @@ private:
          \param level - Logging level
          \param message - Logging message
     */
-    void Log(Level level, const std::string& message);
+    void Log(Level level, const char* message);
 };
 
 } // namespace CppLogging
