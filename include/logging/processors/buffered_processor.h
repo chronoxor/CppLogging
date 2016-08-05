@@ -16,23 +16,25 @@ namespace CppLogging {
 //! Buffered logging processor
 /*!
     Buffered logging processor stores all logging records in the
-    fixed size buffer until Flush() method is invoked or buffer
+    limited size buffer until Flush() method is invoked or buffer
     has not enough space.
+
+    Please note that buffered logging processor moves the given
+    logging record (ProcessRecord() method always returns false)
+    into the buffer!
 
     Not thread-safe.
 */
 class BufferedProcessor : public Processor
 {
 public:
-    //! Initialize buffered processor with given size limit and capacity
+    //! Initialize buffered processor with the given limit and capacity
     /*!
-         \param limit - Buffer size limit in bytes (default is 128 megabytes)
-         \param capacity - Buffer initial capacity in bytes (default is 16 megabytes)
+         \param limit - Buffer limit in logging records (default is 65536)
+         \param capacity - Buffer initial capacity in logging records (default is 4096)
     */
-    explicit BufferedProcessor(size_t limit = 134217728, size_t capacity = 16777216)
-        : _limit(limit),
-          _buffer(capacity)
-    {}
+    explicit BufferedProcessor(size_t limit = 65536, size_t capacity = 4096) : _limit(limit)
+    { _buffer.reserve(capacity); }
     BufferedProcessor(const BufferedProcessor&) = delete;
     BufferedProcessor(BufferedProcessor&&) = default;
     virtual ~BufferedProcessor() { Flush(); }
@@ -46,7 +48,7 @@ public:
 
 private:
     size_t _limit;
-    std::vector<uint8_t> _buffer;
+    std::vector<Record> _buffer;
 
     void ProcessBufferedRecords();
 };

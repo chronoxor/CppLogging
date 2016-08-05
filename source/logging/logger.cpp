@@ -26,11 +26,18 @@ Logger::Logger(const std::string& name, const std::shared_ptr<Processor>& sink) 
 
 void Logger::Log(Level level, const char* message)
 {
-    // Create a new logging record
-    Record record;
+    // Thread local instance of the logging record
+    thread_local Record record;
+
+    // Fill necessary fields of the logging record
+    record.timestamp = CppCommon::Timestamp::utc();
     record.level = level;
-    record.logger = std::make_pair(_name.c_str(), (uint8_t)_name.size());
-    record.message = std::make_pair(message, (uint16_t)std::strlen(message));
+    record.logger = _name;
+    record.message = message;
+
+    // Clear buffer filed and raw field of the logging record
+    record.buffer.clear();
+    record.raw.clear();
 
     // Process the logging record
     if (_sink)

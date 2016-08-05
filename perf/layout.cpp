@@ -11,34 +11,30 @@ using namespace CppLogging;
 
 const int iterations = 10000000;
 
-char logger[] = "Test logger";
-char message[] = "Test message";
-uint8_t buffer[1024];
-
 BENCHMARK("BinaryLayout", iterations)
 {
     static BinaryLayout layout;
+    static Record record;
 
-    Record record;
-    record.logger = std::make_pair(logger, (uint8_t)std::strlen(logger));
-    record.message = std::make_pair(message, (uint16_t)std::strlen(message));
-    record.buffer = std::make_pair(buffer, (uint32_t)sizeof(buffer));
+    record.logger = "Test logger";
+    record.message = "Test message";
+    record.buffer.resize(1024, 123);
 
-    auto result = layout.LayoutRecord(record);
-    context.metrics().AddBytes(result.second);
+    layout.LayoutRecord(record);
+    context.metrics().AddBytes(record.raw.size());
 }
 
 BENCHMARK("TextLayout", iterations)
 {
     static TextLayout layout;
+    static Record record;
 
-    Record record;
-    record.logger = std::make_pair(logger, (uint8_t)std::strlen(logger));
-    record.message = std::make_pair(message, (uint16_t)std::strlen(message));
-    record.buffer = std::make_pair(buffer, (uint32_t)sizeof(buffer));
+    record.logger = "Test logger";
+    record.message = "Test message";
+    record.buffer.resize(1024, 123);
 
-    auto result = layout.LayoutRecord(record);
-    context.metrics().AddBytes(result.second);
+    layout.LayoutRecord(record);
+    context.metrics().AddBytes(record.raw.size());
 }
 
 BENCHMARK_MAIN()

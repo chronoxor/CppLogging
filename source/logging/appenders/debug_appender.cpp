@@ -19,15 +19,15 @@ namespace CppLogging {
 void DebugAppender::AppendRecord(Record& record)
 {
     // Skip logging records without layout
-    if (record.raw.first == nullptr)
+    if (record.raw.empty())
         return;
 
 #if defined(_WIN32) || defined(_WIN64)
     // Append logging record content
-    OutputDebugStringA((LPCSTR)record.raw.first);
+    OutputDebugStringA((LPCSTR)record.raw.data());
 #else
     // Append logging record content
-    std::fwrite(record.raw.first, 1, record.raw.second - 1, stdout);
+    std::fwrite(record.raw.data(), 1, record.raw.size() - 1, stdout);
 #endif
 }
 
