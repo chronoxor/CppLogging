@@ -105,29 +105,9 @@ bool AsyncProcessor::EnqueueRecord(bool discard_on_overflow, const void* chunk, 
         if (discard_on_overflow)
             return false;
 
-        // If the overflow policy is blocking then spin, yield and sleep until the buffer is free
-        int spins = 1000;
-        int yields = 100;
-        int sleep = 1;
-        const int sleeps = 256;
-        do
-        {
-            if (spins-- > 0)
-            {
-                // Spin...
-            }
-            else if (yields-- > 0)
-            {
-                // Yield...
-                CppCommon::Thread::Yield();
-            }
-            else if (sleep < sleeps)
-            {
-                // Sleep...
-                CppCommon::Thread::Sleep(sleep);
-                sleep <<= 1;
-            }
-        } while (!_buffer.Enqueue(chunk, size));
+        // If the overflow policy is blocking then yield if the buffer is full
+        while (!_buffer.Enqueue(chunk, size))
+            CppCommon::Thread::Yield();
     }
 
     return true;
@@ -143,13 +123,7 @@ void AsyncProcessor::ProcessBufferedRecords()
         // Local buffer to store the logging record
         thread_local std::vector<uint8_t> local(_buffer.capacity());
 
-        // Waiting strategy parameters
-        int spins = 1000;
-        int yields = 100;
-        int sleep = 1;
-        const int sleeps = 256;
-
-        do
+        while (true)
         {
             // Read local buffer
             size_t local_size = local.size();
@@ -211,32 +185,10 @@ void AsyncProcessor::ProcessBufferedRecords()
                             throwex CppCommon::RuntimeException("Invalid logging record detected - unknown operation record!");
                     }
                 }
-
-                // Reset waiting strategy parameters
-                spins = 1000;
-                yields = 100;
-                sleep = 1;
             }
             else
-            {
-                // Wait for the next data to process
-                if (spins-- > 0)
-                {
-                    // Spin...
-                }
-                else if (yields-- > 0)
-                {
-                    // Yield...
-                    CppCommon::Thread::Yield();
-                }
-                else if (sleep < sleeps)
-                {
-                    // Sleep...
-                    CppCommon::Thread::Sleep(sleep);
-                    sleep <<= 1;
-                }
-            }
-        } while (true);
+                CppCommon::Thread::Yield();
+        }
     }
     catch (const CppCommon::RuntimeException& ex)
     {
