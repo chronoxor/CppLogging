@@ -29,8 +29,9 @@ public:
          This method will update the raw filed of the given logging record.
 
          \param record - Logging record
+         \return Raw buffer which contains logging record after the layout operation
     */
-    virtual void LayoutRecord(Record& record) = 0;
+    virtual std::pair<void*, size_t> LayoutRecord(Record& record) = 0;
 };
 
 } // namespace CppLogging

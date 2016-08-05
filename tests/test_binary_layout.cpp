@@ -10,12 +10,12 @@
 
 using namespace CppLogging;
 
-Record ParseBinaryLayout(const std::vector<uint8_t>& raw)
+Record ParseBinaryLayout(const std::pair<void*, size_t>& layout)
 {
     Record record;
 
     // Get the buffer start position
-    const uint8_t* buffer = raw.data();
+    uint8_t* buffer = (uint8_t*)layout.first;
 
     // Deserialize logging record
     uint32_t size;
@@ -27,24 +27,18 @@ Record ParseBinaryLayout(const std::vector<uint8_t>& raw)
     buffer += sizeof(uint64_t);
     std::memcpy(&record.level, buffer, sizeof(Level));
     buffer += sizeof(Level);
-
-    uint8_t logger_size;
-    std::memcpy(&logger_size, buffer, sizeof(uint8_t));
+    std::memcpy(&record.logger.second, buffer, sizeof(uint8_t));
     buffer += sizeof(uint8_t);
-    record.logger.insert(record.logger.begin(), buffer, buffer + logger_size);
-    buffer += logger_size;
-
-    uint16_t message_size;
-    std::memcpy(&message_size, buffer, sizeof(uint16_t));
+    record.logger.first = (char*)buffer;
+    buffer += record.logger.second;
+    std::memcpy(&record.message.second, buffer, sizeof(uint16_t));
     buffer += sizeof(uint16_t);
-    record.message.insert(record.message.begin(), buffer, buffer + message_size);
-    buffer += message_size;
-
-    uint32_t buffer_size;
-    std::memcpy(&buffer_size, buffer, sizeof(uint32_t));
+    record.message.first = (char*)buffer;
+    buffer += record.message.second;
+    std::memcpy(&record.buffer.second, buffer, sizeof(uint32_t));
     buffer += sizeof(uint32_t);
-    record.buffer.insert(record.buffer.begin(), buffer, buffer + buffer_size);
-    buffer += buffer_size;
+    record.buffer.first = buffer;
+    buffer += record.buffer.second;
 
     return record;
 }
@@ -57,26 +51,37 @@ bool operator==(const Record& record1, const Record& record2)
         return false;
     if (record1.level != record2.level)
         return false;
-    if (record1.logger != record2.logger)
+    if (record1.logger.second != record2.logger.second)
         return false;
-    if (record1.message != record2.message)
+    if (std::strncmp(record1.logger.first, record2.logger.first, record1.logger.second) != 0)
         return false;
-    if (record1.buffer != record2.buffer)
+    if (record1.message.second != record2.message.second)
+        return false;
+    if (std::strncmp(record1.message.first, record2.message.first, record1.message.second) != 0)
+        return false;
+    if (record1.buffer.second != record2.buffer.second)
+        return false;
+    if (std::memcmp(record1.buffer.first, record2.buffer.first, record1.buffer.second) != 0)
         return false;
     return true;
 }
 
 TEST_CASE("Binary layout", "[CppLogging]")
 {
+    char logger[] = "Test logger";
+    char message[] = "Test message";
+    uint8_t buffer[1024];
+
     Record record;
-    record.logger = "Test logger";
-    record.message = "Test message";
-    record.buffer.resize(1024, 123);
+    record.logger = std::make_pair(logger, (uint8_t)std::strlen(logger));
+    record.message = std::make_pair(message, (uint16_t)std::strlen(message));
+    record.buffer = std::make_pair(buffer, (uint32_t)sizeof(buffer));
 
     BinaryLayout layout;
-    layout.LayoutRecord(record);
-    REQUIRE(record.raw.size() > 0);
+    auto result = layout.LayoutRecord(record);
+    REQUIRE(result.first != nullptr);
+    REQUIRE(result.second > 0);
 
-    Record clone = ParseBinaryLayout(record.raw);
+    Record clone = ParseBinaryLayout(result);
     REQUIRE(clone == record);
 }

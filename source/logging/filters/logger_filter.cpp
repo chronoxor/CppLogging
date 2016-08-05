@@ -12,7 +12,7 @@ namespace CppLogging {
 
 bool LoggerFilter::FilterRecord(Record& record)
 {
-    return std::regex_match(record.logger, _pattern);
+    return std::regex_match(record.logger.first, record.logger.first + record.logger.second, _pattern);
 }
 
 } // namespace CppLogging

@@ -17,7 +17,7 @@ namespace CppLogging {
 void ConsoleAppender::AppendRecord(Record& record)
 {
     // Skip logging records without layout
-    if (record.raw.empty())
+    if (record.raw.first == nullptr)
         return;
 
     // Setup console color depends on the logging level
@@ -47,7 +47,7 @@ void ConsoleAppender::AppendRecord(Record& record)
     }
 
     // Append logging record content
-    std::fwrite(record.raw.data(), 1, record.raw.size() - 1, stdout);
+    std::fwrite(record.raw.first, 1, record.raw.second - 1, stdout);
 
     // Reset console color
     CppCommon::Console::SetColor(CppCommon::Color::WHITE);

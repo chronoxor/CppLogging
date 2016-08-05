@@ -13,8 +13,6 @@
 #include "threads/thread.h"
 #include "time/timestamp.h"
 
-#include <string>
-#include <vector>
 #include <utility>
 
 namespace CppLogging {
@@ -44,33 +42,32 @@ public:
     //! Level of the logging record
     Level level;
     //! Logger name of the logging record
-    std::string logger;
+    std::pair<const char*, uint8_t>  logger;
     //! Message of the logging record
-    std::string message;
+    std::pair<const char*, uint16_t> message;
     //! Buffer of the logging record
-    std::vector<uint8_t> buffer;
+    std::pair<const void*, uint32_t> buffer;
 
     //! Record content after layout
-    std::vector<uint8_t> raw;
+    std::pair<void*, uint32_t> raw;
 
-    Record();
+    Record()
+        : timestamp(CppCommon::Timestamp::utc()),
+          thread(CppCommon::Thread::CurrentThreadId()),
+          level(Level::INFO),
+          logger(nullptr, 0),
+          message(nullptr, 0),
+          buffer(nullptr, 0),
+          raw(nullptr, 0)
+    {}
     Record(const Record&) = default;
-    Record(Record&&) = default;
+    Record(Record&&) noexcept = default;
     ~Record() = default;
 
     Record& operator=(const Record&) = default;
-    Record& operator=(Record&&) = default;
-
-    //! Swap two logging records
-    /*!
-         \param record1 - Logging record
-         \param record2 - Logging record
-    */
-    static void Swap(Record& record1, Record& record2);
+    Record& operator=(Record&&) noexcept = default;
 };
 
 } // namespace CppLogging
-
-#include "record.inl"
 
 #endif // CPPLOGGING_RECORD_H

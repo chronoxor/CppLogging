@@ -80,11 +80,11 @@ BENCHMARK_THREADS_FIXTURE(BinaryConfigFixture, "AsyncProcessor-binary", settings
     thread_local Logger logger = CppLogging::Config::CreateLogger("binary");
     logger.Info("Test message");
 }
-
+/*
 BENCHMARK_THREADS_FIXTURE(TextConfigFixture, "AsyncProcessor-text", settings)
 {
     thread_local Logger logger = CppLogging::Config::CreateLogger("text");
     logger.Info("Test message");
 }
-
+*/
 BENCHMARK_MAIN()

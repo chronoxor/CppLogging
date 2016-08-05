@@ -42,7 +42,7 @@ namespace CppLogging {
     - {Message} - converted to the log message
     - {EndLine} - converted to the end line suffix (e.g. Unix "\n" or Windows "\r\n")
 
-    Thread-safe.
+    Not thread-safe.
 */
 class TextLayout : public Layout
 {
@@ -60,7 +60,7 @@ public:
     TextLayout& operator=(TextLayout&&) = default;
 
     // Implementation of Layout
-    void LayoutRecord(Record& record) override;
+    std::pair<void*, size_t> LayoutRecord(Record& record) override;
 
 private:
     class Impl;

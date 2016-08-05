@@ -11,6 +11,8 @@
 
 #include "logging/layout.h"
 
+#include <memory>
+
 namespace CppLogging {
 
 //! Binary layout
@@ -18,21 +20,25 @@ namespace CppLogging {
     Binary layout performs simple memory copy operation to convert
     the given logging record into the plane raw buffer.
 
-    Thread-safe.
+    Not thread-safe.
 */
 class BinaryLayout : public Layout
 {
 public:
-    BinaryLayout() = default;
+    BinaryLayout();
     BinaryLayout(const BinaryLayout&) = delete;
     BinaryLayout(BinaryLayout&&) = default;
-    ~BinaryLayout() = default;
+    ~BinaryLayout();
 
     BinaryLayout& operator=(const BinaryLayout&) = delete;
     BinaryLayout& operator=(BinaryLayout&&) = default;
 
     // Implementation of Layout
-    void LayoutRecord(Record& record) override;
+    std::pair<void*, size_t> LayoutRecord(Record& record) override;
+
+private:
+    class Impl;
+    std::unique_ptr<Impl> _pimpl;
 };
 
 } // namespace CppLogging

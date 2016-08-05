@@ -59,7 +59,7 @@ class TextLayout::Impl
     };
 
 public:
-    Impl(const std::string& pattern)
+    Impl(const std::string& pattern) : _buffer(1024)
     {
         std::string placeholder;
         std::string subpattern;
@@ -114,49 +114,49 @@ public:
     {
     }
 
-    void LayoutRecord(Record& record)
+    std::pair<void*, size_t> LayoutRecord(Record& record)
     {
-        thread_local bool cache_initizlied = false;
-        thread_local bool cache_time_required = false;
-        thread_local bool cache_utc_required = false;
-        thread_local bool cache_local_required = false;
-        thread_local bool cache_timezone_required = false;
-        thread_local bool cache_millisecond_required = false;
-        thread_local bool cache_microsecond_required = false;
-        thread_local bool cache_nanosecond_required = false;
-        thread_local uint64_t cache_seconds = 0;
-        thread_local int cache_millisecond = 0;
-        thread_local int cache_microsecond = 0;
-        thread_local int cache_nanosecond = 0;
-        thread_local std::string cache_utc_datetime_str = "1970-01-01T01:01:01.000Z";
-        thread_local std::string cache_utc_date_str = "1970-01-01";
-        thread_local std::string cache_utc_time_str = "01:01:01.000Z";
-        thread_local std::string cache_utc_year_str = "1970";
-        thread_local std::string cache_utc_month_str = "01";
-        thread_local std::string cache_utc_day_str = "01";
-        thread_local std::string cache_utc_hour_str = "00";
-        thread_local std::string cache_utc_minute_str = "00";
-        thread_local std::string cache_utc_second_str = "00";
-        thread_local std::string cache_utc_timezone_str = "Z";
-        thread_local std::string cache_local_datetime_str = "1970-01-01T01:01:01.000+00:00";
-        thread_local std::string cache_local_date_str = "1970-01-01";
-        thread_local std::string cache_local_time_str = "01:01:01.000+00:00";
-        thread_local std::string cache_local_year_str = "1970";
-        thread_local std::string cache_local_month_str = "01";
-        thread_local std::string cache_local_day_str = "01";
-        thread_local std::string cache_local_hour_str = "00";
-        thread_local std::string cache_local_minute_str = "00";
-        thread_local std::string cache_local_second_str = "00";
-        thread_local std::string cache_local_timezone_str = "+00:00";
-        thread_local std::string cache_millisecond_str = "000";
-        thread_local std::string cache_microsecond_str = "000";
-        thread_local std::string cache_nanosecond_str = "000";
-        thread_local bool cache_thread_required = false;
-        thread_local uint64_t cache_thread = 0;
-        thread_local std::string cache_thread_str = "0x00000000";
-        thread_local bool cache_level_required = false;
-        thread_local Level cache_level = Level::FATAL;
-        thread_local std::string cache_level_str = "FATAL";
+        static bool cache_initizlied = false;
+        static bool cache_time_required = false;
+        static bool cache_utc_required = false;
+        static bool cache_local_required = false;
+        static bool cache_timezone_required = false;
+        static bool cache_millisecond_required = false;
+        static bool cache_microsecond_required = false;
+        static bool cache_nanosecond_required = false;
+        static uint64_t cache_seconds = 0;
+        static int cache_millisecond = 0;
+        static int cache_microsecond = 0;
+        static int cache_nanosecond = 0;
+        static std::string cache_utc_datetime_str = "1970-01-01T01:01:01.000Z";
+        static std::string cache_utc_date_str = "1970-01-01";
+        static std::string cache_utc_time_str = "01:01:01.000Z";
+        static std::string cache_utc_year_str = "1970";
+        static std::string cache_utc_month_str = "01";
+        static std::string cache_utc_day_str = "01";
+        static std::string cache_utc_hour_str = "00";
+        static std::string cache_utc_minute_str = "00";
+        static std::string cache_utc_second_str = "00";
+        static std::string cache_utc_timezone_str = "Z";
+        static std::string cache_local_datetime_str = "1970-01-01T01:01:01.000+00:00";
+        static std::string cache_local_date_str = "1970-01-01";
+        static std::string cache_local_time_str = "01:01:01.000+00:00";
+        static std::string cache_local_year_str = "1970";
+        static std::string cache_local_month_str = "01";
+        static std::string cache_local_day_str = "01";
+        static std::string cache_local_hour_str = "00";
+        static std::string cache_local_minute_str = "00";
+        static std::string cache_local_second_str = "00";
+        static std::string cache_local_timezone_str = "+00:00";
+        static std::string cache_millisecond_str = "000";
+        static std::string cache_microsecond_str = "000";
+        static std::string cache_nanosecond_str = "000";
+        static bool cache_thread_required = false;
+        static uint64_t cache_thread = 0;
+        static std::string cache_thread_str = "0x00000000";
+        static bool cache_level_required = false;
+        static Level cache_level = Level::FATAL;
+        static std::string cache_level_str = "FATAL";
         bool cache_update_datetime = false;
 
         // Update time cache
@@ -304,8 +304,8 @@ public:
 
         cache_initizlied = true;
 
-        // Clear raw buffer
-        record.raw.clear();
+        // Clear buffer
+        _buffer.clear();
 
         // Iterate through all placeholders
         for (auto& placeholder : _placeholders)
@@ -315,13 +315,13 @@ public:
                 case PlaceholderType::String:
                 {
                     // Output pattern string
-                    record.raw.insert(record.raw.end(), placeholder.value.begin(), placeholder.value.end());
+                    _buffer.insert(_buffer.end(), placeholder.value.begin(), placeholder.value.end());
                     break;
                 }
                 case PlaceholderType::UtcDateTime:
                 {
                     // Output UTC date & time string
-                    record.raw.insert(record.raw.end(), cache_utc_datetime_str.begin(), cache_utc_datetime_str.end());
+                    _buffer.insert(_buffer.end(), cache_utc_datetime_str.begin(), cache_utc_datetime_str.end());
                     // Set the corresponding cache required flag
                     cache_time_required = true;
                     cache_utc_required = true;
@@ -331,7 +331,7 @@ public:
                 case PlaceholderType::UtcDate:
                 {
                     // Output UTC date string
-                    record.raw.insert(record.raw.end(), cache_utc_date_str.begin(), cache_utc_date_str.end());
+                    _buffer.insert(_buffer.end(), cache_utc_date_str.begin(), cache_utc_date_str.end());
                     // Set the corresponding cache required flag
                     cache_time_required = true;
                     cache_utc_required = true;
@@ -340,7 +340,7 @@ public:
                 case PlaceholderType::UtcTime:
                 {
                     // Output UTC time string
-                    record.raw.insert(record.raw.end(), cache_utc_time_str.begin(), cache_utc_time_str.end());
+                    _buffer.insert(_buffer.end(), cache_utc_time_str.begin(), cache_utc_time_str.end());
                     // Set the corresponding cache required flag
                     cache_time_required = true;
                     cache_utc_required = true;
@@ -350,7 +350,7 @@ public:
                 case PlaceholderType::UtcYear:
                 {
                     // Output UTC year string
-                    record.raw.insert(record.raw.end(), cache_utc_year_str.begin(), cache_utc_year_str.end());
+                    _buffer.insert(_buffer.end(), cache_utc_year_str.begin(), cache_utc_year_str.end());
                     // Set the corresponding cache required flag
                     cache_time_required = true;
                     cache_utc_required = true;
@@ -359,7 +359,7 @@ public:
                 case PlaceholderType::UtcMonth:
                 {
                     // Output UTC month string
-                    record.raw.insert(record.raw.end(), cache_utc_month_str.begin(), cache_utc_month_str.end());
+                    _buffer.insert(_buffer.end(), cache_utc_month_str.begin(), cache_utc_month_str.end());
                     // Set the corresponding cache required flag
                     cache_time_required = true;
                     cache_utc_required = true;
@@ -368,7 +368,7 @@ public:
                 case PlaceholderType::UtcDay:
                 {
                     // Output UTC day string
-                    record.raw.insert(record.raw.end(), cache_utc_day_str.begin(), cache_utc_day_str.end());
+                    _buffer.insert(_buffer.end(), cache_utc_day_str.begin(), cache_utc_day_str.end());
                     // Set the corresponding cache required flag
                     cache_time_required = true;
                     cache_utc_required = true;
@@ -377,7 +377,7 @@ public:
                 case PlaceholderType::UtcHour:
                 {
                     // Output UTC hour string
-                    record.raw.insert(record.raw.end(), cache_utc_hour_str.begin(), cache_utc_hour_str.end());
+                    _buffer.insert(_buffer.end(), cache_utc_hour_str.begin(), cache_utc_hour_str.end());
                     // Set the corresponding cache required flag
                     cache_time_required = true;
                     cache_utc_required = true;
@@ -386,7 +386,7 @@ public:
                 case PlaceholderType::UtcMinute:
                 {
                     // Output UTC minute string
-                    record.raw.insert(record.raw.end(), cache_utc_minute_str.begin(), cache_utc_minute_str.end());
+                    _buffer.insert(_buffer.end(), cache_utc_minute_str.begin(), cache_utc_minute_str.end());
                     // Set the corresponding cache required flag
                     cache_time_required = true;
                     cache_utc_required = true;
@@ -395,7 +395,7 @@ public:
                 case PlaceholderType::UtcSecond:
                 {
                     // Output UTC second string
-                    record.raw.insert(record.raw.end(), cache_utc_second_str.begin(), cache_utc_second_str.end());
+                    _buffer.insert(_buffer.end(), cache_utc_second_str.begin(), cache_utc_second_str.end());
                     // Set the corresponding cache required flag
                     cache_time_required = true;
                     cache_utc_required = true;
@@ -404,13 +404,13 @@ public:
                 case PlaceholderType::UtcTimezone:
                 {
                     // Output UTC time zone string
-                    record.raw.insert(record.raw.end(), cache_utc_timezone_str.begin(), cache_utc_timezone_str.end());
+                    _buffer.insert(_buffer.end(), cache_utc_timezone_str.begin(), cache_utc_timezone_str.end());
                     break;
                 }
                 case PlaceholderType::LocalDateTime:
                 {
                     // Output local date & time string
-                    record.raw.insert(record.raw.end(), cache_local_datetime_str.begin(), cache_local_datetime_str.end());
+                    _buffer.insert(_buffer.end(), cache_local_datetime_str.begin(), cache_local_datetime_str.end());
                     // Set the corresponding cache required flag
                     cache_time_required = true;
                     cache_local_required = true;
@@ -421,7 +421,7 @@ public:
                 case PlaceholderType::LocalDate:
                 {
                     // Output local date string
-                    record.raw.insert(record.raw.end(), cache_local_date_str.begin(), cache_local_date_str.end());
+                    _buffer.insert(_buffer.end(), cache_local_date_str.begin(), cache_local_date_str.end());
                     // Set the corresponding cache required flag
                     cache_time_required = true;
                     cache_local_required = true;
@@ -430,7 +430,7 @@ public:
                 case PlaceholderType::LocalTime:
                 {
                     // Output local time string
-                    record.raw.insert(record.raw.end(), cache_local_time_str.begin(), cache_local_time_str.end());
+                    _buffer.insert(_buffer.end(), cache_local_time_str.begin(), cache_local_time_str.end());
                     // Set the corresponding cache required flag
                     cache_time_required = true;
                     cache_local_required = true;
@@ -441,7 +441,7 @@ public:
                 case PlaceholderType::LocalYear:
                 {
                     // Output local year string
-                    record.raw.insert(record.raw.end(), cache_local_year_str.begin(), cache_local_year_str.end());
+                    _buffer.insert(_buffer.end(), cache_local_year_str.begin(), cache_local_year_str.end());
                     // Set the corresponding cache required flag
                     cache_time_required = true;
                     cache_local_required = true;
@@ -450,7 +450,7 @@ public:
                 case PlaceholderType::LocalMonth:
                 {
                     // Output local month string
-                    record.raw.insert(record.raw.end(), cache_local_month_str.begin(), cache_local_month_str.end());
+                    _buffer.insert(_buffer.end(), cache_local_month_str.begin(), cache_local_month_str.end());
                     // Set the corresponding cache required flag
                     cache_time_required = true;
                     cache_local_required = true;
@@ -459,7 +459,7 @@ public:
                 case PlaceholderType::LocalDay:
                 {
                     // Output local day string
-                    record.raw.insert(record.raw.end(), cache_local_day_str.begin(), cache_local_day_str.end());
+                    _buffer.insert(_buffer.end(), cache_local_day_str.begin(), cache_local_day_str.end());
                     // Set the corresponding cache required flag
                     cache_time_required = true;
                     cache_local_required = true;
@@ -468,7 +468,7 @@ public:
                 case PlaceholderType::LocalHour:
                 {
                     // Output local hour string
-                    record.raw.insert(record.raw.end(), cache_local_hour_str.begin(), cache_local_hour_str.end());
+                    _buffer.insert(_buffer.end(), cache_local_hour_str.begin(), cache_local_hour_str.end());
                     // Set the corresponding cache required flag
                     cache_time_required = true;
                     cache_local_required = true;
@@ -477,7 +477,7 @@ public:
                 case PlaceholderType::LocalMinute:
                 {
                     // Output local minute string
-                    record.raw.insert(record.raw.end(), cache_local_minute_str.begin(), cache_local_minute_str.end());
+                    _buffer.insert(_buffer.end(), cache_local_minute_str.begin(), cache_local_minute_str.end());
                     // Set the corresponding cache required flag
                     cache_time_required = true;
                     cache_local_required = true;
@@ -486,7 +486,7 @@ public:
                 case PlaceholderType::LocalSecond:
                 {
                     // Output local second string
-                    record.raw.insert(record.raw.end(), cache_local_second_str.begin(), cache_local_second_str.end());
+                    _buffer.insert(_buffer.end(), cache_local_second_str.begin(), cache_local_second_str.end());
                     // Set the corresponding cache required flag
                     cache_time_required = true;
                     cache_local_required = true;
@@ -495,7 +495,7 @@ public:
                 case PlaceholderType::LocalTimezone:
                 {
                     // Output local time zone string
-                    record.raw.insert(record.raw.end(), cache_local_timezone_str.begin(), cache_local_timezone_str.end());
+                    _buffer.insert(_buffer.end(), cache_local_timezone_str.begin(), cache_local_timezone_str.end());
                     // Set the corresponding cache required flag
                     cache_time_required = true;
                     cache_timezone_required = true;
@@ -504,7 +504,7 @@ public:
                 case PlaceholderType::Millisecond:
                 {
                     // Output millisecond string
-                    record.raw.insert(record.raw.end(), cache_millisecond_str.begin(), cache_millisecond_str.end());
+                    _buffer.insert(_buffer.end(), cache_millisecond_str.begin(), cache_millisecond_str.end());
                     // Set the corresponding cache required flag
                     cache_time_required = true;
                     cache_millisecond_required = true;
@@ -513,7 +513,7 @@ public:
                 case PlaceholderType::Microsecond:
                 {
                     // Output microsecond string
-                    record.raw.insert(record.raw.end(), cache_microsecond_str.begin(), cache_microsecond_str.end());
+                    _buffer.insert(_buffer.end(), cache_microsecond_str.begin(), cache_microsecond_str.end());
                     // Set the corresponding cache required flag
                     cache_time_required = true;
                     cache_microsecond_required = true;
@@ -522,7 +522,7 @@ public:
                 case PlaceholderType::Nanosecond:
                 {
                     // Output nanosecond string
-                    record.raw.insert(record.raw.end(), cache_nanosecond_str.begin(), cache_nanosecond_str.end());
+                    _buffer.insert(_buffer.end(), cache_nanosecond_str.begin(), cache_nanosecond_str.end());
                     // Set the corresponding cache required flag
                     cache_time_required = true;
                     cache_nanosecond_required = true;
@@ -531,7 +531,7 @@ public:
                 case PlaceholderType::Thread:
                 {
                     // Output cached thread Id string
-                    record.raw.insert(record.raw.end(), cache_thread_str.begin(), cache_thread_str.end());
+                    _buffer.insert(_buffer.end(), cache_thread_str.begin(), cache_thread_str.end());
                     // Set the corresponding cache required flag
                     cache_thread_required = true;
                     break;
@@ -539,7 +539,7 @@ public:
                 case PlaceholderType::Level:
                 {
                     // Output cached level string
-                    record.raw.insert(record.raw.end(), cache_level_str.begin(), cache_level_str.end());
+                    _buffer.insert(_buffer.end(), cache_level_str.begin(), cache_level_str.end());
                     // Set the corresponding cache required flag
                     cache_level_required = true;
                     break;
@@ -547,21 +547,30 @@ public:
                 case PlaceholderType::Logger:
                 {
                     // Output logger string
-                    record.raw.insert(record.raw.end(), record.logger.begin(), record.logger.end());
+                    size_t size = _buffer.size();
+                    _buffer.resize(size + record.logger.second);
+                    std::memcpy(_buffer.data() + size, record.logger.first, record.logger.second);
                     break;
                 }
                 case PlaceholderType::Message:
                 {
                     // Output message string
-                    record.raw.insert(record.raw.end(), record.message.begin(), record.message.end());
+                    size_t size = _buffer.size();
+                    _buffer.resize(size + record.message.second);
+                    std::memcpy(_buffer.data() + size, record.message.first, record.message.second);
                     break;
                 }
             }
         }
+
+        // Update raw field of the logging record and return
+        record.raw = std::make_pair(_buffer.data(), (uint32_t)_buffer.size());
+        return record.raw;
     }
 
 private:
     std::vector<Placeholder> _placeholders;
+    std::vector<uint8_t> _buffer;
 
     void AppendPattern(const std::string& pattern)
     {
@@ -774,9 +783,9 @@ TextLayout::~TextLayout()
 {
 }
 
-void TextLayout::LayoutRecord(Record& record)
+std::pair<void*, size_t> TextLayout::LayoutRecord(Record& record)
 {
-    _pimpl->LayoutRecord(record);
+    return _pimpl->LayoutRecord(record);
 }
 
 } // namespace CppLogging
