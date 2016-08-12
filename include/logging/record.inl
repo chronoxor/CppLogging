@@ -19,15 +19,16 @@ inline Record::Record()
     raw.reserve(512);
 }
 
-inline void Record::Swap(Record& record1, Record& record2)
+inline void swap(Record& record1, Record& record2)
 {
-    std::swap(record1.timestamp, record2.timestamp);
-    std::swap(record1.thread, record2.thread);
-    std::swap(record1.level, record2.level);
-    std::swap(record1.logger, record2.logger);
-    std::swap(record1.message, record2.message);
-    std::swap(record1.buffer, record2.buffer);
-    std::swap(record1.raw, record2.raw);
+    using std::swap;
+    swap(record1.timestamp, record2.timestamp);
+    swap(record1.thread, record2.thread);
+    swap(record1.level, record2.level);
+    swap(record1.logger, record2.logger);
+    swap(record1.message, record2.message);
+    swap(record1.buffer, record2.buffer);
+    swap(record1.raw, record2.raw);
 }
 
 } // namespace CppLogging

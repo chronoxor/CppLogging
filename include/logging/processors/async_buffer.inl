@@ -46,7 +46,7 @@ inline bool AsyncBuffer::Enqueue(Record& record)
             if (_head.compare_exchange_weak(head_sequence, head_sequence + 1, std::memory_order_relaxed))
             {
                 // Store and swap the item value
-                Record::Swap(node->value, record);
+                swap(node->value, record);
 
                 // Increment the sequence so that the tail knows it's accessible
                 node->sequence.store(head_sequence + 1, std::memory_order_release);
@@ -90,7 +90,7 @@ inline bool AsyncBuffer::Dequeue(Record& record)
             if (_tail.compare_exchange_weak(tail_sequence, tail_sequence + 1, std::memory_order_relaxed))
             {
                 // Swap and get the item value
-                Record::Swap(record, node->value);
+                swap(record, node->value);
 
                 // Set the sequence to what the head sequence should be next time around
                 node->sequence.store(tail_sequence + _mask + 1, std::memory_order_release);

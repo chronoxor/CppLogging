@@ -66,7 +66,7 @@ public:
          \param record1 - Logging record
          \param record2 - Logging record
     */
-    static void Swap(Record& record1, Record& record2);
+    friend void swap(Record& record1, Record& record2);
 };
 
 } // namespace CppLogging
