@@ -61,11 +61,7 @@ public:
     Record& operator=(const Record&) = default;
     Record& operator=(Record&&) = default;
 
-    //! Swap two logging records
-    /*!
-         \param record1 - Logging record
-         \param record2 - Logging record
-    */
+    //! Swap two instances
     friend void swap(Record& record1, Record& record2);
 };
 
