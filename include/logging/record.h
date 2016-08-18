@@ -62,7 +62,7 @@ public:
     Record& operator=(Record&&) = default;
 
     //! Swap two instances
-    friend void swap(Record& record1, Record& record2);
+    friend void swap(Record& record1, Record& record2) noexcept;
 };
 
 } // namespace CppLogging

@@ -19,7 +19,7 @@ inline Record::Record()
     raw.reserve(512);
 }
 
-inline void swap(Record& record1, Record& record2)
+inline void swap(Record& record1, Record& record2) noexcept
 {
     using std::swap;
     swap(record1.timestamp, record2.timestamp);
