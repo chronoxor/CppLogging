@@ -9,7 +9,7 @@
 
 using namespace CppLogging;
 
-const int iterations = 1000000;
+const uint64_t iterations = 1000000;
 
 class ConsoleConfigFixture
 {

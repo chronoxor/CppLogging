@@ -9,7 +9,7 @@
 
 using namespace CppLogging;
 
-const int iterations = 10000000;
+const uint64_t iterations = 10000000;
 
 BENCHMARK("BinaryLayout", iterations)
 {
