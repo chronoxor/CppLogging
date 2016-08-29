@@ -62,6 +62,7 @@ public:
     Record& operator=(Record&&) = default;
 
     //! Swap two instances
+    void swap(Record& record) noexcept;
     friend void swap(Record& record1, Record& record2) noexcept;
 };
 
