@@ -638,7 +638,7 @@ private:
         else if (placeholder == "Message")
             _placeholders.push_back(Placeholder(PlaceholderType::Message));
         else if (placeholder == "EndLine")
-            AppendPattern(Environment::EndLine());
+            AppendPattern(CppCommon::Environment::EndLine());
         else
             AppendPattern("{" + placeholder + "}");
     }

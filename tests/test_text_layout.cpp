@@ -7,6 +7,7 @@
 #include "logging/layouts/text_layout.h"
 #include "system/environment.h"
 
+using namespace CppCommon;
 using namespace CppLogging;
 
 TEST_CASE("Text layout", "[CppLogging]")
