@@ -5,6 +5,7 @@
 #include "catch.hpp"
 
 #include "logging/layouts/text_layout.h"
+#include "system/environment.h"
 
 using namespace CppLogging;
 
@@ -22,11 +23,7 @@ TEST_CASE("Text layout", "[CppLogging]")
     layout1.LayoutRecord(record);
     REQUIRE(record.raw.size() > 0);
 
-#if defined(_WIN32) || defined(_WIN64)
-    std::string utc_sample = "2016-07-13T11:22:33.123Z - 456.789 - [0x98ABCDEF] - WARN  - Test logger - Test message - \r\n";
-#elif defined(unix) || defined(__unix) || defined(__unix__)
-	std::string utc_sample = "2016-07-13T11:22:33.123Z - 456.789 - [0x98ABCDEF] - WARN  - Test logger - Test message - \n";
-#endif
+    std::string utc_sample = "2016-07-13T11:22:33.123Z - 456.789 - [0x98ABCDEF] - WARN  - Test logger - Test message - " + Environment::EndLine();
 
     TextLayout layout2("{UtcYear}-{UtcMonth}-{UtcDay}T{UtcHour}:{UtcMinute}:{UtcSecond}.{Millisecond}{UtcTimezone} - {Microsecond}.{Nanosecond} - [{Thread}] - {Level} - {Logger} - {Message} - {EndLine}");
     layout2.LayoutRecord(record);
@@ -34,5 +31,5 @@ TEST_CASE("Text layout", "[CppLogging]")
 
     TextLayout layout3("{UtcDateTime} - {Microsecond}.{Nanosecond} - [{Thread}] - {Level} - {Logger} - {Message} - {EndLine}");
     layout3.LayoutRecord(record);
-	REQUIRE(std::string(record.raw.begin(), record.raw.end() - 1) == utc_sample);
+    REQUIRE(std::string(record.raw.begin(), record.raw.end() - 1) == utc_sample);
 }

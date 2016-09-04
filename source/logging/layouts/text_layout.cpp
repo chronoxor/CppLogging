@@ -8,6 +8,7 @@
 
 #include "logging/layouts/text_layout.h"
 
+#include "system/environment.h"
 #include "time/timezone.h"
 
 #include <cstring>
@@ -637,11 +638,7 @@ private:
         else if (placeholder == "Message")
             _placeholders.push_back(Placeholder(PlaceholderType::Message));
         else if (placeholder == "EndLine")
-#if defined(_WIN32) || defined(_WIN64)
-            AppendPattern("\r\n");
-#elif defined(unix) || defined(__unix) || defined(__unix__)
-            AppendPattern("\n");
-#endif
+            AppendPattern(Environment::EndLine());
         else
             AppendPattern("{" + placeholder + "}");
     }
