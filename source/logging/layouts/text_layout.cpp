@@ -763,7 +763,7 @@ private:
     }
 };
 
-TextLayout::TextLayout(const std::string& layout) : _pimpl(new Impl(layout))
+TextLayout::TextLayout(const std::string& layout) : _pimpl(std::make_unique<Impl>(layout))
 {
 }
 
