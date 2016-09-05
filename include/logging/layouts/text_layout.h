@@ -53,11 +53,11 @@ public:
     */
     explicit TextLayout(const std::string& pattern = "{UtcDateTime} [{Thread}] {Level} {Logger} - {Message}{EndLine}");
     TextLayout(const TextLayout&) = delete;
-    TextLayout(TextLayout&&) = default;
+    TextLayout(TextLayout&& layout);
     ~TextLayout();
 
     TextLayout& operator=(const TextLayout&) = delete;
-    TextLayout& operator=(TextLayout&&) = default;
+    TextLayout& operator=(TextLayout&& layout);
 
     // Implementation of Layout
     void LayoutRecord(Record& record) override;

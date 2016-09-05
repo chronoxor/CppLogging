@@ -767,8 +767,18 @@ TextLayout::TextLayout(const std::string& layout) : _pimpl(std::make_unique<Impl
 {
 }
 
+TextLayout::TextLayout(TextLayout&& layout) : _pimpl(std::move(layout._pimpl))
+{
+}
+
 TextLayout::~TextLayout()
 {
+}
+
+TextLayout& TextLayout::operator=(TextLayout&& layout)
+{
+    _pimpl = std::move(layout._pimpl);
+    return *this;
 }
 
 void TextLayout::LayoutRecord(Record& record)
