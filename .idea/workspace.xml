@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CMakeRunConfigurationManager" shouldGenerate="true" assignedExecutableTargets="true" buildAllGenerated="true">
+    <generated>
+      <config projectName="cpplogging" targetName="cpplogging-tests" />
+      <config projectName="cpplogging" targetName="cpplogging-perf-processor_sync" />
+      <config projectName="cpplogging" targetName="cpplogging-example-default" />
+      <config projectName="cpplogging" targetName="cpplogging-example-syslog" />
+      <config projectName="cpplogging" targetName="cpp-optparse" />
+      <config projectName="cpplogging" targetName="doxygen" />
+      <config projectName="cpplogging" targetName="cpplogging-perf-appender_console" />
+      <config projectName="cpplogging" targetName="cpplogging-perf-processor_async" />
+      <config projectName="cpplogging" targetName="cpplogging-example-console" />
+      <config projectName="cpplogging" targetName="cpplogging-perf-appender_null" />
+      <config projectName="cpplogging" targetName="cppbenchmark" />
+      <config projectName="cpplogging" targetName="cpplogging" />
+      <config projectName="cpplogging" targetName="cpplogging-perf-appender_file" />
+      <config projectName="cpplogging" targetName="cpplogging-perf-layout" />
+      <config projectName="cpplogging" targetName="cppcommon" />
+      <config projectName="cpplogging" targetName="cpplogging-example-file" />
+    </generated>
+  </component>
+  <component name="CMakeSettings" AUTO_RELOAD="false" GENERATION_PASS_SYSTEM_ENVIRONMENT="true">
+    <ADDITIONAL_GENERATION_ENVIRONMENT>
+      <envs />
+    </ADDITIONAL_GENERATION_ENVIRONMENT>
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="7f74447b-b31c-4b3a-ae9e-d86d39072a15" name="Default" comment="" />
+    <ignored path="CppLogging.iws" />
+    <ignored path=".idea/workspace.xml" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="TRACKING_ENABLED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CreatePatchCommitExecutor">
+    <option name="PATCH_PATH" value="" />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
+  <component name="FavoritesManager">
+    <favorites_list name="CppLogging" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsGulpfileManager">
+    <detection-done>true</detection-done>
+    <sorting>DEFINITION_ORDER</sorting>
+  </component>
+  <component name="ProjectFrameBounds">
+    <option name="x" value="65" />
+    <option name="y" value="24" />
+    <option name="width" value="1615" />
+    <option name="height" value="1026" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="false">
+    <OptionsSetting value="true" id="Add" />
+    <OptionsSetting value="true" id="Remove" />
+    <OptionsSetting value="true" id="Checkout" />
+    <OptionsSetting value="true" id="Update" />
+    <OptionsSetting value="true" id="Status" />
+    <OptionsSetting value="true" id="Edit" />
+    <ConfirmationsSetting value="0" id="Add" />
+    <ConfirmationsSetting value="0" id="Remove" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="WebServerToolWindowFactoryState" value="false" />
+  </component>
+  <component name="RunManager" selected="Application.Build All">
+    <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="cpplogging" TARGET_NAME="cpplogging" CONFIG_NAME="Debug">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="Build All" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" CONFIG_NAME="Debug" EXPLICIT_BUILD_TARGET_NAME="all">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="cpplogging" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="cpplogging" TARGET_NAME="cpplogging" CONFIG_NAME="Debug">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="cpplogging-example-console" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="cpplogging" TARGET_NAME="cpplogging-example-console" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="cpplogging" RUN_TARGET_NAME="cpplogging-example-console">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="cpplogging-example-default" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="cpplogging" TARGET_NAME="cpplogging-example-default" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="cpplogging" RUN_TARGET_NAME="cpplogging-example-default">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="cpplogging-example-file" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="cpplogging" TARGET_NAME="cpplogging-example-file" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="cpplogging" RUN_TARGET_NAME="cpplogging-example-file">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="cpplogging-example-syslog" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="cpplogging" TARGET_NAME="cpplogging-example-syslog" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="cpplogging" RUN_TARGET_NAME="cpplogging-example-syslog">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="cpplogging-perf-appender_console" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="cpplogging" TARGET_NAME="cpplogging-perf-appender_console" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="cpplogging" RUN_TARGET_NAME="cpplogging-perf-appender_console">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="cpplogging-perf-appender_file" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="cpplogging" TARGET_NAME="cpplogging-perf-appender_file" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="cpplogging" RUN_TARGET_NAME="cpplogging-perf-appender_file">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="cpplogging-perf-appender_null" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="cpplogging" TARGET_NAME="cpplogging-perf-appender_null" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="cpplogging" RUN_TARGET_NAME="cpplogging-perf-appender_null">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="cpplogging-perf-layout" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="cpplogging" TARGET_NAME="cpplogging-perf-layout" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="cpplogging" RUN_TARGET_NAME="cpplogging-perf-layout">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="cpplogging-perf-processor_async" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="cpplogging" TARGET_NAME="cpplogging-perf-processor_async" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="cpplogging" RUN_TARGET_NAME="cpplogging-perf-processor_async">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="cpplogging-perf-processor_sync" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="cpplogging" TARGET_NAME="cpplogging-perf-processor_sync" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="cpplogging" RUN_TARGET_NAME="cpplogging-perf-processor_sync">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="cpplogging-tests" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="cpplogging" TARGET_NAME="cpplogging-tests" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="cpplogging" RUN_TARGET_NAME="cpplogging-tests">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="doxygen" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="cpplogging" TARGET_NAME="doxygen" CONFIG_NAME="Debug">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="cppbenchmark" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="cpplogging" TARGET_NAME="cppbenchmark" CONFIG_NAME="Debug">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="cpp-optparse" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="cpplogging" TARGET_NAME="cpp-optparse" CONFIG_NAME="Debug">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="cppcommon" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="cpplogging" TARGET_NAME="cppcommon" CONFIG_NAME="Debug">
+      <envs />
+      <method />
+    </configuration>
+    <list size="17">
+      <item index="0" class="java.lang.String" itemvalue="Application.Build All" />
+      <item index="1" class="java.lang.String" itemvalue="Application.cpplogging" />
+      <item index="2" class="java.lang.String" itemvalue="Application.cpplogging-example-console" />
+      <item index="3" class="java.lang.String" itemvalue="Application.cpplogging-example-default" />
+      <item index="4" class="java.lang.String" itemvalue="Application.cpplogging-example-file" />
+      <item index="5" class="java.lang.String" itemvalue="Application.cpplogging-example-syslog" />
+      <item index="6" class="java.lang.String" itemvalue="Application.cpplogging-perf-appender_console" />
+      <item index="7" class="java.lang.String" itemvalue="Application.cpplogging-perf-appender_file" />
+      <item index="8" class="java.lang.String" itemvalue="Application.cpplogging-perf-appender_null" />
+      <item index="9" class="java.lang.String" itemvalue="Application.cpplogging-perf-layout" />
+      <item index="10" class="java.lang.String" itemvalue="Application.cpplogging-perf-processor_async" />
+      <item index="11" class="java.lang.String" itemvalue="Application.cpplogging-perf-processor_sync" />
+      <item index="12" class="java.lang.String" itemvalue="Application.cpplogging-tests" />
+      <item index="13" class="java.lang.String" itemvalue="Application.doxygen" />
+      <item index="14" class="java.lang.String" itemvalue="Application.cppbenchmark" />
+      <item index="15" class="java.lang.String" itemvalue="Application.cpp-optparse" />
+      <item index="16" class="java.lang.String" itemvalue="Application.cppcommon" />
+    </list>
+  </component>
+  <component name="ShelveChangesManager" show_recycled="false">
+    <option name="remove_strategy" value="false" />
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="7f74447b-b31c-4b3a-ae9e-d86d39072a15" name="Default" comment="" />
+      <created>1473290170192</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1473290170192</updated>
+      <workItem from="1473290171526" duration="89000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="89000" />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="65" y="24" width="1615" height="1026" extended-state="6" />
+    <editor active="false" />
+    <layout>
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="CMake" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+    </layout>
+  </component>
+  <component name="Vcs.Log.UiProperties">
+    <option name="RECENTLY_FILTERED_USER_GROUPS">
+      <collection />
+    </option>
+    <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
+      <collection />
+    </option>
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager />
+    <watches-manager />
+  </component>
+</project>
