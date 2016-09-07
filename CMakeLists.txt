@@ -88,7 +88,7 @@ if(NOT CPPLOGGING_MODULE)
   # Tests
   file(GLOB TESTS_SOURCE_FILES "tests/*.cpp")
   add_executable(cpplogging-tests ${CATCH_HEADER} ${TESTS_SOURCE_FILES})
-  target_link_libraries(cpplogging-tests cpplogging ${SYSTEM})
+  target_link_libraries(cpplogging-tests cpplogging cppcommon ${SYSTEM})
   list(APPEND INSTALL_TARGETS cpplogging-tests)
   list(APPEND INSTALL_TARGETS_PDB cpplogging-tests)
 
