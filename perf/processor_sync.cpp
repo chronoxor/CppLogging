@@ -17,9 +17,9 @@ class NullConfigFixture : public virtual CppBenchmark::FixtureThreads
 protected:
     NullConfigFixture()
     {
-        auto null_sink = std::make_shared<CppLogging::SyncProcessor>();
-        null_sink->appenders().push_back(std::make_shared<CppLogging::NullAppender>());
-        CppLogging::Config::ConfigLogger("null", null_sink);
+        auto null_sink = std::make_shared<SyncProcessor>();
+        null_sink->appenders().push_back(std::make_shared<NullAppender>());
+        Config::ConfigLogger("null", null_sink);
     }
 
     void Cleanup(CppBenchmark::ContextThreads& context) override
@@ -34,10 +34,10 @@ class BinaryConfigFixture : public virtual CppBenchmark::FixtureThreads
 protected:
     BinaryConfigFixture()
     {
-        auto binary_sink = std::make_shared<CppLogging::SyncProcessor>();
-        binary_sink->layouts().push_back(std::make_shared<CppLogging::BinaryLayout>());
-        binary_sink->appenders().push_back(std::make_shared<CppLogging::NullAppender>());
-        CppLogging::Config::ConfigLogger("binary", binary_sink);
+        auto binary_sink = std::make_shared<SyncProcessor>();
+        binary_sink->layouts().push_back(std::make_shared<BinaryLayout>());
+        binary_sink->appenders().push_back(std::make_shared<NullAppender>());
+        Config::ConfigLogger("binary", binary_sink);
     }
 
     void Cleanup(CppBenchmark::ContextThreads& context) override
@@ -52,10 +52,10 @@ class TextConfigFixture : public virtual CppBenchmark::FixtureThreads
 protected:
     TextConfigFixture()
     {
-        auto text_sink = std::make_shared<CppLogging::SyncProcessor>();
-        text_sink->layouts().push_back(std::make_shared<CppLogging::TextLayout>());
-        text_sink->appenders().push_back(std::make_shared<CppLogging::NullAppender>());
-        CppLogging::Config::ConfigLogger("text", text_sink);
+        auto text_sink = std::make_shared<SyncProcessor>();
+        text_sink->layouts().push_back(std::make_shared<TextLayout>());
+        text_sink->appenders().push_back(std::make_shared<NullAppender>());
+        Config::ConfigLogger("text", text_sink);
     }
 
     void Cleanup(CppBenchmark::ContextThreads& context) override
@@ -67,19 +67,19 @@ protected:
 
 BENCHMARK_THREADS_FIXTURE(NullConfigFixture, "SyncProcessor-null", settings)
 {
-    thread_local Logger logger = CppLogging::Config::CreateLogger("null");
+    thread_local Logger logger = Config::CreateLogger("null");
     logger.Info("Test message");
 }
 
 BENCHMARK_THREADS_FIXTURE(BinaryConfigFixture, "SyncProcessor-binary", settings)
 {
-    thread_local Logger logger = CppLogging::Config::CreateLogger("binary");
+    thread_local Logger logger = Config::CreateLogger("binary");
     logger.Info("Test message");
 }
 
 BENCHMARK_THREADS_FIXTURE(TextConfigFixture, "SyncProcessor-text", settings)
 {
-    thread_local Logger logger = CppLogging::Config::CreateLogger("text");
+    thread_local Logger logger = Config::CreateLogger("text");
     logger.Info("Test message");
 }
 

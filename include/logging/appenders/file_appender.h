@@ -11,7 +11,7 @@
 
 #include "logging/appender.h"
 
-#include "filesystem/file.h"
+#include "filesystem/filesystem.h"
 
 namespace CppLogging {
 

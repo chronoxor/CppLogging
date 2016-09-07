@@ -27,7 +27,11 @@ void FileAppender::AppendRecord(Record& record)
         // Try to write logging record content into the opened file
         try
         {
-            _file.Write(record.raw.data(), record.raw.size());
+            _file.Write(record.raw.data(), record.raw.size() - 1);
+
+            // Perform auto-flush if enabled
+            if (_auto_flush)
+                _file.Flush();
         }
         catch (CppCommon::FileSystemException&)
         {

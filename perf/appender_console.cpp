@@ -16,16 +16,16 @@ class ConsoleConfigFixture
 protected:
     ConsoleConfigFixture()
     {
-        auto sink = std::make_shared<CppLogging::Processor>();
-        sink->layouts().push_back(std::make_shared<CppLogging::TextLayout>());
-        sink->appenders().push_back(std::make_shared<CppLogging::ConsoleAppender>());
-        CppLogging::Config::ConfigLogger("test", sink);
+        auto sink = std::make_shared<Processor>();
+        sink->layouts().push_back(std::make_shared<TextLayout>());
+        sink->appenders().push_back(std::make_shared<ConsoleAppender>());
+        Config::ConfigLogger("test", sink);
     }
 };
 
 BENCHMARK_FIXTURE(ConsoleConfigFixture, "ConsoleAppender", iterations)
 {
-    static Logger logger = CppLogging::Config::CreateLogger("test");
+    static Logger logger = Config::CreateLogger("test");
     logger.Info("Test message");
 }
 

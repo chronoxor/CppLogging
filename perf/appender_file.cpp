@@ -1,5 +1,5 @@
 //
-// Created by Ivan Shynkarenka on 29.07.2016.
+// Created by Ivan Shynkarenka on 08.09.2016.
 //
 
 #include "benchmark/cppbenchmark.h"
@@ -9,7 +9,7 @@
 
 using namespace CppLogging;
 
-const uint64_t iterations = 10000000;
+const uint64_t iterations = 1000000;
 
 class BinaryConfigFixture
 {
@@ -18,7 +18,7 @@ protected:
     {
         auto binary_sink = std::make_shared<Processor>();
         binary_sink->layouts().push_back(std::make_shared<BinaryLayout>());
-        binary_sink->appenders().push_back(std::make_shared<NullAppender>());
+        binary_sink->appenders().push_back(std::make_shared<FileAppender>(CppCommon::File("test.bin.log")));
         Config::ConfigLogger("binary", binary_sink);
     }
 };
@@ -30,18 +30,18 @@ protected:
     {
         auto text_sink = std::make_shared<Processor>();
         text_sink->layouts().push_back(std::make_shared<TextLayout>());
-        text_sink->appenders().push_back(std::make_shared<NullAppender>());
+        text_sink->appenders().push_back(std::make_shared<FileAppender>(CppCommon::File("test.log")));
         Config::ConfigLogger("text", text_sink);
     }
 };
 
-BENCHMARK_FIXTURE(BinaryConfigFixture, "NullAppender-binary", iterations)
+BENCHMARK_FIXTURE(BinaryConfigFixture, "FileAppender-binary", iterations)
 {
     static Logger logger = Config::CreateLogger("binary");
     logger.Info("Test message");
 }
 
-BENCHMARK_FIXTURE(TextConfigFixture, "NullAppender-text", iterations)
+BENCHMARK_FIXTURE(TextConfigFixture, "FileAppender-text", iterations)
 {
     static Logger logger = Config::CreateLogger("text");
     logger.Info("Test message");
