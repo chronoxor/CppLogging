@@ -18,7 +18,7 @@ protected:
     {
         auto binary_sink = std::make_shared<Processor>();
         binary_sink->layouts().push_back(std::make_shared<BinaryLayout>());
-        binary_sink->appenders().push_back(std::make_shared<FileAppender2>(CppCommon::File("test.bin.log")));
+        binary_sink->appenders().push_back(std::make_shared<FileAppender>(CppCommon::File("test.bin.log")));
         Config::ConfigLogger("binary", binary_sink);
     }
 };
@@ -30,7 +30,7 @@ protected:
     {
         auto text_sink = std::make_shared<Processor>();
         text_sink->layouts().push_back(std::make_shared<TextLayout>());
-        text_sink->appenders().push_back(std::make_shared<FileAppender2>(CppCommon::File("test.log")));
+        text_sink->appenders().push_back(std::make_shared<FileAppender>(CppCommon::File("test.log")));
         Config::ConfigLogger("text", text_sink);
     }
 };
