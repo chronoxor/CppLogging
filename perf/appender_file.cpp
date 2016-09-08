@@ -21,6 +21,11 @@ protected:
         binary_sink->appenders().push_back(std::make_shared<FileAppender>(CppCommon::File("test.bin.log")));
         Config::ConfigLogger("binary", binary_sink);
     }
+
+    ~BinaryConfigFixture()
+    {
+        CppCommon::File::Remove("test.bin.log");
+    }
 };
 
 class TextConfigFixture
@@ -32,6 +37,11 @@ protected:
         text_sink->layouts().push_back(std::make_shared<TextLayout>());
         text_sink->appenders().push_back(std::make_shared<FileAppender>(CppCommon::File("test.log")));
         Config::ConfigLogger("text", text_sink);
+    }
+
+    ~TextConfigFixture()
+    {
+        CppCommon::File::Remove("test.log");
     }
 };
 
