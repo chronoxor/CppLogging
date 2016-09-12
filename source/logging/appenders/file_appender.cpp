@@ -13,7 +13,7 @@ namespace CppLogging {
 FileAppender::FileAppender(const CppCommon::File& file, bool truncate, bool auto_flush)
     : _retry(0), _file(file), _truncate(truncate), _auto_flush(auto_flush)
 {
-    CheckFileIsOpened();
+    PrepareFile();
 }
 
 void FileAppender::AppendRecord(Record& record)
@@ -22,7 +22,7 @@ void FileAppender::AppendRecord(Record& record)
     if (record.raw.empty())
         return;
 
-    if (CheckFileIsOpened())
+    if (PrepareFile())
     {
         // Try to write logging record content into the opened file
         try
@@ -47,7 +47,7 @@ void FileAppender::AppendRecord(Record& record)
 
 void FileAppender::Flush()
 {
-    if (CheckFileIsOpened())
+    if (PrepareFile())
     {
         // Try to flush the opened file
         try
@@ -66,7 +66,7 @@ void FileAppender::Flush()
     }
 }
 
-bool FileAppender::CheckFileIsOpened()
+bool FileAppender::PrepareFile()
 {
     try
     {

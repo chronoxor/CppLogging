@@ -60,7 +60,7 @@ class TextLayout::Impl
     };
 
 public:
-    Impl(const std::string& pattern)
+    Impl(const std::string& pattern) : _pattern(pattern)
     {
         std::string placeholder;
         std::string subpattern;
@@ -113,6 +113,11 @@ public:
 
     ~Impl()
     {
+    }
+
+    const std::string& pattern() const noexcept
+    {
+        return _pattern;
     }
 
     void LayoutRecord(Record& record)
@@ -562,6 +567,7 @@ public:
     }
 
 private:
+    std::string _pattern;
     std::vector<Placeholder> _placeholders;
 
     void AppendPattern(const std::string& pattern)
@@ -779,6 +785,11 @@ TextLayout& TextLayout::operator=(TextLayout&& layout)
 {
     _pimpl = std::move(layout._pimpl);
     return *this;
+}
+
+const std::string& TextLayout::pattern() const noexcept
+{
+    return _pimpl->pattern();
 }
 
 void TextLayout::LayoutRecord(Record& record)

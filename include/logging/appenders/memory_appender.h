@@ -35,6 +35,9 @@ public:
     MemoryAppender& operator=(const MemoryAppender&) = delete;
     MemoryAppender& operator=(MemoryAppender&&) = default;
 
+    //! Get memory buffer
+    const std::vector<uint8_t>& buffer() const noexcept { return _buffer; }
+
     // Implementation of Appender
     void AppendRecord(Record& record) override;
 

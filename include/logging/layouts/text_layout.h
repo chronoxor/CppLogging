@@ -59,6 +59,9 @@ public:
     TextLayout& operator=(const TextLayout&) = delete;
     TextLayout& operator=(TextLayout&& layout);
 
+    //! Get the text layout pattern
+    const std::string& pattern() const noexcept;
+
     // Implementation of Layout
     void LayoutRecord(Record& record) override;
 

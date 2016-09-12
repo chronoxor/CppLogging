@@ -51,13 +51,13 @@ private:
     bool _truncate;
     bool _auto_flush;
 
-    //! Check if the file is opened for writing
+    //! Prepare the file for writing
     /*
         - If the file is opened and ready to write immediately returns true
         - If the last retry was earlier than 100ms immediately returns false
         - If the file is closed try to open it for writing, returns true/false
     */
-    bool CheckFileIsOpened();
+    virtual bool PrepareFile();
 };
 
 } // namespace CppLogging
