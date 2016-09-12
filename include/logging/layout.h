@@ -35,7 +35,4 @@ public:
 
 } // namespace CppLogging
 
-#include "logging/layouts/binary_layout.h"
-#include "logging/layouts/text_layout.h"
-
 #endif // CPPLOGGING_LAYOUT_H

@@ -36,9 +36,4 @@ public:
 
 } // namespace CppLogging
 
-#include "logging/trigger.h"
-#include "logging/filters/logger_filter.h"
-#include "logging/filters/level_filter.h"
-#include "logging/filters/message_filter.h"
-
 #endif // CPPLOGGING_FILTER_H

@@ -29,7 +29,7 @@ public:
     SyncProcessor() = default;
     SyncProcessor(const SyncProcessor&) = delete;
     SyncProcessor(SyncProcessor&&) = default;
-    virtual ~SyncProcessor() = default;
+    ~SyncProcessor() = default;
 
     SyncProcessor& operator=(const SyncProcessor&) = delete;
     SyncProcessor& operator=(SyncProcessor&&) = default;

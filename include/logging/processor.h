@@ -9,9 +9,9 @@
 #ifndef CPPLOGGING_PROCESSOR_H
 #define CPPLOGGING_PROCESSOR_H
 
-#include "logging/appender.h"
-#include "logging/filter.h"
-#include "logging/layout.h"
+#include "logging/appenders.h"
+#include "logging/filters.h"
+#include "logging/layouts.h"
 
 namespace CppLogging {
 
@@ -32,7 +32,7 @@ public:
     Processor() = default;
     Processor(const Processor&) = default;
     Processor(Processor&&) = default;
-    virtual ~Processor() = default;
+    virtual ~Processor();
 
     Processor& operator=(const Processor&) = default;
     Processor& operator=(Processor&&) = default;
@@ -76,9 +76,5 @@ private:
 };
 
 } // namespace CppLogging
-
-#include "logging/processors/sync_processor.h"
-#include "logging/processors/async_processor.h"
-#include "logging/processors/buffered_processor.h"
 
 #endif // CPPLOGGING_PROCESSOR_H

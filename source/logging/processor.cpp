@@ -10,6 +10,11 @@
 
 namespace CppLogging {
 
+Processor::~Processor()
+{
+    Flush();
+}
+
 bool Processor::ProcessRecord(Record& record)
 {
     // Filter the given logging record

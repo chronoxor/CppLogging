@@ -9,7 +9,7 @@
 #ifndef CPPLOGGING_LOGGER_H
 #define CPPLOGGING_LOGGER_H
 
-#include "logging/processor.h"
+#include "logging/processors.h"
 
 namespace CppLogging {
 
@@ -33,7 +33,7 @@ public:
     explicit Logger(const std::string& name);
     Logger(const Logger&) = default;
     Logger(Logger&&) = default;
-    ~Logger() = default;
+    ~Logger();
 
     Logger& operator=(const Logger&) = default;
     Logger& operator=(Logger&&) = default;

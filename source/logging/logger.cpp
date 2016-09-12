@@ -24,6 +24,11 @@ Logger::Logger(const std::string& name, const std::shared_ptr<Processor>& sink) 
 {
 }
 
+Logger::~Logger()
+{
+    Flush();
+}
+
 void Logger::Log(Level level, const char* message)
 {
     // Thread local instance of the logging record

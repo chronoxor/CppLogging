@@ -26,7 +26,7 @@ public:
     ErrorAppender() = default;
     ErrorAppender(const ErrorAppender&) = delete;
     ErrorAppender(ErrorAppender&&) = default;
-    ~ErrorAppender() { Flush(); }
+    ~ErrorAppender() = default;
 
     ErrorAppender& operator=(const ErrorAppender&) = delete;
     ErrorAppender& operator=(ErrorAppender&&) = default;

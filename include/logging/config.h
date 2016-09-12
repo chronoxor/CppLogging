@@ -26,7 +26,7 @@ class Config
 public:
     Config(const Config&) = delete;
     Config(Config&&) = delete;
-    ~Config() = default;
+    ~Config();
 
     Config& operator=(const Config&) = delete;
     Config& operator=(Config&&) = delete;

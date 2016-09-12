@@ -36,7 +36,7 @@ public:
     explicit FileAppender(const CppCommon::File& file, bool truncate = false, bool auto_flush = false);
     FileAppender(const FileAppender&) = delete;
     FileAppender(FileAppender&&) = default;
-    ~FileAppender() { Flush(); }
+    ~FileAppender() = default;
 
     FileAppender& operator=(const FileAppender&) = delete;
     FileAppender& operator=(FileAppender&&) = default;

@@ -10,6 +10,15 @@
 
 namespace CppLogging {
 
+Config::~Config()
+{
+    CppCommon::Locker<CppCommon::CriticalSection> locker(_lock);
+
+    for (auto& processor : _config)
+        if (processor.second)
+            processor.second->Flush();
+}
+
 void Config::ConfigLogger(const std::shared_ptr<Processor>& sink)
 {
     Config& instance = GetInstance();
