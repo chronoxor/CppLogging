@@ -36,6 +36,8 @@ public:
     MemoryAppender& operator=(MemoryAppender&&) = default;
 
     //! Get memory buffer
+    std::vector<uint8_t>& buffer() noexcept { return _buffer; }
+    //! Get constant memory buffer
     const std::vector<uint8_t>& buffer() const noexcept { return _buffer; }
 
     // Implementation of Appender
