@@ -32,7 +32,7 @@ public:
     explicit MessageFilter(const std::regex& pattern) : _pattern(pattern) {}
     MessageFilter(const MessageFilter&) = delete;
     MessageFilter(MessageFilter&&) = default;
-    ~MessageFilter() = default;
+    virtual ~MessageFilter() = default;
 
     MessageFilter& operator=(const MessageFilter&) = delete;
     MessageFilter& operator=(MessageFilter&&) = default;

@@ -28,7 +28,7 @@ public:
     DebugAppender() = default;
     DebugAppender(const DebugAppender&) = delete;
     DebugAppender(DebugAppender&&) = default;
-    ~DebugAppender() = default;
+    virtual ~DebugAppender() = default;
 
     DebugAppender& operator=(const DebugAppender&) = delete;
     DebugAppender& operator=(DebugAppender&&) = default;

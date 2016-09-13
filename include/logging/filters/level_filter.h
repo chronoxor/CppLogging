@@ -11,8 +11,6 @@
 
 #include "logging/filter.h"
 
-#include <regex>
-
 namespace CppLogging {
 
 //! Level filter
@@ -38,7 +36,7 @@ public:
     explicit LevelFilter(Level from, Level to) : _from(from), _to(to) {}
     LevelFilter(const LevelFilter&) = delete;
     LevelFilter(LevelFilter&&) = default;
-    ~LevelFilter() = default;
+    virtual ~LevelFilter() = default;
 
     LevelFilter& operator=(const LevelFilter&) = delete;
     LevelFilter& operator=(LevelFilter&&) = default;

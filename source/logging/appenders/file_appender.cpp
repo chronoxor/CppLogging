@@ -21,7 +21,7 @@ void FileAppender::AppendRecord(Record& record)
     if (record.raw.empty())
         return;
 
-    if (PrepareFile())
+    if (PrepareFile(record.raw.size() - 1))
     {
         // Try to write logging record content into the opened file
         try
@@ -46,7 +46,7 @@ void FileAppender::AppendRecord(Record& record)
 
 void FileAppender::Flush()
 {
-    if (PrepareFile())
+    if (PrepareFile(0))
     {
         // Try to flush the opened file
         try
@@ -65,21 +65,25 @@ void FileAppender::Flush()
     }
 }
 
-bool FileAppender::PrepareFile()
+bool FileAppender::PrepareFile(size_t size)
 {
     try
     {
         // 1. Check if the file is already opened for writing
         if (_file.IsFileWriteOpened())
             return true;
+
         // 2. Check retry timestamp if 100ms elapsed after the last attempt
         if ((CppCommon::Timestamp::nano() - _retry).milliseconds() < 100)
             return false;
+
         // 3. If the file is opened for reading close it
         if (_file.IsFileReadOpened())
             _file.Close();
+
         // 4. Open the file for writing
         _file.OpenOrCreate(false, true, _truncate);
+
         // 5. Reset the the retry timestamp
         _retry = CppCommon::Timestamp::nano();
         return true;

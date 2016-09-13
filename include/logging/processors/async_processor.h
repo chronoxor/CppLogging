@@ -37,7 +37,7 @@ public:
     explicit AsyncProcessor(bool discard_on_overflow = false, size_t capacity = 4096);
     AsyncProcessor(const AsyncProcessor&) = delete;
     AsyncProcessor(AsyncProcessor&&) = default;
-    ~AsyncProcessor();
+    virtual ~AsyncProcessor();
 
     AsyncProcessor& operator=(const AsyncProcessor&) = delete;
     AsyncProcessor& operator=(AsyncProcessor&&) = default;

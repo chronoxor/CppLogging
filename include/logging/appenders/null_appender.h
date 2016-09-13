@@ -25,7 +25,7 @@ public:
     NullAppender() = default;
     NullAppender(const NullAppender&) = delete;
     NullAppender(NullAppender&&) = default;
-    ~NullAppender() = default;
+    virtual ~NullAppender() = default;
 
     NullAppender& operator=(const NullAppender&) = delete;
     NullAppender& operator=(NullAppender&&) = default;

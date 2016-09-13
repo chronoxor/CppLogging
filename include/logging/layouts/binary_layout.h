@@ -26,7 +26,7 @@ public:
     BinaryLayout() = default;
     BinaryLayout(const BinaryLayout&) = delete;
     BinaryLayout(BinaryLayout&&) = default;
-    ~BinaryLayout() = default;
+    virtual ~BinaryLayout() = default;
 
     BinaryLayout& operator=(const BinaryLayout&) = delete;
     BinaryLayout& operator=(BinaryLayout&&) = default;

@@ -31,7 +31,7 @@ public:
     explicit Trigger(bool state = true) : _state(state) {}
     Trigger(const Trigger&) = delete;
     Trigger(Trigger&&) = default;
-    ~Trigger() = default;
+    virtual ~Trigger() = default;
 
     Trigger& operator=(const Trigger&) = delete;
     Trigger& operator=(Trigger&&) = default;

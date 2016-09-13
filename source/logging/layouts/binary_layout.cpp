@@ -51,6 +51,8 @@ void BinaryLayout::LayoutRecord(Record& record)
     buffer += sizeof(uint32_t);
     std::memcpy(buffer, record.buffer.data(), record.buffer.size());
     buffer += record.buffer.size();
+
+	(void)buffer;
 }
 
 } // namespace CppLogging

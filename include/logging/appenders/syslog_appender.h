@@ -26,7 +26,7 @@ public:
     SyslogAppender();
     SyslogAppender(const SyslogAppender&) = delete;
     SyslogAppender(SyslogAppender&&) = default;
-    ~SyslogAppender();
+    virtual ~SyslogAppender();
 
     SyslogAppender& operator=(const SyslogAppender&) = delete;
     SyslogAppender& operator=(SyslogAppender&&) = default;

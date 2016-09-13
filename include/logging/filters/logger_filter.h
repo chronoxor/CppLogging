@@ -32,7 +32,7 @@ public:
     explicit LoggerFilter(const std::regex& pattern) : _pattern(pattern) {}
     LoggerFilter(const LoggerFilter&) = delete;
     LoggerFilter(LoggerFilter&&) = default;
-    ~LoggerFilter() = default;
+    virtual ~LoggerFilter() = default;
 
     LoggerFilter& operator=(const LoggerFilter&) = delete;
     LoggerFilter& operator=(LoggerFilter&&) = default;

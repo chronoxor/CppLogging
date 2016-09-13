@@ -54,7 +54,7 @@ public:
     explicit TextLayout(const std::string& pattern = "{UtcDateTime} [{Thread}] {Level} {Logger} - {Message}{EndLine}");
     TextLayout(const TextLayout&) = delete;
     TextLayout(TextLayout&& layout);
-    ~TextLayout();
+    virtual ~TextLayout();
 
     TextLayout& operator=(const TextLayout&) = delete;
     TextLayout& operator=(TextLayout&& layout);

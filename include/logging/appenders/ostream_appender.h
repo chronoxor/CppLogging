@@ -32,7 +32,7 @@ public:
     explicit OstreamAppender(std::ostream& stream) : _ostream(stream) {}
     OstreamAppender(const OstreamAppender&) = delete;
     OstreamAppender(OstreamAppender&&) = default;
-    ~OstreamAppender() = default;
+    virtual ~OstreamAppender() = default;
 
     OstreamAppender& operator=(const OstreamAppender&) = delete;
     OstreamAppender& operator=(OstreamAppender&&) = default;

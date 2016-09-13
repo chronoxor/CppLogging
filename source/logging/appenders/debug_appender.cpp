@@ -8,12 +8,10 @@
 
 #include "logging/appenders/debug_appender.h"
 
-#include "string/encoding.h"
-
-#include <cstdio>
-
 #if defined(_WIN32) || defined(_WIN64)
 #include <windows.h>
+#else
+#include <cstdio>
 #endif
 
 namespace CppLogging {

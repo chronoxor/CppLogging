@@ -20,8 +20,6 @@ namespace CppLogging {
     In case of any IO error this appender will lost the logging record,
     but try to recover from fail in a short interval of 100ms.
 
-    None rolling policy will behave as a simple file appender.
-
     Time-based rolling policy will create a new logging file to write
     into using a special pattern (contains date & time placeholders).
 
@@ -40,14 +38,13 @@ public:
     //! Rolling policy
     enum class RollingPolicy
     {
-        NONE    = 0,    //!< None rolling policy
-        SIZE    = 1,    //!< Size rolling policy
-        YEAR    = 2,    //!< Year rolling policy
-        MONTH   = 3,    //!< Monthly rolling policy
-        DAY     = 4,    //!< Daily rolling policy
-        HOUR    = 5,    //!< Hour rolling policy
-        MINUTE  = 6,    //!< Minute rolling policy
-        SECOND  = 7     //!< Second rolling policy
+        SIZE,   //!< Size rolling policy
+        YEAR,   //!< Year rolling policy
+        MONTH,  //!< Monthly rolling policy
+        DAY,    //!< Daily rolling policy
+        HOUR,   //!< Hour rolling policy
+        MINUTE, //!< Minute rolling policy
+        SECOND, //!< Second rolling policy
     };
 
     //! Initialize the rolling file appender with a time-based policy
@@ -96,7 +93,7 @@ public:
     explicit RollingFileAppender(const CppCommon::Path& path, const std::string& filename, const std::string& extension, size_t size = 104857600, size_t backups = 10, bool archive = false, bool truncate = false, bool auto_flush = false);
     RollingFileAppender(const RollingFileAppender&) = delete;
     RollingFileAppender(RollingFileAppender&&) = default;
-    ~RollingFileAppender() = default;
+    virtual ~RollingFileAppender() = default;
 
     RollingFileAppender& operator=(const RollingFileAppender&) = delete;
     RollingFileAppender& operator=(RollingFileAppender&&) = default;
@@ -104,13 +101,21 @@ public:
     //! Get the rolling file appender pattern
     const std::string& pattern() const noexcept { return _pattern; }
 
+    // Implementation of Appender
+    void AppendRecord(Record& record) override;
+
 private:
     CppCommon::Path _path;
     RollingPolicy _policy;
     std::string _pattern;
+    std::string _filename;
+    std::string _extension;
     size_t _size;
     size_t _backups;
+    size_t _written;
     bool _archive;
+
+    static const std::string ARCHIVE_EXTENSION;
 
     //! Prepare the file for writing
     /*
@@ -118,8 +123,16 @@ private:
         - If the file is opened and ready to write immediately returns true
         - If the last retry was earlier than 100ms immediately returns false
         - If the file is closed try to open it for writing, returns true/false
+
+        \param size - Append size in bytes
     */
-    bool PrepareFile() override;
+    bool PrepareFile(size_t size) override;
+
+    //! Archive the file in a background thread
+    /*
+        \param file - File to archive
+    */
+    void ArchiveFile(const CppCommon::File& file);
 };
 
 } // namespace CppLogging

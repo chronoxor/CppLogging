@@ -26,7 +26,7 @@ public:
     ConsoleAppender() = default;
     ConsoleAppender(const ConsoleAppender&) = delete;
     ConsoleAppender(ConsoleAppender&&) = default;
-    ~ConsoleAppender() = default;
+    virtual ~ConsoleAppender() = default;
 
     ConsoleAppender& operator=(const ConsoleAppender&) = delete;
     ConsoleAppender& operator=(ConsoleAppender&&) = default;

@@ -36,7 +36,7 @@ public:
     explicit FileAppender(const CppCommon::File& file, bool truncate = false, bool auto_flush = false);
     FileAppender(const FileAppender&) = delete;
     FileAppender(FileAppender&&) = default;
-    ~FileAppender() = default;
+    virtual ~FileAppender() = default;
 
     FileAppender& operator=(const FileAppender&) = delete;
     FileAppender& operator=(FileAppender&&) = default;
@@ -45,7 +45,7 @@ public:
     void AppendRecord(Record& record) override;
     void Flush() override;
 
-private:
+protected:
     CppCommon::Timestamp _retry;
     CppCommon::File _file;
     bool _truncate;
@@ -56,8 +56,10 @@ private:
         - If the file is opened and ready to write immediately returns true
         - If the last retry was earlier than 100ms immediately returns false
         - If the file is closed try to open it for writing, returns true/false
+
+        \param size - Append size in bytes
     */
-    virtual bool PrepareFile();
+    virtual bool PrepareFile(size_t size);
 };
 
 } // namespace CppLogging

@@ -30,7 +30,7 @@ public:
     explicit MemoryAppender(size_t capacity = 0) : _buffer(capacity) {}
     MemoryAppender(const MemoryAppender&) = delete;
     MemoryAppender(MemoryAppender&&) = default;
-    ~MemoryAppender() = default;
+    virtual ~MemoryAppender() = default;
 
     MemoryAppender& operator=(const MemoryAppender&) = delete;
     MemoryAppender& operator=(MemoryAppender&&) = default;

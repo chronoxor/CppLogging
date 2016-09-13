@@ -12,7 +12,13 @@ namespace CppLogging {
 
 Processor::~Processor()
 {
-    Flush();
+	// Flush all appenders
+	for (auto& appender : _appenders)
+		appender->Flush();
+
+	// Flush all sub processors
+	for (auto& processor : _processors)
+		processor->Flush();
 }
 
 bool Processor::ProcessRecord(Record& record)

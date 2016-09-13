@@ -8,8 +8,6 @@
 
 #include "logging/appenders/memory_appender.h"
 
-#include <cstring>
-
 namespace CppLogging {
 
 void MemoryAppender::AppendRecord(Record& record)

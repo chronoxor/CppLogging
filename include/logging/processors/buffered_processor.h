@@ -37,7 +37,7 @@ public:
     { _buffer.reserve(capacity); }
     BufferedProcessor(const BufferedProcessor&) = delete;
     BufferedProcessor(BufferedProcessor&&) = default;
-    ~BufferedProcessor() = default;
+    virtual ~BufferedProcessor() = default;
 
     BufferedProcessor& operator=(const BufferedProcessor&) = delete;
     BufferedProcessor& operator=(BufferedProcessor&&) = default;
