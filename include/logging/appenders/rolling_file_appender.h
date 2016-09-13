@@ -9,7 +9,11 @@
 #ifndef CPPLOGGING_APPENDERS_ROLLING_FILE_APPENDER_H
 #define CPPLOGGING_APPENDERS_ROLLING_FILE_APPENDER_H
 
-#include "logging/appenders/file_appender.h"
+#include "logging/appender.h"
+
+#include "filesystem/filesystem.h"
+
+#include <memory>
 
 namespace CppLogging {
 
@@ -32,19 +36,21 @@ namespace CppLogging {
 
     Not thread-safe.
 */
-class RollingFileAppender : public FileAppender
+class RollingFileAppender : public Appender
 {
+    friend class SizePolicyImpl;
+    friend class TimePolicyImpl;
+
 public:
-    //! Rolling policy
-    enum class RollingPolicy
+    //! Time rolling policy
+    enum class TimeRollingPolicy
     {
-        SIZE,   //!< Size rolling policy
-        YEAR,   //!< Year rolling policy
-        MONTH,  //!< Monthly rolling policy
-        DAY,    //!< Daily rolling policy
-        HOUR,   //!< Hour rolling policy
-        MINUTE, //!< Minute rolling policy
-        SECOND, //!< Second rolling policy
+        YEAR,       //!< Year rolling policy
+        MONTH,      //!< Monthly rolling policy
+        DAY,        //!< Daily rolling policy
+        HOUR,       //!< Hour rolling policy
+        MINUTE,     //!< Minute rolling policy
+        SECOND      //!< Second rolling policy
     };
 
     //! Initialize the rolling file appender with a time-based policy
@@ -63,13 +69,13 @@ public:
          - {UtcTimezone}/{LocalTimezone} - converted to the UTC/local timezone suffix (e.g. "+01-00"/"Z")
 
          \param path - Logging path
-         \param pattern - Logging pattern
-         \param policy - Time rolling policy
+         \param policy - Time-based rolling policy (default is TimeRollingPolicy::DAY)
+         \param pattern - Logging pattern (default is "{UtcDateTime}.log")
          \param archive - Archivation flag (default is false)
          \param truncate - Truncate flag (default is false)
          \param auto_flush - Auto-flush flag (default is false)
     */
-    explicit RollingFileAppender(const CppCommon::Path& path, const std::string& pattern, RollingPolicy policy, bool archive = false, bool truncate = false, bool auto_flush = false);
+    explicit RollingFileAppender(const CppCommon::Path& path, TimeRollingPolicy policy = TimeRollingPolicy::DAY, const std::string& pattern = "{UtcDateTime}.log", bool archive = false, bool truncate = false, bool auto_flush = false);
     //! Initialize the rolling file appender with a size-based policy
     /*!
          Size-based policy for 5 backups works in a following way:
@@ -83,56 +89,28 @@ public:
 
          \param path - Logging path
          \param filename - Logging filename
-         \param extension - Logging extension
+         \param extension - Logging extension (default is ".log")
          \param size - Rolling size limit in bytes (default is 100 megabytes)
          \param backups - Rolling backups count (default is 10)
          \param archive - Archivation flag (default is false)
          \param truncate - Truncate flag (default is false)
          \param auto_flush - Auto-flush flag (default is false)
     */
-    explicit RollingFileAppender(const CppCommon::Path& path, const std::string& filename, const std::string& extension, size_t size = 104857600, size_t backups = 10, bool archive = false, bool truncate = false, bool auto_flush = false);
+    explicit RollingFileAppender(const CppCommon::Path& path, const std::string& filename, const std::string& extension = ".log", size_t size = 104857600, size_t backups = 10, bool archive = false, bool truncate = false, bool auto_flush = false);
     RollingFileAppender(const RollingFileAppender&) = delete;
-    RollingFileAppender(RollingFileAppender&&) = default;
-    virtual ~RollingFileAppender() = default;
+    RollingFileAppender(RollingFileAppender&& appender);
+    virtual ~RollingFileAppender();
 
     RollingFileAppender& operator=(const RollingFileAppender&) = delete;
-    RollingFileAppender& operator=(RollingFileAppender&&) = default;
-
-    //! Get the rolling file appender pattern
-    const std::string& pattern() const noexcept { return _pattern; }
+    RollingFileAppender& operator=(RollingFileAppender&& appender);
 
     // Implementation of Appender
     void AppendRecord(Record& record) override;
+    void Flush() override;
 
 private:
-    CppCommon::Path _path;
-    RollingPolicy _policy;
-    std::string _pattern;
-    std::string _filename;
-    std::string _extension;
-    size_t _size;
-    size_t _backups;
-    size_t _written;
-    bool _archive;
-
-    static const std::string ARCHIVE_EXTENSION;
-
-    //! Prepare the file for writing
-    /*
-        - Perform the rolling based on the current rolling strategy
-        - If the file is opened and ready to write immediately returns true
-        - If the last retry was earlier than 100ms immediately returns false
-        - If the file is closed try to open it for writing, returns true/false
-
-        \param size - Append size in bytes
-    */
-    bool PrepareFile(size_t size) override;
-
-    //! Archive the file in a background thread
-    /*
-        \param file - File to archive
-    */
-    void ArchiveFile(const CppCommon::File& file);
+    class Impl;
+    std::unique_ptr<Impl> _pimpl;
 };
 
 } // namespace CppLogging

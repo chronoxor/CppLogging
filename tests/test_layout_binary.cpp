@@ -46,6 +46,8 @@ Record ParseBinaryLayout(const std::vector<uint8_t>& raw)
     record.buffer.insert(record.buffer.begin(), buffer, buffer + buffer_size);
     buffer += buffer_size;
 
+	(void)buffer;
+
     return record;
 }
 

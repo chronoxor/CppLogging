@@ -21,7 +21,7 @@ void FileAppender::AppendRecord(Record& record)
     if (record.raw.empty())
         return;
 
-    if (PrepareFile(record.raw.size() - 1))
+    if (PrepareFile())
     {
         // Try to write logging record content into the opened file
         try
@@ -46,7 +46,7 @@ void FileAppender::AppendRecord(Record& record)
 
 void FileAppender::Flush()
 {
-    if (PrepareFile(0))
+    if (PrepareFile())
     {
         // Try to flush the opened file
         try
@@ -65,7 +65,7 @@ void FileAppender::Flush()
     }
 }
 
-bool FileAppender::PrepareFile(size_t size)
+bool FileAppender::PrepareFile()
 {
     try
     {

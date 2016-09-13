@@ -11,7 +11,6 @@
 #include "system/environment.h"
 #include "time/timezone.h"
 
-#include <cstring>
 #include <vector>
 
 namespace CppLogging {
@@ -649,7 +648,7 @@ private:
             AppendPattern("{" + placeholder + "}");
     }
 
-    void ConvertNumber(std::string& output, int number, int digits)
+    static void ConvertNumber(std::string& output, int number, int digits)
     {
         // Prepare the output string
         output.clear();
@@ -671,7 +670,7 @@ private:
         output[index] = '0' + (char)number;
     }
 
-    void ConvertThread(std::string& output, uint64_t thread)
+    static void ConvertThread(std::string& output, uint64_t thread)
     {
         const char* digits = "0123456789ABCDEF";
 
@@ -693,7 +692,7 @@ private:
         output[1] = 'x';
     }
 
-    void ConvertTimezone(std::string& output, int64_t offset)
+    static void ConvertTimezone(std::string& output, int64_t offset)
     {
         // Prepare the output string
         output.clear();
@@ -723,21 +722,20 @@ private:
         int64_t hours = offset / 60;
         if (hours < 9)
         {
-            output[index--] = '0' + (char)hours;
-            --index;
+            output[index] = '0' + (char)hours;
         }
         else
         {
             output[index--] = '0' + (char)(hours % 10);
             hours /= 10;
-            output[index--] = '0' + (char)hours;
+            output[index] = '0' + (char)hours;
         }
 
         // Output minus prefix
         output[0] = (offset < 0) ? '-' : '+';
     }
 
-    void ConvertLevel(std::string& output, Level level)
+    static void ConvertLevel(std::string& output, Level level)
     {
         switch (level)
         {
