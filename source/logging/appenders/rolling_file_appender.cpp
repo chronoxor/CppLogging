@@ -30,57 +30,8 @@ public:
     {
     }
 
-    void AppendRecord(Record& record)
-    {
-        // Skip logging records without layout
-        if (record.raw.empty())
-            return;
-
-        size_t size = record.raw.size() - 1;
-        if (PrepareFile(size))
-        {
-            // Try to write logging record content into the opened file
-            try
-            {
-                _file.Write(record.raw.data(), size);
-                _written += size;
-
-                // Perform auto-flush if enabled
-                if (_auto_flush)
-                    _file.Flush();
-            }
-            catch (CppCommon::FileSystemException&)
-            {
-                // Try to close the opened file in case of any IO error
-                try
-                {
-                    _file.Close();
-                }
-                catch (CppCommon::FileSystemException&) {}
-            }
-        }
-    }
-
-    void Flush()
-    {
-        if (PrepareFile(0))
-        {
-            // Try to flush the opened file
-            try
-            {
-                _file.Flush();
-            }
-            catch (CppCommon::FileSystemException&)
-            {
-                // Try to close the opened file in case of any IO error
-                try
-                {
-                    _file.Close();
-                }
-                catch (CppCommon::FileSystemException&) {}
-            }
-        }
-    }
+    virtual void AppendRecord(Record& record) = 0;
+    virtual void Flush() = 0;
 
 protected:
     CppCommon::Path _path;
@@ -91,8 +42,6 @@ protected:
     CppCommon::Timestamp _retry;
     CppCommon::File _file;
     size_t _written;
-
-    virtual bool PrepareFile(size_t size) = 0;
 
     void ArchiveFile(const CppCommon::File& file)
     {
@@ -212,6 +161,59 @@ public:
     {
     }
 
+    void AppendRecord(Record& record) override
+    {
+        // Skip logging records without layout
+        if (record.raw.empty())
+            return;
+
+        size_t size = record.raw.size() - 1;
+
+        if (PrepareFile(record.timestamp))
+        {
+            // Try to write logging record content into the opened file
+            try
+            {
+                _file.Write(record.raw.data(), size);
+                _written += size;
+
+                // Perform auto-flush if enabled
+                if (_auto_flush)
+                    _file.Flush();
+            }
+            catch (CppCommon::FileSystemException&)
+            {
+                // Try to close the opened file in case of any IO error
+                try
+                {
+                    _file.Close();
+                }
+                catch (CppCommon::FileSystemException&) {}
+            }
+        }
+    }
+
+    void Flush()
+    {
+        if (PrepareFile(CppCommon::Timestamp::nano()))
+        {
+            // Try to flush the opened file
+            try
+            {
+                _file.Flush();
+            }
+            catch (CppCommon::FileSystemException&)
+            {
+                // Try to close the opened file in case of any IO error
+                try
+                {
+                    _file.Close();
+                }
+                catch (CppCommon::FileSystemException&) {}
+            }
+        }
+    }
+
 private:
     TimeRollingPolicy _policy;
     std::string _pattern;
@@ -219,17 +221,15 @@ private:
     CppCommon::Timestamp _rollstamp;
     CppCommon::Timespan _rolldelay;
 
-    bool PrepareFile(size_t size) override
+    bool PrepareFile(uint64_t timestamp)
     {
         try
         {
-            CppCommon::Timestamp timestamp(CppCommon::Timestamp::nano());
-
             // 1. Check if the file is already opened for writing
             if (_file.IsFileWriteOpened())
             {
                 // 1.1. Check the rolling timestamp
-                if ((_rollstamp + _rolldelay) < timestamp)
+                if (timestamp < (_rollstamp + _rolldelay))
                     return true;
 
                 // 1.2. Flush & close the file
@@ -250,7 +250,7 @@ private:
                 _file.Close();
 
             // 4. Open the file for writing
-            _file = PrepareFilePath(timestamp);
+            _file = PrepareFilePath(CppCommon::Timestamp(timestamp));
             _file.OpenOrCreate(false, true, _truncate);
 
             // 5. Reset the written bytes counter
@@ -736,13 +736,66 @@ public:
     {
     }
 
+    void AppendRecord(Record& record)
+    {
+        // Skip logging records without layout
+        if (record.raw.empty())
+            return;
+
+        size_t size = record.raw.size() - 1;
+
+        if (PrepareFile(size))
+        {
+            // Try to write logging record content into the opened file
+            try
+            {
+                _file.Write(record.raw.data(), size);
+                _written += size;
+
+                // Perform auto-flush if enabled
+                if (_auto_flush)
+                    _file.Flush();
+            }
+            catch (CppCommon::FileSystemException&)
+            {
+                // Try to close the opened file in case of any IO error
+                try
+                {
+                    _file.Close();
+                }
+                catch (CppCommon::FileSystemException&) {}
+            }
+        }
+    }
+
+    void Flush()
+    {
+        if (PrepareFile(0))
+        {
+            // Try to flush the opened file
+            try
+            {
+                _file.Flush();
+            }
+            catch (CppCommon::FileSystemException&)
+            {
+                // Try to close the opened file in case of any IO error
+                try
+                {
+                    _file.Close();
+                }
+                catch (CppCommon::FileSystemException&) {}
+            }
+        }
+    }
+
 private:
     std::string _filename;
     std::string _extension;
     size_t _size;
     size_t _backups;
 
-    bool PrepareFile(size_t size) override
+    bool PrepareFile(size_t size)
     {
         try
         {

@@ -48,6 +48,7 @@ TEST_CASE("Rolling file appender with time-based policy", "[CppLogging]")
 
         for (int i = 0; i < 3; ++i)
         {
+			record.timestamp = CppCommon::Timestamp::nano();
             appender.AppendRecord(record);
             appender.Flush();
 
@@ -56,15 +57,7 @@ TEST_CASE("Rolling file appender with time-based policy", "[CppLogging]")
         }
     }
 
-    REQUIRE(File("test.log").IsFileExists());
-    REQUIRE(File("test.log").size() == 10);
-    REQUIRE(File("test.1.log").IsFileExists());
-    REQUIRE(File("test.1.log").size() == 10);
-    REQUIRE(File("test.2.log").IsFileExists());
-    REQUIRE(File("test.2.log").size() == 10);
-    REQUIRE(File("test.3.log").IsFileExists());
-    REQUIRE(File("test.3.log").size() == 10);
-    REQUIRE(!File("test.4.log").IsFileExists());
+    REQUIRE(Directory(".").GetFiles(".*log").size() == 3);
 
 	File::RemoveIf(".", ".*log");
 }
