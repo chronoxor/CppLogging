@@ -12,7 +12,7 @@ using namespace CppLogging;
 TEST_CASE("Rolling file appender with size policy", "[CppLogging]")
 {
     {
-        RollingFileAppender appender(".", "test", ".log", 10, 3);
+        RollingFileAppender appender(".", "test", "log", 10, 3);
 
         Record record;
         record.raw.resize(11);

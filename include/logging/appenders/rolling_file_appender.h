@@ -89,14 +89,14 @@ public:
 
          \param path - Logging path
          \param filename - Logging filename
-         \param extension - Logging extension (default is ".log")
+         \param extension - Logging extension
          \param size - Rolling size limit in bytes (default is 100 megabytes)
          \param backups - Rolling backups count (default is 10)
          \param archive - Archivation flag (default is false)
          \param truncate - Truncate flag (default is false)
          \param auto_flush - Auto-flush flag (default is false)
     */
-    explicit RollingFileAppender(const CppCommon::Path& path, const std::string& filename, const std::string& extension = ".log", size_t size = 104857600, size_t backups = 10, bool archive = false, bool truncate = false, bool auto_flush = false);
+    explicit RollingFileAppender(const CppCommon::Path& path, const std::string& filename, const std::string& extension, size_t size = 104857600, size_t backups = 10, bool archive = false, bool truncate = false, bool auto_flush = false);
     RollingFileAppender(const RollingFileAppender&) = delete;
     RollingFileAppender(RollingFileAppender&& appender);
     virtual ~RollingFileAppender();
