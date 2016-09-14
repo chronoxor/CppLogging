@@ -85,7 +85,8 @@ bool FileAppender::PrepareFile()
         _file.OpenOrCreate(false, true, _truncate);
 
         // 5. Reset the the retry timestamp
-        _retry = CppCommon::Timestamp::nano();
+        _retry = 0;
+
         return true;
     }
     catch (CppCommon::FileSystemException&)

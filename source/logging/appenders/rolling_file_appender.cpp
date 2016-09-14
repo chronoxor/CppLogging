@@ -210,7 +210,8 @@ private:
             _written = 0;
 
             // 6. Reset the the retry timestamp
-            _retry = CppCommon::Timestamp::nano();
+            _retry = 0;
+
             return true;
         }
         catch (CppCommon::FileSystemException&)
