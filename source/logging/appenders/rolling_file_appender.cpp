@@ -138,7 +138,7 @@ class TimePolicyImpl : public RollingFileAppender::Impl
     };
 
 public:
-    TimePolicyImpl(const CppCommon::Path& path, RollingFileAppender::TimeRollingPolicy policy, const std::string& pattern, bool archive, bool truncate, bool auto_flush)
+    TimePolicyImpl(const CppCommon::Path& path, TimeRollingPolicy policy, const std::string& pattern, bool archive, bool truncate, bool auto_flush)
         : RollingFileAppender::Impl(path, archive, truncate, auto_flush),
           _policy(policy), _pattern(pattern), _rollstamp(0), _rolldelay(0)
     {
@@ -193,13 +193,13 @@ public:
         // Calculate rolling delay
         switch (policy)
         {
-            case RollingFileAppender::TimeRollingPolicy::SECOND:
+            case TimeRollingPolicy::SECOND:
                 _rolldelay = 1000000000ull;
                 break;
-			case RollingFileAppender::TimeRollingPolicy::MINUTE:
+            case TimeRollingPolicy::MINUTE:
                 _rolldelay = 60 * 1000000000ull;
                 break;
-            case RollingFileAppender::TimeRollingPolicy::HOUR:
+            case TimeRollingPolicy::HOUR:
                 _rolldelay = 60 * 60 * 1000000000ull;
                 break;
             default:
@@ -213,11 +213,11 @@ public:
     }
 
 private:
-    RollingFileAppender::TimeRollingPolicy _policy;
+    TimeRollingPolicy _policy;
     std::string _pattern;
     std::vector<Placeholder> _placeholders;
     CppCommon::Timestamp _rollstamp;
-	CppCommon::Timespan _rolldelay;
+    CppCommon::Timespan _rolldelay;
 
     bool PrepareFile(size_t size) override
     {
@@ -280,9 +280,9 @@ private:
         thread_local bool cache_local_required = false;
         thread_local bool cache_timezone_required = false;
         thread_local uint64_t cache_seconds = 0;
-        thread_local std::string cache_utc_datetime_str = "1970-01-01T01:01:01.000Z";
+        thread_local std::string cache_utc_datetime_str = "1970-01-01T01-01-01Z";
         thread_local std::string cache_utc_date_str = "1970-01-01";
-        thread_local std::string cache_utc_time_str = "01:01:01.000Z";
+        thread_local std::string cache_utc_time_str = "01-01-01Z";
         thread_local std::string cache_utc_year_str = "1970";
         thread_local std::string cache_utc_month_str = "01";
         thread_local std::string cache_utc_day_str = "01";
@@ -290,16 +290,16 @@ private:
         thread_local std::string cache_utc_minute_str = "00";
         thread_local std::string cache_utc_second_str = "00";
         thread_local std::string cache_utc_timezone_str = "Z";
-        thread_local std::string cache_local_datetime_str = "1970-01-01T01:01:01.000+00:00";
+        thread_local std::string cache_local_datetime_str = "1970-01-01T01-01-01+00-00";
         thread_local std::string cache_local_date_str = "1970-01-01";
-        thread_local std::string cache_local_time_str = "01:01:01.000+00:00";
+        thread_local std::string cache_local_time_str = "01-01-01+00-00";
         thread_local std::string cache_local_year_str = "1970";
         thread_local std::string cache_local_month_str = "01";
         thread_local std::string cache_local_day_str = "01";
         thread_local std::string cache_local_hour_str = "00";
         thread_local std::string cache_local_minute_str = "00";
         thread_local std::string cache_local_second_str = "00";
-        thread_local std::string cache_local_timezone_str = "+00:00";
+        thread_local std::string cache_local_timezone_str = "+00-00";
         bool cache_update_datetime = false;
 
         // Update time cache
@@ -357,9 +357,9 @@ private:
             cache_utc_date_str += cache_utc_day_str;
 
             cache_utc_time_str = cache_utc_hour_str;
-            cache_utc_time_str += ':';
+            cache_utc_time_str += '-';
             cache_utc_time_str += cache_utc_minute_str;
-            cache_utc_time_str += ':';
+            cache_utc_time_str += '-';
             cache_utc_time_str += cache_utc_second_str;
             cache_utc_time_str += cache_utc_timezone_str;
 
@@ -374,9 +374,9 @@ private:
             cache_local_date_str += cache_local_day_str;
 
             cache_local_time_str = cache_local_hour_str;
-            cache_local_time_str += ':';
+            cache_local_time_str += '-';
             cache_local_time_str += cache_local_minute_str;
-            cache_local_time_str += ':';
+            cache_local_time_str += '-';
             cache_local_time_str += cache_local_second_str;
             cache_local_time_str += cache_local_timezone_str;
 
@@ -695,8 +695,8 @@ private:
             output[index--] = '0' + (char)minutes;
         }
 
-        // Output ':' separator
-        output[index--] = ':';
+        // Output '-' separator
+        output[index--] = '-';
 
         // Output offset hours
         int64_t hours = offset / 60;

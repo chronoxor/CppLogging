@@ -17,6 +17,17 @@
 
 namespace CppLogging {
 
+//! Time rolling policy
+enum class TimeRollingPolicy
+{
+    YEAR,       //!< Year rolling policy
+    MONTH,      //!< Monthly rolling policy
+    DAY,        //!< Daily rolling policy
+    HOUR,       //!< Hour rolling policy
+    MINUTE,     //!< Minute rolling policy
+    SECOND      //!< Second rolling policy
+};
+
 //! Rolling file appender
 /*!
     Rolling file appender writes the given logging record into the file
@@ -42,17 +53,6 @@ class RollingFileAppender : public Appender
     friend class TimePolicyImpl;
 
 public:
-    //! Time rolling policy
-    enum class TimeRollingPolicy
-    {
-        YEAR,       //!< Year rolling policy
-        MONTH,      //!< Monthly rolling policy
-        DAY,        //!< Daily rolling policy
-        HOUR,       //!< Hour rolling policy
-        MINUTE,     //!< Minute rolling policy
-        SECOND      //!< Second rolling policy
-    };
-
     //! Initialize the rolling file appender with a time-based policy
     /*!
          Time-based policy composes logging filename from the given pattern
