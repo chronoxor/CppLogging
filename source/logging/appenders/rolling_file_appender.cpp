@@ -140,7 +140,7 @@ class TimePolicyImpl : public RollingFileAppender::Impl
 public:
     TimePolicyImpl(const CppCommon::Path& path, RollingFileAppender::TimeRollingPolicy policy, const std::string& pattern, bool archive, bool truncate, bool auto_flush)
         : RollingFileAppender::Impl(path, archive, truncate, auto_flush),
-          _policy(policy), _pattern(pattern)
+          _policy(policy), _pattern(pattern), _rollstamp(0), _rolldelay(0)
     {
         std::string placeholder;
         std::string subpattern;
@@ -189,6 +189,23 @@ public:
 
         // Addend end of string character
         AppendPattern(std::string(1, '\0'));
+
+        // Calculate rolling delay
+        switch (policy)
+        {
+            case RollingFileAppender::TimeRollingPolicy::SECOND:
+                _rolldelay = 1000000000ull;
+                break;
+			case RollingFileAppender::TimeRollingPolicy::MINUTE:
+                _rolldelay = 60 * 1000000000ull;
+                break;
+            case RollingFileAppender::TimeRollingPolicy::HOUR:
+                _rolldelay = 60 * 60 * 1000000000ull;
+                break;
+            default:
+                _rolldelay = 24 * 60 * 60 * 1000000000ull;
+                break;
+        }
     }
 
     virtual ~TimePolicyImpl()
@@ -199,50 +216,29 @@ private:
     RollingFileAppender::TimeRollingPolicy _policy;
     std::string _pattern;
     std::vector<Placeholder> _placeholders;
+    CppCommon::Timestamp _rollstamp;
+	CppCommon::Timespan _rolldelay;
 
     bool PrepareFile(size_t size) override
     {
         try
         {
+            CppCommon::Timestamp timestamp(CppCommon::Timestamp::nano());
+
             // 1. Check if the file is already opened for writing
             if (_file.IsFileWriteOpened())
             {
-                // 1.1. Check file size limit
-                if ((_written + size) <= _size)
+                // 1.1. Check the rolling timestamp
+                if ((_rollstamp + _rolldelay) < timestamp)
                     return true;
 
                 // 1.2. Flush & close the file
                 _file.Flush();
                 _file.Close();
 
-                // 1.3. Delete the last backup and archive if exists
-                CppCommon::File backup = PrepareFilePath(_backups);
-                if (backup.IsFileExists())
-                    CppCommon::File::Remove(backup);
-                backup += "." + ARCHIVE_EXTENSION;
-                if (backup.IsFileExists())
-                    CppCommon::File::Remove(backup);
-
-                // 1.4. Roll backup files
-                for (size_t i = _backups - 1; i > 0; --i)
-                {
-                    CppCommon::File src = PrepareFilePath(i);
-                    CppCommon::File dst = PrepareFilePath(i + 1);
-                    if (src.IsFileExists())
-                        CppCommon::File::Rename(src, dst);
-                    src += "." + ARCHIVE_EXTENSION;
-                    dst += "." + ARCHIVE_EXTENSION;
-                    if (src.IsFileExists())
-                        CppCommon::File::Rename(src, dst);
-                }
-
-                // 1.5. Backup the current file
-                backup = PrepareFilePath(1);
-                CppCommon::File::Rename(_file, backup);
-
-                // 1.6. Archive the current backup
+                // 1.3. Archive the file
                 if (_archive)
-                    ArchiveFile(backup);
+                    ArchiveFile(_file);
             }
 
             // 2. Check retry timestamp if 100ms elapsed after the last attempt
@@ -254,14 +250,17 @@ private:
                 _file.Close();
 
             // 4. Open the file for writing
-            _file = PrepareFilePath();
+            _file = PrepareFilePath(timestamp);
             _file.OpenOrCreate(false, true, _truncate);
 
             // 5. Reset the written bytes counter
             _written = 0;
 
-            // 6. Reset the the retry timestamp
+            // 6. Reset the retry timestamp
             _retry = 0;
+
+            // 7. Reset the rolling timestamp
+            _rollstamp = CppCommon::Timestamp::nano();
 
             return true;
         }
@@ -803,7 +802,7 @@ private:
             // 5. Reset the written bytes counter
             _written = 0;
 
-            // 6. Reset the the retry timestamp
+            // 6. Reset the retry timestamp
             _retry = 0;
 
             return true;
