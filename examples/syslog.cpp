@@ -9,7 +9,7 @@
 #include "logging/config.h"
 #include "logging/logger.h"
 
-int main(int argc, char** argv)
+void ConfigureLogger()
 {
     // Create default logging sink processor
     auto sink = std::make_shared<CppLogging::Processor>();
@@ -18,11 +18,17 @@ int main(int argc, char** argv)
     // Add syslog appender
     sink->appenders().push_back(std::make_shared<CppLogging::SyslogAppender>());
 
-    // Configure test logger
-    CppLogging::Config::ConfigLogger("test", sink);
+    // Configure example logger
+    CppLogging::Config::ConfigLogger("example", sink);
+}
 
-    // Create test logger
-    CppLogging::Logger logger("test");
+int main(int argc, char** argv)
+{
+    // Configure logger
+    ConfigureLogger();
+
+    // Create example logger
+    CppLogging::Logger logger("example");
 
     // Log some messages with different level
     logger.Debug("Debug message");

@@ -18,4 +18,12 @@ bool SyncProcessor::ProcessRecord(Record& record)
     return Processor::ProcessRecord(record);
 }
 
+void SyncProcessor::Flush()
+{
+    CppCommon::Locker<CppCommon::CriticalSection> locker(_lock);
+
+    // Flush under the critical section lock
+    return Processor::Flush();
+}
+
 } // namespace CppLogging

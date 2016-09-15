@@ -36,6 +36,7 @@ public:
 
     // Implementation of Processor
     bool ProcessRecord(Record& record) override;
+    void Flush() override;
 
 private:
     CppCommon::CriticalSection _lock;

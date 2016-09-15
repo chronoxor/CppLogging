@@ -259,8 +259,8 @@ private:
             // 6. Reset the retry timestamp
             _retry = 0;
 
-            // 7. Reset the rolling timestamp
-            _rollstamp = CppCommon::Timestamp::nano();
+            // 7. Reset the rolling timestamp with a second persicion
+            _rollstamp = (CppCommon::Timestamp::nano() / 1000000000) * 1000000000;
 
             return true;
         }

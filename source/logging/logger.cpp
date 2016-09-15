@@ -31,11 +31,13 @@ Logger::~Logger()
 
 void Logger::Log(Level level, const char* message)
 {
+    thread_local uint64_t thread = CppCommon::Thread::CurrentThreadId();
     // Thread local instance of the logging record
     thread_local Record record;
 
     // Fill necessary fields of the logging record
     record.timestamp = CppCommon::Timestamp::utc();
+    record.thread = thread;
     record.level = level;
     record.logger = _name;
     record.message = message;
