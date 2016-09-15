@@ -48,16 +48,16 @@ TEST_CASE("Rolling file appender with time-based policy", "[CppLogging]")
 
         for (int i = 0; i < 3; ++i)
         {
-			record.timestamp = CppCommon::Timestamp::nano();
+            record.timestamp = CppCommon::Timestamp::utc();
             appender.AppendRecord(record);
             appender.Flush();
 
-			// Sleep for one second
-			CppCommon::Thread::Sleep(1000);
+            // Sleep for one second
+            CppCommon::Thread::Sleep(1000);
         }
     }
 
     REQUIRE(Directory(".").GetFiles(".*log").size() == 3);
 
-	File::RemoveIf(".", ".*log");
+    File::RemoveIf(".", ".*log");
 }

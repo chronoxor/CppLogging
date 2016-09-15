@@ -195,7 +195,7 @@ public:
 
     void Flush()
     {
-        if (PrepareFile(CppCommon::Timestamp::nano()))
+        if (PrepareFile(CppCommon::Timestamp::utc()))
         {
             // Try to flush the opened file
             try
@@ -260,7 +260,7 @@ private:
             _retry = 0;
 
             // 7. Reset the rolling timestamp with a second persicion
-            _rollstamp = (CppCommon::Timestamp::nano() / 1000000000) * 1000000000;
+            _rollstamp = (CppCommon::Timestamp::utc() / 1000000000) * 1000000000;
 
             return true;
         }
