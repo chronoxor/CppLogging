@@ -1,9 +1,6 @@
 cmake_minimum_required(VERSION 3.2)
 project(cpplogging)
 
-# Modules
-add_subdirectory("modules")
-
 # Doxygen
 find_package(Doxygen)
 if(DOXYGEN_FOUND)
@@ -54,6 +51,9 @@ include_directories("modules/catch/single_include")
 include_directories("modules/cpp-optparse")
 include_directories("modules/CppBenchmark/include")
 include_directories("modules/CppCommon/include")
+
+# Modules
+add_subdirectory("modules")
 
 # Library
 file(GLOB_RECURSE SOURCE_FILES "source/*.cpp")
