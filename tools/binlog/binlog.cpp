@@ -1,5 +1,5 @@
 /*!
-    \file binlogread.cpp
+    \file binlog.cpp
     \brief Binary logs reader definition
     \author Ivan Shynkarenka
     \date 16.09.2015
