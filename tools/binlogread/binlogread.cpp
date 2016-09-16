@@ -12,6 +12,7 @@
 #include "logging/record.h"
 #include "logging/layouts/text_layout.h"
 
+#include <cstring>
 #include <iostream>
 #include <vector>
 
