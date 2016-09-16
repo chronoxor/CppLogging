@@ -85,6 +85,17 @@ if(NOT CPPLOGGING_MODULE)
     list(APPEND INSTALL_TARGETS_PDB ${BENCHMARK_TARGET})
   endforeach()
 
+  # Tools
+  file(GLOB TOOLS_DIRS RELATIVE "${PROJECT_SOURCE_DIR}/tools" "tools/*")
+  foreach(TOOLS_DIR ${TOOLS_DIRS})
+    file(GLOB_RECURSE TOOLS_FILES "tools/${TOOLS_DIR}/*.cpp")
+    set(TOOL_TARGET "${TOOLS_DIR}")
+    add_executable(${TOOL_TARGET} ${TOOLS_FILES})
+    target_link_libraries(${TOOL_TARGET} cpplogging cppcommon ${SYSTEM})
+    list(APPEND INSTALL_TARGETS ${TOOL_TARGET})
+    list(APPEND INSTALL_TARGETS_PDB ${TOOL_TARGET})
+  endforeach()
+
   # Tests
   file(GLOB TESTS_SOURCE_FILES "tests/*.cpp")
   add_executable(cpplogging-tests ${CATCH_HEADER} ${TESTS_SOURCE_FILES})
