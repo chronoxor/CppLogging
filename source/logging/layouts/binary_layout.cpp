@@ -19,7 +19,7 @@ void BinaryLayout::LayoutRecord(Record& record)
     uint32_t size = (uint32_t)(sizeof(uint64_t) + sizeof(uint64_t) + sizeof(Level) + sizeof(uint8_t) + record.logger.size() + sizeof(uint16_t) + record.message.size() + sizeof(uint32_t) + record.buffer.size());
 
     // Resize the raw buffer to the required size
-    record.raw.resize(sizeof(uint32_t) + size);
+    record.raw.resize(sizeof(uint32_t) + size + 1);
 
     // Get the raw buffer start position
     uint8_t* buffer = record.raw.data();
@@ -52,7 +52,8 @@ void BinaryLayout::LayoutRecord(Record& record)
     std::memcpy(buffer, record.buffer.data(), record.buffer.size());
     buffer += record.buffer.size();
 
-	(void)buffer;
+    // Write the last zero byte
+    *buffer = 0;
 }
 
 } // namespace CppLogging
