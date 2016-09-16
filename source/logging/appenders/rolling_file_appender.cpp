@@ -9,6 +9,7 @@
 #include "logging/appenders/rolling_file_appender.h"
 
 #include "errors/exceptions.h"
+#include "string/format.h"
 #include "time/timezone.h"
 
 #include <cassert>
@@ -870,12 +871,12 @@ private:
 
     CppCommon::Path PrepareFilePath()
     {
-        return CppCommon::Path(_path / (_filename + "." + _extension));
+        return CppCommon::Path(_path / "{}.{}"_format(_filename, _extension));
     }
 
     CppCommon::Path PrepareFilePath(size_t backup)
     {
-        return CppCommon::Path(_path / (_filename + "." + std::to_string(backup) + "." + _extension));
+        return CppCommon::Path(_path / "{}.{}.{}"_format(_filename, backup, _extension));
     }
 };
 
