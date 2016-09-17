@@ -281,9 +281,9 @@ private:
         thread_local bool cache_local_required = false;
         thread_local bool cache_timezone_required = false;
         thread_local uint64_t cache_seconds = 0;
-        thread_local std::string cache_utc_datetime_str = "1970-01-01T01-01-01Z";
+        thread_local std::string cache_utc_datetime_str = "1970-01-01T010101Z";
         thread_local std::string cache_utc_date_str = "1970-01-01";
-        thread_local std::string cache_utc_time_str = "01-01-01Z";
+        thread_local std::string cache_utc_time_str = "010101Z";
         thread_local std::string cache_utc_year_str = "1970";
         thread_local std::string cache_utc_month_str = "01";
         thread_local std::string cache_utc_day_str = "01";
@@ -291,16 +291,16 @@ private:
         thread_local std::string cache_utc_minute_str = "00";
         thread_local std::string cache_utc_second_str = "00";
         thread_local std::string cache_utc_timezone_str = "Z";
-        thread_local std::string cache_local_datetime_str = "1970-01-01T01-01-01+00-00";
+        thread_local std::string cache_local_datetime_str = "1970-01-01T010101+0000";
         thread_local std::string cache_local_date_str = "1970-01-01";
-        thread_local std::string cache_local_time_str = "01-01-01+00-00";
+        thread_local std::string cache_local_time_str = "010101+0000";
         thread_local std::string cache_local_year_str = "1970";
         thread_local std::string cache_local_month_str = "01";
         thread_local std::string cache_local_day_str = "01";
         thread_local std::string cache_local_hour_str = "00";
         thread_local std::string cache_local_minute_str = "00";
         thread_local std::string cache_local_second_str = "00";
-        thread_local std::string cache_local_timezone_str = "+00-00";
+        thread_local std::string cache_local_timezone_str = "+0000";
         bool cache_update_datetime = false;
 
         // Update time cache
@@ -358,9 +358,7 @@ private:
             cache_utc_date_str += cache_utc_day_str;
 
             cache_utc_time_str = cache_utc_hour_str;
-            cache_utc_time_str += '-';
             cache_utc_time_str += cache_utc_minute_str;
-            cache_utc_time_str += '-';
             cache_utc_time_str += cache_utc_second_str;
             cache_utc_time_str += cache_utc_timezone_str;
 
@@ -375,9 +373,7 @@ private:
             cache_local_date_str += cache_local_day_str;
 
             cache_local_time_str = cache_local_hour_str;
-            cache_local_time_str += '-';
             cache_local_time_str += cache_local_minute_str;
-            cache_local_time_str += '-';
             cache_local_time_str += cache_local_second_str;
             cache_local_time_str += cache_local_timezone_str;
 
@@ -677,7 +673,7 @@ private:
     {
         // Prepare the output string
         output.clear();
-        output.resize(6, '0');
+        output.resize(5, '0');
 
         // Calculate the output index
         size_t index = output.size() - 1;
@@ -695,9 +691,6 @@ private:
             minutes /= 10;
             output[index--] = '0' + (char)minutes;
         }
-
-        // Output '-' separator
-        output[index--] = '-';
 
         // Output offset hours
         int64_t hours = offset / 60;

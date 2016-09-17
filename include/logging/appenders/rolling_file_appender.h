@@ -57,16 +57,16 @@ public:
     /*!
          Time-based policy composes logging filename from the given pattern
          using the following placeholders:
-         - {UtcDateTime}/{LocalDateTime} - converted to the UTC/local date & time (e.g. "1997-07-16T19-20-30Z"/"1997-07-16T19-20-30+01-00")
+         - {UtcDateTime}/{LocalDateTime} - converted to the UTC/local date & time (e.g. "1997-07-16T192030Z"/"1997-07-16T192030+0100")
          - {UtcDate}/{LocalDate} - converted to the UTC/local date (e.g. "1997-07-16")
-         - {Time}/{LocalTime} - converted to the UTC/local time (e.g. "19-20-30Z"/"19-20-30+01-00")
+         - {Time}/{LocalTime} - converted to the UTC/local time (e.g. "192030Z"/"192030+0100")
          - {UtcYear}/{LocalYear} - converted to the UTC/local four-digits year (e.g. "1997")
          - {UtcMonth}/{LocalMonth} - converted to the UTC/local two-digits month (e.g. "07")
          - {UtcDay}/{LocalDay} - converted to the UTC/local two-digits day (e.g. "16")
          - {UtcHour}/{LocalHour} - converted to the UTC/local two-digits hour (e.g. "19")
          - {UtcMinute}/{LocalMinute} - converted to the UTC/local two-digits minute (e.g. "20")
          - {UtcSecond}/{LocalSecond} - converted to the UTC/local two-digits second (e.g. "30")
-         - {UtcTimezone}/{LocalTimezone} - converted to the UTC/local timezone suffix (e.g. "+01-00"/"Z")
+         - {UtcTimezone}/{LocalTimezone} - converted to the UTC/local timezone suffix (e.g. "+0100"/"Z")
 
          \param path - Logging path
          \param policy - Time-based rolling policy (default is TimeRollingPolicy::DAY)
