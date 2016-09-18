@@ -22,22 +22,25 @@ using namespace CppLogging;
 
 bool InputRecord(FILE* input, Record& record)
 {
-    static std::vector<uint8_t> raw(4096);
+    // Clear the logging record
+    record.Clear();
 
+    // Read the logging record size
     uint32_t size;
     if (fread(&size, sizeof(uint32_t), 1, input) != 1)
         return false;
 
-    raw.resize(size);
+    record.raw.resize(size);
 
-    if (fread(raw.data(), 1, size, input) != size)
+    // Read the logging record raw data
+    if (fread(record.raw.data(), 1, size, input) != size)
     {
         std::cerr << "Failed to read from the input file!" << std::endl;
         return false;
     }
 
     // Get the buffer start position
-    const uint8_t* buffer = raw.data();
+    const uint8_t* buffer = record.raw.data();
 
     // Deserialize logging record
     std::memcpy(&record.timestamp, buffer, sizeof(uint64_t));
@@ -50,21 +53,18 @@ bool InputRecord(FILE* input, Record& record)
     uint8_t logger_size;
     std::memcpy(&logger_size, buffer, sizeof(uint8_t));
     buffer += sizeof(uint8_t);
-    record.logger.clear();
     record.logger.insert(record.logger.begin(), buffer, buffer + logger_size);
     buffer += logger_size;
 
     uint16_t message_size;
     std::memcpy(&message_size, buffer, sizeof(uint16_t));
     buffer += sizeof(uint16_t);
-    record.message.clear();
     record.message.insert(record.message.begin(), buffer, buffer + message_size);
     buffer += message_size;
 
     uint32_t buffer_size;
     std::memcpy(&buffer_size, buffer, sizeof(uint32_t));
     buffer += sizeof(uint32_t);
-    record.buffer.clear();
     record.buffer.insert(record.buffer.begin(), buffer, buffer + buffer_size);
     buffer += buffer_size;
 

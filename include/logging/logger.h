@@ -38,37 +38,47 @@ public:
     Logger& operator=(const Logger&) = default;
     Logger& operator=(Logger&&) = default;
 
-    //! Log debug message
+    //! Log debug message with format arguments
     /*!
          Will log only in debug mode!
 
          \param debug - Debug message
+         \param args - Format arguments
     */
-    void Debug(const char* debug);
+    template <typename... Args>
+    void Debug(const char* debug, const Args&... args);
 
-    //! Log information message
+    //! Log information message with format arguments
     /*!
          \param info - Information message
+         \param args - Format arguments
     */
-    void Info(const char* info);
+    template <typename... Args>
+    void Info(const char* info, const Args&... args);
 
-    //! Log warning message
+    //! Log warning message with format arguments
     /*!
          \param warn - Warning message
+         \param args - Format arguments
     */
-    void Warn(const char* warn);
+    template <typename... Args>
+    void Warn(const char* warn, const Args&... args);
 
-    //! Log error message
+    //! Log error message with format arguments
     /*!
          \param error - Error message
+         \param args - Format arguments
     */
-    void Error(const char* error);
+    template <typename... Args>
+    void Error(const char* error, const Args&... args);
 
-    //! Log fatal message
+    //! Log fatal message with format arguments
     /*!
          \param fatal - Fatal message
+         \param args - Format arguments
     */
-    void Fatal(const char* fatal);
+    template <typename... Args>
+    void Fatal(const char* fatal, const Args&... args);
 
     //! Flush the current logger
     void Flush();
@@ -87,14 +97,20 @@ private:
     */
     explicit Logger(const std::string& name, const std::shared_ptr<Processor>& sink);
 
-    //! Log the given message with a given level
+    //! Log the given message with a given level and format arguments list
     /*!
          \param level - Logging level
          \param message - Logging message
+         \param args - Format arguments list
     */
-    void Log(Level level, const char* message);
+    void Log(Level level, const char* message, fmt::ArgList args);
+
+    // Format variadic declaration
+    FMT_VARIADIC(void, Log, Level, const char*);
 };
 
 } // namespace CppLogging
+
+#include "logger.inl"
 
 #endif // CPPLOGGING_LOGGER_H

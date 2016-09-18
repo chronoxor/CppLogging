@@ -792,6 +792,9 @@ const std::string& TextLayout::pattern() const noexcept
 
 void TextLayout::LayoutRecord(Record& record)
 {
+    // Format message of the logging record
+    record.FormatMessage();
+
     _pimpl->LayoutRecord(record);
 }
 

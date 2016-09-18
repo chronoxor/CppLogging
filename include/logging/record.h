@@ -10,6 +10,7 @@
 #define CPPLOGGING_RECORD_H
 
 #include "logging/level.h"
+#include "string/format.h"
 #include "threads/thread.h"
 #include "time/timestamp.h"
 
@@ -49,6 +50,8 @@ public:
     std::string message;
     //! Buffer of the logging record
     std::vector<uint8_t> buffer;
+    //! Format arguments of the logging record
+    std::vector<uint8_t> format;
 
     //! Record content after layout
     std::vector<uint8_t> raw;
@@ -60,6 +63,18 @@ public:
 
     Record& operator=(const Record&) = default;
     Record& operator=(Record&&) = default;
+
+    //! Initialize format parameters of the logging record
+    /*!
+         \param pattern - Format pattern
+         \param args - Format arguments list
+    */
+    void InitFormat(const char* pattern, fmt::ArgList args);
+    //! Format message of the logging record
+    void FormatMessage();
+
+    //! Clear logging record
+    void Clear();
 
     //! Swap two instances
     void swap(Record& record) noexcept;

@@ -16,7 +16,20 @@ inline Record::Record()
     logger.reserve(32);
     message.reserve(512);
     buffer.reserve(1024);
+    format.reserve(128);
     raw.reserve(512);
+}
+
+inline void Record::Clear()
+{
+    timestamp = 0;
+    thread = 0;
+    level = Level::NONE;
+    logger.clear();
+    message.clear();
+    buffer.clear();
+    format.clear();
+    raw.clear();
 }
 
 inline void Record::swap(Record& record) noexcept
@@ -28,6 +41,7 @@ inline void Record::swap(Record& record) noexcept
     swap(logger, record.logger);
     swap(message, record.message);
     swap(buffer, record.buffer);
+    swap(format, record.format);
     swap(raw, record.raw);
 }
 

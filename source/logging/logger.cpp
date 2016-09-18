@@ -20,20 +20,15 @@ Logger::Logger(const std::string& name) : _name(name), _sink(Config::CreateLogge
 {
 }
 
-Logger::Logger(const std::string& name, const std::shared_ptr<Processor>& sink) : _name(name), _sink(sink)
+void Logger::Log(Level level, const char* message, fmt::ArgList args)
 {
-}
-
-Logger::~Logger()
-{
-    Flush();
-}
-
-void Logger::Log(Level level, const char* message)
-{
+    // Thread local thread Id
     thread_local uint64_t thread = CppCommon::Thread::CurrentThreadId();
     // Thread local instance of the logging record
     thread_local Record record;
+
+    // Clear the logging record
+    record.Clear();
 
     // Fill necessary fields of the logging record
     record.timestamp = CppCommon::Timestamp::utc();
@@ -42,48 +37,12 @@ void Logger::Log(Level level, const char* message)
     record.logger = _name;
     record.message = message;
 
-    // Clear buffer filed and raw field of the logging record
-    record.buffer.clear();
-    record.raw.clear();
+    // Initialize format parameters of the logging record
+    record.InitFormat(message, args);
 
     // Process the logging record
     if (_sink)
         _sink->ProcessRecord(record);
-}
-
-void Logger::Debug(const char* debug)
-{
-#if defined(NDEBUG)
-    // Log nothing in release mode...
-#else
-    Log(Level::DEBUG, debug);
-#endif
-}
-
-void Logger::Info(const char* info)
-{
-    Log(Level::INFO, info);
-}
-
-void Logger::Warn(const char* warn)
-{
-    Log(Level::WARN, warn);
-}
-
-void Logger::Error(const char* error)
-{
-    Log(Level::ERROR, error);
-}
-
-void Logger::Fatal(const char* fatal)
-{
-    Log(Level::FATAL, fatal);
-}
-
-void Logger::Flush()
-{
-    if (_sink)
-        _sink->Flush();
 }
 
 void Logger::Update()
