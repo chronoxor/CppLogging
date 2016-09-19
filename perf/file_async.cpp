@@ -17,11 +17,9 @@ class BinaryConfigFixture : public virtual CppBenchmark::FixtureThreads
 protected:
     BinaryConfigFixture()
     {
-        auto file_sink = std::make_shared<AsyncProcessor>();
-        file_sink->appenders().push_back(std::make_shared<FileAppender>(CppCommon::File("test.bin.log")));
-        auto binary_sink = std::make_shared<Processor>();
+        auto binary_sink = std::make_shared<AsyncProcessor>();
         binary_sink->layouts().push_back(std::make_shared<BinaryLayout>());
-        binary_sink->processors().push_back(file_sink);
+        binary_sink->appenders().push_back(std::make_shared<FileAppender>(CppCommon::File("test.bin.log")));
         Config::ConfigLogger("binary", binary_sink);
     }
 
@@ -42,11 +40,9 @@ class TextConfigFixture : public virtual CppBenchmark::FixtureThreads
 protected:
     TextConfigFixture()
     {
-        auto file_sink = std::make_shared<AsyncProcessor>();
-        file_sink->appenders().push_back(std::make_shared<FileAppender>(CppCommon::File("test.log")));
-        auto text_sink = std::make_shared<Processor>();
+        auto text_sink = std::make_shared<AsyncProcessor>();
         text_sink->layouts().push_back(std::make_shared<TextLayout>());
-        text_sink->processors().push_back(file_sink);
+        text_sink->appenders().push_back(std::make_shared<FileAppender>(CppCommon::File("test.log")));
         Config::ConfigLogger("text", text_sink);
     }
 
@@ -65,13 +61,13 @@ protected:
 BENCHMARK_THREADS_FIXTURE(BinaryConfigFixture, "FileAsync-binary", settings)
 {
     thread_local Logger logger = Config::CreateLogger("binary");
-    logger.Info("Test message");
+    logger.Info("Test message {}", context.metrics().total_iterations());
 }
 
 BENCHMARK_THREADS_FIXTURE(TextConfigFixture, "FileAsync-text", settings)
 {
     thread_local Logger logger = Config::CreateLogger("text");
-    logger.Info("Test message");
+    logger.Info("Test message {}", context.metrics().total_iterations());
 }
 
 BENCHMARK_MAIN()

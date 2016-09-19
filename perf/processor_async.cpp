@@ -34,11 +34,9 @@ class BinaryConfigFixture : public virtual CppBenchmark::FixtureThreads
 protected:
     BinaryConfigFixture()
     {
-        auto null_sink = std::make_shared<AsyncProcessor>();
-        null_sink->appenders().push_back(std::make_shared<NullAppender>());
-        auto binary_sink = std::make_shared<Processor>();
+        auto binary_sink = std::make_shared<AsyncProcessor>();
         binary_sink->layouts().push_back(std::make_shared<BinaryLayout>());
-        binary_sink->processors().push_back(null_sink);
+        binary_sink->appenders().push_back(std::make_shared<NullAppender>());
         Config::ConfigLogger("binary", binary_sink);
     }
 
@@ -54,11 +52,9 @@ class TextConfigFixture : public virtual CppBenchmark::FixtureThreads
 protected:
     TextConfigFixture()
     {
-        auto null_sink = std::make_shared<AsyncProcessor>();
-        null_sink->appenders().push_back(std::make_shared<NullAppender>());
-        auto text_sink = std::make_shared<Processor>();
+        auto text_sink = std::make_shared<AsyncProcessor>();
         text_sink->layouts().push_back(std::make_shared<TextLayout>());
-        text_sink->processors().push_back(null_sink);
+        text_sink->appenders().push_back(std::make_shared<NullAppender>());
         Config::ConfigLogger("text", text_sink);
     }
 
