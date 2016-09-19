@@ -27,7 +27,7 @@ std::string format(const char* pattern, fmt::ArgList args)
     return record.message;
 }
 
-FMT_VARIADIC(std::string, format, const char*);
+FMT_VARIADIC(std::string, format, const char*)
 
 TEST_CASE("Format message", "[CppLogging]")
 {

@@ -106,7 +106,7 @@ private:
     void Log(Level level, const char* message, fmt::ArgList args);
 
     // Format variadic declaration
-    FMT_VARIADIC(void, Log, Level, const char*);
+    FMT_VARIADIC(void, Log, Level, const char*)
 };
 
 } // namespace CppLogging
