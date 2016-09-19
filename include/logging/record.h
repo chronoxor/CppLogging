@@ -57,6 +57,7 @@ public:
     std::vector<uint8_t> raw;
 
     Record();
+    Record(const char* pattern, fmt::ArgList args);
     Record(const Record&) = default;
     Record(Record&&) = default;
     ~Record() = default;
@@ -64,14 +65,8 @@ public:
     Record& operator=(const Record&) = default;
     Record& operator=(Record&&) = default;
 
-    //! Initialize format parameters of the logging record
-    /*!
-         \param pattern - Format pattern
-         \param args - Format arguments list
-    */
-    void InitFormat(const char* pattern, fmt::ArgList args);
     //! Format message of the logging record
-    void FormatMessage();
+    void Format();
 
     //! Clear logging record
     void Clear();
