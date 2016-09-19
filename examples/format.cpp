@@ -42,6 +42,7 @@ int main(int argc, char** argv)
     logger.Info("int: {0:d};  hex: {0:x};  oct: {0:o}; bin: {0:b}", 42);
     logger.Info("int: {0:d};  hex: {0:#x};  oct: {0:#o};  bin: {0:#b}", 42);
     logger.Info("The date is {}", Date(2012, 12, 9));
+    logger.Info("Elapsed time: {s:.2f} seconds", "s"_a = 1.23);
     logger.Info("The answer is {}"_format(42).c_str());
 
     return 0;

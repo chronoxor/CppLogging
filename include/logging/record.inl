@@ -26,7 +26,7 @@ inline Record::Record(const char* pattern, fmt::ArgList args) : Record()
     message = pattern;
 
     // Serialize arguments list
-    args.serialize(format);
+    args.serialize<char>(format);
 }
 
 inline void Record::Clear()

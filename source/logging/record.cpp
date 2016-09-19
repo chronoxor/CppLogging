@@ -17,7 +17,7 @@ void Record::Format()
         return;
 
     // Format the message filed of the logging record
-    fmt::ArgList args = fmt::ArgList::deserialize(format);
+    fmt::ArgList args = fmt::ArgList::deserialize<char>(format);
     message = fmt::format(message.c_str(), args);
 
     // Clear format buffer
