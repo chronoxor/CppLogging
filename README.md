@@ -34,7 +34,7 @@ C++ Logging Library project.
 ```
 git clone git@github.com:chronoxor/CppLogging.git
 cd CppLogging
-git submodule update --init --recursive
+git submodule update --init --recursive --remote
 ```
 
 ## Windows (Visaul Studio 2015)
