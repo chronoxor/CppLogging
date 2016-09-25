@@ -8,7 +8,7 @@ processors (sync, async), filters, layouts (binary, text) and appenders.
 [CppLogging API reference](http://chronoxor.github.io/CppLogging/index.html)
 
 [![Build status](https://travis-ci.org/chronoxor/CppLogging.svg?branch=master)](https://travis-ci.org/chronoxor/CppLogging)
-[![Build status](https://ci.appveyor.com/api/projects/status/6cgcwr1uu0re1o5p?svg=true)](https://ci.appveyor.com/project/chronoxor/CppLogging)
+[![Build status](https://ci.appveyor.com/api/projects/status/91j5tree7gm7awmd?svg=true)](https://ci.appveyor.com/project/chronoxor/CppLogging)
 
 # Contents
   * [Features](#features)
