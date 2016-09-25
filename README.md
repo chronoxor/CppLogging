@@ -1,7 +1,14 @@
 # CppLogging
-C++ Logging Library project.
+C++ Logging Library provides functionality to log different events with a high
+throughput in multi-thread environment into different sinks (console, files,
+rolling files, syslog, etc.). Logging configuration is very flexible and gives
+functionality to build flexible logger hierarchy with combination of logging
+processors (sync, async), filters, layouts (binary, text) and appenders.
 
 [CppLogging API reference](http://chronoxor.github.io/CppLogging/index.html)
+
+[![Build status](https://travis-ci.org/chronoxor/CppLogging.svg?branch=master)](https://travis-ci.org/chronoxor/CppLogging)
+[![Build status](https://ci.appveyor.com/api/projects/status/6cgcwr1uu0re1o5p?svg=true)](https://ci.appveyor.com/project/chronoxor/CppLogging)
 
 # Contents
   * [Features](#features)
@@ -13,9 +20,14 @@ C++ Logging Library project.
     * [Linux](#linux)
 
 # Features
-* Memory management
-* Networking
-* Threading
+* Binary & text layouts
+* Synchronous logging
+* Asynchronous logging
+* Appenders collection (null, memory, console, file, rolling file, ostream, syslog)
+* Logging levels (debug, info, warning, error, fatal)
+* Logging filters (by level, by logger name, by message pattern)
+* Format logging records using [fmt library](https://github.com/fmtlib/fmt)
+* Flexible configuration and logger processing hierarchy
 
 # Requirements
 * Windows 7 / Windows 10
