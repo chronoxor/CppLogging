@@ -20,19 +20,21 @@ C++ Logging Library project.
 # Requirements
 * Windows 7 / Windows 10
 * Linux
+* [CMake](http://www.cmake.org/download/)
 * [GIT](https://git-scm.com/)
+* [GCC](https://gcc.gnu.org/)
+
+Optional:
 * [Visual Studio 2015](https://www.visualstudio.com/)
-* [Clion 1.0.5](https://www.jetbrains.com/clion/)
-* [MinGW 4.0](http://mingw-w64.org/doku.php)
-* [MSYS2](http://msys2.github.io/)
-* GCC 5.0.0
-* [CMake 3.5.0](http://www.cmake.org/download/)
+* [Clion](https://www.jetbrains.com/clion/)
+* [MinGW](http://mingw-w64.org/doku.php)
+* [MSYS](http://www.mingw.org/wiki/msys)
 
 #How to build?
 
 ## Clone repository with submodules
 ```
-git clone git@github.com:chronoxor/CppLogging.git
+git clone https://github.com/chronoxor/CppLogging.git CppLogging
 cd CppLogging
 git submodule update --init --recursive --remote
 ```
@@ -40,13 +42,12 @@ git submodule update --init --recursive --remote
 ## Windows (Visaul Studio 2015)
 ```
 cd scripts
-01-generate-VisualStudio-x32.bat or 01-generate-VisualStudio-x64.bat
+01-generate-VisualStudio.bat
 02-build-VisualStudio.bat
 03-tests.bat
 04-install-VisualStudio.bat
 05-doxygen-VisualStudio.bat
 ```
-If you want 32-bit version use '01-generate-VisualStudio-x32.bat' to generate project files.
 
 ## Windows (MinGW with MSYS)
 ```

@@ -1,4 +1,6 @@
 # CppLogging todo
+
+General
   * Examples
   * Performance
   * Tests
