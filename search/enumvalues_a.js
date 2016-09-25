@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['year',['YEAR',['../namespace_cpp_logging.html#a2ae7ad16f5b402d86a07604253464f57ad18101729d290479023d5eceeb29c9cf',1,'CppLogging']]]
+  ['thread',['Thread',['../class_cpp_logging_1_1_text_layout_1_1_impl.html#a25dcbdead45ae15f29ab124b9e29e748ad97477d6d8a838ead9348185bb5b6742',1,'CppLogging::TextLayout::Impl']]]
 ];
