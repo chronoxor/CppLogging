@@ -20,15 +20,6 @@ inline Record::Record()
     raw.reserve(512);
 }
 
-inline Record::Record(const char* pattern, fmt::ArgList args) : Record()
-{
-    // Save the format pattern
-    message = pattern;
-
-    // Serialize arguments list
-    args.serialize<char>(format);
-}
-
 inline void Record::Clear()
 {
     timestamp = 0;
