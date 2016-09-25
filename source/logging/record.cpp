@@ -94,7 +94,7 @@ void DeserializeExtraData(uint8_t*& data_buffer, fmt::internal::Arg::Type type, 
         std::size_t size;
         std::memcpy(&size, data_buffer, sizeof(std::size_t));
         data_buffer += sizeof(std::size_t);
-        named->name = BasicStringRef<Char>(reinterpret_cast<const Char*>(data_buffer), size);
+        named->name = fmt::BasicStringRef<Char>(reinterpret_cast<const Char*>(data_buffer), size);
         data_buffer += size;
         DeserializeExtraData<Char>(data_buffer, named->type, *named);
     }
