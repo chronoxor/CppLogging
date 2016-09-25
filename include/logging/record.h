@@ -67,6 +67,7 @@ public:
 
     //! Format message of the logging record
     void Format();
+    void Format(fmt::ArgList args);
 
     //! Clear logging record
     void Clear();

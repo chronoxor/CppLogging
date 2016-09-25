@@ -232,15 +232,6 @@ fmt::ArgList Deserialize(std::vector<uint8_t>& buffer)
 } // namespace Internals
 //! @endcond
 
-Record::Record(const char* pattern, fmt::ArgList args) : Record()
-{
-    // Save the format pattern
-    message = pattern;
-
-    // Serialize arguments list
-    Internals::Serialize<char>(args, format);
-}
-
 void Record::Format()
 {
     // Special check for empty format arguments list
@@ -253,6 +244,12 @@ void Record::Format()
 
     // Clear format buffer
     format.clear();
+}
+
+void Record::Format(fmt::ArgList args)
+{
+    // Serialize arguments list
+    Internals::Serialize<char>(args, format);
 }
 
 } // namespace CppLogging

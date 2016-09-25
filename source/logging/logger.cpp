@@ -37,8 +37,8 @@ void Logger::Log(Level level, const char* message, fmt::ArgList args)
     record.logger = _name;
     record.message = message;
 
-    // Serialize arguments list
-    args.serialize<char>(record.format);
+    // Format arguments list
+    record.Format(args);
 
     // Process the logging record
     if (_sink)
