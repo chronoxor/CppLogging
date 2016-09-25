@@ -26,7 +26,7 @@ processors (sync, async), filters, layouts (binary, text) and appenders.
 * Appenders collection (null, memory, console, file, rolling file, ostream, syslog)
 * Logging levels (debug, info, warning, error, fatal)
 * Logging filters (by level, by logger name, by message pattern)
-* Format logging records using [{fmt} library](https://github.com/fmtlib/fmt)
+* Format logging records using [{fmt} library](http://fmtlib.net)
 * Flexible configuration and logger processing hierarchy
 
 # Requirements
