@@ -1,5 +1,7 @@
 var searchData=
 [
-  ['impl',['Impl',['../class_cpp_logging_1_1_text_layout_1_1_impl.html',1,'CppLogging::TextLayout']]],
-  ['impl',['Impl',['../class_cpp_logging_1_1_rolling_file_appender_1_1_impl.html',1,'CppLogging::RollingFileAppender']]]
+  ['layout',['Layout',['../class_cpp_logging_1_1_layout.html',1,'CppLogging']]],
+  ['levelfilter',['LevelFilter',['../class_cpp_logging_1_1_level_filter.html',1,'CppLogging']]],
+  ['logger',['Logger',['../class_cpp_logging_1_1_logger.html',1,'CppLogging']]],
+  ['loggerfilter',['LoggerFilter',['../class_cpp_logging_1_1_logger_filter.html',1,'CppLogging']]]
 ];

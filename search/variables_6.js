@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['raw',['raw',['../class_cpp_logging_1_1_record.html#a53fb6876e9bcb49289e0447ed79d6415',1,'CppLogging::Record']]]
+  ['version',['version',['../namespace_cpp_logging.html#a8bbbfc46fdcba8b729fdf351ee4c8476',1,'CppLogging']]]
 ];

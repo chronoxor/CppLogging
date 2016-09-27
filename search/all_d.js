@@ -1,11 +1,12 @@
 var searchData=
 [
-  ['pattern',['pattern',['../class_cpp_logging_1_1_text_layout.html#ab3e9c2d158ac22b7f9e18a1985998fd1',1,'CppLogging::TextLayout::pattern()'],['../class_cpp_logging_1_1_text_layout_1_1_impl.html#a83f309aeb914666fe59287aadb484ff0',1,'CppLogging::TextLayout::Impl::pattern()']]],
-  ['processor',['Processor',['../class_cpp_logging_1_1_processor.html',1,'CppLogging']]],
-  ['processor',['Processor',['../class_cpp_logging_1_1_processor.html#ab9e8bf067a254854f6f5bb8a108c1105',1,'CppLogging::Processor::Processor()=default'],['../class_cpp_logging_1_1_processor.html#a18d2e051692b2ef3096ae5cca6a3ee58',1,'CppLogging::Processor::Processor(const Processor &amp;)=default'],['../class_cpp_logging_1_1_processor.html#aa9dbbc495f038392b4ff63d635edb657',1,'CppLogging::Processor::Processor(Processor &amp;&amp;)=default']]],
-  ['processor_2ecpp',['processor.cpp',['../processor_8cpp.html',1,'']]],
-  ['processor_2eh',['processor.h',['../processor_8h.html',1,'']]],
-  ['processors',['processors',['../class_cpp_logging_1_1_processor.html#ab4d96b6012bee770a07a3f8a25a836a3',1,'CppLogging::Processor']]],
-  ['processors_2eh',['processors.h',['../processors_8h.html',1,'']]],
-  ['processrecord',['ProcessRecord',['../class_cpp_logging_1_1_processor.html#a88f9da169cacd30e22600e293d471ad6',1,'CppLogging::Processor::ProcessRecord()'],['../class_cpp_logging_1_1_async_processor.html#a3b078b150836eb0e71b410ddb9f11cf6',1,'CppLogging::AsyncProcessor::ProcessRecord()'],['../class_cpp_logging_1_1_buffered_processor.html#a30701e34be19af8d41530b9f9d1cf369',1,'CppLogging::BufferedProcessor::ProcessRecord()'],['../class_cpp_logging_1_1_sync_processor.html#a2e953a43ccd47756d430507bf46022ce',1,'CppLogging::SyncProcessor::ProcessRecord()']]]
+  ['raw',['raw',['../class_cpp_logging_1_1_record.html#a53fb6876e9bcb49289e0447ed79d6415',1,'CppLogging::Record']]],
+  ['record',['Record',['../class_cpp_logging_1_1_record.html#a9869b96b578bbb85709cdaec079526ee',1,'CppLogging::Record::Record()'],['../class_cpp_logging_1_1_record.html#aa27f6c8c7b1593d38ad4c28294df63c9',1,'CppLogging::Record::Record(const Record &amp;)=default'],['../class_cpp_logging_1_1_record.html#aafb916fa6c565ff7735e18d4e52e6f81',1,'CppLogging::Record::Record(Record &amp;&amp;)=default']]],
+  ['record',['Record',['../class_cpp_logging_1_1_record.html',1,'CppLogging']]],
+  ['record_2eh',['record.h',['../record_8h.html',1,'']]],
+  ['record_2einl',['record.inl',['../record_8inl.html',1,'']]],
+  ['rolling_5ffile_5fappender_2ecpp',['rolling_file_appender.cpp',['../rolling__file__appender_8cpp.html',1,'']]],
+  ['rolling_5ffile_5fappender_2eh',['rolling_file_appender.h',['../rolling__file__appender_8h.html',1,'']]],
+  ['rollingfileappender',['RollingFileAppender',['../class_cpp_logging_1_1_rolling_file_appender.html',1,'CppLogging']]],
+  ['rollingfileappender',['RollingFileAppender',['../class_cpp_logging_1_1_rolling_file_appender.html#a8227d016c9848a0b5c224df131063d64',1,'CppLogging::RollingFileAppender::RollingFileAppender(const CppCommon::Path &amp;path, TimeRollingPolicy policy=TimeRollingPolicy::DAY, const std::string &amp;pattern=&quot;{UtcDateTime}.log&quot;, bool archive=false, bool truncate=false, bool auto_flush=false)'],['../class_cpp_logging_1_1_rolling_file_appender.html#aec5894fa4d8f2f9e11ade7e3285e5eef',1,'CppLogging::RollingFileAppender::RollingFileAppender(const CppCommon::Path &amp;path, const std::string &amp;filename, const std::string &amp;extension, size_t size=104857600, size_t backups=10, bool archive=false, bool truncate=false, bool auto_flush=false)'],['../class_cpp_logging_1_1_rolling_file_appender.html#abcf828106ffc0f8df6fbd4b447d23c8b',1,'CppLogging::RollingFileAppender::RollingFileAppender(const RollingFileAppender &amp;)=delete'],['../class_cpp_logging_1_1_rolling_file_appender.html#a2bf5c60945549ef79b8d862bdc46e70f',1,'CppLogging::RollingFileAppender::RollingFileAppender(RollingFileAppender &amp;&amp;appender)']]]
 ];

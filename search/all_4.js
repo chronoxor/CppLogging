@@ -1,11 +1,10 @@
 var searchData=
 [
-  ['day',['DAY',['../namespace_cpp_logging.html#a2ae7ad16f5b402d86a07604253464f57a5b1d59b5451c06afb65ab1bc2713cfb4',1,'CppLogging']]],
-  ['debug',['Debug',['../class_cpp_logging_1_1_logger.html#adaaba9a3da23927ac4ee7630ee29d11c',1,'CppLogging::Logger::Debug()'],['../namespace_cpp_logging.html#ac4e889a814b82af010ef93be2e618f3badc30ec20708ef7b0f641ef78b7880a15',1,'CppLogging::DEBUG()']]],
-  ['debug_5fappender_2ecpp',['debug_appender.cpp',['../debug__appender_8cpp.html',1,'']]],
-  ['debug_5fappender_2eh',['debug_appender.h',['../debug__appender_8h.html',1,'']]],
-  ['debugappender',['DebugAppender',['../class_cpp_logging_1_1_debug_appender.html#a904ca30b987c25394616706f2f61093f',1,'CppLogging::DebugAppender::DebugAppender()=default'],['../class_cpp_logging_1_1_debug_appender.html#aa86c3ffb7964bacfafbc7590048c9848',1,'CppLogging::DebugAppender::DebugAppender(const DebugAppender &amp;)=delete'],['../class_cpp_logging_1_1_debug_appender.html#ad86fc459a31d7fd0405852529e6f38e3',1,'CppLogging::DebugAppender::DebugAppender(DebugAppender &amp;&amp;)=default']]],
-  ['debugappender',['DebugAppender',['../class_cpp_logging_1_1_debug_appender.html',1,'CppLogging']]],
-  ['dequeue',['Dequeue',['../class_cpp_logging_1_1_async_buffer.html#a83acbdf7abb012e6379f4001b1a4d8ee',1,'CppLogging::AsyncBuffer']]],
-  ['disable',['Disable',['../class_cpp_logging_1_1_trigger.html#afa07373f15ec3ecd7618d391059d4b07',1,'CppLogging::Trigger']]]
+  ['enable',['Enable',['../class_cpp_logging_1_1_trigger.html#a2df9ab0b929772cd7b4b5a990102b1d5',1,'CppLogging::Trigger']]],
+  ['enqueue',['Enqueue',['../class_cpp_logging_1_1_async_buffer.html#a9db4993d859111d09a1b1bc23b3a787d',1,'CppLogging::AsyncBuffer']]],
+  ['error',['Error',['../class_cpp_logging_1_1_logger.html#ac6a9f7a2fbf3d8024a24b3c0bd5d7f25',1,'CppLogging::Logger::Error()'],['../namespace_cpp_logging.html#ac4e889a814b82af010ef93be2e618f3babb1ca97ec761fc37101737ba0aa2e7c5',1,'CppLogging::ERROR()']]],
+  ['error_5fappender_2ecpp',['error_appender.cpp',['../error__appender_8cpp.html',1,'']]],
+  ['error_5fappender_2eh',['error_appender.h',['../error__appender_8h.html',1,'']]],
+  ['errorappender',['ErrorAppender',['../class_cpp_logging_1_1_error_appender.html',1,'CppLogging']]],
+  ['errorappender',['ErrorAppender',['../class_cpp_logging_1_1_error_appender.html#abe2c0effcb87d346003d28756fa7a43e',1,'CppLogging::ErrorAppender::ErrorAppender()=default'],['../class_cpp_logging_1_1_error_appender.html#a6687f19113878c2f39cf18a5673982e8',1,'CppLogging::ErrorAppender::ErrorAppender(const ErrorAppender &amp;)=delete'],['../class_cpp_logging_1_1_error_appender.html#a45986a8b03bfb9be12501b04b0aeeb60',1,'CppLogging::ErrorAppender::ErrorAppender(ErrorAppender &amp;&amp;)=default']]]
 ];

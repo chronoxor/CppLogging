@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['sizepolicyimpl',['SizePolicyImpl',['../class_cpp_logging_1_1_size_policy_impl.html',1,'CppLogging']]],
-  ['syncprocessor',['SyncProcessor',['../class_cpp_logging_1_1_sync_processor.html',1,'CppLogging']]],
-  ['syslogappender',['SyslogAppender',['../class_cpp_logging_1_1_syslog_appender.html',1,'CppLogging']]]
+  ['textlayout',['TextLayout',['../class_cpp_logging_1_1_text_layout.html',1,'CppLogging']]],
+  ['trigger',['Trigger',['../class_cpp_logging_1_1_trigger.html',1,'CppLogging']]]
 ];

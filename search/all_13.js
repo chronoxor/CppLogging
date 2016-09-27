@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['warn',['Warn',['../class_cpp_logging_1_1_logger.html#ab0a428aff1b55f33317c95549bc4ef4a',1,'CppLogging::Logger::Warn()'],['../namespace_cpp_logging.html#ac4e889a814b82af010ef93be2e618f3ba32bd8a1db2275458673903bdb84cb277',1,'CppLogging::WARN()']]]
+  ['year',['YEAR',['../namespace_cpp_logging.html#a2ae7ad16f5b402d86a07604253464f57ad18101729d290479023d5eceeb29c9cf',1,'CppLogging']]]
 ];
