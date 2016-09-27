@@ -103,10 +103,8 @@ private:
          \param message - Logging message
          \param args - Format arguments list
     */
-    void Log(Level level, const char* message, fmt::ArgList args);
-
-    // Format variadic declaration
-    FMT_VARIADIC(void, Log, Level, const char*)
+    template <typename... Args>
+    void Log(Level level, const char* message, const Args&... args);
 };
 
 } // namespace CppLogging

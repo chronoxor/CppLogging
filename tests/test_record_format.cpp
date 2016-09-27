@@ -20,17 +20,18 @@ private:
     int _year, _month, _day;
 };
 
-std::string format(const char* pattern, fmt::ArgList args)
+template <typename... Args>
+std::string format(const char* pattern, const Args&... args)
 {
-    Record record(pattern, args);
-    record.Format();
+    Record record;
+    record.FormatSerialize(pattern, args...);
+    record.FormatDeserialize();
     return record.message;
 }
 
-FMT_VARIADIC(std::string, format, const char*)
-
 TEST_CASE("Format message", "[CppLogging]")
 {
+    REQUIRE(format("no arguments") == "no arguments");
     REQUIRE(format("{0}, {1}, {2}", -1, 0, 1) == "-1, 0, 1");
     REQUIRE(format("{0}, {1}, {2}", 'a', 'b', 'c') == "a, b, c");
     REQUIRE(format("{}, {}, {}", 'a', 'b', 'c') == "a, b, c");

@@ -18,6 +18,31 @@ inline Logger::~Logger()
 }
 
 template <typename... Args>
+inline void Logger::Log(Level level, const char* message, const Args&... args)
+{
+    // Thread local thread Id
+    thread_local uint64_t thread = CppCommon::Thread::CurrentThreadId();
+    // Thread local instance of the logging record
+    thread_local Record record;
+
+    // Clear the logging record
+    record.Clear();
+
+    // Fill necessary fields of the logging record
+    record.timestamp = CppCommon::Timestamp::utc();
+    record.thread = thread;
+    record.level = level;
+    record.logger = _name;
+
+    // Format arguments list
+    record.FormatSerialize(message, args...);
+
+    // Process the logging record
+    if (_sink)
+        _sink->ProcessRecord(record);
+}
+
+template <typename... Args>
 inline void Logger::Debug(const char* debug, const Args&... args)
 {
 #if defined(NDEBUG)

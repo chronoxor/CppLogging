@@ -57,7 +57,6 @@ public:
     std::vector<uint8_t> raw;
 
     Record();
-    Record(const char* pattern, fmt::ArgList args);
     Record(const Record&) = default;
     Record(Record&&) = default;
     ~Record() = default;
@@ -66,8 +65,9 @@ public:
     Record& operator=(Record&&) = default;
 
     //! Format message of the logging record
-    void Format();
-    void Format(fmt::ArgList args);
+    template <typename... Args>
+    void FormatSerialize(const char* pattern, const Args&... args);
+    void FormatDeserialize();
 
     //! Clear logging record
     void Clear();

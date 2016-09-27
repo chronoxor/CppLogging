@@ -27,6 +27,7 @@ int main(int argc, char** argv)
 
     // Log some messages with format
     logger.Info("argc: {}, argv: {}", argc, (void*)argv);
+    logger.Info("no arguments");
     logger.Info("{0}, {1}, {2}", -1, 0, 1);
     logger.Info("{0}, {1}, {2}", 'a', 'b', 'c');
     logger.Info("{}, {}, {}", 'a', 'b', 'c');

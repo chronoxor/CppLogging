@@ -20,31 +20,6 @@ Logger::Logger(const std::string& name) : _name(name), _sink(Config::CreateLogge
 {
 }
 
-void Logger::Log(Level level, const char* message, fmt::ArgList args)
-{
-    // Thread local thread Id
-    thread_local uint64_t thread = CppCommon::Thread::CurrentThreadId();
-    // Thread local instance of the logging record
-    thread_local Record record;
-
-    // Clear the logging record
-    record.Clear();
-
-    // Fill necessary fields of the logging record
-    record.timestamp = CppCommon::Timestamp::utc();
-    record.thread = thread;
-    record.level = level;
-    record.logger = _name;
-    record.message = message;
-
-    // Format arguments list
-    record.Format(args);
-
-    // Process the logging record
-    if (_sink)
-        _sink->ProcessRecord(record);
-}
-
 void Logger::Update()
 {
     _sink = Config::CreateLogger(_name)._sink;
