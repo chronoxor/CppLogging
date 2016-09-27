@@ -35,17 +35,17 @@ unsigned CalculateBufferSize(std::size_t&)
 }
 
 template <typename Char, typename T>
-unsigned CalculateBufferSize(std::size_t& extra_size, const fmt::internal::NamedArgWithType<Char, T>& argument)
-{
-    extra_size += sizeof(fmt::internal::NamedArgWithType<Char, T>) + sizeof(std::size_t) + argument.name.size() * sizeof(Char) + CalculateExtraSize<Char, fmt::internal::NamedArgWithType<Char, T>>(argument);
-    return 1;
-}
-
-template <typename Char, typename T>
 unsigned CalculateBufferSize(std::size_t& extra_size, const T& argument)
 {
     fmt::internal::MakeArg<fmt::BasicFormatter<Char>> arg(argument);
     extra_size += CalculateExtraSize<Char, T>(arg);
+    return 1;
+}
+
+template <typename Char, typename T>
+unsigned CalculateBufferSize(std::size_t& extra_size, const fmt::internal::NamedArgWithType<Char, T>& argument)
+{
+    extra_size += sizeof(fmt::internal::NamedArgWithType<Char, T>) + sizeof(std::size_t) + argument.name.size() * sizeof(Char) + CalculateExtraSize<Char, fmt::internal::NamedArgWithType<Char, T>>(argument);
     return 1;
 }
 
@@ -56,19 +56,6 @@ unsigned CalculateBufferSize(std::size_t& extra_size, const T& argument, const A
     count += CalculateBufferSize<Char>(extra_size, argument);
     count += CalculateBufferSize<Char>(extra_size, args...);
     return count;
-}
-
-template <typename Char, typename T>
-void SerializeExtraData(uint8_t*& data_buffer, const fmt::internal::NamedArgWithType<Char, T>& named)
-{
-    std::memcpy(data_buffer, &named, sizeof(fmt::internal::NamedArgWithType<Char, T>));
-    data_buffer += sizeof(fmt::internal::NamedArgWithType<Char, T>);
-    std::size_t size = named.name.size() * sizeof(Char);
-    std::memcpy(data_buffer, &size, sizeof(std::size_t));
-    data_buffer += sizeof(std::size_t);
-    std::memcpy(data_buffer, named.name.data(), size);
-    data_buffer += size;
-    SerializeExtraData<Char, T>(data_buffer, named.type, named);
 }
 
 template <typename Char, typename T>
@@ -109,20 +96,22 @@ void SerializeExtraData(uint8_t*& data_buffer, fmt::internal::Arg::Type type, co
     }
 }
 
+template <typename Char, typename T>
+void SerializeExtraData(uint8_t*& data_buffer, const fmt::internal::NamedArgWithType<Char, T>& named)
+{
+    std::memcpy(data_buffer, &named, sizeof(fmt::internal::NamedArgWithType<Char, T>));
+    data_buffer += sizeof(fmt::internal::NamedArgWithType<Char, T>);
+    std::size_t size = named.name.size() * sizeof(Char);
+    std::memcpy(data_buffer, &size, sizeof(std::size_t));
+    data_buffer += sizeof(std::size_t);
+    std::memcpy(data_buffer, named.name.data(), size);
+    data_buffer += size;
+    SerializeExtraData<Char, T>(data_buffer, named.type, named);
+}
+
 template <typename Char>
 void SerializeArguments(std::size_t, uint8_t*&, uint8_t*&)
 {
-}
-
-template <typename Char, typename T>
-void SerializeArguments(std::size_t item_size, uint8_t*& base_buffer, uint8_t*& data_buffer, const fmt::internal::NamedArgWithType<Char, T>& argument)
-{
-    // Serialize argument
-    const fmt::internal::Arg& arg = argument;
-    std::memcpy(base_buffer, &arg, item_size);
-    base_buffer += item_size;
-    // Serialize extra data
-    SerializeExtraData<Char, T>(data_buffer, argument);
 }
 
 template <typename Char, typename T>
@@ -134,6 +123,17 @@ void SerializeArguments(std::size_t item_size, uint8_t*& base_buffer, uint8_t*& 
     base_buffer += item_size;
     // Serialize extra data
     SerializeExtraData<Char, T>(data_buffer, arg.type, arg);
+}
+
+template <typename Char, typename T>
+void SerializeArguments(std::size_t item_size, uint8_t*& base_buffer, uint8_t*& data_buffer, const fmt::internal::NamedArgWithType<Char, T>& argument)
+{
+    // Serialize argument
+    const fmt::internal::Arg& arg = argument;
+    std::memcpy(base_buffer, &arg, item_size);
+    base_buffer += item_size;
+    // Serialize extra data
+    SerializeExtraData<Char, T>(data_buffer, argument);
 }
 
 template <typename Char, typename T, typename... Args>
