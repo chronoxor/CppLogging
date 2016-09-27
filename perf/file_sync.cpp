@@ -27,12 +27,6 @@ protected:
     {
         CppCommon::File::Remove("test.bin.log");
     }
-
-    void Cleanup(CppBenchmark::ContextThreads& context) override
-    {
-        // Update benchmark metrics
-        context.metrics().AddIterations(context.threads() * iterations - 1);
-    }
 };
 
 class TextConfigFixture : public virtual CppBenchmark::FixtureThreads
@@ -49,12 +43,6 @@ protected:
     ~TextConfigFixture()
     {
         CppCommon::File::Remove("test.log");
-    }
-
-    void Cleanup(CppBenchmark::ContextThreads& context) override
-    {
-        // Update benchmark metrics
-        context.metrics().AddIterations(context.threads() * iterations - 1);
     }
 };
 

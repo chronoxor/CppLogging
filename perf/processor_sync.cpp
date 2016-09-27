@@ -39,12 +39,6 @@ protected:
         binary_sink->appenders().push_back(std::make_shared<NullAppender>());
         Config::ConfigLogger("binary", binary_sink);
     }
-
-    void Cleanup(CppBenchmark::ContextThreads& context) override
-    {
-        // Update benchmark metrics
-        context.metrics().AddIterations(context.threads() * iterations - 1);
-    }
 };
 
 class TextConfigFixture : public virtual CppBenchmark::FixtureThreads
@@ -56,12 +50,6 @@ protected:
         text_sink->layouts().push_back(std::make_shared<TextLayout>());
         text_sink->appenders().push_back(std::make_shared<NullAppender>());
         Config::ConfigLogger("text", text_sink);
-    }
-
-    void Cleanup(CppBenchmark::ContextThreads& context) override
-    {
-        // Update benchmark metrics
-        context.metrics().AddIterations(context.threads() * iterations - 1);
     }
 };
 
