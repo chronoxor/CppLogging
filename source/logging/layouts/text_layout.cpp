@@ -15,6 +15,8 @@
 
 namespace CppLogging {
 
+//! @cond INTERNALS
+
 class TextLayout::Impl
 {
     enum class PlaceholderType
@@ -766,6 +768,8 @@ private:
         }
     }
 };
+
+//! @endcond
 
 TextLayout::TextLayout(const std::string& layout) : _pimpl(std::make_unique<Impl>(layout))
 {

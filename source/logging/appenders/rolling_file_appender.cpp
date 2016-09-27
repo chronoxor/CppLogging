@@ -16,6 +16,8 @@
 
 namespace CppLogging {
 
+//! @cond INTERNALS
+
 class RollingFileAppender::Impl
 {
 public:
@@ -872,6 +874,8 @@ private:
         return CppCommon::Path(_path / "{}.{}.{}"_format(_filename, backup, _extension));
     }
 };
+
+//! @endcond
 
 RollingFileAppender::RollingFileAppender(const CppCommon::Path& path, TimeRollingPolicy policy, const std::string& pattern, bool archive, bool truncate, bool auto_flush)
     : _pimpl(std::make_unique<TimePolicyImpl>(path, policy, pattern, archive, truncate, auto_flush))
