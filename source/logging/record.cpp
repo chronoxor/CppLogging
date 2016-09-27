@@ -10,7 +10,7 @@
 
 namespace CppLogging {
 
-//! @cond
+//! @cond INTERNALS
 namespace Internals {
 
 template <typename Char>
