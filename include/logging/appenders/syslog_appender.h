@@ -37,4 +37,6 @@ public:
 
 } // namespace CppLogging
 
+/*! \example syslog.cpp Syslog logger example */
+
 #endif // CPPLOGGING_APPENDERS_SYSLOG_APPENDER_H

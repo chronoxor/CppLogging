@@ -62,4 +62,6 @@ private:
 
 } // namespace CppLogging
 
+/*! \example file.cpp File logger example */
+
 #endif // CPPLOGGING_APPENDERS_FILE_APPENDER_H

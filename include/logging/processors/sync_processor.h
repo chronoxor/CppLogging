@@ -44,4 +44,6 @@ private:
 
 } // namespace CppLogging
 
+/*! \example sync.cpp Synchronous logger processor example */
+
 #endif // CPPLOGGING_PROCESSORS_SYNC_PROCESSOR_H

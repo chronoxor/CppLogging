@@ -111,4 +111,7 @@ private:
 
 #include "logger.inl"
 
+/*! \example default.cpp Default logger example */
+/*! \example format.cpp Format logger example */
+
 #endif // CPPLOGGING_LOGGER_H

@@ -38,4 +38,6 @@ public:
 
 } // namespace CppLogging
 
+/*! \example console.cpp Console logger example */
+
 #endif // CPPLOGGING_APPENDERS_CONSOLE_APPENDER_H
