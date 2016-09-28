@@ -25,8 +25,8 @@ processors (sync, async), filters, layouts (binary, text) and appenders.
     * [Example 4: Configure custom logger with text layout and syslog appender](#example-4-configure-custom-logger-with-text-layout-and-syslog-appender)
     * [Example 5: Configure custom logger with binary layout and file appender](#example-5-configure-custom-logger-with-binary-layout-and-file-appender)
     * [Example 6: Configure logger with custom text layout pattern](#example-6-configure-logger-with-custom-text-layout-pattern)
-    * [Example 7: Configure rolling file appender with time-based policy](#example-8-configure-rolling-file-appender-with-time-based-policy)
-    * [Example 8: Configure rolling file appender with size-based policy](#example-7-configure-rolling-file-appender-with-size-based-policy)
+    * [Example 7: Configure rolling file appender with time-based policy](#example-7-configure-rolling-file-appender-with-time-based-policy)
+    * [Example 8: Configure rolling file appender with size-based policy](#example-8-configure-rolling-file-appender-with-size-based-policy)
     * [Example 9: Multi-thread logging with synchronous processor](#example-9-multi-thread-logging-with-synchronous-processor)
     * [Example 10: Multi-thread logging with asynchronous processor](#example-10-multi-thread-logging-with-asynchronous-processor)
   * [Tools](#tools)
@@ -410,8 +410,7 @@ void ConfigureLogger()
     auto sink = std::make_shared<CppLogging::Processor>();
     // Add text layout
     sink->layouts().push_back(std::make_shared<CppLogging::TextLayout>());
-    // Add rolling file appender which rolls each second and create log file
-    // with a pattern "{UtcDateTime}.log"
+    // Add rolling file appender which rolls each second and create log file with a pattern "{UtcDateTime}.log"
     sink->appenders().push_back(std::make_shared<CppLogging::FileAppender>(CppCommon::RollingFileAppender(".", TimeRollingPolicy::SECOND, "{UtcDateTime}.log", true)));
 
     // Configure example logger
@@ -462,8 +461,7 @@ void ConfigureLogger()
     auto sink = std::make_shared<CppLogging::Processor>();
     // Add binary layout
     sink->layouts().push_back(std::make_shared<CppLogging::BinaryLayout>());
-    // Add rolling file appender which rolls after append 4kb of logs and will
-    // keep only 5 recent archives
+    // Add rolling file appender which rolls after append 4kb of logs and will keep only 5 recent archives
     sink->appenders().push_back(std::make_shared<CppLogging::FileAppender>(CppCommon::RollingFileAppender(".", "file", "bin.log", 4096, 5, true)));
 
     // Configure example logger
