@@ -56,19 +56,19 @@ protected:
 BENCHMARK_THREADS_FIXTURE(NullConfigFixture, "AsyncProcessor-null", settings)
 {
     thread_local Logger logger = Config::CreateLogger("null");
-    logger.Info("Test message");
+    logger.Info("Test message {}", context.metrics().total_iterations());
 }
 
 BENCHMARK_THREADS_FIXTURE(BinaryConfigFixture, "AsyncProcessor-binary", settings)
 {
     thread_local Logger logger = Config::CreateLogger("binary");
-    logger.Info("Test message");
+    logger.Info("Test message {}", context.metrics().total_iterations());
 }
 
 BENCHMARK_THREADS_FIXTURE(TextConfigFixture, "AsyncProcessor-text", settings)
 {
     thread_local Logger logger = Config::CreateLogger("text");
-    logger.Info("Test message");
+    logger.Info("Test message {}", context.metrics().total_iterations());
 }
 
 BENCHMARK_MAIN()

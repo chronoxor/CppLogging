@@ -38,13 +38,13 @@ protected:
 BENCHMARK_FIXTURE(BinaryConfigFixture, "NullAppender-binary", iterations)
 {
     static Logger logger = Config::CreateLogger("binary");
-    logger.Info("Test message");
+    logger.Info("Test message {}", context.metrics().total_iterations());
 }
 
 BENCHMARK_FIXTURE(TextConfigFixture, "NullAppender-text", iterations)
 {
     static Logger logger = Config::CreateLogger("text");
-    logger.Info("Test message");
+    logger.Info("Test message {}", context.metrics().total_iterations());
 }
 
 BENCHMARK_MAIN()

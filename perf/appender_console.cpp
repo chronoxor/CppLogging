@@ -26,7 +26,7 @@ protected:
 BENCHMARK_FIXTURE(ConsoleConfigFixture, "ConsoleAppender", iterations)
 {
     static Logger logger = Config::CreateLogger("test");
-    logger.Info("Test message");
+    logger.Info("Test message {}", context.metrics().total_iterations());
 }
 
 BENCHMARK_MAIN()
