@@ -36,6 +36,7 @@ processors (sync, async), filters, layouts (binary, text) and appenders.
     * [Benchmark 4: Asynchronous processor with null appender](#benchmark-4-asynchronous-processor-with-null-appender)
     * [Benchmark 5: Synchronous processor with file appender](#benchmark-5-synchronous-processor-with-file-appender)
     * [Benchmark 6: Asynchronous processor with file appender](#benchmark-6-asynchronous-processor-with-file-appender)
+    * [Benchmark 7: Format in logging thread vs format in background thread](#benchmark-7-format-in-logging-thread-vs-format-in-background-thread)
   * [Tools](#tools)
     * [Binary log reader](#binary-log-reader)
 
@@ -1207,6 +1208,103 @@ Maximal time: 576 ns / iteration
 Total time: 4.415 s
 Total iterations: 8000000
 Iterations throughput: 1811865 / second
+===============================================================================
+```
+
+## Benchmark 7: Format in logging thread vs format in background thread
+Benchmark source file: [async_format.cpp](https://github.com/chronoxor/CppLogging/blob/master/perf/async_format.cpp)
+
+Benchmark report is the following:
+```
+===============================================================================
+CppBenchmark report. Version 1.0.0.0
+===============================================================================
+CPU architecutre: Intel(R) Core(TM) i7-4790K CPU @ 4.00GHz
+CPU logical cores: 8
+CPU physical cores: 4
+CPU clock speed: 3.998 GHz
+CPU Hyper-Threading: enabled
+RAM total: 31.962 GiB
+RAM free: 21.623 GiB
+===============================================================================
+OS version: Microsoft Windows 8 Enterprise Edition (build 9200), 64-bit
+OS bits: 64-bit
+Process bits: 64-bit
+Process configuaraion: release
+Local timestamp: Wed Sep 28 22:54:22 2016
+UTC timestamp: Wed Sep 28 19:54:22 2016
+===============================================================================
+Benchmark: PreFormat
+Attempts: 5
+Iterations: 1000000
+-------------------------------------------------------------------------------
+Phase: PreFormat(threads:1)
+Average time: 234 ns / iteration
+Minimal time: 234 ns / iteration
+Maximal time: 245 ns / iteration
+Total time: 234.626 ms
+Total iterations: 1000000
+Iterations throughput: 4262095 / second
+-------------------------------------------------------------------------------
+Phase: PreFormat(threads:2)
+Average time: 419 ns / iteration
+Minimal time: 419 ns / iteration
+Maximal time: 549 ns / iteration
+Total time: 838.510 ms
+Total iterations: 2000000
+Iterations throughput: 2385182 / second
+-------------------------------------------------------------------------------
+Phase: PreFormat(threads:4)
+Average time: 493 ns / iteration
+Minimal time: 493 ns / iteration
+Maximal time: 636 ns / iteration
+Total time: 1.974 s
+Total iterations: 4000000
+Iterations throughput: 2025957 / second
+-------------------------------------------------------------------------------
+Phase: PreFormat(threads:8)
+Average time: 600 ns / iteration
+Minimal time: 600 ns / iteration
+Maximal time: 616 ns / iteration
+Total time: 4.802 s
+Total iterations: 8000000
+Iterations throughput: 1665872 / second
+===============================================================================
+Benchmark: PostFormat
+Attempts: 5
+Iterations: 1000000
+-------------------------------------------------------------------------------
+Phase: PostFormat(threads:1)
+Average time: 441 ns / iteration
+Minimal time: 441 ns / iteration
+Maximal time: 489 ns / iteration
+Total time: 441.860 ms
+Total iterations: 1000000
+Iterations throughput: 2263157 / second
+-------------------------------------------------------------------------------
+Phase: PostFormat(threads:2)
+Average time: 681 ns / iteration
+Minimal time: 681 ns / iteration
+Maximal time: 712 ns / iteration
+Total time: 1.362 s
+Total iterations: 2000000
+Iterations throughput: 1468368 / second
+-------------------------------------------------------------------------------
+Phase: PostFormat(threads:4)
+Average time: 684 ns / iteration
+Minimal time: 684 ns / iteration
+Maximal time: 745 ns / iteration
+Total time: 2.738 s
+Total iterations: 4000000
+Iterations throughput: 1460445 / second
+-------------------------------------------------------------------------------
+Phase: PostFormat(threads:8)
+Average time: 821 ns / iteration
+Minimal time: 821 ns / iteration
+Maximal time: 848 ns / iteration
+Total time: 6.572 s
+Total iterations: 8000000
+Iterations throughput: 1217128 / second
 ===============================================================================
 ```
 
