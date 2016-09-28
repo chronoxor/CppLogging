@@ -30,7 +30,8 @@ processors (sync, async), filters, layouts (binary, text) and appenders.
     * [Example 9: Multi-thread logging with synchronous processor](#example-9-multi-thread-logging-with-synchronous-processor)
     * [Example 10: Multi-thread logging with asynchronous processor](#example-10-multi-thread-logging-with-asynchronous-processor)
   * [Logging benchmarks](#logging-benchmarks)
-    * [Benchmark 1: Binary layout vs text layout](#benchmark-1-binary-layout-vs-text-layout)
+    * [Benchmark 1: Null appender](#benchmark-1-null-appender)
+    * [Benchmark 2: File appender](#benchmark-2-file-appender)
   * [Tools](#tools)
     * [Binary log reader](#binary-log-reader)
 
@@ -647,10 +648,10 @@ int main(int argc, char** argv)
 
 # Logging benchmarks
 
-##Benchmark 1: Binary layout vs text layout
+##Benchmark 1: Null appender
 Benchmark source file: [appender_null.cpp](https://github.com/chronoxor/CppLogging/blob/master/perf/appender_null.cpp)
 
-Report fragment is the following:
+Benchmark report is the following:
 ```
 ===============================================================================
 CppBenchmark report. Version 1.0.0.0
@@ -693,6 +694,55 @@ Maximal time: 176 ns / iteration
 Total time: 1.744 s
 Total iterations: 10000000
 Iterations throughput: 5733126 / second
+===============================================================================
+```
+
+##Benchmark 2: File appender
+Benchmark source file: [appender_file.cpp](https://github.com/chronoxor/CppLogging/blob/master/perf/appender_file.cpp)
+
+Benchmark report is the following:
+```
+===============================================================================
+CppBenchmark report. Version 1.0.0.0
+===============================================================================
+CPU architecutre: Intel(R) Core(TM) i7-4790K CPU @ 4.00GHz
+CPU logical cores: 8
+CPU physical cores: 4
+CPU clock speed: 3.998 GHz
+CPU Hyper-Threading: enabled
+RAM total: 31.962 GiB
+RAM free: 21.181 GiB
+===============================================================================
+OS version: Microsoft Windows 8 Enterprise Edition (build 9200), 64-bit
+OS bits: 64-bit
+Process bits: 64-bit
+Process configuaraion: release
+Local timestamp: Wed Sep 28 22:12:24 2016
+UTC timestamp: Wed Sep 28 19:12:24 2016
+===============================================================================
+Benchmark: FileAppender-binary
+Attempts: 5
+Iterations: 1000000
+-------------------------------------------------------------------------------
+Phase: FileAppender-binary
+Average time: 106 ns / iteration
+Minimal time: 106 ns / iteration
+Maximal time: 117 ns / iteration
+Total time: 106.598 ms
+Total iterations: 1000000
+Iterations throughput: 9381018 / second
+===============================================================================
+Benchmark: FileAppender-text
+Attempts: 5
+Iterations: 1000000
+-------------------------------------------------------------------------------
+Phase: FileAppender-text
+Average time: 229 ns / iteration
+Minimal time: 229 ns / iteration
+Maximal time: 249 ns / iteration
+Total time: 229.126 ms
+Total iterations: 1000000
+Iterations throughput: 4364404 / second
 ===============================================================================
 ```
 
