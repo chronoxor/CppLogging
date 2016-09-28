@@ -22,7 +22,8 @@ processors (sync, async), filters, layouts (binary, text) and appenders.
     * [Example 1: Default logger](#example-1-default-logger)
     * [Example 2: Format with logger](#example-2-format-with-logger)
     * [Example 3: Configure custom logger with text layout and console appender](#example-3-configure-custom-logger-with-text-layout-and-console-appender)
-    * [Example 4: Configure custom logger with binary layout and file appender](#example-4-configure-custom-logger-with-binary-layout-and-file-appender)
+    * [Example 4: Configure custom logger with text layout and syslog appender](#example-4-configure-custom-logger-with-text-layout-and-syslog-appender)
+    * [Example 5: Configure custom logger with binary layout and file appender](#example-5-configure-custom-logger-with-binary-layout-and-file-appender)
   * [Tools](#tools)
     * [Binary log reader](#binary-log-reader)
 
@@ -230,7 +231,50 @@ int main(int argc, char** argv)
 }
 ```
 
-## Example 4: Configure custom logger with binary layout and file appender
+## Example 4: Configure custom logger with text layout and syslog appender
+*Syslog appender is available only in Unix platforms and does nothing in
+Windows!*
+
+This example shows how to configure a custom logged with a given name to
+perform logging with a text layout and syslog appender sink:
+
+```C++
+#include "logging/config.h"
+#include "logging/logger.h"
+
+void ConfigureLogger()
+{
+    // Create default logging sink processor
+    auto sink = std::make_shared<CppLogging::Processor>();
+    // Add text layout
+    sink->layouts().push_back(std::make_shared<CppLogging::TextLayout>());
+    // Add syslog appender
+    sink->appenders().push_back(std::make_shared<CppLogging::SyslogAppender>());
+
+    // Configure example logger
+    CppLogging::Config::ConfigLogger("example", sink);
+}
+
+int main(int argc, char** argv)
+{
+    // Configure logger
+    ConfigureLogger();
+
+    // Create example logger
+    CppLogging::Logger logger("example");
+
+    // Log some messages with different level
+    logger.Debug("Debug message");
+    logger.Info("Info message");
+    logger.Warn("Warning message");
+    logger.Error("Error message");
+    logger.Fatal("Fatal message");
+
+    return 0;
+}
+```
+
+## Example 5: Configure custom logger with binary layout and file appender
 This example shows how to configure a custom logged with a given name to
 perform logging with a binary layout and file appender sink:
 
