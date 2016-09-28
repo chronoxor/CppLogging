@@ -24,8 +24,9 @@ processors (sync, async), filters, layouts (binary, text) and appenders.
     * [Example 3: Configure custom logger with text layout and console appender](#example-3-configure-custom-logger-with-text-layout-and-console-appender)
     * [Example 4: Configure custom logger with text layout and syslog appender](#example-4-configure-custom-logger-with-text-layout-and-syslog-appender)
     * [Example 5: Configure custom logger with binary layout and file appender](#example-5-configure-custom-logger-with-binary-layout-and-file-appender)
-    * [Example 6: Multi-thread logging with synchronous processor](#example-6-multi-thread-logging-with-synchronous-processor)
-    * [Example 7: Multi-thread logging with asynchronous processor](#example-6-multi-thread-logging-with-asynchronous-processor)
+    * [Example 6: Configure logger with custom text layout](#example-6-configure-logger-with-custom-text-layout)
+    * [Example 7: Multi-thread logging with synchronous processor](#example-7-multi-thread-logging-with-synchronous-processor)
+    * [Example 8: Multi-thread logging with asynchronous processor](#example-8-multi-thread-logging-with-asynchronous-processor)
   * [Tools](#tools)
     * [Binary log reader](#binary-log-reader)
 
@@ -316,9 +317,75 @@ int main(int argc, char** argv)
 }
 ```
 
-## Example 6: Multi-thread logging with synchronous processor
-Synchronous processor uses critical-section lock to avoid multiple threads
-from logging at the same time (logging threads are waiting until lock is free).
+## Example 6: Configure logger with custom text layout
+Text layout message is flexible to customize with layout pattern. Text layout
+pattern is a string with a special placeholders provided inside curly brackets
+("{}").
+
+Supported placeholders:
+- {UtcDateTime}/{LocalDateTime} - converted to the UTC/local date & time (e.g. "1997-07-16T19:20:30.123Z"/"1997-07-16T19:20:30.123+01:00")
+- {UtcDate}/{LocalDate} - converted to the UTC/local date (e.g. "1997-07-16")
+- {Time}/{LocalTime} - converted to the UTC/local time (e.g. "19:20:30.123Z"/"19:20:30.123+01:00")
+- {UtcYear}/{LocalYear} - converted to the UTC/local four-digits year (e.g. "1997")
+- {UtcMonth}/{LocalMonth} - converted to the UTC/local two-digits month (e.g. "07")
+- {UtcDay}/{LocalDay} - converted to the UTC/local two-digits day (e.g. "16")
+- {UtcHour}/{LocalHour} - converted to the UTC/local two-digits hour (e.g. "19")
+- {UtcMinute}/{LocalMinute} - converted to the UTC/local two-digits minute (e.g. "20")
+- {UtcSecond}/{LocalSecond} - converted to the UTC/local two-digits second (e.g. "30")
+- {UtcTimezone}/{LocalTimezone} - converted to the UTC/local timezone suffix (e.g. "+01:00"/"Z")
+- {Millisecond} - converted to the three-digits millisecond (e.g. "123")
+- {Microsecond} - converted to the three-digits microsecond (e.g. "123")
+- {Nanosecond} - converted to the three-digits nanosecond (e.g. "789")
+- {Thread} - converted to the thread Id (e.g. "0x0028F3D8")
+- {Level} - converted to the logging level
+- {Logger} - converted to the logger name
+- {Message} - converted to the log message
+- {EndLine} - converted to the end line suffix (e.g. Unix "\n" or Windows "\r\n")
+
+```C++
+#include "logging/config.h"
+#include "logging/logger.h"
+
+void ConfigureLogger()
+{
+    // Create a custom text layout pattern
+    std::string pattern = "{UtcYear}-{UtcMonth}-{UtcDay}T{UtcHour}:{UtcMinute}:{UtcSecond}.{Millisecond}{UtcTimezone} - {Microsecond}.{Nanosecond} - [{Thread}] - {Level} - {Logger} - {Message} - {EndLine}";
+
+    // Create default logging sink processor
+    auto sink = std::make_shared<CppLogging::Processor>();
+    // Add text layout
+    sink->layouts().push_back(std::make_shared<CppLogging::TextLayout>(pattern));
+    // Add console appender
+    sink->appenders().push_back(std::make_shared<CppLogging::ConsoleAppender>());
+
+    // Configure example logger
+    CppLogging::Config::ConfigLogger("example", sink);
+}
+
+int main(int argc, char** argv)
+{
+    // Configure logger
+    ConfigureLogger();
+
+    // Create example logger
+    CppLogging::Logger logger("example");
+
+    // Log some messages with different level
+    logger.Debug("Debug message");
+    logger.Info("Info message");
+    logger.Warn("Warning message");
+    logger.Error("Error message");
+    logger.Fatal("Fatal message");
+
+    return 0;
+}
+```
+
+## Example 7: Multi-thread logging with synchronous processor
+Synchronous processor uses critical-section lock to avoid multiple
+threads from logging at the same time (logging threads are waiting
+until critical-section is released).
+
 This example shows how to configure a custom logger with a given name to
 use synchronous processor in multi-thread environment:
 
@@ -392,11 +459,12 @@ int main(int argc, char** argv)
 }
 ```
 
-## Example 7: Multi-thread logging with asynchronous processor
+## Example 8: Multi-thread logging with asynchronous processor
 Asynchronous processor uses lock-free queue to collect logging records from
-multiple threads at the same time. This example shows much better performance
-in comparison with the previous one for lots of threads with less threads
-contentions:
+multiple threads at the same time.
+
+This example shows much better performance with less threads contentions in
+comparison with the previous one for lots of threads:
 
 ```C++
 #include "logging/config.h"
