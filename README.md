@@ -325,24 +325,26 @@ pattern is a string with a special placeholders provided inside curly brackets
 ("{}").
 
 Supported placeholders:
-- **{UtcDateTime}/{LocalDateTime}** - converted to the UTC/local date & time (e.g. "1997-07-16T19:20:30.123Z"/"1997-07-16T19:20:30.123+01:00")
-- **{UtcDate}/{LocalDate}** - converted to the UTC/local date (e.g. "1997-07-16")
-- **{Time}/{LocalTime}** - converted to the UTC/local time (e.g. "19:20:30.123Z"/"19:20:30.123+01:00")
-- **{UtcYear}/{LocalYear}** - converted to the UTC/local four-digits year (e.g. "1997")
-- **{UtcMonth}/{LocalMonth}** - converted to the UTC/local two-digits month (e.g. "07")
-- **{UtcDay}/{LocalDay}** - converted to the UTC/local two-digits day (e.g. "16")
-- **{UtcHour}/{LocalHour}** - converted to the UTC/local two-digits hour (e.g. "19")
-- **{UtcMinute}/{LocalMinute}** - converted to the UTC/local two-digits minute (e.g. "20")
-- **{UtcSecond}/{LocalSecond}** - converted to the UTC/local two-digits second (e.g. "30")
-- **{UtcTimezone}/{LocalTimezone}** - converted to the UTC/local timezone suffix (e.g. "+01:00"/"Z")
-- **{Millisecond}** - converted to the three-digits millisecond (e.g. "123")
-- **{Microsecond}** - converted to the three-digits microsecond (e.g. "123")
-- **{Nanosecond}** - converted to the three-digits nanosecond (e.g. "789")
-- **{Thread}** - converted to the thread Id (e.g. "0x0028F3D8")
-- **{Level}** - converted to the logging level
-- **{Logger}** - converted to the logger name
-- **{Message}** - converted to the log message
-- **{EndLine}** - converted to the end line suffix (e.g. Unix "\n" or Windows "\r\n")
+| Placeholder                         | Description                 | Example                                                      |
+|-------------------------------------|-----------------------------|--------------------------------------------------------------|
+| **{UtcDateTime} / {LocalDateTime}** | UTC/local date & time       | "1997-07-16T19:20:30.123Z" / "1997-07-16T19:20:30.123+01:00" |
+| **{UtcDate} / {LocalDate}**         | UTC/local date              | "1997-07-16"                                                 |
+| **{Time} / {LocalTime}**            | UTC/local time              | "19:20:30.123Z" / "19:20:30.123+01:00"                       |
+| **{UtcYear} / {LocalYear}**         | UTC/local four-digits year  | "1997"                                                       |
+| **{UtcMonth} / {LocalMonth}**       | UTC/local two-digits month  | "07"                                                         |
+| **{UtcDay} / {LocalDay}**           | UTC/local two-digits day    | "16"                                                         |
+| **{UtcHour} / {LocalHour}**         | UTC/local two-digits hour   | "19"                                                         |
+| **{UtcMinute} / {LocalMinute}**     | UTC/local two-digits minute | "20"                                                         |
+| **{UtcSecond} / {LocalSecond}**     | UTC/local two-digits second | "30"                                                         |
+| **{UtcTimezone} / {LocalTimezone}** | UTC/local timezone suffix   | "Z" / "+01:00"                                               |
+| **{Millisecond}**                   | Three-digits millisecond    | "123"                                                        |
+| **{Microsecond}**                   | Three-digits microsecond    | "123"                                                        |
+| **{Nanosecond}**                    | Three-digits nanosecond     | "789"                                                        |
+| **{Thread}**                        | Thread Id                   | "0x0028F3D8"                                                 |
+| **{Level}**                         | Logging level               |                                                              |
+| **{Logger}**                        | Logger name                 |                                                              |
+| **{Message}**                       | Log message                 |                                                              |
+| **{EndLine}**                       | End line suffix             | Unix "\n" or Windows "\r\n"                                  |
 
 ```C++
 #include "logging/config.h"
@@ -387,18 +389,20 @@ int main(int argc, char** argv)
 Time-based rolling policy will create a new logging file to write into using
 a special pattern (contains date & time placeholders).
 
-Time-based policy composes logging filename from the given pattern
-using the following placeholders:
-- **{UtcDateTime}/{LocalDateTime}** - converted to the UTC/local date & time (e.g. "1997-07-16T192030Z"/"1997-07-16T192030+0100")
-- **{UtcDate}/{LocalDate}** - converted to the UTC/local date (e.g. "1997-07-16")
-- **{Time}/{LocalTime}** - converted to the UTC/local time (e.g. "192030Z"/"192030+0100")
-- **{UtcYear}/{LocalYear}** - converted to the UTC/local four-digits year (e.g. "1997")
-- **{UtcMonth}/{LocalMonth}** - converted to the UTC/local two-digits month (e.g. "07")
-- **{UtcDay}/{LocalDay}** - converted to the UTC/local two-digits day (e.g. "16")
-- **{UtcHour}/{LocalHour}** - converted to the UTC/local two-digits hour (e.g. "19")
-- **{UtcMinute}/{LocalMinute}** - converted to the UTC/local two-digits minute (e.g. "20")
-- **{UtcSecond}/{LocalSecond}** - converted to the UTC/local two-digits second (e.g. "30")
-- **{UtcTimezone}/{LocalTimezone}** - converted to the UTC/local timezone suffix (e.g. "+0100"/"Z")
+Time-based policy composes logging filename from the given pattern using the
+following placeholders:
+| Placeholder                         | Description                 | Example                                                      |
+|-------------------------------------|-----------------------------|--------------------------------------------------------------|
+| **{UtcDateTime} / {LocalDateTime}** | UTC/local date & time       | "1997-07-16T192030Z" / "1997-07-16T192030+0100"              |
+| **{UtcDate} / {LocalDate}**         | UTC/local date              | "1997-07-16"                                                 |
+| **{Time} / {LocalTime}**            | UTC/local time              | "192030Z" / "192030+0100"                                    |
+| **{UtcYear} / {LocalYear}**         | UTC/local four-digits year  | "1997"                                                       |
+| **{UtcMonth} / {LocalMonth}**       | UTC/local two-digits month  | "07"                                                         |
+| **{UtcDay} / {LocalDay}**           | UTC/local two-digits day    | "16"                                                         |
+| **{UtcHour} / {LocalHour}**         | UTC/local two-digits hour   | "19"                                                         |
+| **{UtcMinute} / {LocalMinute}**     | UTC/local two-digits minute | "20"                                                         |
+| **{UtcSecond} / {LocalSecond}**     | UTC/local two-digits second | "30"                                                         |
+| **{UtcTimezone} / {LocalTimezone}** | UTC/local timezone suffix   | "Z" / "+0100"                                                |
 
 ```C++
 #include "logging/config.h"
