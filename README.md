@@ -24,6 +24,8 @@ processors (sync, async), filters, layouts (binary, text) and appenders.
     * [Example 3: Configure custom logger with text layout and console appender](#example-3-configure-custom-logger-with-text-layout-and-console-appender)
     * [Example 4: Configure custom logger with text layout and syslog appender](#example-4-configure-custom-logger-with-text-layout-and-syslog-appender)
     * [Example 5: Configure custom logger with binary layout and file appender](#example-5-configure-custom-logger-with-binary-layout-and-file-appender)
+    * [Example 6: Multi-thread logging with synchronous processor](#example-6-multi-thread-logging-with-synchronous-processor)
+    * [Example 7: Multi-thread logging with asynchronous processor](#example-6-multi-thread-logging-with-asynchronous-processor)
   * [Tools](#tools)
     * [Binary log reader](#binary-log-reader)
 
@@ -192,7 +194,7 @@ Example will create the following log:
 ```
 
 ## Example 3: Configure custom logger with text layout and console appender
-This example shows how to configure a custom logged with a given name to
+This example shows how to configure a custom logger with a given name to
 perform logging with a text layout and console appender sink:
 
 ```C++
@@ -235,7 +237,7 @@ int main(int argc, char** argv)
 *Syslog appender is available only in Unix platforms and does nothing in
 Windows!*
 
-This example shows how to configure a custom logged with a given name to
+This example shows how to configure a custom logger with a given name to
 perform logging with a text layout and syslog appender sink:
 
 ```C++
@@ -275,7 +277,7 @@ int main(int argc, char** argv)
 ```
 
 ## Example 5: Configure custom logger with binary layout and file appender
-This example shows how to configure a custom logged with a given name to
+This example shows how to configure a custom logger with a given name to
 perform logging with a binary layout and file appender sink:
 
 ```C++
@@ -309,6 +311,158 @@ int main(int argc, char** argv)
     logger.Warn("Warning message");
     logger.Error("Error message");
     logger.Fatal("Fatal message");
+
+    return 0;
+}
+```
+
+## Example 6: Multi-thread logging with synchronous processor
+Synchronous processor uses critical-section lock to avoid multiple threads
+from logging at the same time (logging threads are waiting until lock is free).
+This example shows how to configure a custom logger with a given name to
+use synchronous processor in multi-thread environment:
+
+```C++
+#include "logging/config.h"
+#include "logging/logger.h"
+
+#include <atomic>
+#include <iostream>
+#include <thread>
+#include <vector>
+
+void ConfigureLogger()
+{
+    // Create default logging sink processor
+    auto sink = std::make_shared<CppLogging::SyncProcessor>();
+    // Add binary layout
+    sink->layouts().push_back(std::make_shared<CppLogging::BinaryLayout>());
+    // Add file appender with size-based rolling policy and archivation
+    sink->appenders().push_back(std::make_shared<CppLogging::RollingFileAppender>(".", "rolling", "bin.log", 4096, 9, true));
+
+    // Configure example logger
+    CppLogging::Config::ConfigLogger("example", sink);
+}
+
+int main(int argc, char** argv)
+{
+    // Configure logger
+    ConfigureLogger();
+
+    std::cout << "Press Enter to stop..." << std::endl;
+
+    int concurrency = 4;
+
+    // Start some threads
+    std::atomic<bool> stop(false);
+    std::vector<std::thread> threads;
+    for (int thread = 0; thread < concurrency; ++thread)
+    {
+        threads.push_back(std::thread([&stop, thread]()
+        {
+            // Create example logger
+            CppLogging::Logger logger("example");
+
+            while (!stop)
+            {
+                // Log some messages with different level
+                logger.Debug("Debug message");
+                logger.Info("Info message");
+                logger.Warn("Warning message");
+                logger.Error("Error message");
+                logger.Fatal("Fatal message");
+
+                // Yield for a while...
+                CppCommon::Thread::Yield();
+            }
+        }));
+    }
+
+    // Wait for input
+    std::cin.get();
+
+    // Stop threads
+    stop = true;
+
+    // Wait for all threads
+    for (auto& thread : threads)
+        thread.join();
+
+    return 0;
+}
+```
+
+## Example 7: Multi-thread logging with asynchronous processor
+Asynchronous processor uses lock-free queue to collect logging records from
+multiple threads at the same time. This example shows much better performance
+in comparison with the previous one for lots of threads with less threads
+contentions:
+
+```C++
+#include "logging/config.h"
+#include "logging/logger.h"
+
+#include <atomic>
+#include <iostream>
+#include <thread>
+#include <vector>
+
+void ConfigureLogger()
+{
+    // Create default logging sink processor
+    auto sink = std::make_shared<CppLogging::AsyncProcessor>();
+    // Add text layout
+    sink->layouts().push_back(std::make_shared<CppLogging::TextLayout>());
+    // Add file appender with time-based rolling policy and archivation
+    sink->appenders().push_back(std::make_shared<CppLogging::RollingFileAppender>(".", CppLogging::TimeRollingPolicy::SECOND, "{UtcDateTime}.log", true));
+
+    // Configure example logger
+    CppLogging::Config::ConfigLogger("example", sink);
+}
+
+int main(int argc, char** argv)
+{
+    // Configure logger
+    ConfigureLogger();
+
+    std::cout << "Press Enter to stop..." << std::endl;
+
+    int concurrency = 4;
+
+    // Start some threads
+    std::atomic<bool> stop(false);
+    std::vector<std::thread> threads;
+    for (int thread = 0; thread < concurrency; ++thread)
+    {
+        threads.push_back(std::thread([&stop, thread]()
+        {
+            // Create example logger
+            CppLogging::Logger logger("example");
+
+            while (!stop)
+            {
+                // Log some messages with different level
+                logger.Debug("Debug message");
+                logger.Info("Info message");
+                logger.Warn("Warning message");
+                logger.Error("Error message");
+                logger.Fatal("Fatal message");
+
+                // Yield for a while...
+                CppCommon::Thread::Yield();
+            }
+        }));
+    }
+
+    // Wait for input
+    std::cin.get();
+
+    // Stop threads
+    stop = true;
+
+    // Wait for all threads
+    for (auto& thread : threads)
+        thread.join();
 
     return 0;
 }
