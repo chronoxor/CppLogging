@@ -24,9 +24,11 @@ processors (sync, async), filters, layouts (binary, text) and appenders.
     * [Example 3: Configure custom logger with text layout and console appender](#example-3-configure-custom-logger-with-text-layout-and-console-appender)
     * [Example 4: Configure custom logger with text layout and syslog appender](#example-4-configure-custom-logger-with-text-layout-and-syslog-appender)
     * [Example 5: Configure custom logger with binary layout and file appender](#example-5-configure-custom-logger-with-binary-layout-and-file-appender)
-    * [Example 6: Configure logger with custom text layout](#example-6-configure-logger-with-custom-text-layout)
-    * [Example 7: Multi-thread logging with synchronous processor](#example-7-multi-thread-logging-with-synchronous-processor)
-    * [Example 8: Multi-thread logging with asynchronous processor](#example-8-multi-thread-logging-with-asynchronous-processor)
+    * [Example 6: Configure logger with custom text layout pattern](#example-6-configure-logger-with-custom-text-layout-pattern)
+    * [Example 7: Configure rolling file appender with time-based policy](#example-8-configure-rolling-file-appender-with-time-based-policy)
+    * [Example 8: Configure rolling file appender with size-based policy](#example-7-configure-rolling-file-appender-with-size-based-policy)
+    * [Example 9: Multi-thread logging with synchronous processor](#example-9-multi-thread-logging-with-synchronous-processor)
+    * [Example 10: Multi-thread logging with asynchronous processor](#example-10-multi-thread-logging-with-asynchronous-processor)
   * [Tools](#tools)
     * [Binary log reader](#binary-log-reader)
 
@@ -317,7 +319,7 @@ int main(int argc, char** argv)
 }
 ```
 
-## Example 6: Configure logger with custom text layout
+## Example 6: Configure logger with custom text layout pattern
 Text layout message is flexible to customize with layout pattern. Text layout
 pattern is a string with a special placeholders provided inside curly brackets
 ("{}").
@@ -381,7 +383,113 @@ int main(int argc, char** argv)
 }
 ```
 
-## Example 7: Multi-thread logging with synchronous processor
+## Example 7: Configure rolling file appender with time-based policy
+Time-based rolling policy will create a new logging file to write into using
+a special pattern (contains date & time placeholders).
+
+Time-based policy composes logging filename from the given pattern
+using the following placeholders:
+- **{UtcDateTime}/{LocalDateTime}** - converted to the UTC/local date & time (e.g. "1997-07-16T192030Z"/"1997-07-16T192030+0100")
+- **{UtcDate}/{LocalDate}** - converted to the UTC/local date (e.g. "1997-07-16")
+- **{Time}/{LocalTime}** - converted to the UTC/local time (e.g. "192030Z"/"192030+0100")
+- **{UtcYear}/{LocalYear}** - converted to the UTC/local four-digits year (e.g. "1997")
+- **{UtcMonth}/{LocalMonth}** - converted to the UTC/local two-digits month (e.g. "07")
+- **{UtcDay}/{LocalDay}** - converted to the UTC/local two-digits day (e.g. "16")
+- **{UtcHour}/{LocalHour}** - converted to the UTC/local two-digits hour (e.g. "19")
+- **{UtcMinute}/{LocalMinute}** - converted to the UTC/local two-digits minute (e.g. "20")
+- **{UtcSecond}/{LocalSecond}** - converted to the UTC/local two-digits second (e.g. "30")
+- **{UtcTimezone}/{LocalTimezone}** - converted to the UTC/local timezone suffix (e.g. "+0100"/"Z")
+
+```C++
+#include "logging/config.h"
+#include "logging/logger.h"
+
+void ConfigureLogger()
+{
+    // Create default logging sink processor
+    auto sink = std::make_shared<CppLogging::Processor>();
+    // Add text layout
+    sink->layouts().push_back(std::make_shared<CppLogging::TextLayout>());
+    // Add rolling file appender which rolls each second and create log file
+    // with a pattern "{UtcDateTime}.log"
+    sink->appenders().push_back(std::make_shared<CppLogging::FileAppender>(CppCommon::RollingFileAppender(".", TimeRollingPolicy::SECOND, "{UtcDateTime}.log", true)));
+
+    // Configure example logger
+    CppLogging::Config::ConfigLogger("example", sink);
+}
+
+int main(int argc, char** argv)
+{
+    // Configure logger
+    ConfigureLogger();
+
+    // Create example logger
+    CppLogging::Logger logger("example");
+
+    // Log some messages with different level
+    logger.Debug("Debug message");
+    logger.Info("Info message");
+    logger.Warn("Warning message");
+    logger.Error("Error message");
+    logger.Fatal("Fatal message");
+
+    return 0;
+}
+```
+
+## Example 8: Configure rolling file appender with size-based policy
+Size-based rolling policy will create a new logging file to write when the
+current file size exceeded size limit. Logging backups are indexed and its
+count could be limited as well.
+
+Size-based policy for 5 backups works in a following way:
+```
+example.log   -> example.1.log
+example.1.log -> example.2.log
+example.2.log -> example.3.log
+example.3.log -> example.4.log
+example.4.log -> example.5.log
+example.5.log -> remove
+```
+
+```C++
+#include "logging/config.h"
+#include "logging/logger.h"
+
+void ConfigureLogger()
+{
+    // Create default logging sink processor
+    auto sink = std::make_shared<CppLogging::Processor>();
+    // Add binary layout
+    sink->layouts().push_back(std::make_shared<CppLogging::BinaryLayout>());
+    // Add rolling file appender which rolls after append 4kb of logs and will
+    // keep only 5 recent archives
+    sink->appenders().push_back(std::make_shared<CppLogging::FileAppender>(CppCommon::RollingFileAppender(".", "file", "bin.log", 4096, 5, true)));
+
+    // Configure example logger
+    CppLogging::Config::ConfigLogger("example", sink);
+}
+
+int main(int argc, char** argv)
+{
+    // Configure logger
+    ConfigureLogger();
+
+    // Create example logger
+    CppLogging::Logger logger("example");
+
+    // Log some messages with different level
+    logger.Debug("Debug message");
+    logger.Info("Info message");
+    logger.Warn("Warning message");
+    logger.Error("Error message");
+    logger.Fatal("Fatal message");
+
+    return 0;
+}
+```
+
+## Example 9: Multi-thread logging with synchronous processor
 Synchronous processor uses critical-section lock to avoid multiple
 threads from logging at the same time (logging threads are waiting
 until critical-section is released).
@@ -459,7 +567,7 @@ int main(int argc, char** argv)
 }
 ```
 
-## Example 8: Multi-thread logging with asynchronous processor
+## Example 10: Multi-thread logging with asynchronous processor
 Asynchronous processor uses lock-free queue to collect logging records from
 multiple threads at the same time.
 
