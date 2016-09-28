@@ -49,13 +49,13 @@ protected:
 BENCHMARK_THREADS_FIXTURE(BinaryConfigFixture, "FileSync-binary", settings)
 {
     thread_local Logger logger = Config::CreateLogger("binary");
-    logger.Info("Test message {}", context.metrics().total_iterations());
+    logger.Info("Test message");
 }
 
 BENCHMARK_THREADS_FIXTURE(TextConfigFixture, "FileSync-text", settings)
 {
     thread_local Logger logger = Config::CreateLogger("text");
-    logger.Info("Test message {}", context.metrics().total_iterations());
+    logger.Info("Test message");
 }
 
 BENCHMARK_MAIN()
