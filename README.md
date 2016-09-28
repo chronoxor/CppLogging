@@ -32,6 +32,8 @@ processors (sync, async), filters, layouts (binary, text) and appenders.
   * [Logging benchmarks](#logging-benchmarks)
     * [Benchmark 1: Null appender](#benchmark-1-null-appender)
     * [Benchmark 2: File appender](#benchmark-2-file-appender)
+    * [Benchmark 3: Synchronous processor](#benchmark-3-synchronous-processor)
+    * [Benchmark 4: Asynchronous processor](#benchmark-4-asynchronous-processor)
   * [Tools](#tools)
     * [Binary log reader](#binary-log-reader)
 
@@ -743,6 +745,272 @@ Maximal time: 249 ns / iteration
 Total time: 229.126 ms
 Total iterations: 1000000
 Iterations throughput: 4364404 / second
+===============================================================================
+```
+
+## Benchmark 3: Synchronous processor
+Benchmark source file: [processor_sync.cpp](https://github.com/chronoxor/CppLogging/blob/master/perf/processor_sync.cpp)
+
+Benchmark report is the following:
+```
+===============================================================================
+CppBenchmark report. Version 1.0.0.0
+===============================================================================
+CPU architecutre: Intel(R) Core(TM) i7-4790K CPU @ 4.00GHz
+CPU logical cores: 8
+CPU physical cores: 4
+CPU clock speed: 3.998 GHz
+CPU Hyper-Threading: enabled
+RAM total: 31.962 GiB
+RAM free: 21.628 GiB
+===============================================================================
+OS version: Microsoft Windows 8 Enterprise Edition (build 9200), 64-bit
+OS bits: 64-bit
+Process bits: 64-bit
+Process configuaraion: release
+Local timestamp: Wed Sep 28 22:16:57 2016
+UTC timestamp: Wed Sep 28 19:16:57 2016
+===============================================================================
+Benchmark: SyncProcessor-null
+Attempts: 5
+Iterations: 1000000
+-------------------------------------------------------------------------------
+Phase: SyncProcessor-null(threads:1)
+Average time: 27 ns / iteration
+Minimal time: 27 ns / iteration
+Maximal time: 30 ns / iteration
+Total time: 55.891 ms
+Total iterations: 1999999
+Iterations throughput: 35783702 / second
+-------------------------------------------------------------------------------
+Phase: SyncProcessor-null(threads:2)
+Average time: 22 ns / iteration
+Minimal time: 22 ns / iteration
+Maximal time: 29 ns / iteration
+Total time: 89.344 ms
+Total iterations: 3999999
+Iterations throughput: 44770342 / second
+-------------------------------------------------------------------------------
+Phase: SyncProcessor-null(threads:4)
+Average time: 84 ns / iteration
+Minimal time: 84 ns / iteration
+Maximal time: 92 ns / iteration
+Total time: 674.796 ms
+Total iterations: 7999999
+Iterations throughput: 11855429 / second
+-------------------------------------------------------------------------------
+Phase: SyncProcessor-null(threads:8)
+Average time: 113 ns / iteration
+Minimal time: 113 ns / iteration
+Maximal time: 113 ns / iteration
+Total time: 1.808 s
+Total iterations: 15999999
+Iterations throughput: 8849109 / second
+===============================================================================
+Benchmark: SyncProcessor-binary
+Attempts: 5
+Iterations: 1000000
+-------------------------------------------------------------------------------
+Phase: SyncProcessor-binary(threads:1)
+Average time: 74 ns / iteration
+Minimal time: 74 ns / iteration
+Maximal time: 83 ns / iteration
+Total time: 74.038 ms
+Total iterations: 1000000
+Iterations throughput: 13506405 / second
+-------------------------------------------------------------------------------
+Phase: SyncProcessor-binary(threads:2)
+Average time: 123 ns / iteration
+Minimal time: 123 ns / iteration
+Maximal time: 133 ns / iteration
+Total time: 246.187 ms
+Total iterations: 2000000
+Iterations throughput: 8123893 / second
+-------------------------------------------------------------------------------
+Phase: SyncProcessor-binary(threads:4)
+Average time: 205 ns / iteration
+Minimal time: 205 ns / iteration
+Maximal time: 210 ns / iteration
+Total time: 821.948 ms
+Total iterations: 4000000
+Iterations throughput: 4866485 / second
+-------------------------------------------------------------------------------
+Phase: SyncProcessor-binary(threads:8)
+Average time: 276 ns / iteration
+Minimal time: 276 ns / iteration
+Maximal time: 278 ns / iteration
+Total time: 2.213 s
+Total iterations: 8000000
+Iterations throughput: 3614274 / second
+===============================================================================
+Benchmark: SyncProcessor-text
+Attempts: 5
+Iterations: 1000000
+-------------------------------------------------------------------------------
+Phase: SyncProcessor-text(threads:1)
+Average time: 177 ns / iteration
+Minimal time: 177 ns / iteration
+Maximal time: 180 ns / iteration
+Total time: 177.173 ms
+Total iterations: 1000000
+Iterations throughput: 5644200 / second
+-------------------------------------------------------------------------------
+Phase: SyncProcessor-text(threads:2)
+Average time: 222 ns / iteration
+Minimal time: 222 ns / iteration
+Maximal time: 241 ns / iteration
+Total time: 444.429 ms
+Total iterations: 2000000
+Iterations throughput: 4500155 / second
+-------------------------------------------------------------------------------
+Phase: SyncProcessor-text(threads:4)
+Average time: 308 ns / iteration
+Minimal time: 308 ns / iteration
+Maximal time: 315 ns / iteration
+Total time: 1.235 s
+Total iterations: 4000000
+Iterations throughput: 3237170 / second
+-------------------------------------------------------------------------------
+Phase: SyncProcessor-text(threads:8)
+Average time: 405 ns / iteration
+Minimal time: 405 ns / iteration
+Maximal time: 409 ns / iteration
+Total time: 3.242 s
+Total iterations: 8000000
+Iterations throughput: 2467338 / second
+===============================================================================
+```
+
+## Benchmark 4: Asynchronous processor
+Benchmark source file: [processor_async.cpp](https://github.com/chronoxor/CppLogging/blob/master/perf/processor_async.cpp)
+
+Benchmark report is the following:
+```
+===============================================================================
+CppBenchmark report. Version 1.0.0.0
+===============================================================================
+CPU architecutre: Intel(R) Core(TM) i7-4790K CPU @ 4.00GHz
+CPU logical cores: 8
+CPU physical cores: 4
+CPU clock speed: 3.998 GHz
+CPU Hyper-Threading: enabled
+RAM total: 31.962 GiB
+RAM free: 21.576 GiB
+===============================================================================
+OS version: Microsoft Windows 8 Enterprise Edition (build 9200), 64-bit
+OS bits: 64-bit
+Process bits: 64-bit
+Process configuaraion: release
+Local timestamp: Wed Sep 28 22:21:13 2016
+UTC timestamp: Wed Sep 28 19:21:13 2016
+===============================================================================
+Benchmark: AsyncProcessor-null
+Attempts: 5
+Iterations: 1000000
+-------------------------------------------------------------------------------
+Phase: AsyncProcessor-null(threads:1)
+Average time: 71 ns / iteration
+Minimal time: 71 ns / iteration
+Maximal time: 79 ns / iteration
+Total time: 143.543 ms
+Total iterations: 1999999
+Iterations throughput: 13933096 / second
+-------------------------------------------------------------------------------
+Phase: AsyncProcessor-null(threads:2)
+Average time: 47 ns / iteration
+Minimal time: 47 ns / iteration
+Maximal time: 52 ns / iteration
+Total time: 191.668 ms
+Total iterations: 3999999
+Iterations throughput: 20869336 / second
+-------------------------------------------------------------------------------
+Phase: AsyncProcessor-null(threads:4)
+Average time: 30 ns / iteration
+Minimal time: 30 ns / iteration
+Maximal time: 32 ns / iteration
+Total time: 244.934 ms
+Total iterations: 7999999
+Iterations throughput: 32661750 / second
+-------------------------------------------------------------------------------
+Phase: AsyncProcessor-null(threads:8)
+Average time: 44 ns / iteration
+Minimal time: 44 ns / iteration
+Maximal time: 44 ns / iteration
+Total time: 704.504 ms
+Total iterations: 15999999
+Iterations throughput: 22710985 / second
+===============================================================================
+Benchmark: AsyncProcessor-binary
+Attempts: 5
+Iterations: 1000000
+-------------------------------------------------------------------------------
+Phase: AsyncProcessor-binary(threads:1)
+Average time: 130 ns / iteration
+Minimal time: 130 ns / iteration
+Maximal time: 148 ns / iteration
+Total time: 130.037 ms
+Total iterations: 1000000
+Iterations throughput: 7690098 / second
+-------------------------------------------------------------------------------
+Phase: AsyncProcessor-binary(threads:2)
+Average time: 86 ns / iteration
+Minimal time: 86 ns / iteration
+Maximal time: 100 ns / iteration
+Total time: 172.245 ms
+Total iterations: 2000000
+Iterations throughput: 11611351 / second
+-------------------------------------------------------------------------------
+Phase: AsyncProcessor-binary(threads:4)
+Average time: 142 ns / iteration
+Minimal time: 142 ns / iteration
+Maximal time: 148 ns / iteration
+Total time: 570.112 ms
+Total iterations: 4000000
+Iterations throughput: 7016156 / second
+-------------------------------------------------------------------------------
+Phase: AsyncProcessor-binary(threads:8)
+Average time: 138 ns / iteration
+Minimal time: 138 ns / iteration
+Maximal time: 142 ns / iteration
+Total time: 1.111 s
+Total iterations: 8000000
+Iterations throughput: 7199789 / second
+===============================================================================
+Benchmark: AsyncProcessor-text
+Attempts: 5
+Iterations: 1000000
+-------------------------------------------------------------------------------
+Phase: AsyncProcessor-text(threads:1)
+Average time: 216 ns / iteration
+Minimal time: 216 ns / iteration
+Maximal time: 241 ns / iteration
+Total time: 216.754 ms
+Total iterations: 1000000
+Iterations throughput: 4613522 / second
+-------------------------------------------------------------------------------
+Phase: AsyncProcessor-text(threads:2)
+Average time: 286 ns / iteration
+Minimal time: 286 ns / iteration
+Maximal time: 311 ns / iteration
+Total time: 573.699 ms
+Total iterations: 2000000
+Iterations throughput: 3486145 / second
+-------------------------------------------------------------------------------
+Phase: AsyncProcessor-text(threads:4)
+Average time: 338 ns / iteration
+Minimal time: 338 ns / iteration
+Maximal time: 343 ns / iteration
+Total time: 1.352 s
+Total iterations: 4000000
+Iterations throughput: 2957581 / second
+-------------------------------------------------------------------------------
+Phase: AsyncProcessor-text(threads:8)
+Average time: 350 ns / iteration
+Minimal time: 350 ns / iteration
+Maximal time: 354 ns / iteration
+Total time: 2.805 s
+Total iterations: 8000000
+Iterations throughput: 2851072 / second
 ===============================================================================
 ```
 
