@@ -326,7 +326,7 @@ pattern is a string with a special placeholders provided inside curly brackets
 
 Supported placeholders:
 | Placeholder                         | Description                 | Example                                                      |
-|-------------------------------------|-----------------------------|--------------------------------------------------------------|
+| ----------------------------------- | --------------------------- | ------------------------------------------------------------ |
 | **{UtcDateTime} / {LocalDateTime}** | UTC/local date & time       | "1997-07-16T19:20:30.123Z" / "1997-07-16T19:20:30.123+01:00" |
 | **{UtcDate} / {LocalDate}**         | UTC/local date              | "1997-07-16"                                                 |
 | **{Time} / {LocalTime}**            | UTC/local time              | "19:20:30.123Z" / "19:20:30.123+01:00"                       |
@@ -392,7 +392,7 @@ a special pattern (contains date & time placeholders).
 Time-based policy composes logging filename from the given pattern using the
 following placeholders:
 | Placeholder                         | Description                 | Example                                                      |
-|-------------------------------------|-----------------------------|--------------------------------------------------------------|
+| ----------------------------------- | --------------------------- | ------------------------------------------------------------ |
 | **{UtcDateTime} / {LocalDateTime}** | UTC/local date & time       | "1997-07-16T192030Z" / "1997-07-16T192030+0100"              |
 | **{UtcDate} / {LocalDate}**         | UTC/local date              | "1997-07-16"                                                 |
 | **{Time} / {LocalTime}**            | UTC/local time              | "192030Z" / "192030+0100"                                    |
