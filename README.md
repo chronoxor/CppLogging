@@ -32,8 +32,10 @@ processors (sync, async), filters, layouts (binary, text) and appenders.
   * [Logging benchmarks](#logging-benchmarks)
     * [Benchmark 1: Null appender](#benchmark-1-null-appender)
     * [Benchmark 2: File appender](#benchmark-2-file-appender)
-    * [Benchmark 3: Synchronous processor](#benchmark-3-synchronous-processor)
-    * [Benchmark 4: Asynchronous processor](#benchmark-4-asynchronous-processor)
+    * [Benchmark 3: Synchronous processor with null appender](#benchmark-3-synchronous-processor-with-null-appender)
+    * [Benchmark 4: Asynchronous processor with null appender](#benchmark-4-asynchronous-processor-with-null-appender)
+    * [Benchmark 5: Synchronous processor with file appender](#benchmark-5-synchronous-processor-with-file-appender)
+    * [Benchmark 6: Asynchronous processor with file appender](#benchmark-6-asynchronous-processor-with-file-appender)
   * [Tools](#tools)
     * [Binary log reader](#binary-log-reader)
 
@@ -748,7 +750,7 @@ Iterations throughput: 4364404 / second
 ===============================================================================
 ```
 
-## Benchmark 3: Synchronous processor
+## Benchmark 3: Synchronous processor with null appender
 Benchmark source file: [processor_sync.cpp](https://github.com/chronoxor/CppLogging/blob/master/perf/processor_sync.cpp)
 
 Benchmark report is the following:
@@ -881,7 +883,7 @@ Iterations throughput: 2467338 / second
 ===============================================================================
 ```
 
-## Benchmark 4: Asynchronous processor
+## Benchmark 4: Asynchronous processor with null appender
 Benchmark source file: [processor_async.cpp](https://github.com/chronoxor/CppLogging/blob/master/perf/processor_async.cpp)
 
 Benchmark report is the following:
@@ -1011,6 +1013,200 @@ Maximal time: 354 ns / iteration
 Total time: 2.805 s
 Total iterations: 8000000
 Iterations throughput: 2851072 / second
+===============================================================================
+```
+
+## Benchmark 5: Synchronous processor with file appender
+Benchmark source file: [file_sync.cpp](https://github.com/chronoxor/CppLogging/blob/master/perf/file_sync.cpp)
+
+Benchmark report is the following:
+```
+===============================================================================
+CppBenchmark report. Version 1.0.0.0
+===============================================================================
+CPU architecutre: Intel(R) Core(TM) i7-4790K CPU @ 4.00GHz
+CPU logical cores: 8
+CPU physical cores: 4
+CPU clock speed: 3.998 GHz
+CPU Hyper-Threading: enabled
+RAM total: 31.962 GiB
+RAM free: 21.657 GiB
+===============================================================================
+OS version: Microsoft Windows 8 Enterprise Edition (build 9200), 64-bit
+OS bits: 64-bit
+Process bits: 64-bit
+Process configuaraion: release
+Local timestamp: Wed Sep 28 22:39:44 2016
+UTC timestamp: Wed Sep 28 19:39:44 2016
+===============================================================================
+Benchmark: FileSync-binary
+Attempts: 5
+Iterations: 1000000
+-------------------------------------------------------------------------------
+Phase: FileSync-binary(threads:1)
+Average time: 217 ns / iteration
+Minimal time: 217 ns / iteration
+Maximal time: 241 ns / iteration
+Total time: 217.972 ms
+Total iterations: 1000000
+Iterations throughput: 4587743 / second
+-------------------------------------------------------------------------------
+Phase: FileSync-binary(threads:2)
+Average time: 328 ns / iteration
+Minimal time: 328 ns / iteration
+Maximal time: 349 ns / iteration
+Total time: 657.976 ms
+Total iterations: 2000000
+Iterations throughput: 3039622 / second
+-------------------------------------------------------------------------------
+Phase: FileSync-binary(threads:4)
+Average time: 375 ns / iteration
+Minimal time: 375 ns / iteration
+Maximal time: 399 ns / iteration
+Total time: 1.500 s
+Total iterations: 4000000
+Iterations throughput: 2666189 / second
+-------------------------------------------------------------------------------
+Phase: FileSync-binary(threads:8)
+Average time: 431 ns / iteration
+Minimal time: 431 ns / iteration
+Maximal time: 451 ns / iteration
+Total time: 3.455 s
+Total iterations: 8000000
+Iterations throughput: 2315052 / second
+===============================================================================
+Benchmark: FileSync-text
+Attempts: 5
+Iterations: 1000000
+-------------------------------------------------------------------------------
+Phase: FileSync-text(threads:1)
+Average time: 359 ns / iteration
+Minimal time: 359 ns / iteration
+Maximal time: 408 ns / iteration
+Total time: 359.330 ms
+Total iterations: 1000000
+Iterations throughput: 2782949 / second
+-------------------------------------------------------------------------------
+Phase: FileSync-text(threads:2)
+Average time: 473 ns / iteration
+Minimal time: 473 ns / iteration
+Maximal time: 494 ns / iteration
+Total time: 946.856 ms
+Total iterations: 2000000
+Iterations throughput: 2112253 / second
+-------------------------------------------------------------------------------
+Phase: FileSync-text(threads:4)
+Average time: 531 ns / iteration
+Minimal time: 531 ns / iteration
+Maximal time: 579 ns / iteration
+Total time: 2.127 s
+Total iterations: 4000000
+Iterations throughput: 1880220 / second
+-------------------------------------------------------------------------------
+Phase: FileSync-text(threads:8)
+Average time: 700 ns / iteration
+Minimal time: 700 ns / iteration
+Maximal time: 724 ns / iteration
+Total time: 5.606 s
+Total iterations: 8000000
+Iterations throughput: 1426888 / second
+===============================================================================
+```
+
+## Benchmark 6: Asynchronous processor with file appender
+Benchmark source file: [file_async.cpp](https://github.com/chronoxor/CppLogging/blob/master/perf/file_async.cpp)
+
+Benchmark report is the following:
+```
+===============================================================================
+CppBenchmark report. Version 1.0.0.0
+===============================================================================
+CPU architecutre: Intel(R) Core(TM) i7-4790K CPU @ 4.00GHz
+CPU logical cores: 8
+CPU physical cores: 4
+CPU clock speed: 3.998 GHz
+CPU Hyper-Threading: enabled
+RAM total: 31.962 GiB
+RAM free: 21.673 GiB
+===============================================================================
+OS version: Microsoft Windows 8 Enterprise Edition (build 9200), 64-bit
+OS bits: 64-bit
+Process bits: 64-bit
+Process configuaraion: release
+Local timestamp: Wed Sep 28 22:41:46 2016
+UTC timestamp: Wed Sep 28 19:41:46 2016
+===============================================================================
+Benchmark: FileAsync-binary
+Attempts: 5
+Iterations: 1000000
+-------------------------------------------------------------------------------
+Phase: FileAsync-binary(threads:1)
+Average time: 131 ns / iteration
+Minimal time: 131 ns / iteration
+Maximal time: 164 ns / iteration
+Total time: 131.399 ms
+Total iterations: 1000000
+Iterations throughput: 7610405 / second
+-------------------------------------------------------------------------------
+Phase: FileAsync-binary(threads:2)
+Average time: 292 ns / iteration
+Minimal time: 292 ns / iteration
+Maximal time: 333 ns / iteration
+Total time: 584.864 ms
+Total iterations: 2000000
+Iterations throughput: 3419595 / second
+-------------------------------------------------------------------------------
+Phase: FileAsync-binary(threads:4)
+Average time: 290 ns / iteration
+Minimal time: 290 ns / iteration
+Maximal time: 322 ns / iteration
+Total time: 1.161 s
+Total iterations: 4000000
+Iterations throughput: 3442603 / second
+-------------------------------------------------------------------------------
+Phase: FileAsync-binary(threads:8)
+Average time: 300 ns / iteration
+Minimal time: 300 ns / iteration
+Maximal time: 324 ns / iteration
+Total time: 2.407 s
+Total iterations: 8000000
+Iterations throughput: 3322879 / second
+===============================================================================
+Benchmark: FileAsync-text
+Attempts: 5
+Iterations: 1000000
+-------------------------------------------------------------------------------
+Phase: FileAsync-text(threads:1)
+Average time: 283 ns / iteration
+Minimal time: 283 ns / iteration
+Maximal time: 331 ns / iteration
+Total time: 283.559 ms
+Total iterations: 1000000
+Iterations throughput: 3526594 / second
+-------------------------------------------------------------------------------
+Phase: FileAsync-text(threads:2)
+Average time: 539 ns / iteration
+Minimal time: 539 ns / iteration
+Maximal time: 591 ns / iteration
+Total time: 1.079 s
+Total iterations: 2000000
+Iterations throughput: 1852223 / second
+-------------------------------------------------------------------------------
+Phase: FileAsync-text(threads:4)
+Average time: 521 ns / iteration
+Minimal time: 521 ns / iteration
+Maximal time: 561 ns / iteration
+Total time: 2.085 s
+Total iterations: 4000000
+Iterations throughput: 1918385 / second
+-------------------------------------------------------------------------------
+Phase: FileAsync-text(threads:8)
+Average time: 551 ns / iteration
+Minimal time: 551 ns / iteration
+Maximal time: 576 ns / iteration
+Total time: 4.415 s
+Total iterations: 8000000
+Iterations throughput: 1811865 / second
 ===============================================================================
 ```
 
