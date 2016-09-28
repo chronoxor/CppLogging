@@ -29,10 +29,13 @@ processors (sync, async), filters, layouts (binary, text) and appenders.
     * [Example 8: Configure rolling file appender with size-based policy](#example-8-configure-rolling-file-appender-with-size-based-policy)
     * [Example 9: Multi-thread logging with synchronous processor](#example-9-multi-thread-logging-with-synchronous-processor)
     * [Example 10: Multi-thread logging with asynchronous processor](#example-10-multi-thread-logging-with-asynchronous-processor)
+  * [Logging benchmarks](#logging-benchmarks)
+    * [Benchmark 1: Binary layout vs text layout](#benchmark-1-binary-layout-vs-text-layout)
   * [Tools](#tools)
     * [Binary log reader](#binary-log-reader)
 
 # Features
+* Optimized for performance
 * Binary & text layouts
 * Synchronous logging
 * Asynchronous logging
@@ -640,6 +643,57 @@ int main(int argc, char** argv)
 
     return 0;
 }
+```
+
+# Logging benchmarks
+
+##Benchmark 1: Binary layout vs text layout
+Benchmark source file: [appender_null.cpp](https://github.com/chronoxor/CppLogging/blob/master/perf/appender_null.cpp)
+
+Report fragment is the following:
+```
+===============================================================================
+CppBenchmark report. Version 1.0.0.0
+===============================================================================
+CPU architecutre: Intel(R) Core(TM) i7-4790K CPU @ 4.00GHz
+CPU logical cores: 8
+CPU physical cores: 4
+CPU clock speed: 3.998 GHz
+CPU Hyper-Threading: enabled
+RAM total: 31.962 GiB
+RAM free: 21.688 GiB
+===============================================================================
+OS version: Microsoft Windows 8 Enterprise Edition (build 9200), 64-bit
+OS bits: 64-bit
+Process bits: 64-bit
+Process configuaraion: release
+Local timestamp: Wed Sep 28 22:08:14 2016
+UTC timestamp: Wed Sep 28 19:08:14 2016
+===============================================================================
+Benchmark: NullAppender-binary
+Attempts: 5
+Iterations: 10000000
+-------------------------------------------------------------------------------
+Phase: NullAppender-binary
+Average time: 62 ns / iteration
+Minimal time: 62 ns / iteration
+Maximal time: 63 ns / iteration
+Total time: 624.974 ms
+Total iterations: 10000000
+Iterations throughput: 16000657 / second
+===============================================================================
+Benchmark: NullAppender-text
+Attempts: 5
+Iterations: 10000000
+-------------------------------------------------------------------------------
+Phase: NullAppender-text
+Average time: 174 ns / iteration
+Minimal time: 174 ns / iteration
+Maximal time: 176 ns / iteration
+Total time: 1.744 s
+Total iterations: 10000000
+Iterations throughput: 5733126 / second
+===============================================================================
 ```
 
 # Tools
