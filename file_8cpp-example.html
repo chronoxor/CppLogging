@@ -90,10 +90,10 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line">{</div>
 <div class="line">    <span class="comment">// Create default logging sink processor</span></div>
 <div class="line">    <span class="keyword">auto</span> sink = std::make_shared&lt;CppLogging::Processor&gt;();</div>
-<div class="line">    <span class="comment">// Add text layout</span></div>
-<div class="line">    sink-&gt;layouts().push_back(std::make_shared&lt;CppLogging::TextLayout&gt;());</div>
+<div class="line">    <span class="comment">// Add binary layout</span></div>
+<div class="line">    sink-&gt;layouts().push_back(std::make_shared&lt;CppLogging::BinaryLayout&gt;());</div>
 <div class="line">    <span class="comment">// Add file appender</span></div>
-<div class="line">    sink-&gt;appenders().push_back(std::make_shared&lt;CppLogging::FileAppender&gt;(CppCommon::File(<span class="stringliteral">&quot;file.log&quot;</span>)));</div>
+<div class="line">    sink-&gt;appenders().push_back(std::make_shared&lt;CppLogging::FileAppender&gt;(CppCommon::File(<span class="stringliteral">&quot;file.bin.log&quot;</span>)));</div>
 <div class="line"></div>
 <div class="line">    <span class="comment">// Configure example logger</span></div>
 <div class="line">    <a name="a0"></a><a class="code" href="class_cpp_logging_1_1_config.html#aa3e1df3aa623bada0b5523294e9fde14">CppLogging::Config::ConfigLogger</a>(<span class="stringliteral">&quot;example&quot;</span>, sink);</div>
