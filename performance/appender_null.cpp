@@ -11,10 +11,10 @@ using namespace CppLogging;
 
 const uint64_t iterations = 10000000;
 
-class BinaryConfigFixture
+class BinaryConfigPreset
 {
 protected:
-    BinaryConfigFixture()
+    BinaryConfigPreset()
     {
         auto binary_sink = std::make_shared<Processor>();
         binary_sink->layouts().push_back(std::make_shared<BinaryLayout>());
@@ -23,10 +23,10 @@ protected:
     }
 };
 
-class TextConfigFixture
+class TextConfigPreset
 {
 protected:
-    TextConfigFixture()
+    TextConfigPreset()
     {
         auto text_sink = std::make_shared<Processor>();
         text_sink->layouts().push_back(std::make_shared<TextLayout>());
@@ -35,13 +35,13 @@ protected:
     }
 };
 
-BENCHMARK_FIXTURE(BinaryConfigFixture, "NullAppender-binary", iterations)
+BENCHMARK_PRESET(BinaryConfigPreset, "NullAppender-binary", iterations)
 {
     static Logger logger = Config::CreateLogger("binary");
     logger.Info("Test message");
 }
 
-BENCHMARK_FIXTURE(TextConfigFixture, "NullAppender-text", iterations)
+BENCHMARK_PRESET(TextConfigPreset, "NullAppender-text", iterations)
 {
     static Logger logger = Config::CreateLogger("text");
     logger.Info("Test message");
