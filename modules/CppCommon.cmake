@@ -1,4 +1,5 @@
 if(NOT TARGET cppcommon)
   set(CPPCOMMON_MODULE Y)
   add_subdirectory("CppCommon")
+  set_target_properties(cppcommon PROPERTIES FOLDER modules/CppCommon)
 endif()

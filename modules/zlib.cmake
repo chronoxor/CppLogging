@@ -1,0 +1,6 @@
+if(NOT TARGET zlib)
+  option(AMD64 "Enable building amd64 assembly implementation" ON)
+  add_subdirectory("zlib")
+  set_target_properties(zlib zlibstatic example minigzip PROPERTIES FOLDER modules/zlib)
+  set_target_properties(example minigzip PROPERTIES EXCLUDE_FROM_ALL 1 EXCLUDE_FROM_DEFAULT_BUILD 1)
+endif()
