@@ -61,6 +61,7 @@ include_directories("modules/catch/single_include")
 include_directories("modules/cpp-optparse")
 include_directories("modules/CppBenchmark/include")
 include_directories("modules/CppCommon/include")
+include_directories("modules/zlib")
 
 # Library
 file(GLOB_RECURSE SOURCE_FILES "source/*.cpp")

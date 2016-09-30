@@ -6,6 +6,11 @@
     \copyright MIT License
 */
 
+#if defined(_MSC_VER)
+#pragma warning(push)
+#pragma warning(disable: 4702) // C4702: unreachable code
+#endif
+
 namespace CppLogging {
 
 inline AsyncBuffer::AsyncBuffer(size_t capacity) : _capacity(capacity), _mask(capacity - 1), _buffer(new Node[capacity]), _head(0), _tail(0)
@@ -114,3 +119,7 @@ inline bool AsyncBuffer::Dequeue(Record& record)
 }
 
 } // namespace CppLogging
+
+#if defined(_MSC_VER)
+#pragma warning(pop)
+#endif

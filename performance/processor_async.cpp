@@ -12,10 +12,10 @@ using namespace CppLogging;
 const uint64_t iterations = 1000000;
 const auto settings = CppBenchmark::Settings().Iterations(iterations).ThreadsRange(1, 8, [](int from, int to, int& result) { int r = result; result *= 2; return r; });
 
-class NullConfigPreset
+class NullConfigFixture
 {
 protected:
-    NullConfigPreset()
+    NullConfigFixture()
     {
         auto null_sink = std::make_shared<AsyncProcessor>();
         null_sink->appenders().push_back(std::make_shared<NullAppender>());
@@ -23,10 +23,10 @@ protected:
     }
 };
 
-class BinaryConfigPreset
+class BinaryConfigFixture
 {
 protected:
-    BinaryConfigPreset()
+    BinaryConfigFixture()
     {
         auto binary_sink = std::make_shared<AsyncProcessor>();
         binary_sink->layouts().push_back(std::make_shared<BinaryLayout>());
@@ -35,10 +35,10 @@ protected:
     }
 };
 
-class TextConfigPreset
+class TextConfigFixture
 {
 protected:
-    TextConfigPreset()
+    TextConfigFixture()
     {
         auto text_sink = std::make_shared<AsyncProcessor>();
         text_sink->layouts().push_back(std::make_shared<TextLayout>());
@@ -47,19 +47,19 @@ protected:
     }
 };
 
-BENCHMARK_THREADS_PRESET(NullConfigPreset, "AsyncProcessor-null", settings)
+BENCHMARK_THREADS_FIXTURE(NullConfigFixture, "AsyncProcessor-null", settings)
 {
     thread_local Logger logger = Config::CreateLogger("null");
     logger.Info("Test message");
 }
 
-BENCHMARK_THREADS_PRESET(BinaryConfigPreset, "AsyncProcessor-binary", settings)
+BENCHMARK_THREADS_FIXTURE(BinaryConfigFixture, "AsyncProcessor-binary", settings)
 {
     thread_local Logger logger = Config::CreateLogger("binary");
     logger.Info("Test message");
 }
 
-BENCHMARK_THREADS_PRESET(TextConfigPreset, "AsyncProcessor-text", settings)
+BENCHMARK_THREADS_FIXTURE(TextConfigFixture, "AsyncProcessor-text", settings)
 {
     thread_local Logger logger = Config::CreateLogger("text");
     logger.Info("Test message");

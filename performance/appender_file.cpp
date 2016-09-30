@@ -11,10 +11,10 @@ using namespace CppLogging;
 
 const uint64_t iterations = 1000000;
 
-class BinaryConfigPreset
+class BinaryConfigFixture
 {
 protected:
-    BinaryConfigPreset()
+    BinaryConfigFixture()
     {
         auto binary_sink = std::make_shared<Processor>();
         binary_sink->layouts().push_back(std::make_shared<BinaryLayout>());
@@ -22,16 +22,16 @@ protected:
         Config::ConfigLogger("binary", binary_sink);
     }
 
-    ~BinaryConfigPreset()
+    ~BinaryConfigFixture()
     {
         CppCommon::File::Remove("test.bin.log");
     }
 };
 
-class TextConfigPreset
+class TextConfigFixture
 {
 protected:
-    TextConfigPreset()
+    TextConfigFixture()
     {
         auto text_sink = std::make_shared<Processor>();
         text_sink->layouts().push_back(std::make_shared<TextLayout>());
@@ -39,19 +39,19 @@ protected:
         Config::ConfigLogger("text", text_sink);
     }
 
-    ~TextConfigPreset()
+    ~TextConfigFixture()
     {
         CppCommon::File::Remove("test.log");
     }
 };
 
-BENCHMARK_PRESET(BinaryConfigPreset, "FileAppender-binary", iterations)
+BENCHMARK_FIXTURE(BinaryConfigFixture, "FileAppender-binary", iterations)
 {
     static Logger logger = Config::CreateLogger("binary");
     logger.Info("Test message");
 }
 
-BENCHMARK_PRESET(TextConfigPreset, "FileAppender-text", iterations)
+BENCHMARK_FIXTURE(TextConfigFixture, "FileAppender-text", iterations)
 {
     static Logger logger = Config::CreateLogger("text");
     logger.Info("Test message");

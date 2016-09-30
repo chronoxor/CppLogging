@@ -12,10 +12,10 @@ using namespace CppLogging;
 const uint64_t iterations = 1000000;
 const auto settings = CppBenchmark::Settings().Iterations(iterations).ThreadsRange(1, 8, [](int from, int to, int& result) { int r = result; result *= 2; return r; });
 
-class BinaryConfigPreset
+class BinaryConfigFixture
 {
 protected:
-    BinaryConfigPreset()
+    BinaryConfigFixture()
     {
         auto binary_sink = std::make_shared<SyncProcessor>();
         binary_sink->layouts().push_back(std::make_shared<BinaryLayout>());
@@ -23,16 +23,16 @@ protected:
         Config::ConfigLogger("binary", binary_sink);
     }
 
-    ~BinaryConfigPreset()
+    ~BinaryConfigFixture()
     {
         CppCommon::File::Remove("test.bin.log");
     }
 };
 
-class TextConfigPreset
+class TextConfigFixture
 {
 protected:
-    TextConfigPreset()
+    TextConfigFixture()
     {
         auto text_sink = std::make_shared<SyncProcessor>();
         text_sink->layouts().push_back(std::make_shared<TextLayout>());
@@ -40,19 +40,19 @@ protected:
         Config::ConfigLogger("text", text_sink);
     }
 
-    ~TextConfigPreset()
+    ~TextConfigFixture()
     {
         CppCommon::File::Remove("test.log");
     }
 };
 
-BENCHMARK_THREADS_PRESET(BinaryConfigPreset, "FileSync-binary", settings)
+BENCHMARK_THREADS_FIXTURE(BinaryConfigFixture, "FileSync-binary", settings)
 {
     thread_local Logger logger = Config::CreateLogger("binary");
     logger.Info("Test message");
 }
 
-BENCHMARK_THREADS_PRESET(TextConfigPreset, "FileSync-text", settings)
+BENCHMARK_THREADS_FIXTURE(TextConfigFixture, "FileSync-text", settings)
 {
     thread_local Logger logger = Config::CreateLogger("text");
     logger.Info("Test message");
