@@ -46,6 +46,7 @@ processors (sync, async), filters, layouts (binary, text) and appenders.
 * Synchronous logging
 * Asynchronous logging
 * Appenders collection (null, memory, console, file, rolling file, ostream, syslog)
+* Rolling policies (time-based, size-bases) and logs archivation
 * Logging levels (debug, info, warning, error, fatal)
 * Logging filters (by level, by logger name, by message pattern)
 * Format logging records using [{fmt} library](http://fmtlib.net)
