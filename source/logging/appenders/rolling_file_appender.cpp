@@ -118,13 +118,13 @@ protected:
         // Close the file in zip archive
         result = zipCloseFileInZip(zf);
         if (result != ZIP_OK)
-            throwex CppCommon::FileSystemException("Cannot close file in zip archive!").Attach(file);
+            throwex CppCommon::FileSystemException("Cannot close a file in zip archive!").Attach(file);
         zip_file.release();
 
         // Close zip archive
         result = zipClose(zf);
         if (result != ZIP_OK)
-            throwex CppCommon::FileSystemException("Cannot close zip archive!").Attach(file);
+            throwex CppCommon::FileSystemException("Cannot close a zip archive!").Attach(file);
         zip.release();
 
         // Remove the source file
