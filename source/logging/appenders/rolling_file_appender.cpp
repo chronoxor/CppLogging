@@ -11,6 +11,7 @@
 #include "errors/exceptions.h"
 #include "string/format.h"
 #include "time/timezone.h"
+#include "utility/resource.h"
 
 #include "contrib/minizip/zip.h"
 
@@ -62,20 +63,16 @@ protected:
         if (zf == nullptr)
             throwex CppCommon::FileSystemException("Cannot create a new zip archive!").Attach(file);
 
+        // Smart resource cleaner pattern
+        auto zip = resource(zf, [file](zipFile zf) { int result = zipClose(zf, nullptr); if (result != ZIP_OK) throwex CppCommon::FileSystemException("Cannot close zip archive!").Attach(file); });
+
         // Open a new file in zip archive
         int result = zipOpenNewFileInZip64(zf, file.filename().native().c_str(), nullptr, 0, nullptr, 0, nullptr, Z_DEFLATED, Z_DEFAULT_COMPRESSION, 1);
         if (result != ZIP_OK)
             throwex CppCommon::FileSystemException("Cannot open a new file in zip archive!").Attach(file);
 
-        // Close file in zip archive
-        int result = zipCloseFileInZip(zf);
-        if (result != ZIP_OK)
-            throwex CppCommon::FileSystemException("Cannot close file in zip archive!").Attach(file);
-
-        // Close zip archive
-        result = zipClose(zf, nullptr);
-        if (result != ZIP_OK)
-            throwex CppCommon::FileSystemException("Cannot close zip archive!").Attach(file);
+        // Smart resource cleaner pattern
+        auto zip_file = resource([file](void*) { int result = zipCloseFileInZip(zf); if (result != ZIP_OK) throwex CppCommon::FileSystemException("Cannot close file in zip archive!").Attach(file); });
     }
 };
 
