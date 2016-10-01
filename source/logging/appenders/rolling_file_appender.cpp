@@ -12,6 +12,8 @@
 #include "string/format.h"
 #include "time/timezone.h"
 
+#include "contrib/minizip/zip.h"
+
 #include <cassert>
 
 namespace CppLogging {
@@ -48,6 +50,32 @@ protected:
 
     void ArchiveFile(const CppCommon::File& file)
     {
+        // Create a new zip archive
+        zipFile zf;
+#if defined(_WIN32) || defined(_WIN64)
+        zlib_filefunc64_def ffunc;
+        fill_win32_filefunc64W(&ffunc);
+        zf = zipOpen2_64(file.wstring().c_str(), APPEND_STATUS_CREATE, nullptr, &ffunc);
+#else
+        zf = zipOpen64(file.native().c_str(), APPEND_STATUS_CREATE);
+#endif
+        if (zf == nullptr)
+            throwex CppCommon::FileSystemException("Cannot create a new zip archive!").Attach(file);
+
+        // Open a new file in zip archive
+        int result = zipOpenNewFileInZip64(zf, file.filename().native().c_str(), nullptr, 0, nullptr, 0, nullptr, Z_DEFLATED, Z_DEFAULT_COMPRESSION, 1);
+        if (result != ZIP_OK)
+            throwex CppCommon::FileSystemException("Cannot open a new file in zip archive!").Attach(file);
+
+        // Close file in zip archive
+        int result = zipCloseFileInZip(zf);
+        if (result != ZIP_OK)
+            throwex CppCommon::FileSystemException("Cannot close file in zip archive!").Attach(file);
+
+        // Close zip archive
+        result = zipClose(zf, nullptr);
+        if (result != ZIP_OK)
+            throwex CppCommon::FileSystemException("Cannot close zip archive!").Attach(file);
     }
 };
 
