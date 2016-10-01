@@ -62,11 +62,21 @@ include_directories("modules/cpp-optparse")
 include_directories("modules/CppBenchmark/include")
 include_directories("modules/CppCommon/include")
 include_directories("modules/zlib")
+include_directories("build/modules/zlib")
+
+# Support zlib/contrib/minizip
+set(MINIZIP_FILES
+  "modules/zlib/contrib/minizip/ioapi.c"
+  "modules/zlib/contrib/minizip/iowin32.c"
+  "modules/zlib/contrib/minizip/zip.c")
+if(CMAKE_MAKE_PROGRAM MATCHES "(MSBuild|devenv|msdev|nmake)")
+  set_source_files_properties(${MINIZIP_FILES} PROPERTIES COMPILE_FLAGS "/wd4131 /wd4189 /wd4244")
+endif()
 
 # Library
 file(GLOB_RECURSE SOURCE_FILES "source/*.cpp")
-add_library(cpplogging ${SOURCE_FILES})
-target_link_libraries(cpplogging cppcommon)
+add_library(cpplogging ${SOURCE_FILES} ${MINIZIP_FILES})
+target_link_libraries(cpplogging cppcommon zlibstatic)
 set_target_properties(cpplogging PROPERTIES FOLDER libraries)
 list(APPEND INSTALL_TARGETS cpplogging)
 

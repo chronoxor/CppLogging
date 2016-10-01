@@ -25,5 +25,5 @@
 [submodule "modules/zlib"]
 	path = modules/zlib
 	url = https://github.com/madler/zlib.git
-	branch = master
+	branch = develop
 	ignore = dirty

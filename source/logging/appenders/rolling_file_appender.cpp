@@ -11,9 +11,13 @@
 #include "errors/exceptions.h"
 #include "string/format.h"
 #include "time/timezone.h"
+#include "utility/countof.h"
 #include "utility/resource.h"
 
 #include "contrib/minizip/zip.h"
+#if defined(_WIN32) || defined(_WIN64)
+#include "contrib/minizip/iowin32.h"
+#endif
 
 #include <cassert>
 
@@ -34,6 +38,21 @@ public:
 
     virtual ~Impl()
     {
+        try
+        {
+            // Check if the file is already opened for writing
+            if (_file.IsFileWriteOpened())
+            {
+                // Flush & close the file
+                _file.Flush();
+                _file.Close();
+
+                // Archive the file
+                if (_archive)
+                    ArchiveFile(_file);
+            }
+        }
+        catch (CppCommon::FileSystemException&) {}
     }
 
     virtual void AppendRecord(Record& record) = 0;
@@ -56,23 +75,60 @@ protected:
 #if defined(_WIN32) || defined(_WIN64)
         zlib_filefunc64_def ffunc;
         fill_win32_filefunc64W(&ffunc);
-        zf = zipOpen2_64(file.wstring().c_str(), APPEND_STATUS_CREATE, nullptr, &ffunc);
+        zf = zipOpen2_64((file + ".zip").wstring().c_str(), APPEND_STATUS_CREATE, nullptr, &ffunc);
 #else
-        zf = zipOpen64(file.native().c_str(), APPEND_STATUS_CREATE);
+        zf = zipOpen64((file + ".zip").native().c_str(), APPEND_STATUS_CREATE);
 #endif
         if (zf == nullptr)
             throwex CppCommon::FileSystemException("Cannot create a new zip archive!").Attach(file);
 
         // Smart resource cleaner pattern
-        auto zip = resource(zf, [file](zipFile zf) { int result = zipClose(zf, nullptr); if (result != ZIP_OK) throwex CppCommon::FileSystemException("Cannot close zip archive!").Attach(file); });
+        auto zip = CppCommon::resource(zf, [](zipFile zf) { zipClose(zf, nullptr); });
 
         // Open a new file in zip archive
-        int result = zipOpenNewFileInZip64(zf, file.filename().native().c_str(), nullptr, 0, nullptr, 0, nullptr, Z_DEFLATED, Z_DEFAULT_COMPRESSION, 1);
+        int result = zipOpenNewFileInZip64(zf, "test.txt", nullptr, nullptr, 0, nullptr, 0, nullptr, Z_DEFLATED, Z_DEFAULT_COMPRESSION, 1);
         if (result != ZIP_OK)
             throwex CppCommon::FileSystemException("Cannot open a new file in zip archive!").Attach(file);
 
         // Smart resource cleaner pattern
-        auto zip_file = resource([file](void*) { int result = zipCloseFileInZip(zf); if (result != ZIP_OK) throwex CppCommon::FileSystemException("Cannot close file in zip archive!").Attach(file); });
+        auto zip_file = CppCommon::resource(zf, [](zipFile zf) { zipCloseFileInZip(zf); });
+
+        CppCommon::File source(file);
+        uint8_t buffer[16384];
+        size_t size;
+
+        // Open the source file for reading
+        source.Open(true, false);
+
+        // Write data into the zip file
+        do
+        {
+            size = source.Read(buffer, CppCommon::countof(buffer));
+            if (size > 0)
+            {
+                result = zipWriteInFileInZip(zf, buffer, (unsigned)size);
+                if (result != ZIP_OK)
+                    throwex CppCommon::FileSystemException("Cannot write into the zip file!").Attach(file);
+            }
+        } while (size > 0);
+
+        // Close the source file
+        source.Close();
+
+        // Close the file in zip archive
+        result = zipCloseFileInZip(zf);
+        if (result != ZIP_OK)
+            throwex CppCommon::FileSystemException("Cannot close file in zip archive!").Attach(file);
+        zip_file.release();
+
+        // Close zip archive
+        result = zipClose(zf);
+        if (result != ZIP_OK)
+            throwex CppCommon::FileSystemException("Cannot close zip archive!").Attach(file);
+        zip.release();
+
+        // Remove the source file
+        CppCommon::File::Remove(source);
     }
 };
 
@@ -164,9 +220,6 @@ public:
         else
             AppendPattern(subpattern);
 
-        // Addend end of string character
-        AppendPattern(std::string(1, '\0'));
-
         // Calculate rolling delay
         switch (policy)
         {
@@ -187,6 +240,7 @@ public:
 
     virtual ~TimePolicyImpl()
     {
+        Flush();
     }
 
     void AppendRecord(Record& record) override
@@ -755,6 +809,7 @@ public:
 
     virtual ~SizePolicyImpl()
     {
+        Flush();
     }
 
     void AppendRecord(Record& record)
