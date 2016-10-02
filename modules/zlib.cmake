@@ -1,14 +1,16 @@
 if(NOT TARGET zlib)
 
   # Temporary disable some warnings
+  # C4018: 'expression' : signed/unsigned mismatch
   # C4131: 'function' : uses old-style declarator
   # C4210: nonstandard extension used : function given file scope
   # C4244: 'conversion' conversion from 'type1' to 'type2', possible loss of data
+  # C4245: 'conversion' : conversion from 'type1' to 'type2', signed/unsigned mismatch
   if(CMAKE_MAKE_PROGRAM MATCHES "(MSBuild|devenv|msdev|nmake)")
     set(CMAKE_OLD_C_FLAGS ${CMAKE_C_FLAGS})
     set(CMAKE_OLD_CXX_FLAGS ${CMAKE_CXX_FLAGS})
-    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} /wd4127 /wd4131 /wd4210 /wd4244")
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /wd4127 /wd4131 /wd4210 /wd4244")
+    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} /wd4018 /wd4127 /wd4131 /wd4210 /wd4244 /wd4245")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /wd4018 /wd4127 /wd4131 /wd4210 /wd4244 /wd4245")
   endif()
 
   # Set module options
