@@ -62,6 +62,7 @@ include_directories("modules/cpp-optparse")
 include_directories("modules/CppBenchmark/include")
 include_directories("modules/CppCommon/include")
 include_directories("modules/zlib")
+include_directories("build/modules/zlib")
 
 # Support zlib/contrib/minizip
 file(GLOB_RECURSE MINIZIP_FILES "source/logging/appenders/minizip/*.c")
