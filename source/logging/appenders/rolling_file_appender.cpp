@@ -14,9 +14,9 @@
 #include "utility/countof.h"
 #include "utility/resource.h"
 
-#include "contrib/minizip/zip.h"
+#include "minizip/zip.h"
 #if defined(_WIN32) || defined(_WIN64)
-#include "contrib/minizip/iowin32.h"
+#include "minizip/iowin32.h"
 #endif
 
 #include <cassert>
