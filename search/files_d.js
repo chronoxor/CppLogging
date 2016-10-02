@@ -1,7 +1,6 @@
 var searchData=
 [
-  ['sync_5fprocessor_2ecpp',['sync_processor.cpp',['../sync__processor_8cpp.html',1,'']]],
-  ['sync_5fprocessor_2eh',['sync_processor.h',['../sync__processor_8h.html',1,'']]],
-  ['syslog_5fappender_2ecpp',['syslog_appender.cpp',['../syslog__appender_8cpp.html',1,'']]],
-  ['syslog_5fappender_2eh',['syslog_appender.h',['../syslog__appender_8h.html',1,'']]]
+  ['text_5flayout_2ecpp',['text_layout.cpp',['../text__layout_8cpp.html',1,'']]],
+  ['text_5flayout_2eh',['text_layout.h',['../text__layout_8h.html',1,'']]],
+  ['trigger_2eh',['trigger.h',['../trigger_8h.html',1,'']]]
 ];

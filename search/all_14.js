@@ -1,8 +1,26 @@
 var searchData=
 [
-  ['version',['version',['../structunz__file__info64__s.html#a4262e51be02716b887447e68c231006b',1,'unz_file_info64_s::version()'],['../structunz__file__info__s.html#a635f933b26b636d8314cef61af62fcef',1,'unz_file_info_s::version()'],['../namespace_cpp_logging.html#a8bbbfc46fdcba8b729fdf351ee4c8476',1,'CppLogging::version()']]],
-  ['version_2eh',['version.h',['../version_8h.html',1,'']]],
-  ['version_5fneeded',['version_needed',['../structunz__file__info64__s.html#ad0041eacba37cb431242d9bd9c86d264',1,'unz_file_info64_s::version_needed()'],['../structunz__file__info__s.html#a1578aca2bb7fed658f9f94c78d00288e',1,'unz_file_info_s::version_needed()']]],
-  ['versionmadeby',['VERSIONMADEBY',['../zip_8c.html#a0887c08f255f7a753b460e30ed14a3cf',1,'zip.c']]],
-  ['voidpf',['voidpf',['../ioapi_8h.html#a39ab6d73c1cd44bc17064c2dcbb3e753',1,'ioapi.h']]]
+  ['_7easyncbuffer',['~AsyncBuffer',['../class_cpp_logging_1_1_async_buffer.html#acbcb54a2a965cc11c0c1e6f63d0b5f5a',1,'CppLogging::AsyncBuffer']]],
+  ['_7easyncprocessor',['~AsyncProcessor',['../class_cpp_logging_1_1_async_processor.html#ac4da7cc7463aeb7697794bbd067bed0f',1,'CppLogging::AsyncProcessor']]],
+  ['_7ebinarylayout',['~BinaryLayout',['../class_cpp_logging_1_1_binary_layout.html#aeaec266fb019fa9ca511112eb04cd62b',1,'CppLogging::BinaryLayout']]],
+  ['_7ebufferedprocessor',['~BufferedProcessor',['../class_cpp_logging_1_1_buffered_processor.html#a4519f05ece06dafbb40a10f9bd1bbc6c',1,'CppLogging::BufferedProcessor']]],
+  ['_7econfig',['~Config',['../class_cpp_logging_1_1_config.html#a4f5b9a09720c1a71122aa3d4da508f27',1,'CppLogging::Config']]],
+  ['_7econsoleappender',['~ConsoleAppender',['../class_cpp_logging_1_1_console_appender.html#af6494c8942ce73c437106042740c2a02',1,'CppLogging::ConsoleAppender']]],
+  ['_7edebugappender',['~DebugAppender',['../class_cpp_logging_1_1_debug_appender.html#a84021216a9e86c376aef4f8d8297ba01',1,'CppLogging::DebugAppender']]],
+  ['_7eerrorappender',['~ErrorAppender',['../class_cpp_logging_1_1_error_appender.html#a791f147ab9d3b2f36e22079ed081a419',1,'CppLogging::ErrorAppender']]],
+  ['_7efileappender',['~FileAppender',['../class_cpp_logging_1_1_file_appender.html#a0423c19731d415789dda030a749f4035',1,'CppLogging::FileAppender']]],
+  ['_7elevelfilter',['~LevelFilter',['../class_cpp_logging_1_1_level_filter.html#a773c68b5c3b38e553d4b04915e3db564',1,'CppLogging::LevelFilter']]],
+  ['_7elogger',['~Logger',['../class_cpp_logging_1_1_logger.html#ae942d1dd474621a50870c9124942af1c',1,'CppLogging::Logger']]],
+  ['_7eloggerfilter',['~LoggerFilter',['../class_cpp_logging_1_1_logger_filter.html#ab4f9d323690da99887cc13d0526f4771',1,'CppLogging::LoggerFilter']]],
+  ['_7ememoryappender',['~MemoryAppender',['../class_cpp_logging_1_1_memory_appender.html#a599ee8822f4fd517bf9bb1b99c617d1d',1,'CppLogging::MemoryAppender']]],
+  ['_7emessagefilter',['~MessageFilter',['../class_cpp_logging_1_1_message_filter.html#a87b888b7bfe578ad94b464ff7847fef0',1,'CppLogging::MessageFilter']]],
+  ['_7enullappender',['~NullAppender',['../class_cpp_logging_1_1_null_appender.html#afda8485c6dde9373fbc8627abdfea23d',1,'CppLogging::NullAppender']]],
+  ['_7eostreamappender',['~OstreamAppender',['../class_cpp_logging_1_1_ostream_appender.html#ab2bd1c440146e2d8ca64ae5e61de3b1d',1,'CppLogging::OstreamAppender']]],
+  ['_7eprocessor',['~Processor',['../class_cpp_logging_1_1_processor.html#aded3ba54d15df4da4952b62d2d82e178',1,'CppLogging::Processor']]],
+  ['_7erecord',['~Record',['../class_cpp_logging_1_1_record.html#a80115bd6070e1d840724b35621047256',1,'CppLogging::Record']]],
+  ['_7erollingfileappender',['~RollingFileAppender',['../class_cpp_logging_1_1_rolling_file_appender.html#ab9c2f25756cab928b1f3917cf0bf0a24',1,'CppLogging::RollingFileAppender']]],
+  ['_7esyncprocessor',['~SyncProcessor',['../class_cpp_logging_1_1_sync_processor.html#ac68d2120077bd70099813252200d10ec',1,'CppLogging::SyncProcessor']]],
+  ['_7esyslogappender',['~SyslogAppender',['../class_cpp_logging_1_1_syslog_appender.html#ae531c3de5acc64c9bb92cbb078c042d4',1,'CppLogging::SyslogAppender']]],
+  ['_7etextlayout',['~TextLayout',['../class_cpp_logging_1_1_text_layout.html#aad7fb5626cfbad4ac0865736ae03fc3c',1,'CppLogging::TextLayout']]],
+  ['_7etrigger',['~Trigger',['../class_cpp_logging_1_1_trigger.html#a7b997a10c01c8696cbf7f22e12be4826',1,'CppLogging::Trigger']]]
 ];
