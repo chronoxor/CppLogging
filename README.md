@@ -45,12 +45,13 @@ processors (sync, async), filters, layouts (binary, text) and appenders.
 * Binary & text layouts
 * Synchronous logging
 * Asynchronous logging
+* Flexible configuration and logger processing hierarchy
 * Appenders collection (null, memory, console, file, rolling file, ostream, syslog)
-* Rolling policies (time-based, size-bases) and logs archivation
 * Logging levels (debug, info, warning, error, fatal)
 * Logging filters (by level, by logger name, by message pattern)
 * Format logging records using [{fmt} library](http://fmtlib.net)
-* Flexible configuration and logger processing hierarchy
+* Log files rolling policies (time-based, size-bases)
+* Log files Zip archivation
 
 # Requirements
 * Windows 7 / Windows 10
