@@ -67,7 +67,7 @@ include_directories("build/modules/zlib")
 # Support zlib/contrib/minizip
 file(GLOB_RECURSE MINIZIP_FILES "source/logging/appenders/minizip/*.c")
 if(NOT WIN32)
-  list(REMOVE_ITEM MINIZIP_FILES "source/logging/appenders/minizip/iowin32.c")
+  list(REMOVE_ITEM MINIZIP_FILES "${CMAKE_CURRENT_SOURCE_DIR}/source/logging/appenders/minizip/iowin32.c")
 endif()
 if(CMAKE_MAKE_PROGRAM MATCHES "(MSBuild|devenv|msdev|nmake)")
   set_source_files_properties(${MINIZIP_FILES} PROPERTIES COMPILE_FLAGS "/wd4067 /wd4131 /wd4189 /wd4244 /wd4456")
