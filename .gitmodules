@@ -22,8 +22,3 @@
 	path = modules/CppCommon
 	url = https://github.com/chronoxor/CppCommon.git
 	branch = master
-[submodule "modules/zlib"]
-	path = modules/zlib
-	url = https://github.com/madler/zlib.git
-	branch = develop
-	ignore = dirty

@@ -122,7 +122,7 @@ protected:
         zip_file.release();
 
         // Close zip archive
-        result = zipClose(zf);
+        result = zipClose(zf, nullptr);
         if (result != ZIP_OK)
             throwex CppCommon::FileSystemException("Cannot close a zip archive!").Attach(file);
         zip.release();
