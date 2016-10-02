@@ -4,7 +4,7 @@ var searchData=
   ['seek_5fcur',['SEEK_CUR',['../zip_8c.html#a4c8d0b76b470ba65a43ca46a88320f39',1,'zip.c']]],
   ['seek_5fend',['SEEK_END',['../zip_8c.html#ad2a2e6c114780c3071efd24f16c7f7d8',1,'zip.c']]],
   ['seek_5fset',['SEEK_SET',['../zip_8c.html#a0d112bae8fd35be772185b6ec6bcbe64',1,'zip.c']]],
-  ['size',['size',['../class_cpp_logging_1_1_async_buffer.html#af69c09a3e48091d02f726e13b29443d4',1,'CppLogging::AsyncBuffer::size()'],['../ioapi_8h.html#a014d89bd76f74ef3a29c8f04b473eb76',1,'size():&#160;ioapi.h']]],
+  ['size',['size',['../class_cpp_logging_1_1_async_buffer.html#a9a3bd7bec908877f6c1465532df749d9',1,'CppLogging::AsyncBuffer::size()'],['../ioapi_8h.html#a014d89bd76f74ef3a29c8f04b473eb76',1,'size():&#160;ioapi.h']]],
   ['size_5fcentral_5fdir',['size_central_dir',['../structunz64__s.html#ac20ff22a6956f082e88204c72d4fdda1',1,'unz64_s']]],
   ['size_5fcentralextra',['size_centralExtra',['../structcurfile64__info.html#ab4c965d0fe696204fe23e4efd0cc2edb',1,'curfile64_info']]],
   ['size_5fcentralextrafree',['size_centralExtraFree',['../structcurfile64__info.html#a885ce2d7f41cbac1a2ef990643e62069',1,'curfile64_info']]],

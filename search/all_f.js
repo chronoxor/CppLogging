@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['pattern',['pattern',['../class_cpp_logging_1_1_text_layout.html#ab3e9c2d158ac22b7f9e18a1985998fd1',1,'CppLogging::TextLayout']]],
+  ['pattern',['pattern',['../class_cpp_logging_1_1_text_layout.html#a6fb8421162a8bfb0d740da665477e746',1,'CppLogging::TextLayout']]],
   ['pcrc_5f32_5ftab',['pcrc_32_tab',['../structcurfile64__info.html#ad233b27925eb726ed3f225fc4abb4fac',1,'curfile64_info']]],
   ['pfile_5fin_5fzip_5fread',['pfile_in_zip_read',['../structunz64__s.html#ab4f7635123807366457df79da8d59934',1,'unz64_s']]],
   ['pos_5fin_5fbuffered_5fdata',['pos_in_buffered_data',['../structcurfile64__info.html#a208198f19c7d165203225903455478fd',1,'curfile64_info']]],

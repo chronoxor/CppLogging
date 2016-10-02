@@ -4,10 +4,10 @@ var searchData=
   ['z_5fbzip2ed',['Z_BZIP2ED',['../unzip_8h.html#ada7b1ad37b9026b52c9f7b10daf448d1',1,'Z_BZIP2ED():&#160;unzip.h'],['../zip_8h.html#ada7b1ad37b9026b52c9f7b10daf448d1',1,'Z_BZIP2ED():&#160;zip.h']]],
   ['z_5fmaxfilenameinzip',['Z_MAXFILENAMEINZIP',['../zip_8c.html#a135c063faff93cb20013a8c28b8d1984',1,'zip.c']]],
   ['zcallback',['ZCALLBACK',['../ioapi_8h.html#aace96475a6dd2915bc55bc542d7aa8a5',1,'ioapi.h']]],
-  ['zclose64',['ZCLOSE64',['../ioapi_8h.html#ac4ed0148a82154111eb1671549b50c38',1,'ioapi.h']]],
+  ['zclose64',['ZCLOSE64',['../ioapi_8h.html#ab1b931c867b0590b38467d49eea08037',1,'ioapi.h']]],
   ['zdecode',['zdecode',['../crypt_8h.html#a2ac0d8ec3c867c44d730a188d8b0418e',1,'crypt.h']]],
   ['zencode',['zencode',['../crypt_8h.html#ab9d6a91abe3a1127f8b5476ba9ee9316',1,'crypt.h']]],
-  ['zerror64',['ZERROR64',['../ioapi_8h.html#a4c4816968d9e57a9e916bafe96dd7157',1,'ioapi.h']]],
+  ['zerror64',['ZERROR64',['../ioapi_8h.html#acf2095f95b741618436b88bb151feab1',1,'ioapi.h']]],
   ['zip64endheadermagic',['ZIP64ENDHEADERMAGIC',['../zip_8c.html#a2eaf0b0d00af51ea85626bc8ebb1d0a6',1,'zip.c']]],
   ['zip64endlocheadermagic',['ZIP64ENDLOCHEADERMAGIC',['../zip_8c.html#af98a91c14cd4ab92931438c0c4f72341',1,'zip.c']]],
   ['zip_5fbadzipfile',['ZIP_BADZIPFILE',['../zip_8h.html#ac2eb83690692851093eb62ebb3744a64',1,'zip.h']]],
@@ -24,9 +24,9 @@ var searchData=
   ['zlib_5ffilefunc_5fseek_5fcur',['ZLIB_FILEFUNC_SEEK_CUR',['../ioapi_8h.html#a740e5a75e0d5ca1b093661d263f82e99',1,'ioapi.h']]],
   ['zlib_5ffilefunc_5fseek_5fend',['ZLIB_FILEFUNC_SEEK_END',['../ioapi_8h.html#ace27d6d19b1005424d1fb4bd0c7c9602',1,'ioapi.h']]],
   ['zlib_5ffilefunc_5fseek_5fset',['ZLIB_FILEFUNC_SEEK_SET',['../ioapi_8h.html#a962e25bd3652f31479b855be08836c16',1,'ioapi.h']]],
-  ['zopen64',['ZOPEN64',['../ioapi_8h.html#a73e71de7d2bb649346c2709ade661a48',1,'ioapi.h']]],
-  ['zread64',['ZREAD64',['../ioapi_8h.html#ac3f6323030cbaf7b0d389a8aaac36496',1,'ioapi.h']]],
-  ['zseek64',['ZSEEK64',['../ioapi_8h.html#a8ccaa5cb8fc7b04e6139c610cd31ce26',1,'ioapi.h']]],
-  ['ztell64',['ZTELL64',['../ioapi_8h.html#ac849fcd066ac44109dfb95a1c5fd494c',1,'ioapi.h']]],
-  ['zwrite64',['ZWRITE64',['../ioapi_8h.html#ada98b2bb422c21c8c22b1cc6e305e7d3',1,'ioapi.h']]]
+  ['zopen64',['ZOPEN64',['../ioapi_8h.html#a08d33495c45c6de968041556a8de6257',1,'ioapi.h']]],
+  ['zread64',['ZREAD64',['../ioapi_8h.html#a5c7f4b3c02e50f438662270582097117',1,'ioapi.h']]],
+  ['zseek64',['ZSEEK64',['../ioapi_8h.html#a03fd27ea409e9d59f97b4cb296ed5cde',1,'ioapi.h']]],
+  ['ztell64',['ZTELL64',['../ioapi_8h.html#af1ccadb9156604070d26c39cf1af59bf',1,'ioapi.h']]],
+  ['zwrite64',['ZWRITE64',['../ioapi_8h.html#a420774865ef34a74d59accbe0a04d601',1,'ioapi.h']]]
 ];
