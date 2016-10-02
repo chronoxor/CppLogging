@@ -76,9 +76,9 @@ endif()
 # C4189: 'identifier' : local variable is initialized but not referenced
 # C4244: 'conversion' conversion from 'type1' to 'type2', possible loss of data
 # C4456: declaration of 'identifier' hides previous local declaration
-#if(CMAKE_MAKE_PROGRAM MATCHES "(MSBuild|devenv|msdev|nmake)")
+if(CMAKE_MAKE_PROGRAM MATCHES "(MSBuild|devenv|msdev|nmake)")
   set_source_files_properties(${MINIZIP_FILES} PROPERTIES COMPILE_FLAGS "/wd4067 /wd4131 /wd4189 /wd4244 /wd4456")
-#endif()
+endif()
 
 # Library
 file(GLOB_RECURSE SOURCE_FILES "source/*.cpp")
