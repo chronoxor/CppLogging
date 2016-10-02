@@ -342,7 +342,7 @@ private:
             _retry = 0;
 
             // 7. Reset the rolling timestamp with a second persicion
-            _rollstamp = (CppCommon::Timestamp::utc() / 1000000000) * 1000000000;
+            _rollstamp = (timestamp / 1000000000) * 1000000000;
 
             return true;
         }
