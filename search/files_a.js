@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['processor_2ecpp',['processor.cpp',['../processor_8cpp.html',1,'']]],
-  ['processor_2eh',['processor.h',['../processor_8h.html',1,'']]],
-  ['processors_2eh',['processors.h',['../processors_8h.html',1,'']]]
+  ['ostream_5fappender_2ecpp',['ostream_appender.cpp',['../ostream__appender_8cpp.html',1,'']]],
+  ['ostream_5fappender_2eh',['ostream_appender.h',['../ostream__appender_8h.html',1,'']]]
 ];

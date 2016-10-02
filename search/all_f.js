@@ -1,15 +1,20 @@
 var searchData=
 [
-  ['text_5flayout_2ecpp',['text_layout.cpp',['../text__layout_8cpp.html',1,'']]],
-  ['text_5flayout_2eh',['text_layout.h',['../text__layout_8h.html',1,'']]],
-  ['textlayout',['TextLayout',['../class_cpp_logging_1_1_text_layout.html',1,'CppLogging']]],
-  ['textlayout',['TextLayout',['../class_cpp_logging_1_1_text_layout.html#ae2a4ca241c2cc54df25a30287255ef22',1,'CppLogging::TextLayout::TextLayout(const std::string &amp;pattern=&quot;{UtcDateTime} [{Thread}] {Level} {Logger} - {Message}{EndLine}&quot;)'],['../class_cpp_logging_1_1_text_layout.html#a681fb4962a1d348b345aca1addf3f305',1,'CppLogging::TextLayout::TextLayout(const TextLayout &amp;)=delete'],['../class_cpp_logging_1_1_text_layout.html#a21e181a11977c5af3dfcd6f07cd0ef3c',1,'CppLogging::TextLayout::TextLayout(TextLayout &amp;&amp;layout)']]],
-  ['thread',['thread',['../class_cpp_logging_1_1_record.html#a816e732d29b4dcd29a7f073b40b20738',1,'CppLogging::Record']]],
-  ['timepolicyimpl',['TimePolicyImpl',['../class_cpp_logging_1_1_rolling_file_appender.html#a6d81316f3ffde8a367df1396d02a7d6f',1,'CppLogging::RollingFileAppender']]],
-  ['timerollingpolicy',['TimeRollingPolicy',['../namespace_cpp_logging.html#a2ae7ad16f5b402d86a07604253464f57',1,'CppLogging']]],
-  ['timestamp',['timestamp',['../class_cpp_logging_1_1_record.html#acb824eebe901b423004a65d73dd1ce4d',1,'CppLogging::Record']]],
-  ['toggle',['Toggle',['../class_cpp_logging_1_1_trigger.html#a476aab6d9df45cdf6edd531a8f522628',1,'CppLogging::Trigger']]],
-  ['trigger',['Trigger',['../class_cpp_logging_1_1_trigger.html',1,'CppLogging']]],
-  ['trigger',['Trigger',['../class_cpp_logging_1_1_trigger.html#add5ecc4976764319b3194165d8b4fc58',1,'CppLogging::Trigger::Trigger(bool state=true)'],['../class_cpp_logging_1_1_trigger.html#a644ce7ddb13f11fb1e5521a4a4a90d8a',1,'CppLogging::Trigger::Trigger(const Trigger &amp;)=delete'],['../class_cpp_logging_1_1_trigger.html#a2539e6a2cf040f16637291727cabd51f',1,'CppLogging::Trigger::Trigger(Trigger &amp;&amp;)=default']]],
-  ['trigger_2eh',['trigger.h',['../trigger_8h.html',1,'']]]
+  ['pattern',['pattern',['../class_cpp_logging_1_1_text_layout.html#ab3e9c2d158ac22b7f9e18a1985998fd1',1,'CppLogging::TextLayout']]],
+  ['pcrc_5f32_5ftab',['pcrc_32_tab',['../structcurfile64__info.html#ad233b27925eb726ed3f225fc4abb4fac',1,'curfile64_info']]],
+  ['pfile_5fin_5fzip_5fread',['pfile_in_zip_read',['../structunz64__s.html#ab4f7635123807366457df79da8d59934',1,'unz64_s']]],
+  ['pos_5fin_5fbuffered_5fdata',['pos_in_buffered_data',['../structcurfile64__info.html#a208198f19c7d165203225903455478fd',1,'curfile64_info']]],
+  ['pos_5fin_5fcentral_5fdir',['pos_in_central_dir',['../structunz64__s.html#a304767ee88ee980f3eb44861cdb5d5a2',1,'unz64_s']]],
+  ['pos_5fin_5fzip_5fdirectory',['pos_in_zip_directory',['../structunz__file__pos__s.html#a87d193346d3825363f899f574a2f3cb2',1,'unz_file_pos_s::pos_in_zip_directory()'],['../structunz64__file__pos__s.html#a56b202151059b18903fe46dacbfbf12d',1,'unz64_file_pos_s::pos_in_zip_directory()']]],
+  ['pos_5fin_5fzipfile',['pos_in_zipfile',['../structfile__in__zip64__read__info__s.html#a7f66f187144c9c6da0052016296c2469',1,'file_in_zip64_read_info_s']]],
+  ['pos_5flocal_5fextrafield',['pos_local_extrafield',['../structfile__in__zip64__read__info__s.html#af92c3da98b85512f95ba6b1254653c3e',1,'file_in_zip64_read_info_s']]],
+  ['pos_5flocal_5fheader',['pos_local_header',['../structcurfile64__info.html#a6225decff0849b90f09a63addab95c64',1,'curfile64_info']]],
+  ['pos_5fzip64extrainfo',['pos_zip64extrainfo',['../structcurfile64__info.html#a45dfe9b2562314f29f7df1bad71da528',1,'curfile64_info']]],
+  ['processor',['Processor',['../class_cpp_logging_1_1_processor.html#ab9e8bf067a254854f6f5bb8a108c1105',1,'CppLogging::Processor::Processor()=default'],['../class_cpp_logging_1_1_processor.html#a18d2e051692b2ef3096ae5cca6a3ee58',1,'CppLogging::Processor::Processor(const Processor &amp;)=default'],['../class_cpp_logging_1_1_processor.html#aa9dbbc495f038392b4ff63d635edb657',1,'CppLogging::Processor::Processor(Processor &amp;&amp;)=default']]],
+  ['processor',['Processor',['../class_cpp_logging_1_1_processor.html',1,'CppLogging']]],
+  ['processor_2ecpp',['processor.cpp',['../processor_8cpp.html',1,'']]],
+  ['processor_2eh',['processor.h',['../processor_8h.html',1,'']]],
+  ['processors',['processors',['../class_cpp_logging_1_1_processor.html#ab4d96b6012bee770a07a3f8a25a836a3',1,'CppLogging::Processor']]],
+  ['processors_2eh',['processors.h',['../processors_8h.html',1,'']]],
+  ['processrecord',['ProcessRecord',['../class_cpp_logging_1_1_processor.html#a88f9da169cacd30e22600e293d471ad6',1,'CppLogging::Processor::ProcessRecord()'],['../class_cpp_logging_1_1_async_processor.html#a3b078b150836eb0e71b410ddb9f11cf6',1,'CppLogging::AsyncProcessor::ProcessRecord()'],['../class_cpp_logging_1_1_buffered_processor.html#a30701e34be19af8d41530b9f9d1cf369',1,'CppLogging::BufferedProcessor::ProcessRecord()'],['../class_cpp_logging_1_1_sync_processor.html#a2e953a43ccd47756d430507bf46022ce',1,'CppLogging::SyncProcessor::ProcessRecord()']]]
 ];

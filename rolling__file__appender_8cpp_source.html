@@ -64,6 +64,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow2" class="tabs2">
     <ul class="tablist">
       <li><a href="files.html"><span>File&#160;List</span></a></li>
+      <li><a href="globals.html"><span>File&#160;Members</span></a></li>
     </ul>
   </div>
 <!-- window showing the filter options -->
@@ -71,7 +72,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Pages</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Macros</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(11)"><span class="SelectionMark">&#160;</span>Pages</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -155,31 +156,31 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    <span class="keywordtype">void</span> ArchiveFile(<span class="keyword">const</span> CppCommon::File&amp; file)</div>
 <div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    {</div>
 <div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;        <span class="comment">// Create a new zip archive</span></div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;        zipFile zf;</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;        <a class="code" href="zip_8h.html#af69b9a5ea9aaf8e8f0b7681e451b224c">zipFile</a> zf;</div>
 <div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="preprocessor">#if defined(_WIN32) || defined(_WIN64)</span></div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<span class="preprocessor"></span>        zlib_filefunc64_def ffunc;</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;        fill_win32_filefunc64W(&amp;ffunc);</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;        zf = zipOpen2_64((file + <span class="stringliteral">&quot;.zip&quot;</span>).wstring().c_str(), APPEND_STATUS_CREATE, <span class="keyword">nullptr</span>, &amp;ffunc);</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<span class="preprocessor"></span>        <a class="code" href="structzlib__filefunc64__def__s.html">zlib_filefunc64_def</a> ffunc;</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;        <a class="code" href="iowin32_8c.html#a3cb250002eabc68eec7e9b1f95b9d562">fill_win32_filefunc64W</a>(&amp;ffunc);</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;        zf = <a class="code" href="zip_8c.html#a91768e957bb8930ab843aebe4489a7a5">zipOpen2_64</a>((file + <span class="stringliteral">&quot;.zip&quot;</span>).wstring().c_str(), <a class="code" href="zip_8h.html#ae90aeab52897f3fd1c867971c946fa87">APPEND_STATUS_CREATE</a>, <span class="keyword">nullptr</span>, &amp;ffunc);</div>
 <div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;<span class="preprocessor">#else</span></div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;<span class="preprocessor"></span>        zf = zipOpen64((file + <span class="stringliteral">&quot;.zip&quot;</span>).native().c_str(), APPEND_STATUS_CREATE);</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;<span class="preprocessor"></span>        zf = <a class="code" href="zip_8c.html#afe7bbafff91fba994da2597f646e9548">zipOpen64</a>((file + <span class="stringliteral">&quot;.zip&quot;</span>).native().c_str(), <a class="code" href="zip_8h.html#ae90aeab52897f3fd1c867971c946fa87">APPEND_STATUS_CREATE</a>);</div>
 <div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;<span class="preprocessor"></span>        <span class="keywordflow">if</span> (zf == <span class="keyword">nullptr</span>)</div>
 <div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;            throwex CppCommon::FileSystemException(<span class="stringliteral">&quot;Cannot create a new zip archive!&quot;</span>).Attach(file);</div>
 <div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;</div>
 <div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;        <span class="comment">// Smart resource cleaner pattern</span></div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;        <span class="keyword">auto</span> zip = CppCommon::resource(zf, [](zipFile zf) { zipClose(zf, <span class="keyword">nullptr</span>); });</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;        <span class="keyword">auto</span> zip = CppCommon::resource(zf, [](<a class="code" href="zip_8h.html#af69b9a5ea9aaf8e8f0b7681e451b224c">zipFile</a> zf) { <a class="code" href="zip_8c.html#a4fda7a41fa2f57d105ffc7d1cbcf53cc">zipClose</a>(zf, <span class="keyword">nullptr</span>); });</div>
 <div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;</div>
 <div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;        <span class="comment">// Open a new file in zip archive</span></div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;        <span class="keywordtype">int</span> result = zipOpenNewFileInZip64(zf, file.filename().native().c_str(), <span class="keyword">nullptr</span>, <span class="keyword">nullptr</span>, 0, <span class="keyword">nullptr</span>, 0, <span class="keyword">nullptr</span>, Z_DEFLATED, Z_DEFAULT_COMPRESSION, 1);</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;        <span class="keywordflow">if</span> (result != ZIP_OK)</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;        <span class="keywordtype">int</span> result = <a class="code" href="zip_8c.html#a180a6d99515153ada3b58349fcee6a4c">zipOpenNewFileInZip64</a>(zf, file.filename().native().c_str(), <span class="keyword">nullptr</span>, <span class="keyword">nullptr</span>, 0, <span class="keyword">nullptr</span>, 0, <span class="keyword">nullptr</span>, Z_DEFLATED, Z_DEFAULT_COMPRESSION, 1);</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;        <span class="keywordflow">if</span> (result != <a class="code" href="zip_8h.html#a394355d595e63f49e769ecd250222336">ZIP_OK</a>)</div>
 <div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;            throwex CppCommon::FileSystemException(<span class="stringliteral">&quot;Cannot open a new file in zip archive!&quot;</span>).Attach(file);</div>
 <div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;</div>
 <div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;        <span class="comment">// Smart resource cleaner pattern</span></div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;        <span class="keyword">auto</span> zip_file = CppCommon::resource(zf, [](zipFile zf) { zipCloseFileInZip(zf); });</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;        <span class="keyword">auto</span> zip_file = CppCommon::resource(zf, [](<a class="code" href="zip_8h.html#af69b9a5ea9aaf8e8f0b7681e451b224c">zipFile</a> zf) { <a class="code" href="zip_8c.html#ae470f753aef4cffe4f77a5ec2bcfbde1">zipCloseFileInZip</a>(zf); });</div>
 <div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;</div>
 <div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;        CppCommon::File source(file);</div>
 <div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;        uint8_t buffer[16384];</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;        <span class="keywordtype">size_t</span> size;</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;        <span class="keywordtype">size_t</span> <a class="code" href="ioapi_8h.html#a014d89bd76f74ef3a29c8f04b473eb76">size</a>;</div>
 <div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;</div>
 <div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;        <span class="comment">// Open the source file for reading</span></div>
 <div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;        source.Open(<span class="keyword">true</span>, <span class="keyword">false</span>);</div>
@@ -190,8 +191,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;            size = source.Read(buffer, CppCommon::countof(buffer));</div>
 <div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;            <span class="keywordflow">if</span> (size &gt; 0)</div>
 <div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;            {</div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;                result = zipWriteInFileInZip(zf, buffer, (<span class="keywordtype">unsigned</span>)size);</div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;                <span class="keywordflow">if</span> (result != ZIP_OK)</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;                result = <a class="code" href="zip_8c.html#acc932f54d0746b26f428660c92029a9f">zipWriteInFileInZip</a>(zf, buffer, (<span class="keywordtype">unsigned</span>)size);</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;                <span class="keywordflow">if</span> (result != <a class="code" href="zip_8h.html#a394355d595e63f49e769ecd250222336">ZIP_OK</a>)</div>
 <div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;                    throwex CppCommon::FileSystemException(<span class="stringliteral">&quot;Cannot write into the zip file!&quot;</span>).Attach(file);</div>
 <div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;            }</div>
 <div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;        } <span class="keywordflow">while</span> (size &gt; 0);</div>
@@ -200,14 +201,14 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;        source.Close();</div>
 <div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;</div>
 <div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;        <span class="comment">// Close the file in zip archive</span></div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;        result = zipCloseFileInZip(zf);</div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;        <span class="keywordflow">if</span> (result != ZIP_OK)</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;        result = <a class="code" href="zip_8c.html#ae470f753aef4cffe4f77a5ec2bcfbde1">zipCloseFileInZip</a>(zf);</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;        <span class="keywordflow">if</span> (result != <a class="code" href="zip_8h.html#a394355d595e63f49e769ecd250222336">ZIP_OK</a>)</div>
 <div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;            throwex CppCommon::FileSystemException(<span class="stringliteral">&quot;Cannot close a file in zip archive!&quot;</span>).Attach(file);</div>
 <div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;        zip_file.release();</div>
 <div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;</div>
 <div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;        <span class="comment">// Close zip archive</span></div>
-<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;        result = zipClose(zf, <span class="keyword">nullptr</span>);</div>
-<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;        <span class="keywordflow">if</span> (result != ZIP_OK)</div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;        result = <a class="code" href="zip_8c.html#a4fda7a41fa2f57d105ffc7d1cbcf53cc">zipClose</a>(zf, <span class="keyword">nullptr</span>);</div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;        <span class="keywordflow">if</span> (result != <a class="code" href="zip_8h.html#a394355d595e63f49e769ecd250222336">ZIP_OK</a>)</div>
 <div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;            throwex CppCommon::FileSystemException(<span class="stringliteral">&quot;Cannot close a zip archive!&quot;</span>).Attach(file);</div>
 <div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;        zip.release();</div>
 <div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;</div>
@@ -340,8 +341,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;            <span class="comment">// Try to write logging record content into the opened file</span></div>
 <div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;            <span class="keywordflow">try</span></div>
 <div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;            {</div>
-<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;                _file.Write(record.raw.data(), size);</div>
-<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;                _written += size;</div>
+<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;                _file.Write(record.raw.data(), <a class="code" href="ioapi_8h.html#a014d89bd76f74ef3a29c8f04b473eb76">size</a>);</div>
+<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;                _written += <a class="code" href="ioapi_8h.html#a014d89bd76f74ef3a29c8f04b473eb76">size</a>;</div>
 <div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;</div>
 <div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;                <span class="comment">// Perform auto-flush if enabled</span></div>
 <div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;                <span class="keywordflow">if</span> (_auto_flush)</div>
@@ -480,7 +481,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00396"></a><span class="lineno">  396</span>&#160;                <span class="comment">// Update time zone cache values</span></div>
 <div class="line"><a name="l00397"></a><span class="lineno">  397</span>&#160;                <span class="keywordflow">if</span> (cache_timezone_required || !cache_initizlied)</div>
 <div class="line"><a name="l00398"></a><span class="lineno">  398</span>&#160;                {</div>
-<div class="line"><a name="l00399"></a><span class="lineno">  399</span>&#160;                    CppCommon::Timezone local;</div>
+<div class="line"><a name="l00399"></a><span class="lineno">  399</span>&#160;                    CppCommon::Timezone <a class="code" href="unzip_8c.html#a08023ea6765c99d60a6a3840cd07156e">local</a>;</div>
 <div class="line"><a name="l00400"></a><span class="lineno">  400</span>&#160;                    ConvertTimezone(cache_local_timezone_str, local.total().minutes());</div>
 <div class="line"><a name="l00401"></a><span class="lineno">  401</span>&#160;                    cache_update_datetime = <span class="keyword">true</span>;</div>
 <div class="line"><a name="l00402"></a><span class="lineno">  402</span>&#160;                }</div>
@@ -501,7 +502,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00417"></a><span class="lineno">  417</span>&#160;                <span class="comment">// Update local time cache values</span></div>
 <div class="line"><a name="l00418"></a><span class="lineno">  418</span>&#160;                <span class="keywordflow">if</span> (cache_local_required || !cache_initizlied)</div>
 <div class="line"><a name="l00419"></a><span class="lineno">  419</span>&#160;                {</div>
-<div class="line"><a name="l00420"></a><span class="lineno">  420</span>&#160;                    CppCommon::LocalTime local(timestamp);</div>
+<div class="line"><a name="l00420"></a><span class="lineno">  420</span>&#160;                    CppCommon::LocalTime <a class="code" href="unzip_8c.html#a08023ea6765c99d60a6a3840cd07156e">local</a>(timestamp);</div>
 <div class="line"><a name="l00421"></a><span class="lineno">  421</span>&#160;                    ConvertNumber(cache_local_year_str, local.year(), 4);</div>
 <div class="line"><a name="l00422"></a><span class="lineno">  422</span>&#160;                    ConvertNumber(cache_local_month_str, local.month(), 2);</div>
 <div class="line"><a name="l00423"></a><span class="lineno">  423</span>&#160;                    ConvertNumber(cache_local_day_str, local.day(), 2);</div>
@@ -551,7 +552,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00467"></a><span class="lineno">  467</span>&#160;</div>
 <div class="line"><a name="l00468"></a><span class="lineno">  468</span>&#160;        cache_initizlied = <span class="keyword">true</span>;</div>
 <div class="line"><a name="l00469"></a><span class="lineno">  469</span>&#160;</div>
-<div class="line"><a name="l00470"></a><span class="lineno">  470</span>&#160;        std::string filename;</div>
+<div class="line"><a name="l00470"></a><span class="lineno">  470</span>&#160;        std::string <a class="code" href="ioapi_8h.html#a2c8e3f833d9ea6f106973ebe4391bf0f">filename</a>;</div>
 <div class="line"><a name="l00471"></a><span class="lineno">  471</span>&#160;</div>
 <div class="line"><a name="l00472"></a><span class="lineno">  472</span>&#160;        <span class="comment">// Iterate through all placeholders</span></div>
 <div class="line"><a name="l00473"></a><span class="lineno">  473</span>&#160;        <span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp; placeholder : _placeholders)</div>
@@ -834,7 +835,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00750"></a><span class="lineno">  750</span>&#160;        output[index] = <span class="charliteral">&#39;0&#39;</span> + (char)number;</div>
 <div class="line"><a name="l00751"></a><span class="lineno">  751</span>&#160;    }</div>
 <div class="line"><a name="l00752"></a><span class="lineno">  752</span>&#160;</div>
-<div class="line"><a name="l00753"></a><span class="lineno">  753</span>&#160;    <span class="keyword">static</span> <span class="keywordtype">void</span> ConvertTimezone(std::string&amp; output, int64_t offset)</div>
+<div class="line"><a name="l00753"></a><span class="lineno">  753</span>&#160;    <span class="keyword">static</span> <span class="keywordtype">void</span> ConvertTimezone(std::string&amp; output, int64_t <a class="code" href="ioapi_8h.html#a601c4660e8a1a14a1b87fe387e934d19">offset</a>)</div>
 <div class="line"><a name="l00754"></a><span class="lineno">  754</span>&#160;    {</div>
 <div class="line"><a name="l00755"></a><span class="lineno">  755</span>&#160;        <span class="comment">// Prepare the output string</span></div>
 <div class="line"><a name="l00756"></a><span class="lineno">  756</span>&#160;        output.clear();</div>
@@ -909,8 +910,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00825"></a><span class="lineno">  825</span>&#160;            <span class="comment">// Try to write logging record content into the opened file</span></div>
 <div class="line"><a name="l00826"></a><span class="lineno">  826</span>&#160;            <span class="keywordflow">try</span></div>
 <div class="line"><a name="l00827"></a><span class="lineno">  827</span>&#160;            {</div>
-<div class="line"><a name="l00828"></a><span class="lineno">  828</span>&#160;                _file.Write(record.raw.data(), size);</div>
-<div class="line"><a name="l00829"></a><span class="lineno">  829</span>&#160;                _written += size;</div>
+<div class="line"><a name="l00828"></a><span class="lineno">  828</span>&#160;                _file.Write(record.raw.data(), <a class="code" href="ioapi_8h.html#a014d89bd76f74ef3a29c8f04b473eb76">size</a>);</div>
+<div class="line"><a name="l00829"></a><span class="lineno">  829</span>&#160;                _written += <a class="code" href="ioapi_8h.html#a014d89bd76f74ef3a29c8f04b473eb76">size</a>;</div>
 <div class="line"><a name="l00830"></a><span class="lineno">  830</span>&#160;</div>
 <div class="line"><a name="l00831"></a><span class="lineno">  831</span>&#160;                <span class="comment">// Perform auto-flush if enabled</span></div>
 <div class="line"><a name="l00832"></a><span class="lineno">  832</span>&#160;                <span class="keywordflow">if</span> (_auto_flush)</div>
@@ -1075,18 +1076,33 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00992"></a><span class="lineno">  992</span>&#160;}</div>
 <div class="line"><a name="l00993"></a><span class="lineno">  993</span>&#160;</div>
 <div class="line"><a name="l00994"></a><span class="lineno">  994</span>&#160;} <span class="comment">// namespace CppLogging</span></div>
+<div class="ttc" id="zip_8h_html_a394355d595e63f49e769ecd250222336"><div class="ttname"><a href="zip_8h.html#a394355d595e63f49e769ecd250222336">ZIP_OK</a></div><div class="ttdeci">#define ZIP_OK</div><div class="ttdef"><b>Definition:</b> <a href="zip_8h_source.html#l00072">zip.h:72</a></div></div>
 <div class="ttc" id="class_cpp_logging_1_1_rolling_file_appender_html_abe1e794f13149844125945f1a7c2325d"><div class="ttname"><a href="class_cpp_logging_1_1_rolling_file_appender.html#abe1e794f13149844125945f1a7c2325d">CppLogging::RollingFileAppender::Flush</a></div><div class="ttdeci">void Flush() override</div><div class="ttdoc">Flush the logging appender. </div><div class="ttdef"><b>Definition:</b> <a href="rolling__file__appender_8cpp_source.html#l00989">rolling_file_appender.cpp:989</a></div></div>
+<div class="ttc" id="iowin32_8c_html_a3cb250002eabc68eec7e9b1f95b9d562"><div class="ttname"><a href="iowin32_8c.html#a3cb250002eabc68eec7e9b1f95b9d562">fill_win32_filefunc64W</a></div><div class="ttdeci">void fill_win32_filefunc64W(zlib_filefunc64_def *pzlib_filefunc_def)</div><div class="ttdef"><b>Definition:</b> <a href="iowin32_8c_source.html#l00452">iowin32.c:452</a></div></div>
+<div class="ttc" id="ioapi_8h_html_a014d89bd76f74ef3a29c8f04b473eb76"><div class="ttname"><a href="ioapi_8h.html#a014d89bd76f74ef3a29c8f04b473eb76">size</a></div><div class="ttdeci">voidpf void uLong size</div><div class="ttdef"><b>Definition:</b> <a href="ioapi_8h_source.html#l00136">ioapi.h:136</a></div></div>
+<div class="ttc" id="ioapi_8h_html_a2c8e3f833d9ea6f106973ebe4391bf0f"><div class="ttname"><a href="ioapi_8h.html#a2c8e3f833d9ea6f106973ebe4391bf0f">filename</a></div><div class="ttdeci">const char * filename</div><div class="ttdef"><b>Definition:</b> <a href="ioapi_8h_source.html#l00135">ioapi.h:135</a></div></div>
 <div class="ttc" id="class_cpp_logging_1_1_rolling_file_appender_html"><div class="ttname"><a href="class_cpp_logging_1_1_rolling_file_appender.html">CppLogging::RollingFileAppender</a></div><div class="ttdoc">Rolling file appender. </div><div class="ttdef"><b>Definition:</b> <a href="rolling__file__appender_8h_source.html#l00050">rolling_file_appender.h:50</a></div></div>
+<div class="ttc" id="zip_8c_html_a180a6d99515153ada3b58349fcee6a4c"><div class="ttname"><a href="zip_8c.html#a180a6d99515153ada3b58349fcee6a4c">zipOpenNewFileInZip64</a></div><div class="ttdeci">int ZEXPORT zipOpenNewFileInZip64(zipFile file, const char *filename, const zip_fileinfo *zipfi, const void *extrafield_local, uInt size_extrafield_local, const void *extrafield_global, uInt size_extrafield_global, const char *comment, int method, int level, int zip64)</div><div class="ttdef"><b>Definition:</b> <a href="zip_8c_source.html#l01337">zip.c:1337</a></div></div>
 <div class="ttc" id="namespace_cpp_logging_html_a2ae7ad16f5b402d86a07604253464f57a2200becb80f0019c4a2ccecec350d0db"><div class="ttname"><a href="namespace_cpp_logging.html#a2ae7ad16f5b402d86a07604253464f57a2200becb80f0019c4a2ccecec350d0db">CppLogging::TimeRollingPolicy::SECOND</a></div><div class="ttdoc">Second rolling policy. </div></div>
 <div class="ttc" id="namespace_cpp_logging_html_a2ae7ad16f5b402d86a07604253464f57a46bda4cde2f10bdb9e51e3bbefa4a2bf"><div class="ttname"><a href="namespace_cpp_logging.html#a2ae7ad16f5b402d86a07604253464f57a46bda4cde2f10bdb9e51e3bbefa4a2bf">CppLogging::TimeRollingPolicy::MINUTE</a></div><div class="ttdoc">Minute rolling policy. </div></div>
 <div class="ttc" id="class_cpp_logging_1_1_record_html"><div class="ttname"><a href="class_cpp_logging_1_1_record.html">CppLogging::Record</a></div><div class="ttdoc">Logging record. </div><div class="ttdef"><b>Definition:</b> <a href="record_8h_source.html#l00038">record.h:38</a></div></div>
+<div class="ttc" id="structzlib__filefunc64__def__s_html"><div class="ttname"><a href="structzlib__filefunc64__def__s.html">zlib_filefunc64_def_s</a></div><div class="ttdef"><b>Definition:</b> <a href="ioapi_8h_source.html#l00162">ioapi.h:162</a></div></div>
+<div class="ttc" id="zip_8c_html_acc932f54d0746b26f428660c92029a9f"><div class="ttname"><a href="zip_8c.html#acc932f54d0746b26f428660c92029a9f">zipWriteInFileInZip</a></div><div class="ttdeci">int ZEXPORT zipWriteInFileInZip(zipFile file, const void *buf, unsigned int len)</div><div class="ttdef"><b>Definition:</b> <a href="zip_8c_source.html#l01402">zip.c:1402</a></div></div>
 <div class="ttc" id="class_cpp_logging_1_1_rolling_file_appender_html_a8227d016c9848a0b5c224df131063d64"><div class="ttname"><a href="class_cpp_logging_1_1_rolling_file_appender.html#a8227d016c9848a0b5c224df131063d64">CppLogging::RollingFileAppender::RollingFileAppender</a></div><div class="ttdeci">RollingFileAppender(const CppCommon::Path &amp;path, TimeRollingPolicy policy=TimeRollingPolicy::DAY, const std::string &amp;pattern=&quot;{UtcDateTime}.log&quot;, bool archive=false, bool truncate=false, bool auto_flush=false)</div><div class="ttdoc">Initialize the rolling file appender with a time-based policy. </div><div class="ttdef"><b>Definition:</b> <a href="rolling__file__appender_8cpp_source.html#l00960">rolling_file_appender.cpp:960</a></div></div>
+<div class="ttc" id="ioapi_8h_html_a601c4660e8a1a14a1b87fe387e934d19"><div class="ttname"><a href="ioapi_8h.html#a601c4660e8a1a14a1b87fe387e934d19">offset</a></div><div class="ttdeci">voidpf uLong offset</div><div class="ttdef"><b>Definition:</b> <a href="ioapi_8h_source.html#l00142">ioapi.h:142</a></div></div>
+<div class="ttc" id="zip_8h_html_af69b9a5ea9aaf8e8f0b7681e451b224c"><div class="ttname"><a href="zip_8h.html#af69b9a5ea9aaf8e8f0b7681e451b224c">zipFile</a></div><div class="ttdeci">voidp zipFile</div><div class="ttdef"><b>Definition:</b> <a href="zip_8h_source.html#l00069">zip.h:69</a></div></div>
 <div class="ttc" id="class_cpp_logging_1_1_rolling_file_appender_html_a5d4b2e45b751819063a6e9c5edd81bbf"><div class="ttname"><a href="class_cpp_logging_1_1_rolling_file_appender.html#a5d4b2e45b751819063a6e9c5edd81bbf">CppLogging::RollingFileAppender::AppendRecord</a></div><div class="ttdeci">void AppendRecord(Record &amp;record) override</div><div class="ttdoc">Append the given logging record. </div><div class="ttdef"><b>Definition:</b> <a href="rolling__file__appender_8cpp_source.html#l00984">rolling_file_appender.cpp:984</a></div></div>
 <div class="ttc" id="rolling__file__appender_8h_html"><div class="ttname"><a href="rolling__file__appender_8h.html">rolling_file_appender.h</a></div><div class="ttdoc">Rolling file appender definition. </div></div>
 <div class="ttc" id="namespace_cpp_logging_html_a2ae7ad16f5b402d86a07604253464f57add3f965174e8bb2f64523981626ced1a"><div class="ttname"><a href="namespace_cpp_logging.html#a2ae7ad16f5b402d86a07604253464f57add3f965174e8bb2f64523981626ced1a">CppLogging::TimeRollingPolicy::HOUR</a></div><div class="ttdoc">Hour rolling policy. </div></div>
+<div class="ttc" id="unzip_8c_html_a08023ea6765c99d60a6a3840cd07156e"><div class="ttname"><a href="unzip_8c.html#a08023ea6765c99d60a6a3840cd07156e">local</a></div><div class="ttdeci">#define local</div><div class="ttdef"><b>Definition:</b> <a href="unzip_8c_source.html#l00091">unzip.c:91</a></div></div>
+<div class="ttc" id="zip_8c_html_afe7bbafff91fba994da2597f646e9548"><div class="ttname"><a href="zip_8c.html#afe7bbafff91fba994da2597f646e9548">zipOpen64</a></div><div class="ttdeci">zipFile ZEXPORT zipOpen64(const void *pathname, int append)</div><div class="ttdef"><b>Definition:</b> <a href="zip_8c_source.html#l00953">zip.c:953</a></div></div>
+<div class="ttc" id="zip_8c_html_a91768e957bb8930ab843aebe4489a7a5"><div class="ttname"><a href="zip_8c.html#a91768e957bb8930ab843aebe4489a7a5">zipOpen2_64</a></div><div class="ttdeci">zipFile ZEXPORT zipOpen2_64(const void *pathname, int append, zipcharpc *globalcomment, zlib_filefunc64_def *pzlib_filefunc_def)</div><div class="ttdef"><b>Definition:</b> <a href="zip_8c_source.html#l00932">zip.c:932</a></div></div>
+<div class="ttc" id="zip_8c_html_ae470f753aef4cffe4f77a5ec2bcfbde1"><div class="ttname"><a href="zip_8c.html#ae470f753aef4cffe4f77a5ec2bcfbde1">zipCloseFileInZip</a></div><div class="ttdeci">int ZEXPORT zipCloseFileInZip(zipFile file)</div><div class="ttdef"><b>Definition:</b> <a href="zip_8c_source.html#l01750">zip.c:1750</a></div></div>
 <div class="ttc" id="class_cpp_logging_1_1_rolling_file_appender_html_ab9c2f25756cab928b1f3917cf0bf0a24"><div class="ttname"><a href="class_cpp_logging_1_1_rolling_file_appender.html#ab9c2f25756cab928b1f3917cf0bf0a24">CppLogging::RollingFileAppender::~RollingFileAppender</a></div><div class="ttdeci">virtual ~RollingFileAppender()</div><div class="ttdef"><b>Definition:</b> <a href="rolling__file__appender_8cpp_source.html#l00974">rolling_file_appender.cpp:974</a></div></div>
 <div class="ttc" id="namespace_cpp_logging_html_a2ae7ad16f5b402d86a07604253464f57"><div class="ttname"><a href="namespace_cpp_logging.html#a2ae7ad16f5b402d86a07604253464f57">CppLogging::TimeRollingPolicy</a></div><div class="ttdeci">TimeRollingPolicy</div><div class="ttdoc">Time rolling policy. </div><div class="ttdef"><b>Definition:</b> <a href="rolling__file__appender_8h_source.html#l00021">rolling_file_appender.h:21</a></div></div>
 <div class="ttc" id="class_cpp_logging_1_1_rolling_file_appender_html_aca10e07559d6f0266905302e21b42150"><div class="ttname"><a href="class_cpp_logging_1_1_rolling_file_appender.html#aca10e07559d6f0266905302e21b42150">CppLogging::RollingFileAppender::operator=</a></div><div class="ttdeci">RollingFileAppender &amp; operator=(const RollingFileAppender &amp;)=delete</div></div>
+<div class="ttc" id="zip_8h_html_ae90aeab52897f3fd1c867971c946fa87"><div class="ttname"><a href="zip_8h.html#ae90aeab52897f3fd1c867971c946fa87">APPEND_STATUS_CREATE</a></div><div class="ttdeci">#define APPEND_STATUS_CREATE</div><div class="ttdef"><b>Definition:</b> <a href="zip_8h_source.html#l00112">zip.h:112</a></div></div>
+<div class="ttc" id="zip_8c_html_a4fda7a41fa2f57d105ffc7d1cbcf53cc"><div class="ttname"><a href="zip_8c.html#a4fda7a41fa2f57d105ffc7d1cbcf53cc">zipClose</a></div><div class="ttdeci">int ZEXPORT zipClose(zipFile file, const char *global_comment)</div><div class="ttdef"><b>Definition:</b> <a href="zip_8c_source.html#l01882">zip.c:1882</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

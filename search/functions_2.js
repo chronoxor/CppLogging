@@ -1,5 +1,8 @@
 var searchData=
 [
+  ['call_5fzopen64',['call_zopen64',['../ioapi_8c.html#aba1d7f2b69248eee96210089ce140925',1,'ioapi.c']]],
+  ['call_5fzseek64',['call_zseek64',['../ioapi_8c.html#aa3566299e354e3275a72193ab48e4af3',1,'ioapi.c']]],
+  ['call_5fztell64',['call_ztell64',['../ioapi_8c.html#ad18411c799d4ef86d37e25610e411c93',1,'ioapi.c']]],
   ['capacity',['capacity',['../class_cpp_logging_1_1_async_buffer.html#ab4a7d19933ed60cdf4a07e4732e5f966',1,'CppLogging::AsyncBuffer']]],
   ['clear',['Clear',['../class_cpp_logging_1_1_record.html#a329f4aee55d7a67be3f313449b4bdf21',1,'CppLogging::Record']]],
   ['config',['Config',['../class_cpp_logging_1_1_config.html#a36b0110d0dab4d9ff1a273ee527b03d8',1,'CppLogging::Config::Config(const Config &amp;)=delete'],['../class_cpp_logging_1_1_config.html#a33aed3ee45a629bf472d9ab5f4c2a0c5',1,'CppLogging::Config::Config(Config &amp;&amp;)=delete']]],
