@@ -70,7 +70,7 @@ set(MINIZIP_FILES
   "modules/zlib/contrib/minizip/iowin32.c"
   "modules/zlib/contrib/minizip/zip.c")
 if(CMAKE_MAKE_PROGRAM MATCHES "(MSBuild|devenv|msdev|nmake)")
-  set_source_files_properties(${MINIZIP_FILES} PROPERTIES COMPILE_FLAGS "/wd4131 /wd4189 /wd4244")
+  set_source_files_properties(${MINIZIP_FILES} PROPERTIES COMPILE_FLAGS "/wd4067 /wd4131 /wd4189 /wd4244")
 endif()
 
 # Library

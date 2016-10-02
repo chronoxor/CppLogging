@@ -86,7 +86,7 @@ protected:
         auto zip = CppCommon::resource(zf, [](zipFile zf) { zipClose(zf, nullptr); });
 
         // Open a new file in zip archive
-        int result = zipOpenNewFileInZip64(zf, "test.txt", nullptr, nullptr, 0, nullptr, 0, nullptr, Z_DEFLATED, Z_DEFAULT_COMPRESSION, 1);
+        int result = zipOpenNewFileInZip64(zf, file.filename().native().c_str(), nullptr, nullptr, 0, nullptr, 0, nullptr, Z_DEFLATED, Z_DEFAULT_COMPRESSION, 1);
         if (result != ZIP_OK)
             throwex CppCommon::FileSystemException("Cannot open a new file in zip archive!").Attach(file);
 
