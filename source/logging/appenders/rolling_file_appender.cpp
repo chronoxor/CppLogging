@@ -36,37 +36,10 @@ public:
         : _appender(appender), _path(path), _archive(archive), _truncate(truncate), _auto_flush(auto_flush),
           _retry(0), _file(), _written(0)
     {
-        if (_archive)
-        {
-            // Start archivation thread
-            _archive_thread = std::thread([this]() { Archivation(); });
-        }
     }
 
     virtual ~Impl()
     {
-        try
-        {
-            // Check if the file is already opened for writing
-            if (_file.IsFileWriteOpened())
-            {
-                // Flush & close the file
-                _file.Flush();
-                _file.Close();
-
-                // Archive the file
-                if (_archive)
-                    ArchiveQueue(_file);
-            }
-
-            // Wait for archivation thread
-            if (_archive)
-            {
-                _archive_queue.Close();
-                _archive_thread.join();
-            }
-        }
-        catch (CppCommon::FileSystemException&) {}
     }
 
     virtual void AppendRecord(Record& record) = 0;
@@ -83,35 +56,32 @@ protected:
     CppCommon::File _file;
     size_t _written;
 
+    virtual bool PrepareFile(uint64_t timestamp) = 0;
+
+    virtual void CloseFile()
+    {
+        // Check if the file is already opened for writing
+        if (_file.IsFileWriteOpened())
+        {
+            // Flush & close the file
+            _file.Flush();
+            _file.Close();
+
+            // Archive the file
+            if (_archive)
+                ArchiveQueue(_file);
+        }
+    }
+
     std::thread _archive_thread;
     CppCommon::WaitQueue<CppCommon::Path> _archive_queue;
 
-    void ArchiveQueue(const CppCommon::Path& path)
+    virtual void ArchiveQueue(const CppCommon::Path& path)
     {
         _archive_queue.Enqueue(path);
     }
 
-    void Archivation()
-    {
-        // Call initialize archivation thread handler
-        _appender.OnArchiveThreadInitialize();
-
-        try
-        {
-            CppCommon::Path path;
-            while (_archive_queue.Dequeue(path))
-                ArchiveFile(path);
-        }
-        catch (...)
-        {
-            fatality("Archivation thread terminated!");
-        }
-
-        // Call cleanup archivation thread handler
-        _appender.OnArchiveThreadCleanup();
-    }
-
-    void ArchiveFile(const CppCommon::Path& path)
+    virtual void ArchiveFile(const CppCommon::Path& path)
     {
         CppCommon::File file(path);
 
@@ -128,7 +98,7 @@ protected:
             throwex CppCommon::FileSystemException("Cannot create a new zip archive!").Attach(file);
 
         // Smart resource cleaner pattern
-        auto zip = CppCommon::resource(zf, [](zipFile zf) { zipClose(zf, nullptr); });
+        auto zip = CppCommon::resource(zf, [](zipFile handle) { zipClose(handle, nullptr); });
 
         // Open a new file in zip archive
         int result = zipOpenNewFileInZip64(zf, file.filename().native().c_str(), nullptr, nullptr, 0, nullptr, 0, nullptr, Z_DEFLATED, Z_DEFAULT_COMPRESSION, 1);
@@ -136,7 +106,7 @@ protected:
             throwex CppCommon::FileSystemException("Cannot open a new file in zip archive!").Attach(file);
 
         // Smart resource cleaner pattern
-        auto zip_file = CppCommon::resource(zf, [](zipFile zf) { zipCloseFileInZip(zf); });
+        auto zip_file = CppCommon::resource(zf, [](zipFile handle) { zipCloseFileInZip(handle); });
 
         CppCommon::File source(file);
         uint8_t buffer[16384];
@@ -174,6 +144,39 @@ protected:
 
         // Remove the source file
         CppCommon::File::Remove(source);
+    }
+
+    void ArchivationStart()
+    {
+        // Start archivation thread
+        _archive_thread = std::thread([this]() { Archivation(); });
+    }
+
+    void ArchivationStop()
+    {
+        // Stop archivation thread
+        _archive_queue.Close();
+        _archive_thread.join();
+    }
+
+    void Archivation()
+    {
+        // Call initialize archivation thread handler
+        _appender.OnArchiveThreadInitialize();
+
+        try
+        {
+            CppCommon::Path path;
+            while (_archive_queue.Dequeue(path))
+                ArchiveFile(path);
+        }
+        catch (...)
+        {
+            fatality("Archivation thread terminated!");
+        }
+
+        // Call cleanup archivation thread handler
+        _appender.OnArchiveThreadCleanup();
     }
 };
 
@@ -220,6 +223,9 @@ public:
         : RollingFileAppender::Impl(appender, path, archive, truncate, auto_flush),
           _policy(policy), _pattern(pattern), _rollstamp(0), _rolldelay(0)
     {
+        if (_archive)
+            ArchivationStart();
+
         std::string placeholder;
         std::string subpattern;
 
@@ -285,7 +291,13 @@ public:
 
     virtual ~TimePolicyImpl()
     {
-        Flush();
+        try
+        {
+            CloseFile();
+            if (_archive)
+                ArchivationStop();
+        }
+        catch (CppCommon::FileSystemException&) {}
     }
 
     void AppendRecord(Record& record) override
@@ -320,7 +332,7 @@ public:
         }
     }
 
-    void Flush()
+    void Flush() override
     {
         if (PrepareFile(CppCommon::Timestamp::utc()))
         {
@@ -348,7 +360,7 @@ private:
     CppCommon::Timestamp _rollstamp;
     CppCommon::Timespan _rolldelay;
 
-    bool PrepareFile(uint64_t timestamp)
+    bool PrepareFile(uint64_t timestamp) override
     {
         try
         {
@@ -850,14 +862,23 @@ public:
         assert((backups > 0) && "Backups count should be greater than zero!");
         if (backups <= 0)
             throwex CppCommon::ArgumentException("Backups count should be greater than zero!");
+
+        if (_archive)
+            ArchivationStart();
     }
 
     virtual ~SizePolicyImpl()
     {
-        Flush();
+        try
+        {
+            CloseFile();
+            if (_archive)
+                ArchivationStop();
+        }
+        catch (CppCommon::FileSystemException&) {}
     }
 
-    void AppendRecord(Record& record)
+    void AppendRecord(Record& record) override
     {
         // Skip logging records without layout
         if (record.raw.empty())
@@ -889,7 +910,7 @@ public:
         }
     }
 
-    void Flush()
+    void Flush() override
     {
         if (PrepareFile(0))
         {
@@ -916,7 +937,7 @@ private:
     size_t _size;
     size_t _backups;
 
-    bool PrepareFile(size_t size)
+    bool PrepareFile(size_t size) override
     {
         try
         {
@@ -931,34 +952,11 @@ private:
                 _file.Flush();
                 _file.Close();
 
-                // 1.3. Delete the last backup and archive if exists
-                CppCommon::File backup = PrepareFilePath(_backups);
-                if (backup.IsFileExists())
-                    CppCommon::File::Remove(backup);
-                backup += "." + ARCHIVE_EXTENSION;
-                if (backup.IsFileExists())
-                    CppCommon::File::Remove(backup);
-
-                // 1.4. Roll backup files
-                for (size_t i = _backups - 1; i > 0; --i)
-                {
-                    CppCommon::File src = PrepareFilePath(i);
-                    CppCommon::File dst = PrepareFilePath(i + 1);
-                    if (src.IsFileExists())
-                        CppCommon::File::Rename(src, dst);
-                    src += "." + ARCHIVE_EXTENSION;
-                    dst += "." + ARCHIVE_EXTENSION;
-                    if (src.IsFileExists())
-                        CppCommon::File::Rename(src, dst);
-                }
-
-                // 1.5. Backup the current file
-                backup = PrepareFilePath(1);
-                CppCommon::File::Rename(_file, backup);
-
-                // 1.6. Archive the current backup
+                // 1.3. Archive or roll the current backup
                 if (_archive)
-                    ArchiveQueue(backup);
+                    ArchiveQueue(_file);
+                else
+                    RollBackup(_file);
             }
 
             // 2. Check retry timestamp if 100ms elapsed after the last attempt
@@ -987,6 +985,53 @@ private:
             _retry = CppCommon::Timestamp::nano();
             return false;
         }
+    }
+
+    void ArchiveQueue(const CppCommon::Path& path) override
+    {
+        // Create unique file name
+        CppCommon::File unique = CppCommon::File(path).ReplaceFilename(CppCommon::File::unique());
+        CppCommon::File::Rename(path, unique);
+
+        _archive_queue.Enqueue(unique);
+    }
+
+    void ArchiveFile(const CppCommon::Path& path) override
+    {
+        // Roll backup
+        CppCommon::File backup = RollBackup(path);
+
+        // Archive backup
+        Impl::ArchiveFile(backup);
+    }
+
+    CppCommon::File RollBackup(const CppCommon::Path& path)
+    {
+        // Delete the last backup and archive if exists
+        CppCommon::File backup = PrepareFilePath(_backups);
+        if (backup.IsFileExists())
+            CppCommon::File::Remove(backup);
+        backup += "." + ARCHIVE_EXTENSION;
+        if (backup.IsFileExists())
+            CppCommon::File::Remove(backup);
+
+        // Roll backup files
+        for (size_t i = _backups - 1; i > 0; --i)
+        {
+            CppCommon::File src = PrepareFilePath(i);
+            CppCommon::File dst = PrepareFilePath(i + 1);
+            if (src.IsFileExists())
+                CppCommon::File::Rename(src, dst);
+            src += "." + ARCHIVE_EXTENSION;
+            dst += "." + ARCHIVE_EXTENSION;
+            if (src.IsFileExists())
+                CppCommon::File::Rename(src, dst);
+        }
+
+        // Backup the current file
+        backup = PrepareFilePath(1);
+        CppCommon::File::Rename(path, backup);
+        return backup;
     }
 
     CppCommon::Path PrepareFilePath()
