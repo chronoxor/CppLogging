@@ -15,6 +15,9 @@ if(NOT TARGET zlib)
   # Set module options
   option(AMD64 "Enable building amd64 assembly implementation" ON)
 
+  # Set install flag
+  set(SKIP_INSTALL_ALL Y)
+
   # Includes
   include_directories("zlib")
 
