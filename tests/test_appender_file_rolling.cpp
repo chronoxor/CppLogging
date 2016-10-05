@@ -24,8 +24,6 @@ TEST_CASE("Rolling file appender with size-based policy", "[CppLogging]")
         }
     }
 
-    REQUIRE(File("test.log.zip").IsFileExists());
-    REQUIRE(File("test.log.zip").size() > 0);
     REQUIRE(File("test.1.log.zip").IsFileExists());
     REQUIRE(File("test.1.log.zip").size() > 0);
     REQUIRE(File("test.2.log.zip").IsFileExists());
@@ -57,7 +55,7 @@ TEST_CASE("Rolling file appender with time-based policy", "[CppLogging]")
         }
     }
 
-    REQUIRE(Directory(".").GetFiles(".*log.zip").size() == 4);
+    REQUIRE(Directory(".").GetFiles(".*log.zip").size() == 3);
 
     File::RemoveIf(".", ".*.log.zip");
 }
