@@ -46,6 +46,7 @@ public:
     bool ProcessRecord(Record& record) override;
     void Flush() override;
 
+protected:
     //! Initialize thread handler
     /*!
          This handler can be used to initialize priority or affinity of the logging thread.

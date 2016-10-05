@@ -49,8 +49,8 @@ bool AsyncProcessor::EnqueueRecord(bool discard_on_overflow, Record& record)
             return false;
 
         // If the overflow policy is blocking then yield if the buffer is full
-		while (!_buffer.Enqueue(record))
-			CppCommon::Thread::Yield();
+        while (!_buffer.Enqueue(record))
+            CppCommon::Thread::Yield();
     }
 
     return true;
@@ -69,8 +69,8 @@ void AsyncProcessor::ProcessBufferedRecords()
         while (true)
         {
             // Dequeue the next logging record or yield if the buffer is empty
-			while (!_buffer.Dequeue(record))
-				CppCommon::Thread::Yield();
+            while (!_buffer.Dequeue(record))
+                CppCommon::Thread::Yield();
 
             // Handle stop operation record
             if (record.timestamp == 0)

@@ -108,6 +108,18 @@ public:
     void AppendRecord(Record& record) override;
     void Flush() override;
 
+protected:
+    //! Initialize archivation thread handler
+    /*!
+         This handler can be used to initialize priority or affinity of the archivation thread.
+    */
+    virtual void OnArchiveThreadInitialize() {}
+    //! Cleanup archivation thread handler
+    /*!
+         This handler can be used to cleanup priority or affinity of the archivation thread.
+    */
+    virtual void OnArchiveThreadCleanup() {}
+
 private:
     class Impl;
     std::unique_ptr<Impl> _pimpl;
