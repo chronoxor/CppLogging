@@ -656,7 +656,7 @@ int main(int argc, char** argv)
 # Logging benchmarks
 
 ##Benchmark 1: Null appender
-Benchmark source file: [appender_null.cpp](https://github.com/chronoxor/CppLogging/blob/master/perf/appender_null.cpp)
+Benchmark source file: [appender_null.cpp](https://github.com/chronoxor/CppLogging/blob/master/performance/appender_null.cpp)
 
 Benchmark report is the following:
 ```
@@ -705,7 +705,7 @@ Iterations throughput: 5733126 / second
 ```
 
 ##Benchmark 2: File appender
-Benchmark source file: [appender_file.cpp](https://github.com/chronoxor/CppLogging/blob/master/perf/appender_file.cpp)
+Benchmark source file: [appender_file.cpp](https://github.com/chronoxor/CppLogging/blob/master/performance/appender_file.cpp)
 
 Benchmark report is the following:
 ```
@@ -754,7 +754,7 @@ Iterations throughput: 4364404 / second
 ```
 
 ## Benchmark 3: Synchronous processor with null appender
-Benchmark source file: [processor_sync.cpp](https://github.com/chronoxor/CppLogging/blob/master/perf/processor_sync.cpp)
+Benchmark source file: [processor_sync.cpp](https://github.com/chronoxor/CppLogging/blob/master/performance/processor_sync.cpp)
 
 Benchmark report is the following:
 ```
@@ -887,7 +887,7 @@ Iterations throughput: 2467338 / second
 ```
 
 ## Benchmark 4: Asynchronous processor with null appender
-Benchmark source file: [processor_async.cpp](https://github.com/chronoxor/CppLogging/blob/master/perf/processor_async.cpp)
+Benchmark source file: [processor_async.cpp](https://github.com/chronoxor/CppLogging/blob/master/performance/processor_async.cpp)
 
 Benchmark report is the following:
 ```
@@ -1020,7 +1020,7 @@ Iterations throughput: 2851072 / second
 ```
 
 ## Benchmark 5: Synchronous processor with file appender
-Benchmark source file: [file_sync.cpp](https://github.com/chronoxor/CppLogging/blob/master/perf/file_sync.cpp)
+Benchmark source file: [file_sync.cpp](https://github.com/chronoxor/CppLogging/blob/master/performance/file_sync.cpp)
 
 Benchmark report is the following:
 ```
@@ -1117,7 +1117,7 @@ Iterations throughput: 1426888 / second
 ```
 
 ## Benchmark 6: Asynchronous processor with file appender
-Benchmark source file: [file_async.cpp](https://github.com/chronoxor/CppLogging/blob/master/perf/file_async.cpp)
+Benchmark source file: [file_async.cpp](https://github.com/chronoxor/CppLogging/blob/master/performance/file_async.cpp)
 
 Benchmark report is the following:
 ```
@@ -1214,7 +1214,7 @@ Iterations throughput: 1811865 / second
 ```
 
 ## Benchmark 7: Format in logging thread vs format in background thread
-Benchmark source file: [async_format.cpp](https://github.com/chronoxor/CppLogging/blob/master/perf/async_format.cpp)
+Benchmark source file: [async_format.cpp](https://github.com/chronoxor/CppLogging/blob/master/performance/async_format.cpp)
 
 Benchmark report is the following:
 ```
