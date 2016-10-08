@@ -20,6 +20,7 @@ if(NOT TARGET zlib)
 
   # Includes
   include_directories("zlib")
+  include_directories("build/modules/zlib")
 
   # Add module subdirectory
   add_subdirectory("zlib")
