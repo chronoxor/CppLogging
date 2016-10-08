@@ -61,8 +61,8 @@ include_directories("modules/catch/single_include")
 include_directories("modules/cpp-optparse")
 include_directories("modules/CppBenchmark/include")
 include_directories("modules/CppCommon/include")
-include_directories("modules/zlib")
-include_directories("build/modules/zlib")
+include_directories("zlib")
+include_directories("${CMAKE_CURRENT_BINARY_DIR}/zlib")
 
 # Support zlib/contrib/minizip
 file(GLOB_RECURSE MINIZIP_FILES "source/logging/appenders/minizip/*.c")
