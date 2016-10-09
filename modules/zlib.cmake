@@ -1,15 +1,18 @@
-if(NOT TARGET zlib)
+if(NOT TARGET zlibstatic)
 
   # Temporary disable some warnings
   # C4127: conditional expression is constant
   # C4131: 'function' : uses old-style declarator
   # C4210: nonstandard extension used : function given file scope
   # C4244: 'conversion' conversion from 'type1' to 'type2', possible loss of data
+  set(CMAKE_OLD_C_FLAGS ${CMAKE_C_FLAGS})
+  set(CMAKE_OLD_CXX_FLAGS ${CMAKE_CXX_FLAGS})
   if(CMAKE_MAKE_PROGRAM MATCHES "(MSBuild|devenv|msdev|nmake)")
-    set(CMAKE_OLD_C_FLAGS ${CMAKE_C_FLAGS})
-    set(CMAKE_OLD_CXX_FLAGS ${CMAKE_CXX_FLAGS})
     set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} /wd4127 /wd4131 /wd4210 /wd4244")
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /wd4127 /wd4131 /wd4210 /wd4244")
+  elseif(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_COMPILER_IS_GNUC)
+    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -pedantic")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -pedantic")
   endif()
 
   # Set module options
@@ -28,15 +31,13 @@ if(NOT TARGET zlib)
   endif()
 
   # Set module folder
-  set_target_properties(zlib zlibstatic example minigzip PROPERTIES FOLDER modules/zlib)
+  set_target_properties(zlibstatic zlib example minigzip PROPERTIES FOLDER modules/zlib)
 
   # Exclude some modules from the build
-  set_target_properties(example minigzip PROPERTIES EXCLUDE_FROM_ALL 1 EXCLUDE_FROM_DEFAULT_BUILD 1)
+  set_target_properties(zlib example minigzip PROPERTIES EXCLUDE_FROM_ALL 1 EXCLUDE_FROM_DEFAULT_BUILD 1)
 
   # Restore default warnings
-  if(CMAKE_MAKE_PROGRAM MATCHES "(MSBuild|devenv|msdev|nmake)")
-    set(CMAKE_C_FLAGS ${CMAKE_OLD_C_FLAGS})
-    set(CMAKE_CXX_FLAGS ${CMAKE_OLD_CXX_FLAGS})
-  endif()
+  set(CMAKE_C_FLAGS ${CMAKE_OLD_C_FLAGS})
+  set(CMAKE_CXX_FLAGS ${CMAKE_OLD_CXX_FLAGS})
 
 endif()
