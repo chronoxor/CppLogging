@@ -60,6 +60,7 @@ include_directories("modules/catch/single_include")
 include_directories("modules/cpp-optparse")
 include_directories("modules/CppBenchmark/include")
 include_directories("modules/CppCommon/include")
+include_directories("modules/CppCommon/modules/fmt")
 include_directories("modules/zlib")
 
 # Support zlib/contrib/minizip
