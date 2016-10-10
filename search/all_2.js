@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['capacity',['capacity',['../class_cpp_logging_1_1_async_buffer.html#a0de99ebced85547882049a526025b981',1,'CppLogging::AsyncBuffer']]],
+  ['capacity',['capacity',['../class_cpp_logging_1_1_async_buffer.html#ab4a7d19933ed60cdf4a07e4732e5f966',1,'CppLogging::AsyncBuffer']]],
   ['clear',['Clear',['../class_cpp_logging_1_1_record.html#a329f4aee55d7a67be3f313449b4bdf21',1,'CppLogging::Record']]],
   ['config',['Config',['../class_cpp_logging_1_1_config.html',1,'CppLogging']]],
   ['config',['Config',['../class_cpp_logging_1_1_logger.html#ac3da7e21a05bf8852638db7e4dd1b81a',1,'CppLogging::Logger::Config()'],['../class_cpp_logging_1_1_config.html#a36b0110d0dab4d9ff1a273ee527b03d8',1,'CppLogging::Config::Config(const Config &amp;)=delete'],['../class_cpp_logging_1_1_config.html#a33aed3ee45a629bf472d9ab5f4c2a0c5',1,'CppLogging::Config::Config(Config &amp;&amp;)=delete']]],
