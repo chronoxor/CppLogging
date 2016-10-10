@@ -1,12 +1,12 @@
 if(NOT TARGET cppcommon)
 
-  # Set module flag
+  # Module flag
   set(CPPCOMMON_MODULE Y)
 
-  # Add module subdirectory
+  # Module subdirectory
   add_subdirectory("CppCommon")
 
-  # Set module folder
+  # Module folder
   set_target_properties(cppcommon PROPERTIES FOLDER modules/CppCommon)
 
 endif()

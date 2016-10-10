@@ -23,7 +23,6 @@ set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 # Compiler features
 include(SetCompilerFeatures)
 include(SetCompilerWarningAll)
-include(SetCrtSecureWarningsOff)
 include(SetPlatformFeatures)
 
 # External packages
@@ -87,7 +86,7 @@ target_link_libraries(cpplogging cppcommon zlibstatic)
 set_target_properties(cpplogging PROPERTIES FOLDER libraries)
 list(APPEND INSTALL_TARGETS cpplogging)
 
-# Full module components: examples, tests and install
+# Additional module components: examples, performance benchmarks, tests, tools and install
 if(NOT CPPLOGGING_MODULE)
 
   # Examples
@@ -132,7 +131,7 @@ if(NOT CPPLOGGING_MODULE)
   # Tests
   file(GLOB TESTS_SOURCE_FILES "tests/*.cpp")
   set_source_files_properties(${TESTS_SOURCE_FILES} PROPERTIES COMPILE_FLAGS "${COMMON_COMPILE_FLAGS}")
-  add_executable(cpplogging-tests ${CATCH_HEADER} ${TESTS_SOURCE_FILES})
+  add_executable(cpplogging-tests ${CATCH} ${TESTS_SOURCE_FILES})
   target_link_libraries(cpplogging-tests cpplogging cppcommon ${SYSTEM})
   set_target_properties(cpplogging-tests PROPERTIES FOLDER tests)
   list(APPEND INSTALL_TARGETS cpplogging-tests)
