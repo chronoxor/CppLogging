@@ -16,7 +16,7 @@
 #include <iostream>
 #include <vector>
 
-#include <OptionParser.h>
+#include "../../modules/cpp-optparse/OptionParser.h"
 
 using namespace CppLogging;
 
