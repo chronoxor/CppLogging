@@ -92,7 +92,7 @@ protected:
         fill_win32_filefunc64W(&ffunc);
         zf = zipOpen2_64((file + ".zip").wstring().c_str(), APPEND_STATUS_CREATE, nullptr, &ffunc);
 #else
-        zf = zipOpen64((file + ".zip").native().c_str(), APPEND_STATUS_CREATE);
+        zf = zipOpen64((file + ".zip").string().c_str(), APPEND_STATUS_CREATE);
 #endif
         if (zf == nullptr)
             throwex CppCommon::FileSystemException("Cannot create a new zip archive!").Attach(file);
@@ -101,7 +101,7 @@ protected:
         auto zip = CppCommon::resource(zf, [](zipFile handle) { zipClose(handle, nullptr); });
 
         // Open a new file in zip archive
-        int result = zipOpenNewFileInZip64(zf, file.filename().native().c_str(), nullptr, nullptr, 0, nullptr, 0, nullptr, Z_DEFLATED, Z_DEFAULT_COMPRESSION, 1);
+        int result = zipOpenNewFileInZip64(zf, file.filename().string().c_str(), nullptr, nullptr, 0, nullptr, 0, nullptr, Z_DEFLATED, Z_DEFAULT_COMPRESSION, 1);
         if (result != ZIP_OK)
             throwex CppCommon::FileSystemException("Cannot open a new file in zip archive!").Attach(file);
 
