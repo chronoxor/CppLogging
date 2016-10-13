@@ -14,6 +14,7 @@
 #include <atomic>
 #include <cassert>
 #include <cstdio>
+#include <cstring>
 #include <utility>
 
 namespace CppLogging {

@@ -56,8 +56,8 @@ class TextLayout::Impl
         PlaceholderType type;
         std::string value;
 
-        Placeholder(PlaceholderType type) : type(type) {}
-        Placeholder(PlaceholderType type, const std::string& value) : type(type), value(value) {}
+        Placeholder(PlaceholderType t) : type(t) {}
+        Placeholder(PlaceholderType t, const std::string& v) : type(t), value(v) {}
     };
 
 public:

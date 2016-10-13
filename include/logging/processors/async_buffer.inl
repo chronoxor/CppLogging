@@ -18,6 +18,10 @@ inline AsyncBuffer::AsyncBuffer(size_t capacity) : _capacity(capacity), _mask(ca
     assert((capacity > 1) && "Ring buffer capacity must be greater than one!");
     assert(((capacity & (capacity - 1)) == 0) && "Ring buffer capacity must be a power of two!");
 
+    memset(_pad0, 0, sizeof(cache_line_pad));
+    memset(_pad1, 0, sizeof(cache_line_pad));
+    memset(_pad2, 0, sizeof(cache_line_pad));
+
     // Populate the sequence initial values
     for (size_t i = 0; i < capacity; ++i)
         _buffer[i].sequence.store(i, std::memory_order_relaxed);
