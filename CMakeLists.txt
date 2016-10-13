@@ -62,7 +62,7 @@ endif()
 
 # Temporary disable some warnings
 if(NOT MSVC)
-  set_source_files_properties(${MINIZIP_FILES} PROPERTIES COMPILE_FLAGS "${PEDANTIC_COMPILE_FLAGS}")
+  set_source_files_properties(${MINIZIP_FILES} PROPERTIES COMPILE_FLAGS "${COMMON_COMPILE_FLAGS}")
 else()
   # C4067: unexpected tokens following preprocessor directive - expected a newline
   # C4131: 'function' : uses old-style declarator
