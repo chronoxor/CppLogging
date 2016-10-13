@@ -51,6 +51,8 @@ if(WIN32)
   list(APPEND SYSTEM ${USERENV_LIBRARIES})
 endif()
 
+  list(APPEND SYSTEM supc++)
+
 # Modules
 add_subdirectory("modules")
 
