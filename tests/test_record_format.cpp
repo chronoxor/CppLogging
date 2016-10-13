@@ -33,8 +33,8 @@ TEST_CASE("Format message", "[CppLogging]")
 {
 
     REQUIRE(format("no arguments") == "no arguments");
-/*
     REQUIRE(format("{0}, {1}, {2}", -1, 0, 1) == "-1, 0, 1");
+/*
     REQUIRE(format("{0}, {1}, {2}", 'a', 'b', 'c') == "a, b, c");
     REQUIRE(format("{}, {}, {}", 'a', 'b', 'c') == "a, b, c");
     REQUIRE(format("{2}, {1}, {0}", 'a', 'b', 'c') == "c, b, a");
