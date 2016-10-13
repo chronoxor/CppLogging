@@ -300,6 +300,11 @@ public:
         catch (CppCommon::FileSystemException&) {}
     }
 
+    TimeRollingPolicy policy() const
+    {
+        return _policy;
+    }
+
     void AppendRecord(Record& record) override
     {
         // Skip logging records without layout
