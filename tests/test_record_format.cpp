@@ -31,7 +31,7 @@ std::string format(const char* pattern, const Args&... args)
 
 TEST_CASE("Format message", "[CppLogging]")
 {
-/*
+
     REQUIRE(format("no arguments") == "no arguments");
     REQUIRE(format("{0}, {1}, {2}", -1, 0, 1) == "-1, 0, 1");
     REQUIRE(format("{0}, {1}, {2}", 'a', 'b', 'c') == "a, b, c");
@@ -42,6 +42,7 @@ TEST_CASE("Format message", "[CppLogging]")
     REQUIRE(format("{:>30}", "right aligned") == "                 right aligned");
     REQUIRE(format("{:^30}", "centered") == "           centered           ");
     REQUIRE(format("{:*^30}", "centered") == "***********centered***********");
+/*
     REQUIRE(format("{:+f}; {:+f}", 3.14, -3.14) == "+3.140000; -3.140000");
     REQUIRE(format("{: f}; {: f}", 3.14, -3.14) == " 3.140000; -3.140000");
     REQUIRE(format("{:-f}; {:-f}", 3.14, -3.14) == "3.140000; -3.140000");
