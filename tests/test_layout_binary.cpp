@@ -52,7 +52,7 @@ Record ParseBinaryLayout(const std::vector<uint8_t>& raw)
     return record;
 }
 
-bool operator==(const Record& record1, const Record& record2)
+bool CompareRecords(const Record& record1, const Record& record2)
 {
     if (record1.timestamp != record2.timestamp)
         return false;
@@ -81,5 +81,5 @@ TEST_CASE("Binary layout", "[CppLogging]")
     REQUIRE(record.raw.size() > 0);
 
     Record clone = ParseBinaryLayout(record.raw);
-    REQUIRE(clone == record);
+    REQUIRE(CompareRecords(clone, record));
 }
