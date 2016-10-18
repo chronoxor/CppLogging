@@ -187,13 +187,13 @@ void DeserializeExtraData(uint8_t*& data_buffer, fmt::internal::Arg::Type type, 
     // Deserialize extra data
     if (type == fmt::internal::Arg::NAMED_ARG)
     {
-        fmt::internal::NamedArg<Char>* named = reinterpret_cast<fmt::internal::NamedArg<Char>*>(data_buffer);
+        fmt::internal::NamedArg<Char>* named = (fmt::internal::NamedArg<Char>*)data_buffer;
         value.pointer = named;
         data_buffer += sizeof(fmt::internal::NamedArg<Char>);
         std::size_t size;
         std::memcpy(&size, data_buffer, sizeof(std::size_t));
         data_buffer += sizeof(std::size_t);
-        named->name = fmt::BasicStringRef<Char>(reinterpret_cast<const Char*>(data_buffer), size);
+        named->name = fmt::BasicStringRef<Char>((const Char*)data_buffer, size);
         data_buffer += size;
         DeserializeExtraData<Char>(data_buffer, named->type, *named);
     }
@@ -202,7 +202,7 @@ void DeserializeExtraData(uint8_t*& data_buffer, fmt::internal::Arg::Type type, 
         std::size_t size;
         std::memcpy(&size, data_buffer, sizeof(std::size_t));
         data_buffer += sizeof(std::size_t);
-        value.string.value = reinterpret_cast<const char*>(data_buffer);
+        value.string.value = (const char*)data_buffer;
         data_buffer += size;
     }
     else if (type == fmt::internal::Arg::STRING)
@@ -210,7 +210,7 @@ void DeserializeExtraData(uint8_t*& data_buffer, fmt::internal::Arg::Type type, 
         std::size_t size;
         std::memcpy(&size, data_buffer, sizeof(std::size_t));
         data_buffer += sizeof(std::size_t);
-        value.string.value = reinterpret_cast<const char*>(data_buffer);
+        value.string.value = (const char*)data_buffer;
         value.string.size = size / sizeof(char);
         data_buffer += size;
     }
@@ -219,7 +219,7 @@ void DeserializeExtraData(uint8_t*& data_buffer, fmt::internal::Arg::Type type, 
         std::size_t size;
         std::memcpy(&size, data_buffer, sizeof(std::size_t));
         data_buffer += sizeof(std::size_t);
-        value.wstring.value = reinterpret_cast<const wchar_t*>(data_buffer);
+        value.wstring.value = (const wchar_t*)data_buffer;
         value.wstring.size = size / sizeof(wchar_t);
         data_buffer += size;
     }
@@ -269,7 +269,7 @@ fmt::ArgList Deserialize(std::vector<uint8_t>& buffer)
     for (unsigned i = 0; i < count; ++i)
     {
         // Deserialize argument
-        fmt::internal::Value* value = reinterpret_cast<fmt::internal::Value*>(local_buffer);
+        fmt::internal::Value* value = (fmt::internal::Value*)local_buffer;
         local_buffer += item_size;
         // Deserialize extra data
         DeserializeExtraData<Char>(data_buffer, fmt::ArgList::type(types, i), *value);
@@ -277,8 +277,8 @@ fmt::ArgList Deserialize(std::vector<uint8_t>& buffer)
 
     // Prepare and return arguments list stored in the provided buffer
     return (count > fmt::ArgList::MAX_PACKED_ARGS) ?
-        fmt::ArgList(types, reinterpret_cast<const fmt::internal::Arg*>(base_buffer)) :
-        fmt::ArgList(types, reinterpret_cast<const fmt::internal::Value*>(base_buffer));
+        fmt::ArgList(types, (const fmt::internal::Arg*)base_buffer) :
+        fmt::ArgList(types, (const fmt::internal::Value*)base_buffer);
 }
 
 } // namespace Internals
