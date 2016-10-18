@@ -41,7 +41,7 @@ inline void AlignDeserialize(uint8_t*& buffer, T& value)
 }
 
 template <typename Char, typename T>
-std::size_t CalculateExtraSize(const fmt::internal::Arg& arg)
+inline std::size_t CalculateExtraSize(const fmt::internal::Arg& arg)
 {
     std::size_t result = 0;
 
@@ -52,19 +52,19 @@ std::size_t CalculateExtraSize(const fmt::internal::Arg& arg)
     else if (arg.type == fmt::internal::Arg::WSTRING)
         result = alignof(std::size_t) + sizeof(std::size_t) + alignof(wchar_t) + arg.wstring.size * sizeof(wchar_t);
     else if (arg.type == fmt::internal::Arg::CUSTOM)
-        result = alignof(T) + sizeof(T);
+        result = alignof(std::size_t) + sizeof(std::size_t) + sizeof(T) + sizeof(T);
 
     return result;
 }
 
 template <typename Char>
-unsigned CalculateBufferSize(std::size_t&)
+inline unsigned CalculateBufferSize(std::size_t&)
 {
     return 0;
 }
 
 template <typename Char, typename T>
-unsigned CalculateBufferSize(std::size_t& extra_size, const T& argument)
+inline unsigned CalculateBufferSize(std::size_t& extra_size, const T& argument)
 {
     fmt::internal::MakeArg<fmt::BasicFormatter<Char>> arg(argument);
     extra_size += CalculateExtraSize<Char, T>(arg);
@@ -72,14 +72,14 @@ unsigned CalculateBufferSize(std::size_t& extra_size, const T& argument)
 }
 
 template <typename Char, typename T>
-unsigned CalculateBufferSize(std::size_t& extra_size, const fmt::internal::NamedArgWithType<Char, T>& argument)
+inline unsigned CalculateBufferSize(std::size_t& extra_size, const fmt::internal::NamedArgWithType<Char, T>& argument)
 {
-    extra_size += alignof(fmt::internal::NamedArgWithType<Char, T>) + sizeof(fmt::internal::NamedArgWithType<Char, T>) + alignof(std::size_t) + sizeof(std::size_t) + alignof(Char) + argument.name.size() * sizeof(Char) + CalculateExtraSize<Char, fmt::internal::NamedArgWithType<Char, T>>(argument);
+    extra_size += alignof(fmt::internal::NamedArg<Char>) + sizeof(fmt::internal::NamedArg<Char>) + alignof(std::size_t) + sizeof(std::size_t) + alignof(Char) + argument.name.size() * sizeof(Char) + CalculateExtraSize<Char, fmt::internal::NamedArgWithType<Char, T>>(argument);
     return 1;
 }
 
 template <typename Char, typename T, typename... Args>
-unsigned CalculateBufferSize(std::size_t& extra_size, const T& argument, const Args&... args)
+inline unsigned CalculateBufferSize(std::size_t& extra_size, const T& argument, const Args&... args)
 {
     unsigned count = 0;
     count += CalculateBufferSize<Char>(extra_size, argument);
@@ -88,52 +88,51 @@ unsigned CalculateBufferSize(std::size_t& extra_size, const T& argument, const A
 }
 
 template <typename Char, typename T>
-void SerializeExtraData(uint8_t*& data_buffer, fmt::internal::Arg::Type type, const fmt::internal::Value& value)
+inline void SerializeExtraData(uint8_t*& data_buffer, fmt::internal::Arg::Type type, const fmt::internal::Value& value)
 {
     // Serialize extra data
     if (type == fmt::internal::Arg::CSTRING)
     {
         std::size_t size = (std::strlen(value.string.value) + 1) * sizeof(char);
         AlignSerialize(data_buffer, size);
-        AlignSerialize(data_buffer, value.string.value, size, sizeof(char));
+        AlignSerialize(data_buffer, value.string.value, size, alignof(char));
     }
     else if (type == fmt::internal::Arg::STRING)
     {
         std::size_t size = value.string.size * sizeof(char);
         AlignSerialize(data_buffer, size);
-        AlignSerialize(data_buffer, value.string.value, size, sizeof(char));
+        AlignSerialize(data_buffer, value.string.value, size, alignof(char));
     }
     else if (type == fmt::internal::Arg::WSTRING)
     {
         std::size_t size = value.wstring.size * sizeof(wchar_t);
         AlignSerialize(data_buffer, size);
-        AlignSerialize(data_buffer, value.wstring.value, size, sizeof(wchar_t));
+        AlignSerialize(data_buffer, value.wstring.value, size, alignof(wchar_t));
     }
     else if (type == fmt::internal::Arg::CUSTOM)
     {
-        std::size_t size = sizeof(T);
-        AlignSerialize(data_buffer, size);
-        AlignSerialize(data_buffer, value.custom.value, size, size);
+        AlignSerialize(data_buffer, sizeof(T));
+        AlignSerialize(data_buffer, value.custom.value, sizeof(T), sizeof(T));
     }
 }
 
 template <typename Char, typename T>
-void SerializeExtraData(uint8_t*& data_buffer, const fmt::internal::NamedArgWithType<Char, T>& named)
+inline void SerializeExtraData(uint8_t*& data_buffer, const fmt::internal::NamedArgWithType<Char, T>& named)
 {
-    AlignSerialize(data_buffer, named);
+    AlignSerialize(data_buffer, (const fmt::internal::NamedArg<Char>&)named);
     std::size_t size = named.name.size() * sizeof(Char);
     AlignSerialize(data_buffer, size);
-    AlignSerialize(data_buffer, named.name.data(), size, sizeof(Char));
+    AlignSerialize(data_buffer, named.name.data(), size, alignof(Char));
     SerializeExtraData<Char, T>(data_buffer, named.type, named);
 }
 
 template <typename Char>
-void SerializeArguments(std::size_t, std::size_t, uint8_t*&, uint8_t*&)
+inline void SerializeArguments(std::size_t, std::size_t, uint8_t*&, uint8_t*&)
 {
 }
 
 template <typename Char, typename T>
-void SerializeArguments(std::size_t item_align, std::size_t item_size, uint8_t*& base_buffer, uint8_t*& data_buffer, const T& argument)
+inline void SerializeArguments(std::size_t item_align, std::size_t item_size, uint8_t*& base_buffer, uint8_t*& data_buffer, const T& argument)
 {
     // Serialize argument
     fmt::internal::MakeArg<fmt::BasicFormatter<Char>> arg(argument);
@@ -143,7 +142,7 @@ void SerializeArguments(std::size_t item_align, std::size_t item_size, uint8_t*&
 }
 
 template <typename Char, typename T>
-void SerializeArguments(std::size_t item_align, std::size_t item_size, uint8_t*& base_buffer, uint8_t*& data_buffer, const fmt::internal::NamedArgWithType<Char, T>& argument)
+inline void SerializeArguments(std::size_t item_align, std::size_t item_size, uint8_t*& base_buffer, uint8_t*& data_buffer, const fmt::internal::NamedArgWithType<Char, T>& argument)
 {
     // Serialize argument
     const fmt::internal::Arg& arg = argument;
@@ -153,14 +152,14 @@ void SerializeArguments(std::size_t item_align, std::size_t item_size, uint8_t*&
 }
 
 template <typename Char, typename T, typename... Args>
-void SerializeArguments(std::size_t item_align, std::size_t item_size, uint8_t*& base_buffer, uint8_t*& data_buffer, const T& argument, const Args&... args)
+inline void SerializeArguments(std::size_t item_align, std::size_t item_size, uint8_t*& base_buffer, uint8_t*& data_buffer, const T& argument, const Args&... args)
 {
     SerializeArguments<Char>(item_align, item_size, base_buffer, data_buffer, argument);
     SerializeArguments<Char>(item_align, item_size, base_buffer, data_buffer, args...);
 }
 
 template <typename Char, typename... Args>
-void Serialize(std::vector<uint8_t>& buffer, const Args&... args)
+inline void Serialize(std::vector<uint8_t>& buffer, const Args&... args)
 {
     std::size_t extra_size = 0;
     unsigned count = CalculateBufferSize<Char>(extra_size, args...);
@@ -196,18 +195,18 @@ void Serialize(std::vector<uint8_t>& buffer, const Args&... args)
 }
 
 template <typename Char>
-void DeserializeExtraData(uint8_t*& data_buffer, fmt::internal::Arg::Type type, fmt::internal::Value& value)
+inline void DeserializeExtraData(uint8_t*& data_buffer, fmt::internal::Arg::Type type, fmt::internal::Value& value)
 {
     // Deserialize extra data
     if (type == fmt::internal::Arg::NAMED_ARG)
     {
-        AlignBuffer(data_buffer, sizeof(fmt::internal::NamedArg<Char>));
+        AlignBuffer(data_buffer, alignof(fmt::internal::NamedArg<Char>));
         fmt::internal::NamedArg<Char>* named = (fmt::internal::NamedArg<Char>*)data_buffer;
         value.pointer = named;
         data_buffer += sizeof(fmt::internal::NamedArg<Char>);
         std::size_t size;
         AlignDeserialize(data_buffer, size);
-        AlignBuffer(data_buffer, sizeof(Char));
+        AlignBuffer(data_buffer, alignof(Char));
         named->name = fmt::BasicStringRef<Char>((const Char*)data_buffer, size);
         data_buffer += size;
         DeserializeExtraData<Char>(data_buffer, named->type, *named);
@@ -216,7 +215,7 @@ void DeserializeExtraData(uint8_t*& data_buffer, fmt::internal::Arg::Type type, 
     {
         std::size_t size;
         AlignDeserialize(data_buffer, size);
-        AlignBuffer(data_buffer, sizeof(char));
+        AlignBuffer(data_buffer, alignof(char));
         value.string.value = (const char*)data_buffer;
         data_buffer += size;
     }
@@ -224,7 +223,7 @@ void DeserializeExtraData(uint8_t*& data_buffer, fmt::internal::Arg::Type type, 
     {
         std::size_t size;
         AlignDeserialize(data_buffer, size);
-        AlignBuffer(data_buffer, sizeof(char));
+        AlignBuffer(data_buffer, alignof(char));
         value.string.value = (const char*)data_buffer;
         value.string.size = size / sizeof(char);
         data_buffer += size;
@@ -233,7 +232,7 @@ void DeserializeExtraData(uint8_t*& data_buffer, fmt::internal::Arg::Type type, 
     {
         std::size_t size;
         AlignDeserialize(data_buffer, size);
-        AlignBuffer(data_buffer, sizeof(wchar_t));
+        AlignBuffer(data_buffer, alignof(wchar_t));
         value.wstring.value = (const wchar_t*)data_buffer;
         value.wstring.size = size / sizeof(wchar_t);
         data_buffer += size;
@@ -249,7 +248,7 @@ void DeserializeExtraData(uint8_t*& data_buffer, fmt::internal::Arg::Type type, 
 }
 
 template <typename Char>
-fmt::ArgList Deserialize(std::vector<uint8_t>& buffer)
+inline fmt::ArgList Deserialize(std::vector<uint8_t>& buffer)
 {
     // Special check for empty format arguments list
     if (buffer.empty())
