@@ -62,7 +62,7 @@ endif()
 
 # Temporary disable some warnings
 if(NOT MSVC)
-  set_source_files_properties(${MINIZIP_FILES} PROPERTIES COMPILE_FLAGS "${COMMON_COMPILE_FLAGS}")
+  set_source_files_properties(${MINIZIP_FILES} PROPERTIES COMPILE_FLAGS "${COMMON_COMPILE_FLAGS} -Wno-unused-variable")
 else()
   # C4067: unexpected tokens following preprocessor directive - expected a newline
   # C4131: 'function' : uses old-style declarator
@@ -76,7 +76,7 @@ endif()
 file(GLOB_RECURSE SOURCE_FILES "source/*.cpp")
 set_source_files_properties(${SOURCE_FILES} PROPERTIES COMPILE_FLAGS "${PEDANTIC_COMPILE_FLAGS}")
 add_library(cpplogging ${SOURCE_FILES} ${MINIZIP_FILES})
-if(CYGWIN)
+if(CYGWIN OR MINGW)
   target_compile_definitions(cpplogging PRIVATE USE_FILE32API=1)
 endif()
 target_include_directories(cpplogging PUBLIC "include" PRIVATE "modules/CppCommon/include" PRIVATE "modules/zlib")
