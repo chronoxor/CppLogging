@@ -11,15 +11,9 @@ namespace CppLogging {
 //! @cond INTERNALS
 namespace Internals {
 
-inline void AlignBuffer(uint8_t*& buffer, size_t align)
-{
-    size_t offset = (uintptr_t)buffer % align;
-    buffer += (offset != 0) ? (align - offset) : 0;
-}
-
 inline void AlignSerialize(uint8_t*& buffer, const void* data, size_t size, size_t align)
 {
-    AlignBuffer(buffer, align);
+    buffer = CppCommon::Memory::Align(buffer, align);
     std::memcpy(buffer, data, size);
     buffer += size;
 }
@@ -27,7 +21,7 @@ inline void AlignSerialize(uint8_t*& buffer, const void* data, size_t size, size
 template <typename T>
 inline void AlignSerialize(uint8_t*& buffer, const T& value)
 {
-    AlignBuffer(buffer, alignof(T));
+    buffer = CppCommon::Memory::Align(buffer, alignof(T));
     std::memcpy(buffer, &value, sizeof(T));
     buffer += sizeof(T);
 }
@@ -35,7 +29,7 @@ inline void AlignSerialize(uint8_t*& buffer, const T& value)
 template <typename T>
 inline void AlignDeserialize(uint8_t*& buffer, T& value)
 {
-    AlignBuffer(buffer, alignof(T));
+    buffer = CppCommon::Memory::Align(buffer, alignof(T));
     std::memcpy(&value, buffer, sizeof(T));
     buffer += sizeof(T);
 }
@@ -52,7 +46,7 @@ inline std::size_t CalculateExtraSize(const fmt::internal::Arg& arg)
     else if (arg.type == fmt::internal::Arg::WSTRING)
         result = alignof(std::size_t) + sizeof(std::size_t) + alignof(wchar_t) + arg.wstring.size * sizeof(wchar_t);
     else if (arg.type == fmt::internal::Arg::CUSTOM)
-        result = alignof(std::size_t) + sizeof(std::size_t) + sizeof(T) + sizeof(T);
+        result = alignof(std::size_t) + sizeof(std::size_t) + alignof(std::size_t) + sizeof(std::size_t) + sizeof(T);
 
     return result;
 }
@@ -112,7 +106,8 @@ inline void SerializeExtraData(uint8_t*& data_buffer, fmt::internal::Arg::Type t
     else if (type == fmt::internal::Arg::CUSTOM)
     {
         AlignSerialize(data_buffer, sizeof(T));
-        AlignSerialize(data_buffer, value.custom.value, sizeof(T), sizeof(T));
+        AlignSerialize(data_buffer, alignof(T));
+        AlignSerialize(data_buffer, value.custom.value, sizeof(T), alignof(T));
     }
 }
 
@@ -190,6 +185,9 @@ inline void Serialize(std::vector<uint8_t>& buffer, const Args&... args)
     fmt::ULongLong types = fmt::internal::make_type(args...);
     AlignSerialize(base_buffer, types);
 
+    // Align base buffer
+    base_buffer = CppCommon::Memory::Align(base_buffer, item_align);
+
     // Serialize values of format arguments
     SerializeArguments<Char>(item_align, item_size, base_buffer, data_buffer, args...);
 }
@@ -200,13 +198,13 @@ inline void DeserializeExtraData(uint8_t*& data_buffer, fmt::internal::Arg::Type
     // Deserialize extra data
     if (type == fmt::internal::Arg::NAMED_ARG)
     {
-        AlignBuffer(data_buffer, alignof(fmt::internal::NamedArg<Char>));
+        data_buffer = CppCommon::Memory::Align(data_buffer, alignof(fmt::internal::NamedArg<Char>));
         fmt::internal::NamedArg<Char>* named = (fmt::internal::NamedArg<Char>*)data_buffer;
         value.pointer = named;
         data_buffer += sizeof(fmt::internal::NamedArg<Char>);
         std::size_t size;
         AlignDeserialize(data_buffer, size);
-        AlignBuffer(data_buffer, alignof(Char));
+        data_buffer = CppCommon::Memory::Align(data_buffer, alignof(Char));
         named->name = fmt::BasicStringRef<Char>((const Char*)data_buffer, size);
         data_buffer += size;
         DeserializeExtraData<Char>(data_buffer, named->type, *named);
@@ -215,7 +213,7 @@ inline void DeserializeExtraData(uint8_t*& data_buffer, fmt::internal::Arg::Type
     {
         std::size_t size;
         AlignDeserialize(data_buffer, size);
-        AlignBuffer(data_buffer, alignof(char));
+        data_buffer = CppCommon::Memory::Align(data_buffer, alignof(char));
         value.string.value = (const char*)data_buffer;
         data_buffer += size;
     }
@@ -223,7 +221,7 @@ inline void DeserializeExtraData(uint8_t*& data_buffer, fmt::internal::Arg::Type
     {
         std::size_t size;
         AlignDeserialize(data_buffer, size);
-        AlignBuffer(data_buffer, alignof(char));
+        data_buffer = CppCommon::Memory::Align(data_buffer, alignof(char));
         value.string.value = (const char*)data_buffer;
         value.string.size = size / sizeof(char);
         data_buffer += size;
@@ -232,7 +230,7 @@ inline void DeserializeExtraData(uint8_t*& data_buffer, fmt::internal::Arg::Type
     {
         std::size_t size;
         AlignDeserialize(data_buffer, size);
-        AlignBuffer(data_buffer, alignof(wchar_t));
+        data_buffer = CppCommon::Memory::Align(data_buffer, alignof(wchar_t));
         value.wstring.value = (const wchar_t*)data_buffer;
         value.wstring.size = size / sizeof(wchar_t);
         data_buffer += size;
@@ -241,7 +239,9 @@ inline void DeserializeExtraData(uint8_t*& data_buffer, fmt::internal::Arg::Type
     {
         std::size_t size;
         AlignDeserialize(data_buffer, size);
-        AlignBuffer(data_buffer, size);
+        std::size_t align;
+        AlignDeserialize(data_buffer, align);
+        data_buffer = CppCommon::Memory::Align(data_buffer, align);
         value.custom.value = data_buffer;
         data_buffer += size;
     }
@@ -276,7 +276,7 @@ inline fmt::ArgList Deserialize(std::vector<uint8_t>& buffer)
     std::size_t item_size = (count > fmt::ArgList::MAX_PACKED_ARGS) ? sizeof(fmt::internal::Arg) : sizeof(fmt::internal::Value);
 
     // Align base buffer
-    AlignBuffer(base_buffer, item_align);
+    base_buffer = CppCommon::Memory::Align(base_buffer, item_align);
 
     // Deserialize values of format arguments
     uint8_t* local_buffer = base_buffer;

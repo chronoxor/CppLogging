@@ -11,6 +11,7 @@
 
 #include "logging/level.h"
 #include "string/format.h"
+#include "system/memory.h"
 #include "threads/thread.h"
 #include "time/timestamp.h"
 
