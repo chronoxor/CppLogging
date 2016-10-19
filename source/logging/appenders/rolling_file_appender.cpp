@@ -81,7 +81,7 @@ protected:
         _archive_queue.Enqueue(path);
     }
 
-    virtual void ArchiveFile(const CppCommon::Path& path)
+    virtual void ArchiveFile(const CppCommon::Path& path, const CppCommon::Path& filename = "")
     {
         CppCommon::File file(path);
 
@@ -101,7 +101,7 @@ protected:
         auto zip = CppCommon::resource(zf, [](zipFile handle) { zipClose(handle, nullptr); });
 
         // Open a new file in zip archive
-        int result = zipOpenNewFileInZip64(zf, file.filename().string().c_str(), nullptr, nullptr, 0, nullptr, 0, nullptr, Z_DEFLATED, Z_DEFAULT_COMPRESSION, 1);
+        int result = zipOpenNewFileInZip64(zf, filename.empty() ? file.filename().string().c_str() : filename.string().c_str(), nullptr, nullptr, 0, nullptr, 0, nullptr, Z_DEFLATED, Z_DEFAULT_COMPRESSION, 1);
         if (result != ZIP_OK)
             throwex CppCommon::FileSystemException("Cannot open a new file in zip archive!").Attach(file);
 
@@ -1001,13 +1001,13 @@ private:
         _archive_queue.Enqueue(unique);
     }
 
-    void ArchiveFile(const CppCommon::Path& path) override
+    void ArchiveFile(const CppCommon::Path& path, const CppCommon::Path& filename = "") override
     {
         // Roll backup
         CppCommon::File backup = RollBackup(path);
 
         // Archive backup
-        Impl::ArchiveFile(backup);
+        Impl::ArchiveFile(backup, PrepareFilePath());
     }
 
     CppCommon::File RollBackup(const CppCommon::Path& path)
