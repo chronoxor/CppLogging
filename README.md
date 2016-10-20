@@ -1,6 +1,9 @@
 # CppLogging
 
 [![Linux build status](https://img.shields.io/travis/chronoxor/CppLogging/master.svg?label=Linux)](https://travis-ci.org/chronoxor/CppLogging)
+[![OSX build status](https://img.shields.io/travis/chronoxor/CppLogging/master.svg?label=OSX)](https://travis-ci.org/chronoxor/CppLogging)
+[![Cygwin build status](https://img.shields.io/appveyor/ci/chronoxor/CppLogging/master.svg?label=Cygwin)](https://ci.appveyor.com/project/chronoxor/CppLogging)
+[![MinGW build status](https://img.shields.io/appveyor/ci/chronoxor/CppLogging/master.svg?label=MinGW)](https://ci.appveyor.com/project/chronoxor/CppLogging)
 [![Windows build status](https://img.shields.io/appveyor/ci/chronoxor/CppLogging/master.svg?label=Windows)](https://ci.appveyor.com/project/chronoxor/CppLogging)
 
 C++ Logging Library provides functionality to log different events with a high
@@ -69,7 +72,6 @@ Optional:
 * [Clang](http://clang.llvm.org)
 * [Clion](https://www.jetbrains.com/clion)
 * [MinGW](http://mingw-w64.org/doku.php)
-* [MSYS](http://www.mingw.org/wiki/msys)
 * [Visual Studio 2015](https://www.visualstudio.com)
 
 #How to build?
@@ -103,12 +105,6 @@ cygwin.bat
 ```
 cd build
 mingw.bat
-```
-
-## Windows (MinGW with MSYS)
-```
-cd build
-msys.bat
 ```
 
 ## Windows (Visaul Studio 2015)
