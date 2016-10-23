@@ -56,8 +56,6 @@ protected:
     CppCommon::File _file;
     size_t _written;
 
-    virtual bool PrepareFile(uint64_t timestamp) = 0;
-
     virtual void CloseFile()
     {
         // Check if the file is already opened for writing
@@ -365,7 +363,7 @@ private:
     CppCommon::Timestamp _rollstamp;
     CppCommon::Timespan _rolldelay;
 
-    bool PrepareFile(uint64_t timestamp) override
+    bool PrepareFile(uint64_t timestamp)
     {
         try
         {
@@ -942,7 +940,7 @@ private:
     size_t _size;
     size_t _backups;
 
-    bool PrepareFile(size_t size) override
+    bool PrepareFile(size_t size)
     {
         try
         {
