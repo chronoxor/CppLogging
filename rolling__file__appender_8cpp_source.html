@@ -468,7 +468,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00384"></a><span class="lineno">  384</span>&#160;            }</div>
 <div class="line"><a name="l00385"></a><span class="lineno">  385</span>&#160;</div>
 <div class="line"><a name="l00386"></a><span class="lineno">  386</span>&#160;            <span class="comment">// 2. Check retry timestamp if 100ms elapsed after the last attempt</span></div>
-<div class="line"><a name="l00387"></a><span class="lineno">  387</span>&#160;            <span class="keywordflow">if</span> ((CppCommon::Timestamp::nano() - _retry).milliseconds() &lt; 100)</div>
+<div class="line"><a name="l00387"></a><span class="lineno">  387</span>&#160;            <span class="keywordflow">if</span> ((CppCommon::Timestamp::utc() - _retry).milliseconds() &lt; 100)</div>
 <div class="line"><a name="l00388"></a><span class="lineno">  388</span>&#160;                <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
 <div class="line"><a name="l00389"></a><span class="lineno">  389</span>&#160;</div>
 <div class="line"><a name="l00390"></a><span class="lineno">  390</span>&#160;            <span class="comment">// 3. If the file is opened for reading close it</span></div>
@@ -493,7 +493,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00409"></a><span class="lineno">  409</span>&#160;        <span class="keywordflow">catch</span> (CppCommon::FileSystemException&amp;)</div>
 <div class="line"><a name="l00410"></a><span class="lineno">  410</span>&#160;        {</div>
 <div class="line"><a name="l00411"></a><span class="lineno">  411</span>&#160;            <span class="comment">// In case of any IO error reset the retry timestamp and return false!</span></div>
-<div class="line"><a name="l00412"></a><span class="lineno">  412</span>&#160;            _retry = CppCommon::Timestamp::nano();</div>
+<div class="line"><a name="l00412"></a><span class="lineno">  412</span>&#160;            _retry = CppCommon::Timestamp::utc();</div>
 <div class="line"><a name="l00413"></a><span class="lineno">  413</span>&#160;            <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
 <div class="line"><a name="l00414"></a><span class="lineno">  414</span>&#160;        }</div>
 <div class="line"><a name="l00415"></a><span class="lineno">  415</span>&#160;    }</div>
@@ -1047,7 +1047,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00963"></a><span class="lineno">  963</span>&#160;            }</div>
 <div class="line"><a name="l00964"></a><span class="lineno">  964</span>&#160;</div>
 <div class="line"><a name="l00965"></a><span class="lineno">  965</span>&#160;            <span class="comment">// 2. Check retry timestamp if 100ms elapsed after the last attempt</span></div>
-<div class="line"><a name="l00966"></a><span class="lineno">  966</span>&#160;            <span class="keywordflow">if</span> ((CppCommon::Timestamp::nano() - _retry).milliseconds() &lt; 100)</div>
+<div class="line"><a name="l00966"></a><span class="lineno">  966</span>&#160;            <span class="keywordflow">if</span> ((CppCommon::Timestamp::utc() - _retry).milliseconds() &lt; 100)</div>
 <div class="line"><a name="l00967"></a><span class="lineno">  967</span>&#160;                <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
 <div class="line"><a name="l00968"></a><span class="lineno">  968</span>&#160;</div>
 <div class="line"><a name="l00969"></a><span class="lineno">  969</span>&#160;            <span class="comment">// 3. If the file is opened for reading close it</span></div>
@@ -1069,7 +1069,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00985"></a><span class="lineno">  985</span>&#160;        <span class="keywordflow">catch</span> (CppCommon::FileSystemException&amp;)</div>
 <div class="line"><a name="l00986"></a><span class="lineno">  986</span>&#160;        {</div>
 <div class="line"><a name="l00987"></a><span class="lineno">  987</span>&#160;            <span class="comment">// In case of any IO error reset the retry timestamp and return false!</span></div>
-<div class="line"><a name="l00988"></a><span class="lineno">  988</span>&#160;            _retry = CppCommon::Timestamp::nano();</div>
+<div class="line"><a name="l00988"></a><span class="lineno">  988</span>&#160;            _retry = CppCommon::Timestamp::utc();</div>
 <div class="line"><a name="l00989"></a><span class="lineno">  989</span>&#160;            <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
 <div class="line"><a name="l00990"></a><span class="lineno">  990</span>&#160;        }</div>
 <div class="line"><a name="l00991"></a><span class="lineno">  991</span>&#160;    }</div>
