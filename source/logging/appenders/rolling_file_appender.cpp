@@ -384,7 +384,7 @@ private:
             }
 
             // 2. Check retry timestamp if 100ms elapsed after the last attempt
-            if ((CppCommon::Timestamp::nano() - _retry).milliseconds() < 100)
+            if ((CppCommon::Timestamp::utc() - _retry).milliseconds() < 100)
                 return false;
 
             // 3. If the file is opened for reading close it
@@ -409,7 +409,7 @@ private:
         catch (CppCommon::FileSystemException&)
         {
             // In case of any IO error reset the retry timestamp and return false!
-            _retry = CppCommon::Timestamp::nano();
+            _retry = CppCommon::Timestamp::utc();
             return false;
         }
     }
@@ -963,7 +963,7 @@ private:
             }
 
             // 2. Check retry timestamp if 100ms elapsed after the last attempt
-            if ((CppCommon::Timestamp::nano() - _retry).milliseconds() < 100)
+            if ((CppCommon::Timestamp::utc() - _retry).milliseconds() < 100)
                 return false;
 
             // 3. If the file is opened for reading close it
@@ -985,7 +985,7 @@ private:
         catch (CppCommon::FileSystemException&)
         {
             // In case of any IO error reset the retry timestamp and return false!
-            _retry = CppCommon::Timestamp::nano();
+            _retry = CppCommon::Timestamp::utc();
             return false;
         }
     }
