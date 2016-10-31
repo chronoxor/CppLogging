@@ -56,7 +56,7 @@ protected:
     CppCommon::File _file;
     size_t _written;
 
-    virtual void CloseFile()
+    void CloseFile()
     {
         // Check if the file is already opened for writing
         if (_file.IsFileWriteOpened())
@@ -422,26 +422,26 @@ private:
         thread_local bool cache_local_required = false;
         thread_local bool cache_timezone_required = false;
         thread_local uint64_t cache_seconds = 0;
-        thread_local std::string cache_utc_datetime_str = "1970-01-01T010101Z";
-        thread_local std::string cache_utc_date_str = "1970-01-01";
-        thread_local std::string cache_utc_time_str = "010101Z";
-        thread_local std::string cache_utc_year_str = "1970";
-        thread_local std::string cache_utc_month_str = "01";
-        thread_local std::string cache_utc_day_str = "01";
-        thread_local std::string cache_utc_hour_str = "00";
-        thread_local std::string cache_utc_minute_str = "00";
-        thread_local std::string cache_utc_second_str = "00";
-        thread_local std::string cache_utc_timezone_str = "Z";
-        thread_local std::string cache_local_datetime_str = "1970-01-01T010101+0000";
-        thread_local std::string cache_local_date_str = "1970-01-01";
-        thread_local std::string cache_local_time_str = "010101+0000";
-        thread_local std::string cache_local_year_str = "1970";
-        thread_local std::string cache_local_month_str = "01";
-        thread_local std::string cache_local_day_str = "01";
-        thread_local std::string cache_local_hour_str = "00";
-        thread_local std::string cache_local_minute_str = "00";
-        thread_local std::string cache_local_second_str = "00";
-        thread_local std::string cache_local_timezone_str = "+0000";
+        thread_local char cache_utc_datetime_str[] = "1970-01-01T010101Z";
+        thread_local char cache_utc_date_str[] = "1970-01-01";
+        thread_local char cache_utc_time_str[] = "010101Z";
+        thread_local char cache_utc_year_str[] = "1970";
+        thread_local char cache_utc_month_str[] = "01";
+        thread_local char cache_utc_day_str[] = "01";
+        thread_local char cache_utc_hour_str[] = "00";
+        thread_local char cache_utc_minute_str[] = "00";
+        thread_local char cache_utc_second_str[] = "00";
+        thread_local char cache_utc_timezone_str[] = "Z";
+        thread_local char cache_local_datetime_str[] = "1970-01-01T010101+0000";
+        thread_local char cache_local_date_str[] = "1970-01-01";
+        thread_local char cache_local_time_str[] = "010101+0000";
+        thread_local char cache_local_year_str[] = "1970";
+        thread_local char cache_local_month_str[] = "01";
+        thread_local char cache_local_day_str[] = "01";
+        thread_local char cache_local_hour_str[] = "00";
+        thread_local char cache_local_minute_str[] = "00";
+        thread_local char cache_local_second_str[] = "00";
+        thread_local char cache_local_timezone_str[] = "+0000";
         bool cache_update_datetime = false;
 
         // Update time cache
@@ -457,7 +457,7 @@ private:
                 if (cache_timezone_required || !cache_initizlied)
                 {
                     CppCommon::Timezone local;
-                    ConvertTimezone(cache_local_timezone_str, local.total().minutes());
+                    ConvertTimezone(cache_local_timezone_str, local.total().minutes(), 5);
                     cache_update_datetime = true;
                 }
 
@@ -492,35 +492,59 @@ private:
         // Update date & time cache
         if (cache_update_datetime)
         {
-            cache_utc_date_str = cache_utc_year_str;
-            cache_utc_date_str += '-';
-            cache_utc_date_str += cache_utc_month_str;
-            cache_utc_date_str += '-';
-            cache_utc_date_str += cache_utc_day_str;
+            char* buffer = cache_utc_date_str;
+            std::memcpy(buffer, cache_utc_year_str, CppCommon::countof(cache_utc_year_str) - 1);
+            buffer += CppCommon::countof(cache_utc_year_str) - 1;
+            *buffer++ = '-';
+            std::memcpy(buffer, cache_utc_month_str, CppCommon::countof(cache_utc_month_str) - 1);
+            buffer += CppCommon::countof(cache_utc_month_str) - 1;
+            *buffer++ = '-';
+            std::memcpy(buffer, cache_utc_day_str, CppCommon::countof(cache_utc_day_str) - 1);
+            buffer += CppCommon::countof(cache_utc_day_str) - 1;
 
-            cache_utc_time_str = cache_utc_hour_str;
-            cache_utc_time_str += cache_utc_minute_str;
-            cache_utc_time_str += cache_utc_second_str;
-            cache_utc_time_str += cache_utc_timezone_str;
+            buffer = cache_utc_time_str;
+            std::memcpy(buffer, cache_utc_hour_str, CppCommon::countof(cache_utc_hour_str) - 1);
+            buffer += CppCommon::countof(cache_utc_hour_str) - 1;
+            std::memcpy(buffer, cache_utc_minute_str, CppCommon::countof(cache_utc_minute_str) - 1);
+            buffer += CppCommon::countof(cache_utc_minute_str) - 1;
+            std::memcpy(buffer, cache_utc_second_str, CppCommon::countof(cache_utc_second_str) - 1);
+            buffer += CppCommon::countof(cache_utc_second_str) - 1;
+            std::memcpy(buffer, cache_utc_timezone_str, CppCommon::countof(cache_utc_timezone_str) - 1);
+            buffer += CppCommon::countof(cache_utc_timezone_str) - 1;
 
-            cache_utc_datetime_str = cache_utc_date_str;
-            cache_utc_datetime_str += 'T';
-            cache_utc_datetime_str += cache_utc_time_str;
+            buffer = cache_utc_datetime_str;
+            std::memcpy(buffer, cache_utc_date_str, CppCommon::countof(cache_utc_date_str) - 1);
+            buffer += CppCommon::countof(cache_utc_date_str) - 1;
+            *buffer++ = 'T';
+            std::memcpy(buffer, cache_utc_time_str, CppCommon::countof(cache_utc_time_str) - 1);
+            buffer += CppCommon::countof(cache_utc_time_str) - 1;
 
-            cache_local_date_str = cache_local_year_str;
-            cache_local_date_str += '-';
-            cache_local_date_str += cache_local_month_str;
-            cache_local_date_str += '-';
-            cache_local_date_str += cache_local_day_str;
+            buffer = cache_local_date_str;
+            std::memcpy(buffer, cache_local_year_str, CppCommon::countof(cache_local_year_str) - 1);
+            buffer += CppCommon::countof(cache_local_year_str) - 1;
+            *buffer++ = '-';
+            std::memcpy(buffer, cache_local_month_str, CppCommon::countof(cache_local_month_str) - 1);
+            buffer += CppCommon::countof(cache_local_month_str) - 1;
+            *buffer++ = '-';
+            std::memcpy(buffer, cache_local_day_str, CppCommon::countof(cache_local_day_str) - 1);
+            buffer += CppCommon::countof(cache_local_day_str) - 1;
 
-            cache_local_time_str = cache_local_hour_str;
-            cache_local_time_str += cache_local_minute_str;
-            cache_local_time_str += cache_local_second_str;
-            cache_local_time_str += cache_local_timezone_str;
+            buffer = cache_local_time_str;
+            std::memcpy(buffer, cache_local_hour_str, CppCommon::countof(cache_local_hour_str) - 1);
+            buffer += CppCommon::countof(cache_local_hour_str) - 1;
+            std::memcpy(buffer, cache_local_minute_str, CppCommon::countof(cache_local_minute_str) - 1);
+            buffer += CppCommon::countof(cache_local_minute_str) - 1;
+            std::memcpy(buffer, cache_local_second_str, CppCommon::countof(cache_local_second_str) - 1);
+            buffer += CppCommon::countof(cache_local_second_str) - 1;
+            std::memcpy(buffer, cache_local_timezone_str, CppCommon::countof(cache_local_timezone_str) - 1);
+            buffer += CppCommon::countof(cache_local_timezone_str) - 1;
 
-            cache_local_datetime_str = cache_local_date_str;
-            cache_local_datetime_str += 'T';
-            cache_local_datetime_str += cache_local_time_str;
+            buffer = cache_local_datetime_str;
+            std::memcpy(buffer, cache_local_date_str, CppCommon::countof(cache_local_date_str) - 1);
+            buffer += CppCommon::countof(cache_local_date_str) - 1;
+            *buffer++ = 'T';
+            std::memcpy(buffer, cache_local_time_str, CppCommon::countof(cache_local_time_str) - 1);
+            buffer += CppCommon::countof(cache_local_time_str) - 1;
 
             cache_update_datetime = false;
         }
@@ -543,7 +567,7 @@ private:
                 case PlaceholderType::UtcDateTime:
                 {
                     // Output UTC date & time string
-                    filename.insert(filename.end(), cache_utc_datetime_str.begin(), cache_utc_datetime_str.end());
+                    filename.insert(filename.end(), std::begin(cache_utc_datetime_str), std::end(cache_utc_datetime_str) - 1);
                     // Set the corresponding cache required flag
                     cache_time_required = true;
                     cache_utc_required = true;
@@ -552,7 +576,7 @@ private:
                 case PlaceholderType::UtcDate:
                 {
                     // Output UTC date string
-                    filename.insert(filename.end(), cache_utc_date_str.begin(), cache_utc_date_str.end());
+                    filename.insert(filename.end(), std::begin(cache_utc_date_str), std::end(cache_utc_date_str) - 1);
                     // Set the corresponding cache required flag
                     cache_time_required = true;
                     cache_utc_required = true;
@@ -561,7 +585,7 @@ private:
                 case PlaceholderType::UtcTime:
                 {
                     // Output UTC time string
-                    filename.insert(filename.end(), cache_utc_time_str.begin(), cache_utc_time_str.end());
+                    filename.insert(filename.end(), std::begin(cache_utc_time_str), std::end(cache_utc_time_str) - 1);
                     // Set the corresponding cache required flag
                     cache_time_required = true;
                     cache_utc_required = true;
@@ -570,7 +594,7 @@ private:
                 case PlaceholderType::UtcYear:
                 {
                     // Output UTC year string
-                    filename.insert(filename.end(), cache_utc_year_str.begin(), cache_utc_year_str.end());
+                    filename.insert(filename.end(), std::begin(cache_utc_year_str), std::end(cache_utc_year_str) - 1);
                     // Set the corresponding cache required flag
                     cache_time_required = true;
                     cache_utc_required = true;
@@ -579,7 +603,7 @@ private:
                 case PlaceholderType::UtcMonth:
                 {
                     // Output UTC month string
-                    filename.insert(filename.end(), cache_utc_month_str.begin(), cache_utc_month_str.end());
+                    filename.insert(filename.end(), std::begin(cache_utc_month_str), std::end(cache_utc_month_str) - 1);
                     // Set the corresponding cache required flag
                     cache_time_required = true;
                     cache_utc_required = true;
@@ -588,7 +612,7 @@ private:
                 case PlaceholderType::UtcDay:
                 {
                     // Output UTC day string
-                    filename.insert(filename.end(), cache_utc_day_str.begin(), cache_utc_day_str.end());
+                    filename.insert(filename.end(), std::begin(cache_utc_day_str), std::end(cache_utc_day_str) - 1);
                     // Set the corresponding cache required flag
                     cache_time_required = true;
                     cache_utc_required = true;
@@ -597,7 +621,7 @@ private:
                 case PlaceholderType::UtcHour:
                 {
                     // Output UTC hour string
-                    filename.insert(filename.end(), cache_utc_hour_str.begin(), cache_utc_hour_str.end());
+                    filename.insert(filename.end(), std::begin(cache_utc_hour_str), std::end(cache_utc_hour_str) - 1);
                     // Set the corresponding cache required flag
                     cache_time_required = true;
                     cache_utc_required = true;
@@ -606,7 +630,7 @@ private:
                 case PlaceholderType::UtcMinute:
                 {
                     // Output UTC minute string
-                    filename.insert(filename.end(), cache_utc_minute_str.begin(), cache_utc_minute_str.end());
+                    filename.insert(filename.end(), std::begin(cache_utc_minute_str), std::end(cache_utc_minute_str) - 1);
                     // Set the corresponding cache required flag
                     cache_time_required = true;
                     cache_utc_required = true;
@@ -615,7 +639,7 @@ private:
                 case PlaceholderType::UtcSecond:
                 {
                     // Output UTC second string
-                    filename.insert(filename.end(), cache_utc_second_str.begin(), cache_utc_second_str.end());
+                    filename.insert(filename.end(), std::begin(cache_utc_second_str), std::end(cache_utc_second_str) - 1);
                     // Set the corresponding cache required flag
                     cache_time_required = true;
                     cache_utc_required = true;
@@ -624,13 +648,13 @@ private:
                 case PlaceholderType::UtcTimezone:
                 {
                     // Output UTC time zone string
-                    filename.insert(filename.end(), cache_utc_timezone_str.begin(), cache_utc_timezone_str.end());
+                    filename.insert(filename.end(), std::begin(cache_utc_timezone_str), std::end(cache_utc_timezone_str) - 1);
                     break;
                 }
                 case PlaceholderType::LocalDateTime:
                 {
                     // Output local date & time string
-                    filename.insert(filename.end(), cache_local_datetime_str.begin(), cache_local_datetime_str.end());
+                    filename.insert(filename.end(), std::begin(cache_local_datetime_str), std::end(cache_local_datetime_str) - 1);
                     // Set the corresponding cache required flag
                     cache_time_required = true;
                     cache_local_required = true;
@@ -640,7 +664,7 @@ private:
                 case PlaceholderType::LocalDate:
                 {
                     // Output local date string
-                    filename.insert(filename.end(), cache_local_date_str.begin(), cache_local_date_str.end());
+                    filename.insert(filename.end(), std::begin(cache_local_date_str), std::end(cache_local_date_str) - 1);
                     // Set the corresponding cache required flag
                     cache_time_required = true;
                     cache_local_required = true;
@@ -649,7 +673,7 @@ private:
                 case PlaceholderType::LocalTime:
                 {
                     // Output local time string
-                    filename.insert(filename.end(), cache_local_time_str.begin(), cache_local_time_str.end());
+                    filename.insert(filename.end(), std::begin(cache_local_time_str), std::end(cache_local_time_str) - 1);
                     // Set the corresponding cache required flag
                     cache_time_required = true;
                     cache_local_required = true;
@@ -659,7 +683,7 @@ private:
                 case PlaceholderType::LocalYear:
                 {
                     // Output local year string
-                    filename.insert(filename.end(), cache_local_year_str.begin(), cache_local_year_str.end());
+                    filename.insert(filename.end(), std::begin(cache_local_year_str), std::end(cache_local_year_str) - 1);
                     // Set the corresponding cache required flag
                     cache_time_required = true;
                     cache_local_required = true;
@@ -668,7 +692,7 @@ private:
                 case PlaceholderType::LocalMonth:
                 {
                     // Output local month string
-                    filename.insert(filename.end(), cache_local_month_str.begin(), cache_local_month_str.end());
+                    filename.insert(filename.end(), std::begin(cache_local_month_str), std::end(cache_local_month_str) - 1);
                     // Set the corresponding cache required flag
                     cache_time_required = true;
                     cache_local_required = true;
@@ -677,7 +701,7 @@ private:
                 case PlaceholderType::LocalDay:
                 {
                     // Output local day string
-                    filename.insert(filename.end(), cache_local_day_str.begin(), cache_local_day_str.end());
+                    filename.insert(filename.end(), std::begin(cache_local_day_str), std::end(cache_local_day_str) - 1);
                     // Set the corresponding cache required flag
                     cache_time_required = true;
                     cache_local_required = true;
@@ -686,7 +710,7 @@ private:
                 case PlaceholderType::LocalHour:
                 {
                     // Output local hour string
-                    filename.insert(filename.end(), cache_local_hour_str.begin(), cache_local_hour_str.end());
+                    filename.insert(filename.end(), std::begin(cache_local_hour_str), std::end(cache_local_hour_str) - 1);
                     // Set the corresponding cache required flag
                     cache_time_required = true;
                     cache_local_required = true;
@@ -695,7 +719,7 @@ private:
                 case PlaceholderType::LocalMinute:
                 {
                     // Output local minute string
-                    filename.insert(filename.end(), cache_local_minute_str.begin(), cache_local_minute_str.end());
+                    filename.insert(filename.end(), std::begin(cache_local_minute_str), std::end(cache_local_minute_str) - 1);
                     // Set the corresponding cache required flag
                     cache_time_required = true;
                     cache_local_required = true;
@@ -704,7 +728,7 @@ private:
                 case PlaceholderType::LocalSecond:
                 {
                     // Output local second string
-                    filename.insert(filename.end(), cache_local_second_str.begin(), cache_local_second_str.end());
+                    filename.insert(filename.end(), std::begin(cache_local_second_str), std::end(cache_local_second_str) - 1);
                     // Set the corresponding cache required flag
                     cache_time_required = true;
                     cache_local_required = true;
@@ -713,7 +737,7 @@ private:
                 case PlaceholderType::LocalTimezone:
                 {
                     // Output local time zone string
-                    filename.insert(filename.end(), cache_local_timezone_str.begin(), cache_local_timezone_str.end());
+                    filename.insert(filename.end(), std::begin(cache_local_timezone_str), std::end(cache_local_timezone_str) - 1);
                     // Set the corresponding cache required flag
                     cache_time_required = true;
                     cache_timezone_required = true;
@@ -788,14 +812,13 @@ private:
             AppendPattern("{" + placeholder + "}");
     }
 
-    static void ConvertNumber(std::string& output, int number, int digits)
+    static void ConvertNumber(char* output, int number, size_t size)
     {
         // Prepare the output string
-        output.clear();
-        output.resize(digits, '0');
+        std::memset(output, '0', size);
 
         // Calculate the output index
-        size_t index = output.size() - 1;
+        size_t index = size - 1;
 
         // Output digits
         while ((number >= 10) && (index != 0))
@@ -810,14 +833,13 @@ private:
         output[index] = '0' + (char)number;
     }
 
-    static void ConvertTimezone(std::string& output, int64_t offset)
+    static void ConvertTimezone(char* output, int64_t offset, size_t size)
     {
         // Prepare the output string
-        output.clear();
-        output.resize(5, '0');
+        std::memset(output, '0', size);
 
         // Calculate the output index
-        size_t index = output.size() - 1;
+        size_t index = size - 1;
 
         // Output offset minutes
         int64_t minutes = offset % 60;
