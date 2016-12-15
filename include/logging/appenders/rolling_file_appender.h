@@ -113,12 +113,12 @@ protected:
     /*!
          This handler can be used to initialize priority or affinity of the archivation thread.
     */
-    virtual void OnArchiveThreadInitialize() {}
+    virtual void onArchiveThreadInitialize() {}
     //! Cleanup archivation thread handler
     /*!
          This handler can be used to cleanup priority or affinity of the archivation thread.
     */
-    virtual void OnArchiveThreadCleanup() {}
+    virtual void onArchiveThreadCleanup() {}
 
 private:
     class Impl;

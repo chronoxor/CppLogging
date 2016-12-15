@@ -59,7 +59,7 @@ bool AsyncProcessor::EnqueueRecord(bool discard_on_overflow, Record& record)
 void AsyncProcessor::ProcessBufferedRecords()
 {
     // Call initialize thread handler
-    OnThreadInitialize();
+    onThreadInitialize();
 
     try
     {
@@ -94,7 +94,7 @@ void AsyncProcessor::ProcessBufferedRecords()
     }
 
     // Call cleanup thread handler
-    OnThreadCleanup();
+    onThreadCleanup();
 }
 
 void AsyncProcessor::Flush()

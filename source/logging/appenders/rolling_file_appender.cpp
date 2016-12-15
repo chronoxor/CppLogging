@@ -160,7 +160,7 @@ protected:
     void Archivation()
     {
         // Call initialize archivation thread handler
-        _appender.OnArchiveThreadInitialize();
+        _appender.onArchiveThreadInitialize();
 
         try
         {
@@ -174,7 +174,7 @@ protected:
         }
 
         // Call cleanup archivation thread handler
-        _appender.OnArchiveThreadCleanup();
+        _appender.onArchiveThreadCleanup();
     }
 };
 

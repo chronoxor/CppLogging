@@ -51,12 +51,12 @@ protected:
     /*!
          This handler can be used to initialize priority or affinity of the logging thread.
     */
-    virtual void OnThreadInitialize() {}
+    virtual void onThreadInitialize() {}
     //! Cleanup thread handler
     /*!
          This handler can be used to cleanup priority or affinity of the logging thread.
     */
-    virtual void OnThreadCleanup() {}
+    virtual void onThreadCleanup() {}
 
 private:
     bool _discard_on_overflow;
