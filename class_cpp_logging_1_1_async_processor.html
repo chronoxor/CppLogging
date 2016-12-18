@@ -66,7 +66,6 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="#pro-methods">Protected Member Functions</a> &#124;
 <a href="class_cpp_logging_1_1_async_processor-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">CppLogging::AsyncProcessor Class Reference</div>  </div>
@@ -133,15 +132,6 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ab4d96b6012bee770a07a3f8a25a836a3 inherit pub_methods_class_cpp_logging_1_1_processor"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::shared_ptr&lt; <a class="el" href="class_cpp_logging_1_1_processor.html">Processor</a> &gt; &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cpp_logging_1_1_processor.html#ab4d96b6012bee770a07a3f8a25a836a3">processors</a> () noexcept</td></tr>
 <tr class="memdesc:ab4d96b6012bee770a07a3f8a25a836a3 inherit pub_methods_class_cpp_logging_1_1_processor"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get collection of child processors.  <a href="class_cpp_logging_1_1_processor.html#ab4d96b6012bee770a07a3f8a25a836a3">More...</a><br /></td></tr>
 <tr class="separator:ab4d96b6012bee770a07a3f8a25a836a3 inherit pub_methods_class_cpp_logging_1_1_processor"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
-Protected Member Functions</h2></td></tr>
-<tr class="memitem:a8c3a9e6cc2d5d5f38caf02c28e1c07c2"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cpp_logging_1_1_async_processor.html#a8c3a9e6cc2d5d5f38caf02c28e1c07c2">onThreadInitialize</a> ()</td></tr>
-<tr class="memdesc:a8c3a9e6cc2d5d5f38caf02c28e1c07c2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize thread handler.  <a href="#a8c3a9e6cc2d5d5f38caf02c28e1c07c2">More...</a><br /></td></tr>
-<tr class="separator:a8c3a9e6cc2d5d5f38caf02c28e1c07c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0a5c1c085fbf838e9ceaaa37dc4d85c5"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cpp_logging_1_1_async_processor.html#a0a5c1c085fbf838e9ceaaa37dc4d85c5">onThreadCleanup</a> ()</td></tr>
-<tr class="memdesc:a0a5c1c085fbf838e9ceaaa37dc4d85c5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Cleanup thread handler.  <a href="#a0a5c1c085fbf838e9ceaaa37dc4d85c5">More...</a><br /></td></tr>
-<tr class="separator:a0a5c1c085fbf838e9ceaaa37dc4d85c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Asynchronous logging processor. </p>
@@ -309,67 +299,7 @@ Protected Member Functions</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="class_cpp_logging_1_1_processor.html#ac5775e961b086b9cfad49a67bb746f72">CppLogging::Processor</a>.</p>
 
-<p>Definition at line <a class="el" href="async__processor_8cpp_source.html#l00100">100</a> of file <a class="el" href="async__processor_8cpp_source.html">async_processor.cpp</a>.</p>
-
-</div>
-</div>
-<a id="a0a5c1c085fbf838e9ceaaa37dc4d85c5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0a5c1c085fbf838e9ceaaa37dc4d85c5">&sect;&nbsp;</a></span>onThreadCleanup()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">virtual void CppLogging::AsyncProcessor::onThreadCleanup </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Cleanup thread handler. </p>
-<p>This handler can be used to cleanup priority or affinity of the logging thread. </p>
-
-<p>Definition at line <a class="el" href="async__processor_8h_source.html#l00059">59</a> of file <a class="el" href="async__processor_8h_source.html">async_processor.h</a>.</p>
-
-</div>
-</div>
-<a id="a8c3a9e6cc2d5d5f38caf02c28e1c07c2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8c3a9e6cc2d5d5f38caf02c28e1c07c2">&sect;&nbsp;</a></span>onThreadInitialize()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">virtual void CppLogging::AsyncProcessor::onThreadInitialize </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Initialize thread handler. </p>
-<p>This handler can be used to initialize priority or affinity of the logging thread. </p>
-
-<p>Definition at line <a class="el" href="async__processor_8h_source.html#l00054">54</a> of file <a class="el" href="async__processor_8h_source.html">async_processor.h</a>.</p>
+<p>Definition at line <a class="el" href="async__processor_8cpp_source.html#l00094">94</a> of file <a class="el" href="async__processor_8cpp_source.html">async_processor.cpp</a>.</p>
 
 </div>
 </div>
