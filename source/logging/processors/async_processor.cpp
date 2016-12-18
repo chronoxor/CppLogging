@@ -12,12 +12,12 @@
 
 namespace CppLogging {
 
-AsyncProcessor::AsyncProcessor(bool discard_on_overflow, size_t capacity)
+AsyncProcessor::AsyncProcessor(bool discard_on_overflow, size_t capacity, const std::function<void ()>& on_thread_initialize, const std::function<void ()>& on_thread_clenup)
     : _discard_on_overflow(discard_on_overflow),
       _buffer(capacity)
 {
     // Start processing thread
-    _thread = std::thread([this]() { ProcessBufferedRecords(); });
+    _thread = std::thread([this, on_thread_initialize, on_thread_clenup]() { ProcessBufferedRecords(on_thread_initialize, on_thread_clenup); });
 }
 
 AsyncProcessor::~AsyncProcessor()
@@ -56,8 +56,11 @@ bool AsyncProcessor::EnqueueRecord(bool discard_on_overflow, Record& record)
     return true;
 }
 
-void AsyncProcessor::ProcessBufferedRecords()
+void AsyncProcessor::ProcessBufferedRecords(const std::function<void ()>& on_thread_initialize, const std::function<void ()>& on_thread_clenup)
 {
+    // Call the thread initialize handler
+    on_thread_initialize();
+
     try
     {
         // Thread local logger record to process
@@ -89,6 +92,9 @@ void AsyncProcessor::ProcessBufferedRecords()
     {
         fatality("Asynchronous logging processor terminated!");
     }
+
+    // Call the thread cleanup handler
+    on_thread_clenup();
 }
 
 void AsyncProcessor::Flush()

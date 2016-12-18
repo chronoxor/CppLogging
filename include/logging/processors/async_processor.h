@@ -13,6 +13,8 @@
 
 #include "logging/processors/async_buffer.h"
 
+#include <functional>
+
 namespace CppLogging {
 
 //! Asynchronous logging processor
@@ -33,8 +35,10 @@ public:
     /*!
          \param discard_on_overflow - Discard logging records on buffer overflow or block and wait (default is false)
          \param capacity - Buffer capacity in logging records (default is 4096)
+         \param on_thread_initialize - Thread initialize handler can be used to initialize priority or affinity of the logging thread (default does nothing)
+         \param on_thread_clenup - Thread initialize handler can be used to cleanup priority or affinity of the logging thread (default does nothing)
     */
-    explicit AsyncProcessor(bool discard_on_overflow = false, size_t capacity = 4096);
+    explicit AsyncProcessor(bool discard_on_overflow = false, size_t capacity = 4096, const std::function<void ()>& on_thread_initialize = [](){}, const std::function<void ()>& on_thread_clenup = [](){});
     AsyncProcessor(const AsyncProcessor&) = delete;
     AsyncProcessor(AsyncProcessor&&) = default;
     virtual ~AsyncProcessor();
@@ -52,7 +56,7 @@ private:
     std::thread _thread;
 
     bool EnqueueRecord(bool discard_on_overflow, Record& record);
-    void ProcessBufferedRecords();
+    void ProcessBufferedRecords(const std::function<void ()>& on_thread_initialize, const std::function<void ()>& on_thread_clenup);
 };
 
 } // namespace CppLogging
