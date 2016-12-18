@@ -58,9 +58,6 @@ bool AsyncProcessor::EnqueueRecord(bool discard_on_overflow, Record& record)
 
 void AsyncProcessor::ProcessBufferedRecords()
 {
-    // Call initialize thread handler
-    onThreadInitialize();
-
     try
     {
         // Thread local logger record to process
@@ -92,9 +89,6 @@ void AsyncProcessor::ProcessBufferedRecords()
     {
         fatality("Asynchronous logging processor terminated!");
     }
-
-    // Call cleanup thread handler
-    onThreadCleanup();
 }
 
 void AsyncProcessor::Flush()

@@ -46,18 +46,6 @@ public:
     bool ProcessRecord(Record& record) override;
     void Flush() override;
 
-protected:
-    //! Initialize thread handler
-    /*!
-         This handler can be used to initialize priority or affinity of the logging thread.
-    */
-    virtual void onThreadInitialize() {}
-    //! Cleanup thread handler
-    /*!
-         This handler can be used to cleanup priority or affinity of the logging thread.
-    */
-    virtual void onThreadCleanup() {}
-
 private:
     bool _discard_on_overflow;
     AsyncBuffer _buffer;
