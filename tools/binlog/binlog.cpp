@@ -8,9 +8,9 @@
 
 #include <stdio.h>
 
-#include "version.h"
 #include "logging/record.h"
 #include "logging/layouts/text_layout.h"
+#include "logging/version.h"
 
 #include <cstring>
 #include <iostream>
