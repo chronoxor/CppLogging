@@ -1,36 +1,58 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="CMakeRunConfigurationManager" shouldGenerate="true" assignedExecutableTargets="true" buildAllGenerated="true">
+  <component name="CMakeRunConfigurationManager" shouldGenerate="true" buildAllGenerated="true">
     <generated>
       <config projectName="cpplogging" targetName="cpplogging-tests" />
-      <config projectName="cpplogging" targetName="cpplogging-perf-processor_sync" />
-      <config projectName="cpplogging" targetName="cpplogging-example-default" />
+      <config projectName="cpplogging" targetName="zlib" />
+      <config projectName="cpplogging" targetName="cpplogging-example-sync" />
+      <config projectName="cpplogging" targetName="fmt" />
       <config projectName="cpplogging" targetName="cpplogging-example-syslog" />
-      <config projectName="cpplogging" targetName="cpp-optparse" />
+      <config projectName="cpplogging" targetName="cpplogging-performance-layout" />
       <config projectName="cpplogging" targetName="doxygen" />
-      <config projectName="cpplogging" targetName="cpplogging-perf-appender_console" />
+      <config projectName="cpplogging" targetName="cpplogging-performance-processor_async" />
+      <config projectName="cpplogging" targetName="cpplogging-performance-file_sync" />
       <config projectName="cpplogging" targetName="cpplogging-perf-processor_async" />
-      <config projectName="cpplogging" targetName="cpplogging-example-console" />
-      <config projectName="cpplogging" targetName="cpplogging-perf-appender_null" />
-      <config projectName="cpplogging" targetName="cppbenchmark" />
-      <config projectName="cpplogging" targetName="cpplogging" />
+      <config projectName="cpplogging" targetName="cpplogging-performance-async_format" />
+      <config projectName="cpplogging" targetName="cpplogging-example-async" />
       <config projectName="cpplogging" targetName="cpplogging-perf-appender_file" />
       <config projectName="cpplogging" targetName="cpplogging-perf-layout" />
       <config projectName="cpplogging" targetName="cppcommon" />
+      <config projectName="cpplogging" targetName="cpplogging-performance-appender_console" />
+      <config projectName="cpplogging" targetName="cpplogging-performance-processor_sync" />
+      <config projectName="cpplogging" targetName="cpplogging-perf-processor_sync" />
+      <config projectName="cpplogging" targetName="cpplogging-example-format" />
+      <config projectName="cpplogging" targetName="cpplogging-example-default" />
+      <config projectName="cpplogging" targetName="cpplogging-performance-file_async" />
+      <config projectName="cpplogging" targetName="cpplogging-performance-appender_null" />
+      <config projectName="cpplogging" targetName="cpplogging-performance-appender_file" />
+      <config projectName="cpplogging" targetName="cpp-optparse" />
+      <config projectName="cpplogging" targetName="binlog" />
+      <config projectName="cpplogging" targetName="HdrHistogram" />
+      <config projectName="cpplogging" targetName="cpplogging-perf-appender_console" />
+      <config projectName="cpplogging" targetName="cpplogging-example-console" />
+      <config projectName="cpplogging" targetName="cpplogging-performance-format" />
+      <config projectName="cpplogging" targetName="cpplogging-perf-appender_null" />
+      <config projectName="cpplogging" targetName="cppbenchmark" />
+      <config projectName="cpplogging" targetName="cpplogging" />
       <config projectName="cpplogging" targetName="cpplogging-example-file" />
     </generated>
   </component>
-  <component name="CMakeSettings" AUTO_RELOAD="false" GENERATION_PASS_SYSTEM_ENVIRONMENT="true">
-    <ADDITIONAL_GENERATION_ENVIRONMENT>
-      <envs />
-    </ADDITIONAL_GENERATION_ENVIRONMENT>
+  <component name="CMakeSettings">
+    <configurations>
+      <configuration CONFIG_NAME="Debug" GENERATION_DIR="temp" />
+    </configurations>
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7f74447b-b31c-4b3a-ae9e-d86d39072a15" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/.name" afterPath="$PROJECT_DIR$/.idea/.name" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/CppLogging.iml" afterPath="$PROJECT_DIR$/.idea/CppLogging.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="CppLogging.iws" />
     <ignored path=".idea/workspace.xml" />
+    <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
+    <ignored path="$PROJECT_DIR$/temp/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -46,68 +68,7 @@
     <favorites_list name="CppLogging" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="file_appender.cpp" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/source/logging/appenders/file_appender.cpp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
-              <caret line="15" column="0" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="file.cpp" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/modules/CppCommon/source/filesystem/file.cpp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
-              <caret line="262" column="27" selection-start-line="262" selection-start-column="27" selection-end-line="262" selection-end-column="27" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="appender_file.cpp" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/perf/appender_file.cpp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="225">
-              <caret line="37" column="0" selection-start-line="37" selection-start-column="0" selection-end-line="37" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="shared_ptr.h" pinned="false" current-in-tab="false">
-        <entry file="file:///usr/include/c++/5/bits/shared_ptr.h">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
-              <caret line="635" column="0" selection-start-line="635" selection-start-column="0" selection-end-line="635" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="file.cpp" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/examples/file.cpp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="unique_ptr.h" pinned="false" current-in-tab="false">
-        <entry file="file:///usr/include/c++/5/bits/unique_ptr.h">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="4485">
-              <caret line="299" column="0" selection-start-line="299" selection-start-column="0" selection-end-line="299" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf />
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -124,20 +85,42 @@
     <option name="width" value="1615" />
     <option name="height" value="1026" />
   </component>
-  <component name="ProjectLevelVcsManager" settingsEditedManually="false">
-    <OptionsSetting value="true" id="Add" />
-    <OptionsSetting value="true" id="Remove" />
-    <OptionsSetting value="true" id="Checkout" />
-    <OptionsSetting value="true" id="Update" />
-    <OptionsSetting value="true" id="Status" />
-    <OptionsSetting value="true" id="Edit" />
-    <ConfirmationsSetting value="0" id="Add" />
-    <ConfirmationsSetting value="0" id="Remove" />
+  <component name="ProjectView">
+    <navigator currentView="ProjectPane" proportions="" version="1">
+      <flattenPackages />
+      <showMembers />
+      <showModules />
+      <showLibraryContents />
+      <hideEmptyPackages />
+      <abbreviatePackageNames />
+      <autoscrollToSource />
+      <autoscrollFromSource />
+      <sortByType />
+      <manualOrder />
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="ProjectPane">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="cpplogging" />
+              <option name="myItemType" value="com.jetbrains.cidr.projectView.CidrFilesViewHelper$MyProjectTreeStructure$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="CppLogging" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
+    </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="settings.editor.selected.configurable" value="CMakeSettings" />
   </component>
-  <component name="RunManager" selected="Application.cpplogging-perf-appender_file">
+  <component name="RunManager" selected="Application.Build All">
     <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="cpplogging" TARGET_NAME="cpplogging" CONFIG_NAME="Debug">
       <envs />
       <method />
@@ -210,7 +193,75 @@
       <envs />
       <method />
     </configuration>
-    <list size="17">
+    <configuration default="false" name="binlog" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="cpplogging" TARGET_NAME="binlog" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="cpplogging" RUN_TARGET_NAME="binlog">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="cpplogging-example-async" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="cpplogging" TARGET_NAME="cpplogging-example-async" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="cpplogging" RUN_TARGET_NAME="cpplogging-example-async">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="cpplogging-example-format" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="cpplogging" TARGET_NAME="cpplogging-example-format" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="cpplogging" RUN_TARGET_NAME="cpplogging-example-format">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="cpplogging-example-sync" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="cpplogging" TARGET_NAME="cpplogging-example-sync" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="cpplogging" RUN_TARGET_NAME="cpplogging-example-sync">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="cpplogging-performance-appender_console" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="cpplogging" TARGET_NAME="cpplogging-performance-appender_console" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="cpplogging" RUN_TARGET_NAME="cpplogging-performance-appender_console">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="cpplogging-performance-appender_file" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="cpplogging" TARGET_NAME="cpplogging-performance-appender_file" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="cpplogging" RUN_TARGET_NAME="cpplogging-performance-appender_file">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="cpplogging-performance-appender_null" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="cpplogging" TARGET_NAME="cpplogging-performance-appender_null" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="cpplogging" RUN_TARGET_NAME="cpplogging-performance-appender_null">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="cpplogging-performance-async_format" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="cpplogging" TARGET_NAME="cpplogging-performance-async_format" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="cpplogging" RUN_TARGET_NAME="cpplogging-performance-async_format">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="cpplogging-performance-file_async" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="cpplogging" TARGET_NAME="cpplogging-performance-file_async" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="cpplogging" RUN_TARGET_NAME="cpplogging-performance-file_async">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="cpplogging-performance-file_sync" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="cpplogging" TARGET_NAME="cpplogging-performance-file_sync" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="cpplogging" RUN_TARGET_NAME="cpplogging-performance-file_sync">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="cpplogging-performance-format" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="cpplogging" TARGET_NAME="cpplogging-performance-format" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="cpplogging" RUN_TARGET_NAME="cpplogging-performance-format">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="cpplogging-performance-layout" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="cpplogging" TARGET_NAME="cpplogging-performance-layout" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="cpplogging" RUN_TARGET_NAME="cpplogging-performance-layout">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="cpplogging-performance-processor_async" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="cpplogging" TARGET_NAME="cpplogging-performance-processor_async" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="cpplogging" RUN_TARGET_NAME="cpplogging-performance-processor_async">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="cpplogging-performance-processor_sync" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="cpplogging" TARGET_NAME="cpplogging-performance-processor_sync" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="cpplogging" RUN_TARGET_NAME="cpplogging-performance-processor_sync">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="HdrHistogram" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="cpplogging" TARGET_NAME="HdrHistogram" CONFIG_NAME="Debug">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="zlib" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="cpplogging" TARGET_NAME="zlib" CONFIG_NAME="Debug">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="fmt" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="cpplogging" TARGET_NAME="fmt" CONFIG_NAME="Debug">
+      <envs />
+      <method />
+    </configuration>
+    <list size="34">
       <item index="0" class="java.lang.String" itemvalue="Application.Build All" />
       <item index="1" class="java.lang.String" itemvalue="Application.cpplogging" />
       <item index="2" class="java.lang.String" itemvalue="Application.cpplogging-example-console" />
@@ -228,6 +279,23 @@
       <item index="14" class="java.lang.String" itemvalue="Application.cppbenchmark" />
       <item index="15" class="java.lang.String" itemvalue="Application.cpp-optparse" />
       <item index="16" class="java.lang.String" itemvalue="Application.cppcommon" />
+      <item index="17" class="java.lang.String" itemvalue="Application.binlog" />
+      <item index="18" class="java.lang.String" itemvalue="Application.cpplogging-example-async" />
+      <item index="19" class="java.lang.String" itemvalue="Application.cpplogging-example-format" />
+      <item index="20" class="java.lang.String" itemvalue="Application.cpplogging-example-sync" />
+      <item index="21" class="java.lang.String" itemvalue="Application.cpplogging-performance-appender_console" />
+      <item index="22" class="java.lang.String" itemvalue="Application.cpplogging-performance-appender_file" />
+      <item index="23" class="java.lang.String" itemvalue="Application.cpplogging-performance-appender_null" />
+      <item index="24" class="java.lang.String" itemvalue="Application.cpplogging-performance-async_format" />
+      <item index="25" class="java.lang.String" itemvalue="Application.cpplogging-performance-file_async" />
+      <item index="26" class="java.lang.String" itemvalue="Application.cpplogging-performance-file_sync" />
+      <item index="27" class="java.lang.String" itemvalue="Application.cpplogging-performance-format" />
+      <item index="28" class="java.lang.String" itemvalue="Application.cpplogging-performance-layout" />
+      <item index="29" class="java.lang.String" itemvalue="Application.cpplogging-performance-processor_async" />
+      <item index="30" class="java.lang.String" itemvalue="Application.cpplogging-performance-processor_sync" />
+      <item index="31" class="java.lang.String" itemvalue="Application.HdrHistogram" />
+      <item index="32" class="java.lang.String" itemvalue="Application.zlib" />
+      <item index="33" class="java.lang.String" itemvalue="Application.fmt" />
     </list>
   </component>
   <component name="ShelveChangesManager" show_recycled="false">
@@ -246,19 +314,22 @@
       <workItem from="1473290171526" duration="89000" />
       <workItem from="1473290420148" duration="274000" />
       <workItem from="1473290845943" duration="309000" />
+      <workItem from="1484076215029" duration="219000" />
+      <workItem from="1484076665607" duration="17000" />
+      <workItem from="1484078708222" duration="643000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="672000" />
+    <option name="totallyTimeSpent" value="1551000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="65" y="24" width="1615" height="1026" extended-state="6" />
     <editor active="false" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2495356" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32912722" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="CMake" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -276,6 +347,9 @@
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="processedProjectFiles" value="true" />
+  </component>
   <component name="Vcs.Log.UiProperties">
     <option name="RECENTLY_FILTERED_USER_GROUPS">
       <collection />
@@ -289,23 +363,9 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
-          <url>file://$PROJECT_DIR$/modules/CppCommon/source/filesystem/file.cpp</url>
-          <line>262</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
-          <url>file://$PROJECT_DIR$/modules/CppCommon/source/filesystem/file.cpp</url>
-          <line>452</line>
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
-          <url>file://$PROJECT_DIR$/modules/CppCommon/source/filesystem/file.cpp</url>
-          <line>453</line>
-          <option name="timeStamp" value="3" />
-        </line-breakpoint>
-      </breakpoints>
+      <breakpoints-dialog>
+        <breakpoints-dialog />
+      </breakpoints-dialog>
       <option name="time" value="4" />
     </breakpoint-manager>
     <watches-manager />
@@ -313,81 +373,100 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/source/logging/appenders/file_appender.cpp">
       <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modules/CppCommon/source/filesystem/file.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3930">
+          <caret line="262" column="19" lean-forward="false" selection-start-line="262" selection-start-column="19" selection-end-line="262" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///usr/include/c++/5/bits/shared_ptr.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="9525">
+          <caret line="635" column="0" lean-forward="false" selection-start-line="635" selection-start-column="0" selection-end-line="635" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/examples/file.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///usr/include/c++/5/bits/unique_ptr.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4485">
+          <caret line="299" column="0" lean-forward="false" selection-start-line="299" selection-start-column="0" selection-end-line="299" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/source/logging/appenders/file_appender.cpp">
+      <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1230">
-          <caret line="82" column="0" selection-start-line="82" selection-start-column="0" selection-end-line="82" selection-end-column="0" />
-          <folding />
+          <caret line="82" column="0" lean-forward="false" selection-start-line="82" selection-start-column="0" selection-end-line="82" selection-end-column="0" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/modules/CppCommon/source/filesystem/file.cpp">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/examples/file.cpp">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
     <entry file="file:///usr/include/c++/5/bits/unique_ptr.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="4485">
-          <caret line="299" column="0" selection-start-line="299" selection-start-column="0" selection-end-line="299" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file:///usr/include/c++/5/bits/unique_ptr.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4485">
-          <caret line="299" column="0" selection-start-line="299" selection-start-column="0" selection-end-line="299" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/examples/file.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/modules/CppCommon/source/filesystem/file.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="262" column="27" selection-start-line="262" selection-start-column="27" selection-end-line="262" selection-end-column="27" />
-          <folding />
+          <caret line="299" column="0" lean-forward="false" selection-start-line="299" selection-start-column="0" selection-end-line="299" selection-end-column="0" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/source/logging/appenders/file_appender.cpp">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="170">
-          <caret line="15" column="0" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
-          <folding />
+          <caret line="15" column="0" lean-forward="false" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/perf/appender_file.cpp" />
+    <entry file="file://$PROJECT_DIR$/modules/CppCommon/source/filesystem/file.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="262" column="19" lean-forward="false" selection-start-line="262" selection-start-column="19" selection-end-line="262" selection-end-column="19" />
         </state>
       </provider>
     </entry>
     <entry file="file:///usr/include/c++/5/bits/shared_ptr.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="635" column="0" selection-start-line="635" selection-start-column="0" selection-end-line="635" selection-end-column="0" />
-          <folding />
+        <state relative-caret-position="495">
+          <caret line="635" column="0" lean-forward="false" selection-start-line="635" selection-start-column="0" selection-end-line="635" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/perf/appender_file.cpp">
+    <entry file="file://$PROJECT_DIR$/examples/file.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="37" column="0" selection-start-line="37" selection-start-column="0" selection-end-line="37" selection-end-column="0" />
-          <folding />
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///usr/include/c++/5/bits/unique_ptr.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="840">
+          <caret line="299" column="0" lean-forward="false" selection-start-line="299" selection-start-column="0" selection-end-line="299" selection-end-column="0" />
         </state>
       </provider>
     </entry>
