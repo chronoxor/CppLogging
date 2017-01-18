@@ -48,6 +48,7 @@ processors (sync, async), filters, layouts (binary, text) and appenders.
     * [Binary log reader](#binary-log-reader)
 
 # Features
+* Cross platform (Linux, OSX, Windows)
 * Optimized for performance
 * Binary & text layouts
 * Synchronous logging
