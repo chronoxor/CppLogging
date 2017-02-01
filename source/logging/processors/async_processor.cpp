@@ -9,6 +9,7 @@
 #include "logging/processors/async_processor.h"
 
 #include "errors/fatal.h"
+#include "threads/thread.h"
 
 namespace CppLogging {
 
@@ -17,7 +18,7 @@ AsyncProcessor::AsyncProcessor(bool discard_on_overflow, size_t capacity, const 
       _buffer(capacity)
 {
     // Start processing thread
-    _thread = std::thread([this, on_thread_initialize, on_thread_clenup]() { ProcessBufferedRecords(on_thread_initialize, on_thread_clenup); });
+    _thread = CppCommon::Thread::Start([this, on_thread_initialize, on_thread_clenup]() { ProcessBufferedRecords(on_thread_initialize, on_thread_clenup); });
 }
 
 AsyncProcessor::~AsyncProcessor()

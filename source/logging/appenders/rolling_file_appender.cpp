@@ -11,6 +11,7 @@
 #include "errors/exceptions.h"
 #include "errors/fatal.h"
 #include "string/format.h"
+#include "threads/thread.h"
 #include "threads/wait_queue.h"
 #include "time/timezone.h"
 #include "utility/countof.h"
@@ -147,7 +148,7 @@ protected:
     void ArchivationStart()
     {
         // Start archivation thread
-        _archive_thread = std::thread([this]() { Archivation(); });
+        _archive_thread = CppCommon::Thread::Start([this]() { Archivation(); });
     }
 
     void ArchivationStop()
