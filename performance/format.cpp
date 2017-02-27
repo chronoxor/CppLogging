@@ -1,5 +1,5 @@
 //
-// Created by Ivan Shynkarenka on 28.09.2016.
+// Created by Ivan Shynkarenka on 28.09.2016
 //
 
 #include "benchmark/cppbenchmark.h"
