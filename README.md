@@ -664,7 +664,7 @@ int main(int argc, char** argv)
 
 # Logging benchmarks
 
-##Benchmark 1: Null appender
+## Benchmark 1: Null appender
 Benchmark source file: [appender_null.cpp](https://github.com/chronoxor/CppLogging/blob/master/performance/appender_null.cpp)
 
 Benchmark report is the following:
@@ -713,7 +713,7 @@ Iterations throughput: 5733126 / second
 ===============================================================================
 ```
 
-##Benchmark 2: File appender
+## Benchmark 2: File appender
 Benchmark source file: [appender_file.cpp](https://github.com/chronoxor/CppLogging/blob/master/performance/appender_file.cpp)
 
 Benchmark report is the following:
