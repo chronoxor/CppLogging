@@ -140,7 +140,7 @@ if(NOT CPPLOGGING_MODULE)
 
   # CTest
   enable_testing()
-  add_test(cpplogging-tests cpplogging-tests)
+  add_test(cpplogging-tests cpplogging-tests --durations yes --order lex)
 
   # Install
   install(TARGETS ${INSTALL_TARGETS}
