@@ -8,7 +8,6 @@
 
 #include "logging/appenders/rolling_file_appender.h"
 
-#include "errors/exceptions.h"
 #include "errors/fatal.h"
 #include "string/format.h"
 #include "threads/thread.h"
