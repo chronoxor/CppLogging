@@ -26,7 +26,7 @@ GitHub: https://github.com/chronoxor/CppLogging
 
 /*!
     \namespace CppLogging
-    \brief C++ logging project definitions
+    \brief C++ Logging project definitions
 */
 namespace CppLogging {
 
