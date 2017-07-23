@@ -12,30 +12,35 @@
 #include "logging/layouts/text_layout.h"
 #include "logging/version.h"
 
+#include "filesystem/file.h"
+#include "system/stream.h"
+
 #include <cstring>
 #include <iostream>
+#include <memory>
 #include <vector>
 
 #include "../../modules/cpp-optparse/OptionParser.h"
 
+using namespace CppCommon;
 using namespace CppLogging;
 
-bool InputRecord(FILE* input, Record& record)
+bool InputRecord(Reader& input, Record& record)
 {
     // Clear the logging record
     record.Clear();
 
     // Read the logging record size
     uint32_t size;
-    if (fread(&size, sizeof(uint32_t), 1, input) != 1)
+    if (input.Read(&size, sizeof(uint32_t)) != sizeof(uint32_t))
         return false;
 
     record.raw.resize(size);
 
     // Read the logging record raw data
-    if (fread(record.raw.data(), 1, size, input) != size)
+    if (input.Read(record.raw.data(), size) != size)
     {
-        std::cerr << "Failed to read from the input file!" << std::endl;
+        std::cerr << "Failed to read from the input source!" << std::endl;
         return false;
     }
 
@@ -74,14 +79,15 @@ bool InputRecord(FILE* input, Record& record)
     return true;
 }
 
-bool OutputRecord(FILE* output, Record& record)
+bool OutputRecord(Writer& output, Record& record)
 {
     TextLayout layout;
     layout.LayoutRecord(record);
 
-    if (fwrite(record.raw.data(), 1, record.raw.size() - 1, output) != (record.raw.size() - 1))
+    size_t size = record.raw.size() - 1;
+    if (output.Write(record.raw.data(), size) != size)
     {
-        std::cerr << "Failed to write into the output file!" << std::endl;
+        std::cerr << "Failed to write into the output source!" << std::endl;
         return false;
     }
 
@@ -106,46 +112,28 @@ int main(int argc, char** argv)
     }
 
     // Open the input file or stdin
-    FILE* input_file = options.is_set("input") ? fopen(options.get("input"), "rb") : stdin;
-    if (input_file == nullptr)
+    std::unique_ptr<Reader> input(new StdInput());
+    if (options.is_set("input"))
     {
-        std::cerr << "Failed to open the input file!" << std::endl;
-        return -1;
+        File* file = new File(Path(options.get("input")));
+        file->Open(true, false);
+        input.reset(file);
     }
 
     // Open the output file or stdout
-    FILE* output_file = options.is_set("output") ? fopen(options.get("input"), "wb") : stdout;
-    if (output_file == nullptr)
+    std::unique_ptr<Writer> output(new StdOutput());
+    if (options.is_set("output"))
     {
-        std::cerr << "Failed to open the output file!" << std::endl;
-        return -1;
+        File* file = new File(Path(options.get("output")));
+        file->Open(false, true);
+        output.reset(file);
     }
 
     // Process all logging record
     Record record;
-    while (InputRecord(input_file, record))
-        if (!OutputRecord(output_file, record))
+    while (InputRecord(*input, record))
+        if (!OutputRecord(*output, record))
             break;
-
-    // Close the input file
-    if (options.is_set("input"))
-    {
-        if (fclose(input_file) != 0)
-        {
-            std::cerr << "Failed to close the input file!" << std::endl;
-            return -1;
-        }
-    }
-
-    // Close the output file
-    if (options.is_set("output"))
-    {
-        if (fclose(output_file) != 0)
-        {
-            std::cerr << "Failed to close the output file!" << std::endl;
-            return -1;
-        }
-    }
 
     return 0;
 }
