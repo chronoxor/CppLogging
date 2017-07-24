@@ -38,12 +38,7 @@ public:
     {
     }
 
-    Impl(const Impl&) = delete;
-    Impl(Impl&&) noexcept = default;
     virtual ~Impl() = default;
-
-    Impl& operator=(const Impl&) = delete;
-    Impl& operator=(Impl&&) noexcept = default;
 
     virtual void AppendRecord(Record& record) = 0;
     virtual void Flush() = 0;
@@ -290,9 +285,6 @@ public:
         }
     }
 
-    TimePolicyImpl(const TimePolicyImpl&) = delete;
-    TimePolicyImpl(TimePolicyImpl&&) noexcept = default;
-
     virtual ~TimePolicyImpl()
     {
         try
@@ -303,9 +295,6 @@ public:
         }
         catch (CppCommon::FileSystemException&) {}
     }
-
-    TimePolicyImpl& operator=(const TimePolicyImpl&) = delete;
-    TimePolicyImpl& operator=(TimePolicyImpl&&) noexcept = default;
 
     TimeRollingPolicy policy() const
     {
@@ -901,9 +890,6 @@ public:
             ArchivationStart();
     }
 
-    SizePolicyImpl(const SizePolicyImpl&) = delete;
-    SizePolicyImpl(SizePolicyImpl&&) noexcept = default;
-
     virtual ~SizePolicyImpl()
     {
         try
@@ -914,9 +900,6 @@ public:
         }
         catch (CppCommon::FileSystemException&) {}
     }
-
-    SizePolicyImpl& operator=(const SizePolicyImpl&) = delete;
-    SizePolicyImpl& operator=(SizePolicyImpl&&) noexcept = default;
 
     void AppendRecord(Record& record) override
     {

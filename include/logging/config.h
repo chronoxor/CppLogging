@@ -25,11 +25,11 @@ class Config
 {
 public:
     Config(const Config&) = delete;
-    Config(Config&&) = delete;
+    Config(Config&&) noexcept = delete;
     ~Config();
 
     Config& operator=(const Config&) = delete;
-    Config& operator=(Config&&) = delete;
+    Config& operator=(Config&&) noexcept = delete;
 
     //! Configure default logger with a given logging sink processor
     /*!

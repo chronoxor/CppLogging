@@ -113,12 +113,7 @@ public:
         AppendPattern(std::string(1, '\0'));
     }
 
-    Impl(const Impl&) = delete;
-    Impl(Impl&&) noexcept = default;
     ~Impl() = default;
-
-    Impl& operator=(const Impl&) = delete;
-    Impl& operator=(Impl&&) noexcept = default;
 
     const std::string& pattern() const noexcept
     {
