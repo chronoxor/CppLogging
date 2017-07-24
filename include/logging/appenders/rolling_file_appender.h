@@ -98,11 +98,11 @@ public:
     */
     explicit RollingFileAppender(const CppCommon::Path& path, const std::string& filename, const std::string& extension, size_t size = 104857600, size_t backups = 10, bool archive = false, bool truncate = false, bool auto_flush = false);
     RollingFileAppender(const RollingFileAppender&) = delete;
-    RollingFileAppender(RollingFileAppender&& appender);
+    RollingFileAppender(RollingFileAppender&& appender) noexcept;
     virtual ~RollingFileAppender();
 
     RollingFileAppender& operator=(const RollingFileAppender&) = delete;
-    RollingFileAppender& operator=(RollingFileAppender&& appender);
+    RollingFileAppender& operator=(RollingFileAppender&& appender) noexcept;
 
     // Implementation of Appender
     void AppendRecord(Record& record) override;

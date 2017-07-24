@@ -25,11 +25,11 @@ class SyslogAppender : public Appender
 public:
     SyslogAppender();
     SyslogAppender(const SyslogAppender&) = delete;
-    SyslogAppender(SyslogAppender&&) = default;
+    SyslogAppender(SyslogAppender&&) noexcept = default;
     virtual ~SyslogAppender();
 
     SyslogAppender& operator=(const SyslogAppender&) = delete;
-    SyslogAppender& operator=(SyslogAppender&&) = default;
+    SyslogAppender& operator=(SyslogAppender&&) noexcept = default;
 
     // Implementation of Appender
     void AppendRecord(Record& record) override;

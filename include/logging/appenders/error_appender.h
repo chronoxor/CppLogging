@@ -25,11 +25,11 @@ class ErrorAppender : public Appender
 public:
     ErrorAppender() = default;
     ErrorAppender(const ErrorAppender&) = delete;
-    ErrorAppender(ErrorAppender&&) = default;
+    ErrorAppender(ErrorAppender&&) noexcept = default;
     virtual ~ErrorAppender() = default;
 
     ErrorAppender& operator=(const ErrorAppender&) = delete;
-    ErrorAppender& operator=(ErrorAppender&&) = default;
+    ErrorAppender& operator=(ErrorAppender&&) noexcept = default;
 
     // Implementation of Appender
     void AppendRecord(Record& record) override;

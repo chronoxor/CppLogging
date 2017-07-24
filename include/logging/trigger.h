@@ -30,11 +30,11 @@ public:
     */
     explicit Trigger(bool state = true) : _state(state) {}
     Trigger(const Trigger&) = delete;
-    Trigger(Trigger&&) = default;
+    Trigger(Trigger&&) noexcept = default;
     virtual ~Trigger() = default;
 
     Trigger& operator=(const Trigger&) = delete;
-    Trigger& operator=(Trigger&&) = default;
+    Trigger& operator=(Trigger&&) noexcept = default;
 
     //! Is logging enabled?
     bool IsEnabled() noexcept { return _state; }

@@ -36,11 +36,11 @@ public:
     explicit BufferedProcessor(size_t limit = 65536, size_t capacity = 4096) : _limit(limit)
     { _buffer.reserve(capacity); }
     BufferedProcessor(const BufferedProcessor&) = delete;
-    BufferedProcessor(BufferedProcessor&&) = default;
+    BufferedProcessor(BufferedProcessor&&) noexcept = default;
     virtual ~BufferedProcessor() = default;
 
     BufferedProcessor& operator=(const BufferedProcessor&) = delete;
-    BufferedProcessor& operator=(BufferedProcessor&&) = default;
+    BufferedProcessor& operator=(BufferedProcessor&&) noexcept = default;
 
     // Implementation of Processor
     bool ProcessRecord(Record& record) override;

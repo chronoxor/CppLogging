@@ -38,9 +38,12 @@ public:
     {
     }
 
-    virtual ~Impl()
-    {
-    }
+    Impl(const Impl&) = delete;
+    Impl(Impl&&) noexcept = default;
+    virtual ~Impl() = default;
+
+    Impl& operator=(const Impl&) = delete;
+    Impl& operator=(Impl&&) noexcept = default;
 
     virtual void AppendRecord(Record& record) = 0;
     virtual void Flush() = 0;
@@ -287,6 +290,9 @@ public:
         }
     }
 
+    TimePolicyImpl(const TimePolicyImpl&) = delete;
+    TimePolicyImpl(TimePolicyImpl&&) noexcept = default;
+
     virtual ~TimePolicyImpl()
     {
         try
@@ -297,6 +303,9 @@ public:
         }
         catch (CppCommon::FileSystemException&) {}
     }
+
+    TimePolicyImpl& operator=(const TimePolicyImpl&) = delete;
+    TimePolicyImpl& operator=(TimePolicyImpl&&) noexcept = default;
 
     TimeRollingPolicy policy() const
     {
@@ -892,6 +901,9 @@ public:
             ArchivationStart();
     }
 
+    SizePolicyImpl(const SizePolicyImpl&) = delete;
+    SizePolicyImpl(SizePolicyImpl&&) noexcept = default;
+
     virtual ~SizePolicyImpl()
     {
         try
@@ -902,6 +914,9 @@ public:
         }
         catch (CppCommon::FileSystemException&) {}
     }
+
+    SizePolicyImpl& operator=(const SizePolicyImpl&) = delete;
+    SizePolicyImpl& operator=(SizePolicyImpl&&) noexcept = default;
 
     void AppendRecord(Record& record) override
     {
@@ -1082,7 +1097,7 @@ RollingFileAppender::RollingFileAppender(const CppCommon::Path& path, const std:
 {
 }
 
-RollingFileAppender::RollingFileAppender(RollingFileAppender&& appender) : _pimpl(std::move(appender._pimpl))
+RollingFileAppender::RollingFileAppender(RollingFileAppender&& appender) noexcept : _pimpl(std::move(appender._pimpl))
 {
 }
 
@@ -1090,7 +1105,7 @@ RollingFileAppender::~RollingFileAppender()
 {
 }
 
-RollingFileAppender& RollingFileAppender::operator=(RollingFileAppender&& appender)
+RollingFileAppender& RollingFileAppender::operator=(RollingFileAppender&& appender) noexcept
 {
     _pimpl = std::move(appender._pimpl);
     return *this;

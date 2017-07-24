@@ -59,11 +59,11 @@ public:
 
     Record();
     Record(const Record&) = default;
-    Record(Record&&) = default;
+    Record(Record&&) noexcept = default;
     ~Record() = default;
 
     Record& operator=(const Record&) = default;
-    Record& operator=(Record&&) = default;
+    Record& operator=(Record&&) noexcept = default;
 
     //! Format message of the logging record
     template <typename... Args>

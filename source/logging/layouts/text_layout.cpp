@@ -113,9 +113,12 @@ public:
         AppendPattern(std::string(1, '\0'));
     }
 
-    ~Impl()
-    {
-    }
+    Impl(const Impl&) = delete;
+    Impl(Impl&&) noexcept = default;
+    ~Impl() = default;
+
+    Impl& operator=(const Impl&) = delete;
+    Impl& operator=(Impl&&) noexcept = default;
 
     const std::string& pattern() const noexcept
     {
@@ -802,7 +805,7 @@ TextLayout::TextLayout(const std::string& layout) : _pimpl(std::make_unique<Impl
 {
 }
 
-TextLayout::TextLayout(TextLayout&& layout) : _pimpl(std::move(layout._pimpl))
+TextLayout::TextLayout(TextLayout&& layout) noexcept : _pimpl(std::move(layout._pimpl))
 {
 }
 
@@ -810,7 +813,7 @@ TextLayout::~TextLayout()
 {
 }
 
-TextLayout& TextLayout::operator=(TextLayout&& layout)
+TextLayout& TextLayout::operator=(TextLayout&& layout) noexcept
 {
     _pimpl = std::move(layout._pimpl);
     return *this;

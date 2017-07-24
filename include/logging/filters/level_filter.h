@@ -35,11 +35,11 @@ public:
     */
     explicit LevelFilter(Level from, Level to) : _from(from), _to(to) {}
     LevelFilter(const LevelFilter&) = delete;
-    LevelFilter(LevelFilter&&) = default;
+    LevelFilter(LevelFilter&&) noexcept = default;
     virtual ~LevelFilter() = default;
 
     LevelFilter& operator=(const LevelFilter&) = delete;
-    LevelFilter& operator=(LevelFilter&&) = default;
+    LevelFilter& operator=(LevelFilter&&) noexcept = default;
 
     // Implementation of Filter
     bool FilterRecord(Record& record) override;

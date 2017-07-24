@@ -28,11 +28,11 @@ class SyncProcessor : public Processor
 public:
     SyncProcessor() = default;
     SyncProcessor(const SyncProcessor&) = delete;
-    SyncProcessor(SyncProcessor&&) = default;
+    SyncProcessor(SyncProcessor&&) noexcept = default;
     virtual ~SyncProcessor() = default;
 
     SyncProcessor& operator=(const SyncProcessor&) = delete;
-    SyncProcessor& operator=(SyncProcessor&&) = default;
+    SyncProcessor& operator=(SyncProcessor&&) noexcept = default;
 
     // Implementation of Processor
     bool ProcessRecord(Record& record) override;

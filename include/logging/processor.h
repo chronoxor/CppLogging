@@ -31,11 +31,11 @@ class Processor
 public:
     Processor() = default;
     Processor(const Processor&) = default;
-    Processor(Processor&&) = default;
+    Processor(Processor&&) noexcept = default;
     virtual ~Processor();
 
     Processor& operator=(const Processor&) = default;
-    Processor& operator=(Processor&&) = default;
+    Processor& operator=(Processor&&) noexcept = default;
 
     //! Get collection of child filters
     std::vector<std::shared_ptr<Filter>>& filters() noexcept { return _filters; }
