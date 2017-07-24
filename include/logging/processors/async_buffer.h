@@ -38,11 +38,11 @@ public:
     */
     explicit AsyncBuffer(size_t capacity);
     AsyncBuffer(const AsyncBuffer&) = delete;
-    AsyncBuffer(AsyncBuffer&&) noexcept = default;
+    AsyncBuffer(AsyncBuffer&&) = default;
     ~AsyncBuffer() { delete[] _buffer; }
 
     AsyncBuffer& operator=(const AsyncBuffer&) = delete;
-    AsyncBuffer& operator=(AsyncBuffer&&) noexcept = default;
+    AsyncBuffer& operator=(AsyncBuffer&&) = default;
 
     //! Get ring buffer capacity
     size_t capacity() const noexcept { return _capacity; }

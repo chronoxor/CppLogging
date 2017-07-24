@@ -40,11 +40,11 @@ public:
     */
     explicit AsyncProcessor(bool discard_on_overflow = false, size_t capacity = 4096, const std::function<void ()>& on_thread_initialize = [](){}, const std::function<void ()>& on_thread_clenup = [](){});
     AsyncProcessor(const AsyncProcessor&) = delete;
-    AsyncProcessor(AsyncProcessor&&) noexcept = default;
+    AsyncProcessor(AsyncProcessor&&) = default;
     virtual ~AsyncProcessor();
 
     AsyncProcessor& operator=(const AsyncProcessor&) = delete;
-    AsyncProcessor& operator=(AsyncProcessor&&) noexcept = default;
+    AsyncProcessor& operator=(AsyncProcessor&&) = default;
 
     // Implementation of Processor
     bool ProcessRecord(Record& record) override;
