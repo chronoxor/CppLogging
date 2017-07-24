@@ -7,6 +7,7 @@
 #include "logging/config.h"
 #include "logging/logger.h"
 
+using namespace CppCommon;
 using namespace CppLogging;
 
 const uint64_t iterations = 1000000;
@@ -18,13 +19,13 @@ protected:
     {
         auto binary_sink = std::make_shared<Processor>();
         binary_sink->layouts().push_back(std::make_shared<BinaryLayout>());
-        binary_sink->appenders().push_back(std::make_shared<FileAppender>(CppCommon::File("test.bin.log")));
+        binary_sink->appenders().push_back(std::make_shared<FileAppender>(File("test.bin.log")));
         Config::ConfigLogger("binary", binary_sink);
     }
 
     ~BinaryConfigFixture()
     {
-        CppCommon::File::Remove("test.bin.log");
+        File::Remove("test.bin.log");
     }
 };
 
@@ -35,13 +36,13 @@ protected:
     {
         auto text_sink = std::make_shared<Processor>();
         text_sink->layouts().push_back(std::make_shared<TextLayout>());
-        text_sink->appenders().push_back(std::make_shared<FileAppender>(CppCommon::File("test.log")));
+        text_sink->appenders().push_back(std::make_shared<FileAppender>(File("test.log")));
         Config::ConfigLogger("text", text_sink);
     }
 
     ~TextConfigFixture()
     {
-        CppCommon::File::Remove("test.log");
+        File::Remove("test.log");
     }
 };
 

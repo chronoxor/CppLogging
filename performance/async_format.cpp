@@ -7,6 +7,7 @@
 #include "logging/config.h"
 #include "logging/logger.h"
 
+using namespace CppCommon;
 using namespace CppLogging;
 
 const uint64_t iterations = 1000000;
@@ -26,11 +27,11 @@ protected:
     ~TextConfigFixture()
     {
         if (_file.IsFileExists())
-            CppCommon::File::Remove(_file);
+            File::Remove(_file);
     }
 
 private:
-    CppCommon::File _file;
+    File _file;
 };
 
 BENCHMARK_THREADS_FIXTURE(TextConfigFixture, "PreFormat", settings)

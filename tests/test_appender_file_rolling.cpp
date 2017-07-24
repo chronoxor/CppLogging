@@ -46,12 +46,12 @@ TEST_CASE("Rolling file appender with time-based policy", "[CppLogging]")
 
         for (int i = 0; i < 3; ++i)
         {
-            record.timestamp = CppCommon::Timestamp::utc();
+            record.timestamp = Timestamp::utc();
             appender.AppendRecord(record);
             appender.Flush();
 
             // Sleep for one second
-            CppCommon::Thread::Sleep(1000);
+            Thread::Sleep(1000);
         }
     }
 
