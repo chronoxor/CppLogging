@@ -794,7 +794,7 @@ Average time: 27 ns / iteration
 Minimal time: 27 ns / iteration
 Maximal time: 30 ns / iteration
 Total time: 55.891 ms
-Total iterations: 1999999
+Total iterations: 2000000
 Iterations throughput: 35783702 / second
 -------------------------------------------------------------------------------
 Phase: SyncProcessor-null(threads:2)
@@ -802,7 +802,7 @@ Average time: 22 ns / iteration
 Minimal time: 22 ns / iteration
 Maximal time: 29 ns / iteration
 Total time: 89.344 ms
-Total iterations: 3999999
+Total iterations: 4000000
 Iterations throughput: 44770342 / second
 -------------------------------------------------------------------------------
 Phase: SyncProcessor-null(threads:4)
@@ -810,7 +810,7 @@ Average time: 84 ns / iteration
 Minimal time: 84 ns / iteration
 Maximal time: 92 ns / iteration
 Total time: 674.796 ms
-Total iterations: 7999999
+Total iterations: 8000000
 Iterations throughput: 11855429 / second
 -------------------------------------------------------------------------------
 Phase: SyncProcessor-null(threads:8)
@@ -818,7 +818,7 @@ Average time: 113 ns / iteration
 Minimal time: 113 ns / iteration
 Maximal time: 113 ns / iteration
 Total time: 1.808 s
-Total iterations: 15999999
+Total iterations: 16000000
 Iterations throughput: 8849109 / second
 ===============================================================================
 Benchmark: SyncProcessor-binary
@@ -927,7 +927,7 @@ Average time: 71 ns / iteration
 Minimal time: 71 ns / iteration
 Maximal time: 79 ns / iteration
 Total time: 143.543 ms
-Total iterations: 1999999
+Total iterations: 2000000
 Iterations throughput: 13933096 / second
 -------------------------------------------------------------------------------
 Phase: AsyncProcessor-null(threads:2)
@@ -935,7 +935,7 @@ Average time: 47 ns / iteration
 Minimal time: 47 ns / iteration
 Maximal time: 52 ns / iteration
 Total time: 191.668 ms
-Total iterations: 3999999
+Total iterations: 4000000
 Iterations throughput: 20869336 / second
 -------------------------------------------------------------------------------
 Phase: AsyncProcessor-null(threads:4)
@@ -943,7 +943,7 @@ Average time: 30 ns / iteration
 Minimal time: 30 ns / iteration
 Maximal time: 32 ns / iteration
 Total time: 244.934 ms
-Total iterations: 7999999
+Total iterations: 8000000
 Iterations throughput: 32661750 / second
 -------------------------------------------------------------------------------
 Phase: AsyncProcessor-null(threads:8)
@@ -951,7 +951,7 @@ Average time: 44 ns / iteration
 Minimal time: 44 ns / iteration
 Maximal time: 44 ns / iteration
 Total time: 704.504 ms
-Total iterations: 15999999
+Total iterations: 16000000
 Iterations throughput: 22710985 / second
 ===============================================================================
 Benchmark: AsyncProcessor-binary
