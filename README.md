@@ -24,7 +24,7 @@ processors (sync, async), filters, layouts (binary, text) and appenders.
     * [Windows (Cygwin)](#windows-cygwin)
     * [Windows (MinGW)](#windows-mingw)
     * [Windows (MinGW with MSYS)](#windows-mingw-with-msys)
-    * [Windows (Visaul Studio)](#windows-visaul-studio)
+    * [Windows (Visual Studio)](#windows-visual-studio)
   * [Logging examples](#logging-examples)
     * [Example 1: Default logger](#example-1-default-logger)
     * [Example 2: Format with logger](#example-2-format-with-logger)
@@ -108,7 +108,7 @@ cd build
 mingw.bat
 ```
 
-## Windows (Visaul Studio)
+## Windows (Visual Studio)
 ```
 cd build
 vs.bat
