@@ -10,6 +10,8 @@
 
 using namespace CppLogging;
 
+namespace {
+
 Record ParseBinaryLayout(const std::vector<uint8_t>& raw)
 {
     Record record;
@@ -68,6 +70,8 @@ bool CompareRecords(const Record& record1, const Record& record2)
         return false;
     return true;
 }
+
+} // namespace
 
 TEST_CASE("Binary layout", "[CppLogging]")
 {

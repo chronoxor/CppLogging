@@ -8,6 +8,8 @@
 
 using namespace CppLogging;
 
+namespace {
+
 class Date
 {
 public:
@@ -27,6 +29,8 @@ std::string format(const char* pattern, const Args&... args)
     record.FormatSerialize(pattern, args...);
     record.FormatDeserialize();
     return record.message;
+}
+
 }
 
 TEST_CASE("Format message", "[CppLogging]")
