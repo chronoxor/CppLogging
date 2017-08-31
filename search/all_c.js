@@ -1,7 +1,8 @@
 var searchData=
 [
   ['pattern',['pattern',['../class_cpp_logging_1_1_text_layout.html#ab3e9c2d158ac22b7f9e18a1985998fd1',1,'CppLogging::TextLayout']]],
-  ['processor',['Processor',['../class_cpp_logging_1_1_processor.html',1,'CppLogging::Processor'],['../class_cpp_logging_1_1_processor.html#ab9e8bf067a254854f6f5bb8a108c1105',1,'CppLogging::Processor::Processor()=default'],['../class_cpp_logging_1_1_processor.html#a18d2e051692b2ef3096ae5cca6a3ee58',1,'CppLogging::Processor::Processor(const Processor &amp;)=default'],['../class_cpp_logging_1_1_processor.html#af909c31ebb473cad9623ca3b84f8cc91',1,'CppLogging::Processor::Processor(Processor &amp;&amp;) noexcept=default']]],
+  ['processor',['Processor',['../class_cpp_logging_1_1_processor.html',1,'CppLogging']]],
+  ['processor',['Processor',['../class_cpp_logging_1_1_processor.html#ab9e8bf067a254854f6f5bb8a108c1105',1,'CppLogging::Processor::Processor()=default'],['../class_cpp_logging_1_1_processor.html#a18d2e051692b2ef3096ae5cca6a3ee58',1,'CppLogging::Processor::Processor(const Processor &amp;)=default'],['../class_cpp_logging_1_1_processor.html#af909c31ebb473cad9623ca3b84f8cc91',1,'CppLogging::Processor::Processor(Processor &amp;&amp;) noexcept=default']]],
   ['processor_2ecpp',['processor.cpp',['../processor_8cpp.html',1,'']]],
   ['processor_2eh',['processor.h',['../processor_8h.html',1,'']]],
   ['processors',['processors',['../class_cpp_logging_1_1_processor.html#ab4d96b6012bee770a07a3f8a25a836a3',1,'CppLogging::Processor']]],
