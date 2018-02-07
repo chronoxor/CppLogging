@@ -41,7 +41,7 @@ int main(int argc, char** argv)
     std::vector<std::thread> threads;
     for (int thread = 0; thread < concurrency; ++thread)
     {
-        threads.push_back(std::thread([&stop, thread]()
+        threads.push_back(std::thread([&stop]()
         {
             // Create example logger
             CppLogging::Logger logger("example");
