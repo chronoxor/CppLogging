@@ -38,6 +38,9 @@ if(WIN32)
   find_package(Userenv)
 endif()
 
+# Modules
+add_subdirectory("modules")
+
 # Link libraries
 list(APPEND LINKLIBS Threads::Threads)
 if(UNIX)
@@ -51,9 +54,6 @@ if(WIN32)
   list(APPEND LINKLIBS ${USERENV_LIBRARIES})
 endif()
 list(APPEND LINKLIBS cppcommon)
-
-# Modules
-add_subdirectory("modules")
 
 # Support zlib/contrib/minizip
 file(GLOB_RECURSE MINIZIP_FILES "source/logging/appenders/minizip/*.c")
