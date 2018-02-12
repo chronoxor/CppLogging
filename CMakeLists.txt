@@ -25,9 +25,6 @@ include(SetCompilerFeatures)
 include(SetCompilerWarnings)
 include(SetPlatformFeatures)
 
-# Modules
-add_subdirectory("modules")
-
 # External packages
 find_package(Threads REQUIRED)
 if(UNIX)
@@ -54,6 +51,9 @@ if(WIN32)
   list(APPEND LINKLIBS ${USERENV_LIBRARIES})
 endif()
 list(APPEND LINKLIBS cppcommon)
+
+# Modules
+add_subdirectory("modules")
 
 # Support zlib/contrib/minizip
 file(GLOB_RECURSE MINIZIP_FILES "source/logging/appenders/minizip/*.c")
