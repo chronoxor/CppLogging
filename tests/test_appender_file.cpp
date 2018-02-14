@@ -2,7 +2,7 @@
 // Created by Ivan Shynkarenka on 08.09.2016
 //
 
-#include "catch.hpp"
+#include "test.h"
 
 #include "logging/appenders/file_appender.h"
 

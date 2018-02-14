@@ -2,7 +2,7 @@
 // Created by Ivan Shynkarenka on 13.09.2016
 //
 
-#include "catch.hpp"
+#include "test.h"
 
 #include "logging/appenders/rolling_file_appender.h"
 

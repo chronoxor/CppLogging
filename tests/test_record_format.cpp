@@ -2,7 +2,7 @@
 // Created by Ivan Shynkarenka on 18.09.2016
 //
 
-#include "catch.hpp"
+#include "test.h"
 
 #include "logging/record.h"
 

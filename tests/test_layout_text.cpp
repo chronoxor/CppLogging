@@ -2,7 +2,7 @@
 // Created by Ivan Shynkarenka on 22.07.2016
 //
 
-#include "catch.hpp"
+#include "test.h"
 
 #include "logging/layouts/text_layout.h"
 #include "system/environment.h"

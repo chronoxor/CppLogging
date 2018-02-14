@@ -2,7 +2,7 @@
 // Created by Ivan Shynkarenka on 09.07.2016
 //
 
-#include "catch.hpp"
+#include "test.h"
 
 #include "logging/layouts/binary_layout.h"
 
