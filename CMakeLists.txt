@@ -73,6 +73,9 @@ else()
   set_source_files_properties(${MINIZIP_FILES} PROPERTIES COMPILE_FLAGS "${PEDANTIC_COMPILE_FLAGS} /wd4067 /wd4131 /wd4189 /wd4244 /wd4456")
 endif()
 
+# System directories
+include_directories(SYSTEM "${CMAKE_CURRENT_SOURCE_DIR}/modules")
+
 # Library
 file(GLOB_RECURSE SOURCE_FILES "source/*.cpp")
 set_source_files_properties(${SOURCE_FILES} PROPERTIES COMPILE_FLAGS "${PEDANTIC_COMPILE_FLAGS}")
@@ -131,8 +134,7 @@ if(NOT CPPLOGGING_MODULE)
   # Tests
   file(GLOB TESTS_SOURCE_FILES "tests/*.cpp")
   set_source_files_properties(${TESTS_SOURCE_FILES} PROPERTIES COMPILE_FLAGS "${PEDANTIC_COMPILE_FLAGS}")
-  add_executable(cpplogging-tests ${CATCH} ${TESTS_SOURCE_FILES})
-  target_include_directories(cpplogging-tests PRIVATE "modules/catch/single_include")
+  add_executable(cpplogging-tests ${CATCH2} ${TESTS_SOURCE_FILES})
   target_link_libraries(cpplogging-tests ${LINKLIBS})
   set_target_properties(cpplogging-tests PROPERTIES FOLDER tests)
   list(APPEND INSTALL_TARGETS cpplogging-tests)

@@ -20,7 +20,7 @@
 #include <memory>
 #include <vector>
 
-#include "../../modules/cpp-optparse/OptionParser.h"
+#include <cpp-optparse/OptionParser.h>
 
 using namespace CppCommon;
 using namespace CppLogging;
