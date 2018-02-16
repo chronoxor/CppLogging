@@ -89,7 +89,7 @@ set_target_properties(cpplogging PROPERTIES FOLDER libraries)
 list(APPEND INSTALL_TARGETS cpplogging)
 list(APPEND LINKLIBS cpplogging)
 
-# Additional module components: examples, performance benchmarks, tests, tools and install
+# Additional module components: benchmarks, examples, plugins, tests, tools and install
 if(NOT CPPLOGGING_MODULE)
 
   # Examples
@@ -105,7 +105,7 @@ if(NOT CPPLOGGING_MODULE)
     list(APPEND INSTALL_TARGETS_PDB ${EXAMPLE_TARGET})
   endforeach()
 
-  # Performance benchmarks
+  # Benchmarks
   file(GLOB BENCHMARK_FILES RELATIVE "${CMAKE_CURRENT_SOURCE_DIR}/performance" "performance/*.cpp")
   foreach(BENCHMARK_FILE ${BENCHMARK_FILES})
     string(REGEX REPLACE "(.*)\\.cpp" "\\1" BENCHMARK_NAME ${BENCHMARK_FILE})
