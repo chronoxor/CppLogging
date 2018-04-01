@@ -1,7 +1,7 @@
 var searchData=
 [
   ['raw',['raw',['../class_cpp_logging_1_1_record.html#a53fb6876e9bcb49289e0447ed79d6415',1,'CppLogging::Record']]],
-  ['record',['Record',['../class_cpp_logging_1_1_record.html#a9869b96b578bbb85709cdaec079526ee',1,'CppLogging::Record::Record()'],['../class_cpp_logging_1_1_record.html#aa27f6c8c7b1593d38ad4c28294df63c9',1,'CppLogging::Record::Record(const Record &amp;)=default'],['../class_cpp_logging_1_1_record.html#a849fa7db00d75c12f17cb12c7fba3f51',1,'CppLogging::Record::Record(Record &amp;&amp;) noexcept=default']]],
+  ['record',['Record',['../class_cpp_logging_1_1_record.html#a9869b96b578bbb85709cdaec079526ee',1,'CppLogging::Record::Record()'],['../class_cpp_logging_1_1_record.html#aa27f6c8c7b1593d38ad4c28294df63c9',1,'CppLogging::Record::Record(const Record &amp;)=default'],['../class_cpp_logging_1_1_record.html#aafb916fa6c565ff7735e18d4e52e6f81',1,'CppLogging::Record::Record(Record &amp;&amp;)=default']]],
   ['record',['Record',['../class_cpp_logging_1_1_record.html',1,'CppLogging']]],
   ['record_2eh',['record.h',['../record_8h.html',1,'']]],
   ['record_2einl',['record.inl',['../record_8inl.html',1,'']]],
