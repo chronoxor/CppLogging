@@ -35,11 +35,11 @@ public:
     */
     explicit FileAppender(const CppCommon::File& file, bool truncate = false, bool auto_flush = false);
     FileAppender(const FileAppender&) = delete;
-    FileAppender(FileAppender&&) noexcept = default;
+    FileAppender(FileAppender&&) = default;
     virtual ~FileAppender() = default;
 
     FileAppender& operator=(const FileAppender&) = delete;
-    FileAppender& operator=(FileAppender&&) noexcept = default;
+    FileAppender& operator=(FileAppender&&) = default;
 
     // Implementation of Appender
     void AppendRecord(Record& record) override;
