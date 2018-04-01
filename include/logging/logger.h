@@ -32,11 +32,11 @@ public:
     */
     explicit Logger(const std::string& name);
     Logger(const Logger&) = default;
-    Logger(Logger&&) noexcept = default;
+    Logger(Logger&&) = default;
     ~Logger();
 
     Logger& operator=(const Logger&) = default;
-    Logger& operator=(Logger&&) noexcept = default;
+    Logger& operator=(Logger&&) = default;
 
     //! Log debug message with format arguments
     /*!
