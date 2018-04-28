@@ -788,7 +788,7 @@ private:
                 std::memcpy(output, "ALL", CppCommon::countof("ALL") - 1);
                 break;
             default:
-                std::memcpy(output, "<unknown>", CppCommon::countof("<unknown>") - 1);
+                std::memcpy(output, "<\?\?\?>", CppCommon::countof("<\?\?\?>") - 1);
                 break;
         }
     }
