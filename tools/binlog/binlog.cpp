@@ -6,8 +6,6 @@
     \copyright MIT License
 */
 
-#include <stdio.h>
-
 #include "logging/record.h"
 #include "logging/layouts/text_layout.h"
 #include "logging/version.h"
@@ -15,6 +13,7 @@
 #include "filesystem/file.h"
 #include "system/stream.h"
 
+#include <cstdio>
 #include <cstring>
 #include <iostream>
 #include <memory>

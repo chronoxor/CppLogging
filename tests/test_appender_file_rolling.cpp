@@ -35,7 +35,6 @@ TEST_CASE("Rolling file appender with size-based policy", "[CppLogging]")
     File::RemoveIf(".", ".*.log.zip");
 }
 
-
 TEST_CASE("Rolling file appender with time-based policy", "[CppLogging]")
 {
     {

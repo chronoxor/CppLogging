@@ -57,7 +57,7 @@ class TextLayout::Impl
         PlaceholderType type;
         std::string value;
 
-        Placeholder(PlaceholderType t) : type(t) {}
+        explicit Placeholder(PlaceholderType t) : type(t) {}
         Placeholder(PlaceholderType t, const std::string& v) : type(t), value(v) {}
     };
 
@@ -604,7 +604,7 @@ private:
 
         // Insert or append pattern into placeholders collection
         if (_placeholders.empty() || (_placeholders[_placeholders.size() - 1].type != PlaceholderType::String))
-            _placeholders.push_back(Placeholder(PlaceholderType::String, pattern));
+            _placeholders.emplace_back(PlaceholderType::String, pattern);
         else
             _placeholders[_placeholders.size() - 1].value += pattern;
     }
@@ -616,59 +616,59 @@ private:
             return;
 
         if (placeholder == "UtcDateTime")
-            _placeholders.push_back(Placeholder(PlaceholderType::UtcDateTime));
+            _placeholders.emplace_back(PlaceholderType::UtcDateTime);
         else if (placeholder == "UtcDate")
-            _placeholders.push_back(Placeholder(PlaceholderType::UtcDate));
+            _placeholders.emplace_back(Placeholder(PlaceholderType::UtcDate));
         else if (placeholder == "UtcTime")
-            _placeholders.push_back(Placeholder(PlaceholderType::UtcTime));
+            _placeholders.emplace_back(Placeholder(PlaceholderType::UtcTime));
         else if (placeholder == "UtcYear")
-            _placeholders.push_back(Placeholder(PlaceholderType::UtcYear));
+            _placeholders.emplace_back(Placeholder(PlaceholderType::UtcYear));
         else if (placeholder == "UtcMonth")
-            _placeholders.push_back(Placeholder(PlaceholderType::UtcMonth));
+            _placeholders.emplace_back(Placeholder(PlaceholderType::UtcMonth));
         else if (placeholder == "UtcDay")
-            _placeholders.push_back(Placeholder(PlaceholderType::UtcDay));
+            _placeholders.emplace_back(Placeholder(PlaceholderType::UtcDay));
         else if (placeholder == "UtcHour")
-            _placeholders.push_back(Placeholder(PlaceholderType::UtcHour));
+            _placeholders.emplace_back(Placeholder(PlaceholderType::UtcHour));
         else if (placeholder == "UtcMinute")
-            _placeholders.push_back(Placeholder(PlaceholderType::UtcMinute));
+            _placeholders.emplace_back(Placeholder(PlaceholderType::UtcMinute));
         else if (placeholder == "UtcSecond")
-            _placeholders.push_back(Placeholder(PlaceholderType::UtcSecond));
+            _placeholders.emplace_back(Placeholder(PlaceholderType::UtcSecond));
         else if (placeholder == "UtcTimezone")
-            _placeholders.push_back(Placeholder(PlaceholderType::UtcTimezone));
+            _placeholders.emplace_back(Placeholder(PlaceholderType::UtcTimezone));
         else if (placeholder == "LocalDateTime")
-            _placeholders.push_back(Placeholder(PlaceholderType::LocalDateTime));
+            _placeholders.emplace_back(Placeholder(PlaceholderType::LocalDateTime));
         else if (placeholder == "LocalDate")
-            _placeholders.push_back(Placeholder(PlaceholderType::LocalDate));
+            _placeholders.emplace_back(Placeholder(PlaceholderType::LocalDate));
         else if (placeholder == "LocalTime")
-            _placeholders.push_back(Placeholder(PlaceholderType::LocalTime));
+            _placeholders.emplace_back(Placeholder(PlaceholderType::LocalTime));
         else if (placeholder == "LocalYear")
-            _placeholders.push_back(Placeholder(PlaceholderType::LocalYear));
+            _placeholders.emplace_back(Placeholder(PlaceholderType::LocalYear));
         else if (placeholder == "LocalMonth")
-            _placeholders.push_back(Placeholder(PlaceholderType::LocalMonth));
+            _placeholders.emplace_back(Placeholder(PlaceholderType::LocalMonth));
         else if (placeholder == "LocalDay")
-            _placeholders.push_back(Placeholder(PlaceholderType::LocalDay));
+            _placeholders.emplace_back(Placeholder(PlaceholderType::LocalDay));
         else if (placeholder == "LocalHour")
-            _placeholders.push_back(Placeholder(PlaceholderType::LocalHour));
+            _placeholders.emplace_back(Placeholder(PlaceholderType::LocalHour));
         else if (placeholder == "LocalMinute")
-            _placeholders.push_back(Placeholder(PlaceholderType::LocalMinute));
+            _placeholders.emplace_back(Placeholder(PlaceholderType::LocalMinute));
         else if (placeholder == "LocalSecond")
-            _placeholders.push_back(Placeholder(PlaceholderType::LocalSecond));
+            _placeholders.emplace_back(Placeholder(PlaceholderType::LocalSecond));
         else if (placeholder == "LocalTimezone")
-            _placeholders.push_back(Placeholder(PlaceholderType::LocalTimezone));
+            _placeholders.emplace_back(Placeholder(PlaceholderType::LocalTimezone));
         else if (placeholder == "Millisecond")
-            _placeholders.push_back(Placeholder(PlaceholderType::Millisecond));
+            _placeholders.emplace_back(Placeholder(PlaceholderType::Millisecond));
         else if (placeholder == "Microsecond")
-            _placeholders.push_back(Placeholder(PlaceholderType::Microsecond));
+            _placeholders.emplace_back(Placeholder(PlaceholderType::Microsecond));
         else if (placeholder == "Nanosecond")
-            _placeholders.push_back(Placeholder(PlaceholderType::Nanosecond));
+            _placeholders.emplace_back(Placeholder(PlaceholderType::Nanosecond));
         else if (placeholder == "Thread")
-            _placeholders.push_back(Placeholder(PlaceholderType::Thread));
+            _placeholders.emplace_back(Placeholder(PlaceholderType::Thread));
         else if (placeholder == "Level")
-            _placeholders.push_back(Placeholder(PlaceholderType::Level));
+            _placeholders.emplace_back(Placeholder(PlaceholderType::Level));
         else if (placeholder == "Logger")
-            _placeholders.push_back(Placeholder(PlaceholderType::Logger));
+            _placeholders.emplace_back(Placeholder(PlaceholderType::Logger));
         else if (placeholder == "Message")
-            _placeholders.push_back(Placeholder(PlaceholderType::Message));
+            _placeholders.emplace_back(Placeholder(PlaceholderType::Message));
         else if (placeholder == "EndLine")
             AppendPattern(CppCommon::Environment::EndLine());
         else
@@ -788,7 +788,7 @@ private:
                 std::memcpy(output, "ALL", CppCommon::countof("ALL") - 1);
                 break;
             default:
-                std::memcpy(output, "<\?\?\?>", CppCommon::countof("<\?\?\?>") - 1);
+                std::memcpy(output, "<unknown>", CppCommon::countof("<unknown>") - 1);
                 break;
         }
     }

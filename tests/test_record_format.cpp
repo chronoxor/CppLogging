@@ -31,11 +31,10 @@ std::string format(const char* pattern, const Args&... args)
     return record.message;
 }
 
-}
+} // namespace
 
 TEST_CASE("Format message", "[CppLogging]")
 {
-
     REQUIRE(format("no arguments") == "no arguments");
     REQUIRE(format("{0}, {1}, {2}", -1, 0, 1) == "-1, 0, 1");
     REQUIRE(format("{0}, {1}, {2}", 'a', 'b', 'c') == "a, b, c");
