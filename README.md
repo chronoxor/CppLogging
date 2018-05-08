@@ -72,6 +72,7 @@ processors (sync, async), filters, layouts (binary, text) and appenders.
 Optional:
 * [Clang](http://clang.llvm.org)
 * [Clion](https://www.jetbrains.com/clion)
+* [Cygwin](https://cygwin.com)
 * [MinGW](http://mingw-w64.org/doku.php)
 * [Visual Studio](https://www.visualstudio.com)
 
