@@ -12,7 +12,7 @@ rolling files, syslog, etc.). Logging configuration is very flexible and gives
 functionality to build flexible logger hierarchy with combination of logging
 processors (sync, async), filters, layouts (binary, text) and appenders.
 
-[CppLogging API reference](http://chronoxor.github.io/CppLogging/index.html)
+[CppLogging API reference](https://chronoxor.github.io/CppLogging/index.html)
 
 # Contents
   * [Features](#features)
@@ -65,15 +65,15 @@ processors (sync, async), filters, layouts (binary, text) and appenders.
 * Linux
 * OSX
 * Windows 7 / Windows 10
-* [CMake](http://www.cmake.org)
+* [CMake](https://www.cmake.org)
 * [GIT](https://git-scm.com)
 * [GCC](https://gcc.gnu.org)
 
 Optional:
-* [Clang](http://clang.llvm.org)
+* [Clang](https://clang.llvm.org)
 * [Clion](https://www.jetbrains.com/clion)
 * [Cygwin](https://cygwin.com)
-* [MinGW](http://mingw-w64.org/doku.php)
+* [MinGW](https://mingw-w64.org/doku.php)
 * [Visual Studio](https://www.visualstudio.com)
 
 # How to build?
