@@ -690,27 +690,27 @@ UTC timestamp: Wed Sep 28 19:08:14 2016
 ===============================================================================
 Benchmark: NullAppender-binary
 Attempts: 5
-Iterations: 10000000
+Operations: 10000000
 -------------------------------------------------------------------------------
 Phase: NullAppender-binary
-Average time: 62 ns / iteration
-Minimal time: 62 ns / iteration
-Maximal time: 63 ns / iteration
+Average time: 62 ns/op
+Minimal time: 62 ns/op
+Maximal time: 63 ns/op
 Total time: 624.974 ms
-Total iterations: 10000000
-Iterations throughput: 16000657 / second
+Total operations: 10000000
+Operations throughput: 16000657 ops/s
 ===============================================================================
 Benchmark: NullAppender-text
 Attempts: 5
-Iterations: 10000000
+Operations: 10000000
 -------------------------------------------------------------------------------
 Phase: NullAppender-text
-Average time: 174 ns / iteration
-Minimal time: 174 ns / iteration
-Maximal time: 176 ns / iteration
+Average time: 174 ns/op
+Minimal time: 174 ns/op
+Maximal time: 176 ns/op
 Total time: 1.744 s
-Total iterations: 10000000
-Iterations throughput: 5733126 / second
+Total operations: 10000000
+Operations throughput: 5733126 ops/s
 ===============================================================================
 ```
 
@@ -739,27 +739,27 @@ UTC timestamp: Wed Sep 28 19:12:24 2016
 ===============================================================================
 Benchmark: FileAppender-binary
 Attempts: 5
-Iterations: 1000000
+Operations: 1000000
 -------------------------------------------------------------------------------
 Phase: FileAppender-binary
-Average time: 106 ns / iteration
-Minimal time: 106 ns / iteration
-Maximal time: 117 ns / iteration
+Average time: 106 ns/op
+Minimal time: 106 ns/op
+Maximal time: 117 ns/op
 Total time: 106.598 ms
-Total iterations: 1000000
-Iterations throughput: 9381018 / second
+Total operations: 1000000
+Operations throughput: 9381018 ops/s
 ===============================================================================
 Benchmark: FileAppender-text
 Attempts: 5
-Iterations: 1000000
+Operations: 1000000
 -------------------------------------------------------------------------------
 Phase: FileAppender-text
-Average time: 229 ns / iteration
-Minimal time: 229 ns / iteration
-Maximal time: 249 ns / iteration
+Average time: 229 ns/op
+Minimal time: 229 ns/op
+Maximal time: 249 ns/op
 Total time: 229.126 ms
-Total iterations: 1000000
-Iterations throughput: 4364404 / second
+Total operations: 1000000
+Operations throughput: 4364404 ops/s
 ===============================================================================
 ```
 
@@ -788,111 +788,111 @@ UTC timestamp: Wed Sep 28 19:16:57 2016
 ===============================================================================
 Benchmark: SyncProcessor-null
 Attempts: 5
-Iterations: 1000000
+Operations: 1000000
 -------------------------------------------------------------------------------
 Phase: SyncProcessor-null(threads:1)
-Average time: 27 ns / iteration
-Minimal time: 27 ns / iteration
-Maximal time: 30 ns / iteration
+Average time: 27 ns/op
+Minimal time: 27 ns/op
+Maximal time: 30 ns/op
 Total time: 55.891 ms
-Total iterations: 2000000
-Iterations throughput: 35783702 / second
+Total operations: 2000000
+Operations throughput: 35783702 ops/s
 -------------------------------------------------------------------------------
 Phase: SyncProcessor-null(threads:2)
-Average time: 22 ns / iteration
-Minimal time: 22 ns / iteration
-Maximal time: 29 ns / iteration
+Average time: 22 ns/op
+Minimal time: 22 ns/op
+Maximal time: 29 ns/op
 Total time: 89.344 ms
-Total iterations: 4000000
-Iterations throughput: 44770342 / second
+Total operations: 4000000
+Operations throughput: 44770342 ops/s
 -------------------------------------------------------------------------------
 Phase: SyncProcessor-null(threads:4)
-Average time: 84 ns / iteration
-Minimal time: 84 ns / iteration
-Maximal time: 92 ns / iteration
+Average time: 84 ns/op
+Minimal time: 84 ns/op
+Maximal time: 92 ns/op
 Total time: 674.796 ms
-Total iterations: 8000000
-Iterations throughput: 11855429 / second
+Total operations: 8000000
+Operations throughput: 11855429 ops/s
 -------------------------------------------------------------------------------
 Phase: SyncProcessor-null(threads:8)
-Average time: 113 ns / iteration
-Minimal time: 113 ns / iteration
-Maximal time: 113 ns / iteration
+Average time: 113 ns/op
+Minimal time: 113 ns/op
+Maximal time: 113 ns/op
 Total time: 1.808 s
-Total iterations: 16000000
-Iterations throughput: 8849109 / second
+Total operations: 16000000
+Operations throughput: 8849109 ops/s
 ===============================================================================
 Benchmark: SyncProcessor-binary
 Attempts: 5
-Iterations: 1000000
+Operations: 1000000
 -------------------------------------------------------------------------------
 Phase: SyncProcessor-binary(threads:1)
-Average time: 74 ns / iteration
-Minimal time: 74 ns / iteration
-Maximal time: 83 ns / iteration
+Average time: 74 ns/op
+Minimal time: 74 ns/op
+Maximal time: 83 ns/op
 Total time: 74.038 ms
-Total iterations: 1000000
-Iterations throughput: 13506405 / second
+Total operations: 1000000
+Operations throughput: 13506405 ops/s
 -------------------------------------------------------------------------------
 Phase: SyncProcessor-binary(threads:2)
-Average time: 123 ns / iteration
-Minimal time: 123 ns / iteration
-Maximal time: 133 ns / iteration
+Average time: 123 ns/op
+Minimal time: 123 ns/op
+Maximal time: 133 ns/op
 Total time: 246.187 ms
-Total iterations: 2000000
-Iterations throughput: 8123893 / second
+Total operations: 2000000
+Operations throughput: 8123893 ops/s
 -------------------------------------------------------------------------------
 Phase: SyncProcessor-binary(threads:4)
-Average time: 205 ns / iteration
-Minimal time: 205 ns / iteration
-Maximal time: 210 ns / iteration
+Average time: 205 ns/op
+Minimal time: 205 ns/op
+Maximal time: 210 ns/op
 Total time: 821.948 ms
-Total iterations: 4000000
-Iterations throughput: 4866485 / second
+Total operations: 4000000
+Operations throughput: 4866485 ops/s
 -------------------------------------------------------------------------------
 Phase: SyncProcessor-binary(threads:8)
-Average time: 276 ns / iteration
-Minimal time: 276 ns / iteration
-Maximal time: 278 ns / iteration
+Average time: 276 ns/op
+Minimal time: 276 ns/op
+Maximal time: 278 ns/op
 Total time: 2.213 s
-Total iterations: 8000000
-Iterations throughput: 3614274 / second
+Total operations: 8000000
+Operations throughput: 3614274 ops/s
 ===============================================================================
 Benchmark: SyncProcessor-text
 Attempts: 5
-Iterations: 1000000
+Operations: 1000000
 -------------------------------------------------------------------------------
 Phase: SyncProcessor-text(threads:1)
-Average time: 177 ns / iteration
-Minimal time: 177 ns / iteration
-Maximal time: 180 ns / iteration
+Average time: 177 ns/op
+Minimal time: 177 ns/op
+Maximal time: 180 ns/op
 Total time: 177.173 ms
-Total iterations: 1000000
-Iterations throughput: 5644200 / second
+Total operations: 1000000
+Operations throughput: 5644200 ops/s
 -------------------------------------------------------------------------------
 Phase: SyncProcessor-text(threads:2)
-Average time: 222 ns / iteration
-Minimal time: 222 ns / iteration
-Maximal time: 241 ns / iteration
+Average time: 222 ns/op
+Minimal time: 222 ns/op
+Maximal time: 241 ns/op
 Total time: 444.429 ms
-Total iterations: 2000000
-Iterations throughput: 4500155 / second
+Total operations: 2000000
+Operations throughput: 4500155 ops/s
 -------------------------------------------------------------------------------
 Phase: SyncProcessor-text(threads:4)
-Average time: 308 ns / iteration
-Minimal time: 308 ns / iteration
-Maximal time: 315 ns / iteration
+Average time: 308 ns/op
+Minimal time: 308 ns/op
+Maximal time: 315 ns/op
 Total time: 1.235 s
-Total iterations: 4000000
-Iterations throughput: 3237170 / second
+Total operations: 4000000
+Operations throughput: 3237170 ops/s
 -------------------------------------------------------------------------------
 Phase: SyncProcessor-text(threads:8)
-Average time: 405 ns / iteration
-Minimal time: 405 ns / iteration
-Maximal time: 409 ns / iteration
+Average time: 405 ns/op
+Minimal time: 405 ns/op
+Maximal time: 409 ns/op
 Total time: 3.242 s
-Total iterations: 8000000
-Iterations throughput: 2467338 / second
+Total operations: 8000000
+Operations throughput: 2467338 ops/s
 ===============================================================================
 ```
 
@@ -921,111 +921,111 @@ UTC timestamp: Wed Sep 28 19:21:13 2016
 ===============================================================================
 Benchmark: AsyncProcessor-null
 Attempts: 5
-Iterations: 1000000
+Operations: 1000000
 -------------------------------------------------------------------------------
 Phase: AsyncProcessor-null(threads:1)
-Average time: 71 ns / iteration
-Minimal time: 71 ns / iteration
-Maximal time: 79 ns / iteration
+Average time: 71 ns/op
+Minimal time: 71 ns/op
+Maximal time: 79 ns/op
 Total time: 143.543 ms
-Total iterations: 2000000
-Iterations throughput: 13933096 / second
+Total operations: 2000000
+Operations throughput: 13933096 ops/s
 -------------------------------------------------------------------------------
 Phase: AsyncProcessor-null(threads:2)
-Average time: 47 ns / iteration
-Minimal time: 47 ns / iteration
-Maximal time: 52 ns / iteration
+Average time: 47 ns/op
+Minimal time: 47 ns/op
+Maximal time: 52 ns/op
 Total time: 191.668 ms
-Total iterations: 4000000
-Iterations throughput: 20869336 / second
+Total operations: 4000000
+Operations throughput: 20869336 ops/s
 -------------------------------------------------------------------------------
 Phase: AsyncProcessor-null(threads:4)
-Average time: 30 ns / iteration
-Minimal time: 30 ns / iteration
-Maximal time: 32 ns / iteration
+Average time: 30 ns/op
+Minimal time: 30 ns/op
+Maximal time: 32 ns/op
 Total time: 244.934 ms
-Total iterations: 8000000
-Iterations throughput: 32661750 / second
+Total operations: 8000000
+Operations throughput: 32661750 ops/s
 -------------------------------------------------------------------------------
 Phase: AsyncProcessor-null(threads:8)
-Average time: 44 ns / iteration
-Minimal time: 44 ns / iteration
-Maximal time: 44 ns / iteration
+Average time: 44 ns/op
+Minimal time: 44 ns/op
+Maximal time: 44 ns/op
 Total time: 704.504 ms
-Total iterations: 16000000
-Iterations throughput: 22710985 / second
+Total operations: 16000000
+Operations throughput: 22710985 ops/s
 ===============================================================================
 Benchmark: AsyncProcessor-binary
 Attempts: 5
-Iterations: 1000000
+Operations: 1000000
 -------------------------------------------------------------------------------
 Phase: AsyncProcessor-binary(threads:1)
-Average time: 130 ns / iteration
-Minimal time: 130 ns / iteration
-Maximal time: 148 ns / iteration
+Average time: 130 ns/op
+Minimal time: 130 ns/op
+Maximal time: 148 ns/op
 Total time: 130.037 ms
-Total iterations: 1000000
-Iterations throughput: 7690098 / second
+Total operations: 1000000
+Operations throughput: 7690098 ops/s
 -------------------------------------------------------------------------------
 Phase: AsyncProcessor-binary(threads:2)
-Average time: 86 ns / iteration
-Minimal time: 86 ns / iteration
-Maximal time: 100 ns / iteration
+Average time: 86 ns/op
+Minimal time: 86 ns/op
+Maximal time: 100 ns/op
 Total time: 172.245 ms
-Total iterations: 2000000
-Iterations throughput: 11611351 / second
+Total operations: 2000000
+Operations throughput: 11611351 ops/s
 -------------------------------------------------------------------------------
 Phase: AsyncProcessor-binary(threads:4)
-Average time: 142 ns / iteration
-Minimal time: 142 ns / iteration
-Maximal time: 148 ns / iteration
+Average time: 142 ns/op
+Minimal time: 142 ns/op
+Maximal time: 148 ns/op
 Total time: 570.112 ms
-Total iterations: 4000000
-Iterations throughput: 7016156 / second
+Total operations: 4000000
+Operations throughput: 7016156 ops/s
 -------------------------------------------------------------------------------
 Phase: AsyncProcessor-binary(threads:8)
-Average time: 138 ns / iteration
-Minimal time: 138 ns / iteration
-Maximal time: 142 ns / iteration
+Average time: 138 ns/op
+Minimal time: 138 ns/op
+Maximal time: 142 ns/op
 Total time: 1.111 s
-Total iterations: 8000000
-Iterations throughput: 7199789 / second
+Total operations: 8000000
+Operations throughput: 7199789 ops/s
 ===============================================================================
 Benchmark: AsyncProcessor-text
 Attempts: 5
-Iterations: 1000000
+Operations: 1000000
 -------------------------------------------------------------------------------
 Phase: AsyncProcessor-text(threads:1)
-Average time: 216 ns / iteration
-Minimal time: 216 ns / iteration
-Maximal time: 241 ns / iteration
+Average time: 216 ns/op
+Minimal time: 216 ns/op
+Maximal time: 241 ns/op
 Total time: 216.754 ms
-Total iterations: 1000000
-Iterations throughput: 4613522 / second
+Total operations: 1000000
+Operations throughput: 4613522 ops/s
 -------------------------------------------------------------------------------
 Phase: AsyncProcessor-text(threads:2)
-Average time: 286 ns / iteration
-Minimal time: 286 ns / iteration
-Maximal time: 311 ns / iteration
+Average time: 286 ns/op
+Minimal time: 286 ns/op
+Maximal time: 311 ns/op
 Total time: 573.699 ms
-Total iterations: 2000000
-Iterations throughput: 3486145 / second
+Total operations: 2000000
+Operations throughput: 3486145 ops/s
 -------------------------------------------------------------------------------
 Phase: AsyncProcessor-text(threads:4)
-Average time: 338 ns / iteration
-Minimal time: 338 ns / iteration
-Maximal time: 343 ns / iteration
+Average time: 338 ns/op
+Minimal time: 338 ns/op
+Maximal time: 343 ns/op
 Total time: 1.352 s
-Total iterations: 4000000
-Iterations throughput: 2957581 / second
+Total operations: 4000000
+Operations throughput: 2957581 ops/s
 -------------------------------------------------------------------------------
 Phase: AsyncProcessor-text(threads:8)
-Average time: 350 ns / iteration
-Minimal time: 350 ns / iteration
-Maximal time: 354 ns / iteration
+Average time: 350 ns/op
+Minimal time: 350 ns/op
+Maximal time: 354 ns/op
 Total time: 2.805 s
-Total iterations: 8000000
-Iterations throughput: 2851072 / second
+Total operations: 8000000
+Operations throughput: 2851072 ops/s
 ===============================================================================
 ```
 
@@ -1054,75 +1054,75 @@ UTC timestamp: Wed Sep 28 19:39:44 2016
 ===============================================================================
 Benchmark: FileSync-binary
 Attempts: 5
-Iterations: 1000000
+Operations: 1000000
 -------------------------------------------------------------------------------
 Phase: FileSync-binary(threads:1)
-Average time: 217 ns / iteration
-Minimal time: 217 ns / iteration
-Maximal time: 241 ns / iteration
+Average time: 217 ns/op
+Minimal time: 217 ns/op
+Maximal time: 241 ns/op
 Total time: 217.972 ms
-Total iterations: 1000000
-Iterations throughput: 4587743 / second
+Total operations: 1000000
+Operations throughput: 4587743 ops/s
 -------------------------------------------------------------------------------
 Phase: FileSync-binary(threads:2)
-Average time: 328 ns / iteration
-Minimal time: 328 ns / iteration
-Maximal time: 349 ns / iteration
+Average time: 328 ns/op
+Minimal time: 328 ns/op
+Maximal time: 349 ns/op
 Total time: 657.976 ms
-Total iterations: 2000000
-Iterations throughput: 3039622 / second
+Total operations: 2000000
+Operations throughput: 3039622 ops/s
 -------------------------------------------------------------------------------
 Phase: FileSync-binary(threads:4)
-Average time: 375 ns / iteration
-Minimal time: 375 ns / iteration
-Maximal time: 399 ns / iteration
+Average time: 375 ns/op
+Minimal time: 375 ns/op
+Maximal time: 399 ns/op
 Total time: 1.500 s
-Total iterations: 4000000
-Iterations throughput: 2666189 / second
+Total operations: 4000000
+Operations throughput: 2666189 ops/s
 -------------------------------------------------------------------------------
 Phase: FileSync-binary(threads:8)
-Average time: 431 ns / iteration
-Minimal time: 431 ns / iteration
-Maximal time: 451 ns / iteration
+Average time: 431 ns/op
+Minimal time: 431 ns/op
+Maximal time: 451 ns/op
 Total time: 3.455 s
-Total iterations: 8000000
-Iterations throughput: 2315052 / second
+Total operations: 8000000
+Operations throughput: 2315052 ops/s
 ===============================================================================
 Benchmark: FileSync-text
 Attempts: 5
-Iterations: 1000000
+Operations: 1000000
 -------------------------------------------------------------------------------
 Phase: FileSync-text(threads:1)
-Average time: 359 ns / iteration
-Minimal time: 359 ns / iteration
-Maximal time: 408 ns / iteration
+Average time: 359 ns/op
+Minimal time: 359 ns/op
+Maximal time: 408 ns/op
 Total time: 359.330 ms
-Total iterations: 1000000
-Iterations throughput: 2782949 / second
+Total operations: 1000000
+Operations throughput: 2782949 ops/s
 -------------------------------------------------------------------------------
 Phase: FileSync-text(threads:2)
-Average time: 473 ns / iteration
-Minimal time: 473 ns / iteration
-Maximal time: 494 ns / iteration
+Average time: 473 ns/op
+Minimal time: 473 ns/op
+Maximal time: 494 ns/op
 Total time: 946.856 ms
-Total iterations: 2000000
-Iterations throughput: 2112253 / second
+Total operations: 2000000
+Operations throughput: 2112253 ops/s
 -------------------------------------------------------------------------------
 Phase: FileSync-text(threads:4)
-Average time: 531 ns / iteration
-Minimal time: 531 ns / iteration
-Maximal time: 579 ns / iteration
+Average time: 531 ns/op
+Minimal time: 531 ns/op
+Maximal time: 579 ns/op
 Total time: 2.127 s
-Total iterations: 4000000
-Iterations throughput: 1880220 / second
+Total operations: 4000000
+Operations throughput: 1880220 ops/s
 -------------------------------------------------------------------------------
 Phase: FileSync-text(threads:8)
-Average time: 700 ns / iteration
-Minimal time: 700 ns / iteration
-Maximal time: 724 ns / iteration
+Average time: 700 ns/op
+Minimal time: 700 ns/op
+Maximal time: 724 ns/op
 Total time: 5.606 s
-Total iterations: 8000000
-Iterations throughput: 1426888 / second
+Total operations: 8000000
+Operations throughput: 1426888 ops/s
 ===============================================================================
 ```
 
@@ -1151,75 +1151,75 @@ UTC timestamp: Wed Sep 28 19:41:46 2016
 ===============================================================================
 Benchmark: FileAsync-binary
 Attempts: 5
-Iterations: 1000000
+Operations: 1000000
 -------------------------------------------------------------------------------
 Phase: FileAsync-binary(threads:1)
-Average time: 131 ns / iteration
-Minimal time: 131 ns / iteration
-Maximal time: 164 ns / iteration
+Average time: 131 ns/op
+Minimal time: 131 ns/op
+Maximal time: 164 ns/op
 Total time: 131.399 ms
-Total iterations: 1000000
-Iterations throughput: 7610405 / second
+Total operations: 1000000
+Operations throughput: 7610405 ops/s
 -------------------------------------------------------------------------------
 Phase: FileAsync-binary(threads:2)
-Average time: 292 ns / iteration
-Minimal time: 292 ns / iteration
-Maximal time: 333 ns / iteration
+Average time: 292 ns/op
+Minimal time: 292 ns/op
+Maximal time: 333 ns/op
 Total time: 584.864 ms
-Total iterations: 2000000
-Iterations throughput: 3419595 / second
+Total operations: 2000000
+Operations throughput: 3419595 ops/s
 -------------------------------------------------------------------------------
 Phase: FileAsync-binary(threads:4)
-Average time: 290 ns / iteration
-Minimal time: 290 ns / iteration
-Maximal time: 322 ns / iteration
+Average time: 290 ns/op
+Minimal time: 290 ns/op
+Maximal time: 322 ns/op
 Total time: 1.161 s
-Total iterations: 4000000
-Iterations throughput: 3442603 / second
+Total operations: 4000000
+Operations throughput: 3442603 ops/s
 -------------------------------------------------------------------------------
 Phase: FileAsync-binary(threads:8)
-Average time: 300 ns / iteration
-Minimal time: 300 ns / iteration
-Maximal time: 324 ns / iteration
+Average time: 300 ns/op
+Minimal time: 300 ns/op
+Maximal time: 324 ns/op
 Total time: 2.407 s
-Total iterations: 8000000
-Iterations throughput: 3322879 / second
+Total operations: 8000000
+Operations throughput: 3322879 ops/s
 ===============================================================================
 Benchmark: FileAsync-text
 Attempts: 5
-Iterations: 1000000
+Operations: 1000000
 -------------------------------------------------------------------------------
 Phase: FileAsync-text(threads:1)
-Average time: 283 ns / iteration
-Minimal time: 283 ns / iteration
-Maximal time: 331 ns / iteration
+Average time: 283 ns/op
+Minimal time: 283 ns/op
+Maximal time: 331 ns/op
 Total time: 283.559 ms
-Total iterations: 1000000
-Iterations throughput: 3526594 / second
+Total operations: 1000000
+Operations throughput: 3526594 ops/s
 -------------------------------------------------------------------------------
 Phase: FileAsync-text(threads:2)
-Average time: 539 ns / iteration
-Minimal time: 539 ns / iteration
-Maximal time: 591 ns / iteration
+Average time: 539 ns/op
+Minimal time: 539 ns/op
+Maximal time: 591 ns/op
 Total time: 1.079 s
-Total iterations: 2000000
-Iterations throughput: 1852223 / second
+Total operations: 2000000
+Operations throughput: 1852223 ops/s
 -------------------------------------------------------------------------------
 Phase: FileAsync-text(threads:4)
-Average time: 521 ns / iteration
-Minimal time: 521 ns / iteration
-Maximal time: 561 ns / iteration
+Average time: 521 ns/op
+Minimal time: 521 ns/op
+Maximal time: 561 ns/op
 Total time: 2.085 s
-Total iterations: 4000000
-Iterations throughput: 1918385 / second
+Total operations: 4000000
+Operations throughput: 1918385 ops/s
 -------------------------------------------------------------------------------
 Phase: FileAsync-text(threads:8)
-Average time: 551 ns / iteration
-Minimal time: 551 ns / iteration
-Maximal time: 576 ns / iteration
+Average time: 551 ns/op
+Minimal time: 551 ns/op
+Maximal time: 576 ns/op
 Total time: 4.415 s
-Total iterations: 8000000
-Iterations throughput: 1811865 / second
+Total operations: 8000000
+Operations throughput: 1811865 ops/s
 ===============================================================================
 ```
 
@@ -1248,75 +1248,75 @@ UTC timestamp: Wed Sep 28 19:54:22 2016
 ===============================================================================
 Benchmark: PreFormat
 Attempts: 5
-Iterations: 1000000
+Operations: 1000000
 -------------------------------------------------------------------------------
 Phase: PreFormat(threads:1)
-Average time: 234 ns / iteration
-Minimal time: 234 ns / iteration
-Maximal time: 245 ns / iteration
+Average time: 234 ns/op
+Minimal time: 234 ns/op
+Maximal time: 245 ns/op
 Total time: 234.626 ms
-Total iterations: 1000000
-Iterations throughput: 4262095 / second
+Total operations: 1000000
+Operations throughput: 4262095 ops/s
 -------------------------------------------------------------------------------
 Phase: PreFormat(threads:2)
-Average time: 419 ns / iteration
-Minimal time: 419 ns / iteration
-Maximal time: 549 ns / iteration
+Average time: 419 ns/op
+Minimal time: 419 ns/op
+Maximal time: 549 ns/op
 Total time: 838.510 ms
-Total iterations: 2000000
-Iterations throughput: 2385182 / second
+Total operations: 2000000
+Operations throughput: 2385182 ops/s
 -------------------------------------------------------------------------------
 Phase: PreFormat(threads:4)
-Average time: 493 ns / iteration
-Minimal time: 493 ns / iteration
-Maximal time: 636 ns / iteration
+Average time: 493 ns/op
+Minimal time: 493 ns/op
+Maximal time: 636 ns/op
 Total time: 1.974 s
-Total iterations: 4000000
-Iterations throughput: 2025957 / second
+Total operations: 4000000
+Operations throughput: 2025957 ops/s
 -------------------------------------------------------------------------------
 Phase: PreFormat(threads:8)
-Average time: 600 ns / iteration
-Minimal time: 600 ns / iteration
-Maximal time: 616 ns / iteration
+Average time: 600 ns/op
+Minimal time: 600 ns/op
+Maximal time: 616 ns/op
 Total time: 4.802 s
-Total iterations: 8000000
-Iterations throughput: 1665872 / second
+Total operations: 8000000
+Operations throughput: 1665872 ops/s
 ===============================================================================
 Benchmark: PostFormat
 Attempts: 5
-Iterations: 1000000
+Operations: 1000000
 -------------------------------------------------------------------------------
 Phase: PostFormat(threads:1)
-Average time: 441 ns / iteration
-Minimal time: 441 ns / iteration
-Maximal time: 489 ns / iteration
+Average time: 441 ns/op
+Minimal time: 441 ns/op
+Maximal time: 489 ns/op
 Total time: 441.860 ms
-Total iterations: 1000000
-Iterations throughput: 2263157 / second
+Total operations: 1000000
+Operations throughput: 2263157 ops/s
 -------------------------------------------------------------------------------
 Phase: PostFormat(threads:2)
-Average time: 681 ns / iteration
-Minimal time: 681 ns / iteration
-Maximal time: 712 ns / iteration
+Average time: 681 ns/op
+Minimal time: 681 ns/op
+Maximal time: 712 ns/op
 Total time: 1.362 s
-Total iterations: 2000000
-Iterations throughput: 1468368 / second
+Total operations: 2000000
+Operations throughput: 1468368 ops/s
 -------------------------------------------------------------------------------
 Phase: PostFormat(threads:4)
-Average time: 684 ns / iteration
-Minimal time: 684 ns / iteration
-Maximal time: 745 ns / iteration
+Average time: 684 ns/op
+Minimal time: 684 ns/op
+Maximal time: 745 ns/op
 Total time: 2.738 s
-Total iterations: 4000000
-Iterations throughput: 1460445 / second
+Total operations: 4000000
+Operations throughput: 1460445 ops/s
 -------------------------------------------------------------------------------
 Phase: PostFormat(threads:8)
-Average time: 821 ns / iteration
-Minimal time: 821 ns / iteration
-Maximal time: 848 ns / iteration
+Average time: 821 ns/op
+Minimal time: 821 ns/op
+Maximal time: 848 ns/op
 Total time: 6.572 s
-Total iterations: 8000000
-Iterations throughput: 1217128 / second
+Total operations: 8000000
+Operations throughput: 1217128 ops/s
 ===============================================================================
 ```
 

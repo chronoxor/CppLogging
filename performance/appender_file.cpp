@@ -10,7 +10,7 @@
 using namespace CppCommon;
 using namespace CppLogging;
 
-const uint64_t iterations = 1000000;
+const uint64_t operations = 1000000;
 
 class BinaryConfigFixture
 {
@@ -46,13 +46,13 @@ protected:
     }
 };
 
-BENCHMARK_FIXTURE(BinaryConfigFixture, "FileAppender-binary", iterations)
+BENCHMARK_FIXTURE(BinaryConfigFixture, "FileAppender-binary", operations)
 {
     static Logger logger = Config::CreateLogger("binary");
     logger.Info("Test message");
 }
 
-BENCHMARK_FIXTURE(TextConfigFixture, "FileAppender-text", iterations)
+BENCHMARK_FIXTURE(TextConfigFixture, "FileAppender-text", operations)
 {
     static Logger logger = Config::CreateLogger("text");
     logger.Info("Test message");

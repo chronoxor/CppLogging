@@ -9,7 +9,7 @@
 
 using namespace CppLogging;
 
-const uint64_t iterations = 1000000;
+const uint64_t operations = 1000000;
 
 class ConsoleConfigFixture
 {
@@ -23,7 +23,7 @@ protected:
     }
 };
 
-BENCHMARK_FIXTURE(ConsoleConfigFixture, "ConsoleAppender", iterations)
+BENCHMARK_FIXTURE(ConsoleConfigFixture, "ConsoleAppender", operations)
 {
     static Logger logger = Config::CreateLogger("test");
     logger.Info("Test message");

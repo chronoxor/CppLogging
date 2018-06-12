@@ -9,7 +9,7 @@
 
 using namespace CppLogging;
 
-const uint64_t iterations = 10000000;
+const uint64_t operations = 10000000;
 
 class BinaryConfigFixture
 {
@@ -35,13 +35,13 @@ protected:
     }
 };
 
-BENCHMARK_FIXTURE(BinaryConfigFixture, "NullAppender-binary", iterations)
+BENCHMARK_FIXTURE(BinaryConfigFixture, "NullAppender-binary", operations)
 {
     static Logger logger = Config::CreateLogger("binary");
     logger.Info("Test message");
 }
 
-BENCHMARK_FIXTURE(TextConfigFixture, "NullAppender-text", iterations)
+BENCHMARK_FIXTURE(TextConfigFixture, "NullAppender-text", operations)
 {
     static Logger logger = Config::CreateLogger("text");
     logger.Info("Test message");

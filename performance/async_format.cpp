@@ -10,8 +10,8 @@
 using namespace CppCommon;
 using namespace CppLogging;
 
-const uint64_t iterations = 1000000;
-const auto settings = CppBenchmark::Settings().Iterations(iterations).ThreadsRange(1, 8, [](int from, int to, int& result) { int r = result; result *= 2; return r; });
+const uint64_t operations = 1000000;
+const auto settings = CppBenchmark::Settings().Operations(operations).ThreadsRange(1, 8, [](int from, int to, int& result) { int r = result; result *= 2; return r; });
 
 class TextConfigFixture
 {
@@ -37,13 +37,13 @@ private:
 BENCHMARK_THREADS_FIXTURE(TextConfigFixture, "PreFormat", settings)
 {
     thread_local Logger logger = Config::CreateLogger("text");
-    logger.Info("Test message {}"_format(context.metrics().total_iterations()).c_str());
+    logger.Info("Test message {}"_format(context.metrics().total_operations()).c_str());
 }
 
 BENCHMARK_THREADS_FIXTURE(TextConfigFixture, "PostFormat", settings)
 {
     thread_local Logger logger = Config::CreateLogger("text");
-    logger.Info("Test message {}", context.metrics().total_iterations());
+    logger.Info("Test message {}", context.metrics().total_operations());
 }
 
 BENCHMARK_MAIN()

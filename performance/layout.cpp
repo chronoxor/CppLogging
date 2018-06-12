@@ -9,9 +9,9 @@
 
 using namespace CppLogging;
 
-const uint64_t iterations = 10000000;
+const uint64_t operations = 10000000;
 
-BENCHMARK("BinaryLayout", iterations)
+BENCHMARK("BinaryLayout", operations)
 {
     static BinaryLayout layout;
     static Record record;
@@ -24,7 +24,7 @@ BENCHMARK("BinaryLayout", iterations)
     context.metrics().AddBytes(record.raw.size());
 }
 
-BENCHMARK("TextLayout", iterations)
+BENCHMARK("TextLayout", operations)
 {
     static TextLayout layout;
     static Record record;
