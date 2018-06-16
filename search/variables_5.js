@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['thread',['thread',['../class_cpp_logging_1_1_record.html#a816e732d29b4dcd29a7f073b40b20738',1,'CppLogging::Record']]],
-  ['timestamp',['timestamp',['../class_cpp_logging_1_1_record.html#acb824eebe901b423004a65d73dd1ce4d',1,'CppLogging::Record']]]
+  ['version',['version',['../namespace_cpp_logging.html#a8bbbfc46fdcba8b729fdf351ee4c8476',1,'CppLogging']]]
 ];

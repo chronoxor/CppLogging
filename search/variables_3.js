@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['message',['message',['../class_cpp_logging_1_1_record.html#a5633a400f28f8b80878eb0979e128668',1,'CppLogging::Record']]]
+  ['raw',['raw',['../class_cpp_logging_1_1_record.html#a53fb6876e9bcb49289e0447ed79d6415',1,'CppLogging::Record']]]
 ];
