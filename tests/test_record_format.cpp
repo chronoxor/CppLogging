@@ -26,8 +26,7 @@ template <typename... Args>
 std::string format(const char* pattern, const Args&... args)
 {
     Record record;
-    record.FormatSerialize(pattern, args...);
-    record.FormatDeserialize();
+    record.Format(pattern, args...);
     return record.message;
 }
 

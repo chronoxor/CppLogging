@@ -15,9 +15,6 @@ namespace CppLogging {
 
 void BinaryLayout::LayoutRecord(Record& record)
 {
-    // Format message of the logging record
-    record.FormatDeserialize();
-
     // Calculate logging record size
     uint32_t size = (uint32_t)(sizeof(uint64_t) + sizeof(uint64_t) + sizeof(Level) + sizeof(uint8_t) + record.logger.size() + sizeof(uint16_t) + record.message.size() + sizeof(uint32_t) + record.buffer.size());
 

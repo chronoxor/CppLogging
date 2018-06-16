@@ -35,7 +35,7 @@ inline void Logger::Log(Level level, const char* message, const Args&... args)
     record.logger = _name;
 
     // Format arguments list
-    record.FormatSerialize(message, args...);
+    record.Format(message, args...);
 
     // Process the logging record
     if (_sink)

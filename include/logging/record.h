@@ -51,8 +51,6 @@ public:
     std::string message;
     //! Buffer of the logging record
     std::vector<uint8_t> buffer;
-    //! Format arguments of the logging record
-    std::vector<uint8_t> format;
 
     //! Record content after layout
     std::vector<uint8_t> raw;
@@ -67,8 +65,7 @@ public:
 
     //! Format message of the logging record
     template <typename... Args>
-    void FormatSerialize(const char* pattern, const Args&... args);
-    void FormatDeserialize();
+    void Format(const char* pattern, const Args&... args);
 
     //! Clear logging record
     void Clear();

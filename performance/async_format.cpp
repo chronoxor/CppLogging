@@ -34,13 +34,7 @@ private:
     File _file;
 };
 
-BENCHMARK_THREADS_FIXTURE(TextConfigFixture, "PreFormat", settings)
-{
-    thread_local Logger logger = Config::CreateLogger("text");
-    logger.Info("Test message {}"_format(context.metrics().total_operations()).c_str());
-}
-
-BENCHMARK_THREADS_FIXTURE(TextConfigFixture, "PostFormat", settings)
+BENCHMARK_THREADS_FIXTURE(TextConfigFixture, "Format", settings)
 {
     thread_local Logger logger = Config::CreateLogger("text");
     logger.Info("Test message {}", context.metrics().total_operations());
