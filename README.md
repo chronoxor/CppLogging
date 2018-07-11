@@ -79,38 +79,38 @@ Optional:
 # How to build?
 
 ## Clone repository with submodules
-```
+```shell
 git clone https://github.com/chronoxor/CppLogging.git CppLogging
 cd CppLogging
 git submodule update --init --recursive --remote
 ```
 
 ## Linux
-```
+```shell
 cd build
 ./unix.sh
 ```
 
 ## OSX
-```
+```shell
 cd build
 ./unix.sh
 ```
 
 ## Windows (Cygwin)
-```
+```shell
 cd build
 cygwin.bat
 ```
 
 ## Windows (MinGW)
-```
+```shell
 cd build
 mingw.bat
 ```
 
 ## Windows (Visual Studio)
-```
+```shell
 cd build
 vs.bat
 ```
@@ -122,7 +122,7 @@ This is the simple example of using default logger. Just link it with
 CppLogging library and you'll get default logger functionality with
 text layout and console appender:
 
-```C++
+```c++
 #include "logging/logger.h"
 
 int main(int argc, char** argv)
@@ -149,7 +149,7 @@ Example will create the following log in console:
 CppLogging library provides powerful logging format API based on the
 [{fmt} library](http://fmtlib.net):
 
-```C++
+```c++
 #include "logging/logger.h"
 
 class Date
@@ -221,7 +221,7 @@ Example will create the following log:
 This example shows how to configure a custom logger with a given name to
 perform logging with a text layout and console appender sink:
 
-```C++
+```c++
 #include "logging/config.h"
 #include "logging/logger.h"
 
@@ -264,7 +264,7 @@ Windows!*
 This example shows how to configure a custom logger with a given name to
 perform logging with a text layout and syslog appender sink:
 
-```C++
+```c++
 #include "logging/config.h"
 #include "logging/logger.h"
 
@@ -304,7 +304,7 @@ int main(int argc, char** argv)
 This example shows how to configure a custom logger with a given name to
 perform logging with a binary layout and file appender sink:
 
-```C++
+```c++
 #include "logging/config.h"
 #include "logging/logger.h"
 
@@ -365,7 +365,7 @@ Supported placeholders:
 - **{Message}** - converted to the log message
 - **{EndLine}** - converted to the end line suffix (e.g. Unix "\n" or Windows "\r\n")
 
-```C++
+```c++
 #include "logging/config.h"
 #include "logging/logger.h"
 
@@ -421,7 +421,7 @@ following placeholders:
 - **{UtcSecond} / {LocalSecond}** - converted to the UTC/local two-digits second (e.g. "30")
 - **{UtcTimezone} / {LocalTimezone}** - converted to the UTC/local timezone suffix (e.g. "Z" / "+0100")
 
-```C++
+```c++
 #include "logging/config.h"
 #include "logging/logger.h"
 
@@ -472,7 +472,7 @@ example.4.log -> example.5.log
 example.5.log -> remove
 ```
 
-```C++
+```c++
 #include "logging/config.h"
 #include "logging/logger.h"
 
@@ -516,7 +516,7 @@ until critical-section is released).
 This example shows how to configure a custom logger with a given name to
 use synchronous processor in multi-thread environment:
 
-```C++
+```c++
 #include "logging/config.h"
 #include "logging/logger.h"
 
@@ -593,7 +593,7 @@ multiple threads at the same time.
 This example shows much better performance with less threads contentions in
 comparison with the previous one for lots of threads:
 
-```C++
+```c++
 #include "logging/config.h"
 #include "logging/logger.h"
 
@@ -1328,7 +1328,7 @@ human-readable text format. By default it reads binary stream from 'stdin' and
 outputs converted text to 'stdout'. However it is possible to provide explicit
 input/output file names using command line arguments:
 
-```
+```shell
 Usage: binlog [options]
 
 Options:
