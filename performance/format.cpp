@@ -8,15 +8,13 @@
 
 using namespace CppLogging;
 
-const uint64_t operations = 10000000;
-
-BENCHMARK("Format(int)", operations)
+BENCHMARK("Format(int)")
 {
     static Record record;
     record.Format("test {} test", context.metrics().total_operations());
 }
 
-BENCHMARK("Format(int, double, string)", operations)
+BENCHMARK("Format(int, double, string)")
 {
     static Record record;
     record.Format("test {}.{}.{} test", context.metrics().total_operations(), context.metrics().total_operations() / 1000.0, context.name());

@@ -9,8 +9,7 @@
 
 using namespace CppLogging;
 
-const uint64_t operations = 1000000;
-const auto settings = CppBenchmark::Settings().Operations(operations).ThreadsRange(1, 8, [](int from, int to, int& result) { int r = result; result *= 2; return r; });
+const auto settings = CppBenchmark::Settings().ThreadsRange(1, 8, [](int from, int to, int& result) { int r = result; result *= 2; return r; });
 
 class NullConfigFixture
 {

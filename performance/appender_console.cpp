@@ -9,8 +9,6 @@
 
 using namespace CppLogging;
 
-const uint64_t operations = 1000000;
-
 class ConsoleConfigFixture
 {
 protected:
@@ -23,7 +21,7 @@ protected:
     }
 };
 
-BENCHMARK_FIXTURE(ConsoleConfigFixture, "ConsoleAppender", operations)
+BENCHMARK_FIXTURE(ConsoleConfigFixture, "ConsoleAppender")
 {
     static Logger logger = Config::CreateLogger("test");
     logger.Info("Test message");

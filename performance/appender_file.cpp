@@ -10,8 +10,6 @@
 using namespace CppCommon;
 using namespace CppLogging;
 
-const uint64_t operations = 1000000;
-
 class BinaryConfigFixture
 {
 protected:
@@ -46,13 +44,13 @@ protected:
     }
 };
 
-BENCHMARK_FIXTURE(BinaryConfigFixture, "FileAppender-binary", operations)
+BENCHMARK_FIXTURE(BinaryConfigFixture, "FileAppender-binary")
 {
     static Logger logger = Config::CreateLogger("binary");
     logger.Info("Test message");
 }
 
-BENCHMARK_FIXTURE(TextConfigFixture, "FileAppender-text", operations)
+BENCHMARK_FIXTURE(TextConfigFixture, "FileAppender-text")
 {
     static Logger logger = Config::CreateLogger("text");
     logger.Info("Test message");
