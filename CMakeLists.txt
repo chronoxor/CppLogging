@@ -39,15 +39,15 @@ if(NOT WIN32)
 endif()
 
 # Temporary disable some warnings
-if(NOT MSVC)
-  set_source_files_properties(${MINIZIP_FILES} PROPERTIES COMPILE_FLAGS "${PEDANTIC_COMPILE_FLAGS} -Wno-shadow -Wno-unused-variable")
-else()
+if(MSVC)
   # C4067: unexpected tokens following preprocessor directive - expected a newline
   # C4131: 'function' : uses old-style declarator
   # C4189: 'identifier' : local variable is initialized but not referenced
   # C4244: 'conversion' conversion from 'type1' to 'type2', possible loss of data
   # C4456: declaration of 'identifier' hides previous local declaration
   set_source_files_properties(${MINIZIP_FILES} PROPERTIES COMPILE_FLAGS "${PEDANTIC_COMPILE_FLAGS} /wd4067 /wd4131 /wd4189 /wd4244 /wd4456")
+else()
+  set_source_files_properties(${MINIZIP_FILES} PROPERTIES COMPILE_FLAGS "${PEDANTIC_COMPILE_FLAGS} -Wno-shadow -Wno-unused-variable")
 endif()
 
 # System directories
