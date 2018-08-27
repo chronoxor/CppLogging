@@ -142,8 +142,7 @@ int main(int argc, char** argv)
 ```
 
 Example will create the following log in console:
-![Default report][default]
-[default]: https://github.com/chronoxor/CppLogging/raw/master/images/default.png "Default report"
+![Default report](https://github.com/chronoxor/CppLogging/raw/master/images/default.png)
 
 ## Example 2: Format with logger
 CppLogging library provides powerful logging format API based on the
