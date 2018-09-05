@@ -618,57 +618,57 @@ private:
         if (placeholder == "UtcDateTime")
             _placeholders.emplace_back(PlaceholderType::UtcDateTime);
         else if (placeholder == "UtcDate")
-            _placeholders.emplace_back(Placeholder(PlaceholderType::UtcDate));
+            _placeholders.emplace_back(PlaceholderType::UtcDate);
         else if (placeholder == "UtcTime")
-            _placeholders.emplace_back(Placeholder(PlaceholderType::UtcTime));
+            _placeholders.emplace_back(PlaceholderType::UtcTime);
         else if (placeholder == "UtcYear")
-            _placeholders.emplace_back(Placeholder(PlaceholderType::UtcYear));
+            _placeholders.emplace_back(PlaceholderType::UtcYear);
         else if (placeholder == "UtcMonth")
-            _placeholders.emplace_back(Placeholder(PlaceholderType::UtcMonth));
+            _placeholders.emplace_back(PlaceholderType::UtcMonth);
         else if (placeholder == "UtcDay")
-            _placeholders.emplace_back(Placeholder(PlaceholderType::UtcDay));
+            _placeholders.emplace_back(PlaceholderType::UtcDay);
         else if (placeholder == "UtcHour")
-            _placeholders.emplace_back(Placeholder(PlaceholderType::UtcHour));
+            _placeholders.emplace_back(PlaceholderType::UtcHour);
         else if (placeholder == "UtcMinute")
-            _placeholders.emplace_back(Placeholder(PlaceholderType::UtcMinute));
+            _placeholders.emplace_back(PlaceholderType::UtcMinute);
         else if (placeholder == "UtcSecond")
-            _placeholders.emplace_back(Placeholder(PlaceholderType::UtcSecond));
+            _placeholders.emplace_back(PlaceholderType::UtcSecond);
         else if (placeholder == "UtcTimezone")
-            _placeholders.emplace_back(Placeholder(PlaceholderType::UtcTimezone));
+            _placeholders.emplace_back(PlaceholderType::UtcTimezone);
         else if (placeholder == "LocalDateTime")
-            _placeholders.emplace_back(Placeholder(PlaceholderType::LocalDateTime));
+            _placeholders.emplace_back(PlaceholderType::LocalDateTime);
         else if (placeholder == "LocalDate")
-            _placeholders.emplace_back(Placeholder(PlaceholderType::LocalDate));
+            _placeholders.emplace_back(PlaceholderType::LocalDate);
         else if (placeholder == "LocalTime")
-            _placeholders.emplace_back(Placeholder(PlaceholderType::LocalTime));
+            _placeholders.emplace_back(PlaceholderType::LocalTime);
         else if (placeholder == "LocalYear")
-            _placeholders.emplace_back(Placeholder(PlaceholderType::LocalYear));
+            _placeholders.emplace_back(PlaceholderType::LocalYear);
         else if (placeholder == "LocalMonth")
-            _placeholders.emplace_back(Placeholder(PlaceholderType::LocalMonth));
+            _placeholders.emplace_back(PlaceholderType::LocalMonth);
         else if (placeholder == "LocalDay")
-            _placeholders.emplace_back(Placeholder(PlaceholderType::LocalDay));
+            _placeholders.emplace_back(PlaceholderType::LocalDay);
         else if (placeholder == "LocalHour")
-            _placeholders.emplace_back(Placeholder(PlaceholderType::LocalHour));
+            _placeholders.emplace_back(PlaceholderType::LocalHour);
         else if (placeholder == "LocalMinute")
-            _placeholders.emplace_back(Placeholder(PlaceholderType::LocalMinute));
+            _placeholders.emplace_back(PlaceholderType::LocalMinute);
         else if (placeholder == "LocalSecond")
-            _placeholders.emplace_back(Placeholder(PlaceholderType::LocalSecond));
+            _placeholders.emplace_back(PlaceholderType::LocalSecond);
         else if (placeholder == "LocalTimezone")
-            _placeholders.emplace_back(Placeholder(PlaceholderType::LocalTimezone));
+            _placeholders.emplace_back(PlaceholderType::LocalTimezone);
         else if (placeholder == "Millisecond")
-            _placeholders.emplace_back(Placeholder(PlaceholderType::Millisecond));
+            _placeholders.emplace_back(PlaceholderType::Millisecond);
         else if (placeholder == "Microsecond")
-            _placeholders.emplace_back(Placeholder(PlaceholderType::Microsecond));
+            _placeholders.emplace_back(PlaceholderType::Microsecond);
         else if (placeholder == "Nanosecond")
-            _placeholders.emplace_back(Placeholder(PlaceholderType::Nanosecond));
+            _placeholders.emplace_back(PlaceholderType::Nanosecond);
         else if (placeholder == "Thread")
-            _placeholders.emplace_back(Placeholder(PlaceholderType::Thread));
+            _placeholders.emplace_back(PlaceholderType::Thread);
         else if (placeholder == "Level")
-            _placeholders.emplace_back(Placeholder(PlaceholderType::Level));
+            _placeholders.emplace_back(PlaceholderType::Level);
         else if (placeholder == "Logger")
-            _placeholders.emplace_back(Placeholder(PlaceholderType::Logger));
+            _placeholders.emplace_back(PlaceholderType::Logger);
         else if (placeholder == "Message")
-            _placeholders.emplace_back(Placeholder(PlaceholderType::Message));
+            _placeholders.emplace_back(PlaceholderType::Message);
         else if (placeholder == "EndLine")
             AppendPattern(CppCommon::Environment::EndLine());
         else
