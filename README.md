@@ -18,13 +18,6 @@ processors (sync, async), filters, layouts (binary, text) and appenders.
   * [Features](#features)
   * [Requirements](#requirements)
   * [How to build?](#how-to-build)
-    * [Clone repository with submodules](#clone-repository-with-submodules)
-    * [Linux](#linux)
-    * [OSX](#osx)
-    * [Windows (Cygwin)](#windows-cygwin)
-    * [Windows (MinGW)](#windows-mingw)
-    * [Windows (MinGW with MSYS)](#windows-mingw-with-msys)
-    * [Windows (Visual Studio)](#windows-visual-studio)
   * [Logging examples](#logging-examples)
     * [Example 1: Default logger](#example-1-default-logger)
     * [Example 2: Format with logger](#example-2-format-with-logger)
@@ -78,38 +71,38 @@ Optional:
 
 # How to build?
 
-## Clone repository with submodules
+### Clone repository with submodules
 ```shell
 git clone https://github.com/chronoxor/CppLogging.git
 cd CppLogging
 git submodule update --init --recursive --remote
 ```
 
-## Linux
+### Linux
 ```shell
 cd build
 ./unix.sh
 ```
 
-## OSX
+### OSX
 ```shell
 cd build
 ./unix.sh
 ```
 
-## Windows (Cygwin)
+### Windows (Cygwin)
 ```shell
 cd build
 cygwin.bat
 ```
 
-## Windows (MinGW)
+### Windows (MinGW)
 ```shell
 cd build
 mingw.bat
 ```
 
-## Windows (Visual Studio)
+### Windows (Visual Studio)
 ```shell
 cd build
 vs.bat
