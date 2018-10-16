@@ -7,7 +7,7 @@
 [![Windows build status](https://img.shields.io/appveyor/ci/chronoxor/CppLogging/master.svg?label=Windows)](https://ci.appveyor.com/project/chronoxor/CppLogging)
 
 C++ Logging Library provides functionality to log different events with a high
-throughput in multi-thread environment into different sinks (console, files,
+throughput in multithreaded environment into different sinks (console, files,
 rolling files, syslog, etc.). Logging configuration is very flexible and gives
 functionality to build flexible logger hierarchy with combination of logging
 processors (sync, async), filters, layouts (binary, text) and appenders.
@@ -27,8 +27,8 @@ processors (sync, async), filters, layouts (binary, text) and appenders.
     * [Example 6: Configure logger with custom text layout pattern](#example-6-configure-logger-with-custom-text-layout-pattern)
     * [Example 7: Configure rolling file appender with time-based policy](#example-7-configure-rolling-file-appender-with-time-based-policy)
     * [Example 8: Configure rolling file appender with size-based policy](#example-8-configure-rolling-file-appender-with-size-based-policy)
-    * [Example 9: Multi-thread logging with synchronous processor](#example-9-multi-thread-logging-with-synchronous-processor)
-    * [Example 10: Multi-thread logging with asynchronous processor](#example-10-multi-thread-logging-with-asynchronous-processor)
+    * [Example 9: Multithreaded logging with synchronous processor](#example-9-multithreaded-logging-with-synchronous-processor)
+    * [Example 10: Multithreaded logging with asynchronous processor](#example-10-multithreaded-logging-with-asynchronous-processor)
   * [Logging benchmarks](#logging-benchmarks)
     * [Benchmark 1: Null appender](#benchmark-1-null-appender)
     * [Benchmark 2: File appender](#benchmark-2-file-appender)
@@ -500,13 +500,13 @@ int main(int argc, char** argv)
 }
 ```
 
-## Example 9: Multi-thread logging with synchronous processor
+## Example 9: Multithreaded logging with synchronous processor
 Synchronous processor uses critical-section lock to avoid multiple
 threads from logging at the same time (logging threads are waiting
 until critical-section is released).
 
 This example shows how to configure a custom logger with a given name to
-use synchronous processor in multi-thread environment:
+use synchronous processor in multithreaded environment:
 
 ```c++
 #include "logging/config.h"
@@ -578,7 +578,7 @@ int main(int argc, char** argv)
 }
 ```
 
-## Example 10: Multi-thread logging with asynchronous processor
+## Example 10: Multithreaded logging with asynchronous processor
 Asynchronous processor uses lock-free queue to collect logging records from
 multiple threads at the same time.
 
