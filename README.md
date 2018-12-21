@@ -57,7 +57,7 @@ processors (sync, async), filters, layouts (binary, text) and appenders.
 # Requirements
 * Linux (gcc g++ cmake doxygen graphviz binutils-dev uuid-dev)
 * OSX (clang cmake doxygen graphviz)
-* Windows 7 / Windows 10
+* Windows 10
 * [cmake](https://www.cmake.org)
 * [git](https://git-scm.com)
 * [gcc](https://gcc.gnu.org)
