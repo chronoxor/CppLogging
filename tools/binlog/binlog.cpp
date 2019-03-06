@@ -97,8 +97,8 @@ int main(int argc, char** argv)
 {
     auto parser = optparse::OptionParser().version(version);
 
-    parser.add_option("-i", "--input").help("Input file name");
-    parser.add_option("-o", "--output").help("Output file name");
+    parser.add_option("-i", "--input").dest("input").help("Input file name");
+    parser.add_option("-o", "--output").dest("output").help("Output file name");
 
     optparse::Values options = parser.parse_args(argc, argv);
 
