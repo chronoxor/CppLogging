@@ -60,7 +60,9 @@ bool AsyncProcessor::EnqueueRecord(bool discard_on_overflow, Record& record)
 void AsyncProcessor::ProcessBufferedRecords(const std::function<void ()>& on_thread_initialize, const std::function<void ()>& on_thread_clenup)
 {
     // Call the thread initialize handler
-    on_thread_initialize();
+    assert((on_thread_initialize) && "Thread initialize handler must be valid!");
+    if (on_thread_initialize)
+        on_thread_initialize();
 
     try
     {
@@ -95,7 +97,9 @@ void AsyncProcessor::ProcessBufferedRecords(const std::function<void ()>& on_thr
     }
 
     // Call the thread cleanup handler
-    on_thread_clenup();
+    assert((on_thread_clenup) && "Thread cleanup handler must be valid!");
+    if (on_thread_clenup)
+        on_thread_clenup();
 }
 
 void AsyncProcessor::Flush()
