@@ -35,11 +35,11 @@ public:
     //! Initialize asynchronous processor with the given overflow policy and buffer capacity
     /*!
          \param discard_on_overflow - Discard logging records on buffer overflow or block and wait (default is false)
-         \param capacity - Buffer capacity in logging records (default is 4096)
+         \param capacity - Buffer capacity in logging records (default is 8192)
          \param on_thread_initialize - Thread initialize handler can be used to initialize priority or affinity of the logging thread (default does nothing)
          \param on_thread_clenup - Thread cleanup handler can be used to cleanup priority or affinity of the logging thread (default does nothing)
     */
-    explicit AsyncProcessor(bool discard_on_overflow = false, size_t capacity = 4096, const std::function<void ()>& on_thread_initialize = [](){}, const std::function<void ()>& on_thread_clenup = [](){});
+    explicit AsyncProcessor(bool discard_on_overflow = false, size_t capacity = 8192, const std::function<void ()>& on_thread_initialize = [](){}, const std::function<void ()>& on_thread_clenup = [](){});
     AsyncProcessor(const AsyncProcessor&) = delete;
     AsyncProcessor(AsyncProcessor&&) = default;
     virtual ~AsyncProcessor();

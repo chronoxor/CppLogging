@@ -31,9 +31,9 @@ public:
     //! Initialize buffered processor with the given limit and capacity
     /*!
          \param limit - Buffer limit in logging records (default is 65536)
-         \param capacity - Buffer initial capacity in logging records (default is 4096)
+         \param capacity - Buffer initial capacity in logging records (default is 8192)
     */
-    explicit BufferedProcessor(size_t limit = 65536, size_t capacity = 4096) : _limit(limit)
+    explicit BufferedProcessor(size_t limit = 65536, size_t capacity = 8192) : _limit(limit)
     { _buffer.reserve(capacity); }
     BufferedProcessor(const BufferedProcessor&) = delete;
     BufferedProcessor(BufferedProcessor&&) noexcept = default;
