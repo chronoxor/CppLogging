@@ -38,6 +38,13 @@ public:
     Logger& operator=(const Logger&) = default;
     Logger& operator=(Logger&&) = default;
 
+    //! Log debug message
+    /*!
+         Will log only in debug mode!
+
+         \param debug - Debug message
+    */
+    void Debug(const std::string& debug) { Debug(debug.c_str()); }
     //! Log debug message with format arguments
     /*!
          Will log only in debug mode!
@@ -48,6 +55,11 @@ public:
     template <typename... Args>
     void Debug(const char* debug, const Args&... args);
 
+    //! Log information message
+    /*!
+         \param info - Information message
+    */
+    void Info(const std::string& info) { Info(Info.c_str()); }
     //! Log information message with format arguments
     /*!
          \param info - Information message
@@ -56,6 +68,11 @@ public:
     template <typename... Args>
     void Info(const char* info, const Args&... args);
 
+    //! Log warning message
+    /*!
+         \param warn - Warning message
+    */
+    void Warn(const std::string& warn) { Warn(warn.c_str()); }
     //! Log warning message with format arguments
     /*!
          \param warn - Warning message
@@ -64,6 +81,11 @@ public:
     template <typename... Args>
     void Warn(const char* warn, const Args&... args);
 
+    //! Log error message
+    /*!
+         \param error - Error message
+    */
+    void Error(const std::string& error) { Error(error.c_str()); }
     //! Log error message with format arguments
     /*!
          \param error - Error message
@@ -72,6 +94,11 @@ public:
     template <typename... Args>
     void Error(const char* error, const Args&... args);
 
+    //! Log fatal message
+    /*!
+         \param fatal - Fatal message
+    */
+    void Fatal(const std::string& fatal) { Fatal(fatal.c_str()); }
     //! Log fatal message with format arguments
     /*!
          \param fatal - Fatal message
