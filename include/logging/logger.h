@@ -59,7 +59,7 @@ public:
     /*!
          \param info - Information message
     */
-    void Info(const std::string& info) { Info(Info.c_str()); }
+    void Info(const std::string& info) { Info(info.c_str()); }
     //! Log information message with format arguments
     /*!
          \param info - Information message

@@ -744,6 +744,9 @@ private:
             }
         }
 
+        // Create directory tree
+        CppCommon::Directory::CreateTree(_path);
+
         return CppCommon::Path(_path / filename);
     }
 
