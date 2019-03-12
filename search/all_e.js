@@ -7,7 +7,7 @@ var searchData=
   ['switch_5ffilter_2ecpp',['switch_filter.cpp',['../switch__filter_8cpp.html',1,'']]],
   ['switch_5ffilter_2eh',['switch_filter.h',['../switch__filter_8h.html',1,'']]],
   ['switchfilter',['SwitchFilter',['../class_cpp_logging_1_1_switch_filter.html',1,'CppLogging']]],
-  ['switchfilter',['SwitchFilter',['../class_cpp_logging_1_1_switch_filter.html#a7e6dda5d4915133fa522e46fd3fdb693',1,'CppLogging::SwitchFilter::SwitchFilter(bool enabled)'],['../class_cpp_logging_1_1_switch_filter.html#ab60c21d0a9cb0e2172bc11a55e02e36f',1,'CppLogging::SwitchFilter::SwitchFilter(const SwitchFilter &amp;)=delete'],['../class_cpp_logging_1_1_switch_filter.html#ae751fbd2eefe4261565c059857bcd48a',1,'CppLogging::SwitchFilter::SwitchFilter(SwitchFilter &amp;&amp;) noexcept=default']]],
+  ['switchfilter',['SwitchFilter',['../class_cpp_logging_1_1_switch_filter.html#a7e6dda5d4915133fa522e46fd3fdb693',1,'CppLogging::SwitchFilter::SwitchFilter(bool enabled)'],['../class_cpp_logging_1_1_switch_filter.html#ab60c21d0a9cb0e2172bc11a55e02e36f',1,'CppLogging::SwitchFilter::SwitchFilter(const SwitchFilter &amp;)=delete'],['../class_cpp_logging_1_1_switch_filter.html#abcf775ee943e94786643f3c14c616c11',1,'CppLogging::SwitchFilter::SwitchFilter(SwitchFilter &amp;&amp;)=default']]],
   ['sync_5fprocessor_2ecpp',['sync_processor.cpp',['../sync__processor_8cpp.html',1,'']]],
   ['sync_5fprocessor_2eh',['sync_processor.h',['../sync__processor_8h.html',1,'']]],
   ['syncprocessor',['SyncProcessor',['../class_cpp_logging_1_1_sync_processor.html',1,'CppLogging']]],
