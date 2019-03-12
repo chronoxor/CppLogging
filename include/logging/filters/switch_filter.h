@@ -30,11 +30,11 @@ public:
     */
     explicit SwitchFilter(bool enabled) { Update(enabled); }
     SwitchFilter(const SwitchFilter&) = delete;
-    SwitchFilter(SwitchFilter&&) noexcept = default;
+    SwitchFilter(SwitchFilter&&) = default;
     virtual ~SwitchFilter() = default;
 
     SwitchFilter& operator=(const SwitchFilter&) = delete;
-    SwitchFilter& operator=(SwitchFilter&&) noexcept = default;
+    SwitchFilter& operator=(SwitchFilter&&) = default;
 
     //! Get the filter enabled flag
     bool enabled() const noexcept { return _enabled; }

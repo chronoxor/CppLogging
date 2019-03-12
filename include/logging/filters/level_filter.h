@@ -37,11 +37,11 @@ public:
     */
     explicit LevelFilter(Level from, Level to) { Update(from, to); }
     LevelFilter(const LevelFilter&) = delete;
-    LevelFilter(LevelFilter&&) noexcept = default;
+    LevelFilter(LevelFilter&&) = default;
     virtual ~LevelFilter() = default;
 
     LevelFilter& operator=(const LevelFilter&) = delete;
-    LevelFilter& operator=(LevelFilter&&) noexcept = default;
+    LevelFilter& operator=(LevelFilter&&) = default;
 
     //! Get Level from value
     Level from() const noexcept { return _from; }
