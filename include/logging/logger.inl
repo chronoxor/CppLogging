@@ -34,6 +34,11 @@ inline void Logger::Log(Level level, const char* message, const Args&... args)
     record.level = level;
     record.logger = _name;
 
+    // Filter the logging record
+    if (_sink)
+        if (!_sink->FilterRecord(record))
+            return;
+
     // Format arguments list
     record.Format(message, args...);
 

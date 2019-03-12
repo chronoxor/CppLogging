@@ -16,10 +16,8 @@
 
 void ConfigureLogger()
 {
-    // Create default logging sink processor
-    auto sink = std::make_shared<CppLogging::SyncProcessor>();
-    // Add binary layout
-    sink->layouts().push_back(std::make_shared<CppLogging::BinaryLayout>());
+    // Create default logging sink processor with a binary layout
+    auto sink = std::make_shared<CppLogging::SyncProcessor>(std::make_shared<CppLogging::BinaryLayout>());
     // Add file appender with size-based rolling policy and archivation
     sink->appenders().push_back(std::make_shared<CppLogging::RollingFileAppender>(".", "rolling", "bin.log", 4096, 9, true));
 

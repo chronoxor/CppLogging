@@ -11,10 +11,8 @@
 
 void ConfigureLogger()
 {
-    // Create default logging sink processor
-    auto sink = std::make_shared<CppLogging::Processor>();
-    // Add binary layout
-    sink->layouts().push_back(std::make_shared<CppLogging::BinaryLayout>());
+    // Create default logging sink processor with a binary layout
+    auto sink = std::make_shared<CppLogging::Processor>(std::make_shared<CppLogging::BinaryLayout>());
     // Add file appender
     sink->appenders().push_back(std::make_shared<CppLogging::FileAppender>(CppCommon::File("file.bin.log")));
 

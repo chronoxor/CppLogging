@@ -48,8 +48,7 @@ Logger Config::CreateLogger()
         return Logger(it->first, it->second);
     else
     {
-        auto sink = std::make_shared<Processor>();
-        sink->layouts().push_back(std::make_shared<TextLayout>());
+        auto sink = std::make_shared<Processor>(std::make_shared<TextLayout>());
         sink->appenders().push_back(std::make_shared<ConsoleAppender>());
         instance._config[""] = sink;
         return Logger("", sink);

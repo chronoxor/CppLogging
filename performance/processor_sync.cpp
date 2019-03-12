@@ -16,7 +16,7 @@ class NullConfigFixture
 protected:
     NullConfigFixture()
     {
-        auto null_sink = std::make_shared<SyncProcessor>();
+        auto null_sink = std::make_shared<SyncProcessor>(std::make_shared<NullLayout>());
         null_sink->appenders().push_back(std::make_shared<NullAppender>());
         Config::ConfigLogger("null", null_sink);
     }
@@ -27,8 +27,7 @@ class BinaryConfigFixture
 protected:
     BinaryConfigFixture()
     {
-        auto binary_sink = std::make_shared<SyncProcessor>();
-        binary_sink->layouts().push_back(std::make_shared<BinaryLayout>());
+        auto binary_sink = std::make_shared<SyncProcessor>(std::make_shared<BinaryLayout>());
         binary_sink->appenders().push_back(std::make_shared<NullAppender>());
         Config::ConfigLogger("binary", binary_sink);
     }
@@ -39,8 +38,7 @@ class TextConfigFixture
 protected:
     TextConfigFixture()
     {
-        auto text_sink = std::make_shared<SyncProcessor>();
-        text_sink->layouts().push_back(std::make_shared<TextLayout>());
+        auto text_sink = std::make_shared<SyncProcessor>(std::make_shared<TextLayout>());
         text_sink->appenders().push_back(std::make_shared<NullAppender>());
         Config::ConfigLogger("text", text_sink);
     }

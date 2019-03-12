@@ -37,6 +37,9 @@ public:
     MessageFilter& operator=(const MessageFilter&) = delete;
     MessageFilter& operator=(MessageFilter&&) noexcept = default;
 
+    //! Get the message regular expression pattern
+    const std::regex& pattern() const noexcept { return _pattern; }
+
     // Implementation of Filter
     bool FilterRecord(Record& record) override;
 

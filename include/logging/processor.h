@@ -29,7 +29,11 @@ namespace CppLogging {
 class Processor
 {
 public:
-    Processor() = default;
+    //! Initialize logging processor with a given layout interface
+    /*!
+         \param layout - Logging layout interface
+    */
+    explicit Processor(const std::shared_ptr<Layout>& layout) : _layout(layout) {}
     Processor(const Processor&) = default;
     Processor(Processor&&) noexcept = default;
     virtual ~Processor();
@@ -37,14 +41,21 @@ public:
     Processor& operator=(const Processor&) = default;
     Processor& operator=(Processor&&) noexcept = default;
 
+    //! Get the logging processor layout
+    std::shared_ptr<Layout>& layout() noexcept { return _layout; }
     //! Get collection of child filters
     std::vector<std::shared_ptr<Filter>>& filters() noexcept { return _filters; }
-    //! Get collection of child layouts
-    std::vector<std::shared_ptr<Layout>>& layouts() noexcept { return _layouts; }
     //! Get collection of child appenders
     std::vector<std::shared_ptr<Appender>>& appenders() noexcept { return _appenders; }
     //! Get collection of child processors
     std::vector<std::shared_ptr<Processor>>& processors() noexcept { return _processors; }
+
+    //! Filter the given logging record
+    /*!
+         \param record - Logging record
+         \return 'true' if the logging record should be processed, 'false' if the logging record was filtered out
+    */
+    virtual bool FilterRecord(Record& record);
 
     //! Process the given logging record through all child filters, layouts and appenders
     /*!
@@ -69,8 +80,8 @@ public:
     virtual void Flush();
 
 private:
+    std::shared_ptr<Layout> _layout;
     std::vector<std::shared_ptr<Filter>> _filters;
-    std::vector<std::shared_ptr<Layout>> _layouts;
     std::vector<std::shared_ptr<Appender>> _appenders;
     std::vector<std::shared_ptr<Processor>> _processors;
 };

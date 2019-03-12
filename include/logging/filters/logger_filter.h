@@ -37,6 +37,9 @@ public:
     LoggerFilter& operator=(const LoggerFilter&) = delete;
     LoggerFilter& operator=(LoggerFilter&&) noexcept = default;
 
+    //! Get the logger regular expression pattern
+    const std::regex& pattern() const noexcept { return _pattern; }
+
     // Implementation of Filter
     bool FilterRecord(Record& record) override;
 

@@ -11,10 +11,8 @@
 
 void ConfigureLogger()
 {
-    // Create default logging sink processor
-    auto sink = std::make_shared<CppLogging::Processor>();
-    // Add text layout
-    sink->layouts().push_back(std::make_shared<CppLogging::TextLayout>());
+    // Create default logging sink processor with a text layout
+    auto sink = std::make_shared<CppLogging::Processor>(std::make_shared<CppLogging::TextLayout>());
     // Add console appender
     sink->appenders().push_back(std::make_shared<CppLogging::ConsoleAppender>());
 

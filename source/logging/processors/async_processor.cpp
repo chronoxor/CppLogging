@@ -13,8 +13,9 @@
 
 namespace CppLogging {
 
-AsyncProcessor::AsyncProcessor(bool discard_on_overflow, size_t capacity, const std::function<void ()>& on_thread_initialize, const std::function<void ()>& on_thread_clenup)
-    : _discard_on_overflow(discard_on_overflow),
+AsyncProcessor::AsyncProcessor(const std::shared_ptr<Layout>& layout, bool discard_on_overflow, size_t capacity, const std::function<void ()>& on_thread_initialize, const std::function<void ()>& on_thread_clenup)
+    : Processor(layout),
+      _discard_on_overflow(discard_on_overflow),
       _buffer(capacity)
 {
     // Start processing thread

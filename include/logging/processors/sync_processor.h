@@ -26,7 +26,11 @@ namespace CppLogging {
 class SyncProcessor : public Processor
 {
 public:
-    SyncProcessor() = default;
+    //! Initialize synchronous logging processor with a given layout interface
+    /*!
+         \param layout - Logging layout interface
+    */
+    explicit SyncProcessor(const std::shared_ptr<Layout>& layout) : Processor(layout) {}
     SyncProcessor(const SyncProcessor&) = delete;
     SyncProcessor(SyncProcessor&&) noexcept = default;
     virtual ~SyncProcessor() = default;

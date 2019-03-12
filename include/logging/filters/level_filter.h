@@ -11,6 +11,8 @@
 
 #include "logging/filter.h"
 
+#include <atomic>
+
 namespace CppLogging {
 
 //! Level filter
@@ -27,13 +29,13 @@ public:
     /*!
          \param level - Level value
     */
-    explicit LevelFilter(Level level) : _from(level), _to(level) {}
+    explicit LevelFilter(Level level) { Update(level); }
     //! Initialize level filter with a given level range
     /*!
          \param from - Level from value
          \param to - Level to value
     */
-    explicit LevelFilter(Level from, Level to) : _from(from), _to(to) {}
+    explicit LevelFilter(Level from, Level to) { Update(from, to); }
     LevelFilter(const LevelFilter&) = delete;
     LevelFilter(LevelFilter&&) noexcept = default;
     virtual ~LevelFilter() = default;
@@ -41,12 +43,29 @@ public:
     LevelFilter& operator=(const LevelFilter&) = delete;
     LevelFilter& operator=(LevelFilter&&) noexcept = default;
 
+    //! Get Level from value
+    Level from() const noexcept { return _from; }
+    //! Get Level to value
+    Level to() const noexcept { return _to; }
+
+    //! Update level filter with a given level value
+    /*!
+         \param level - Level value
+    */
+    void Update(Level level);
+    //! Update level filter with a given level range
+    /*!
+         \param from - Level from value
+         \param to - Level to value
+    */
+    void Update(Level from, Level to);
+
     // Implementation of Filter
     bool FilterRecord(Record& record) override;
 
 private:
-    Level _from;
-    Level _to;
+    std::atomic<Level> _from;
+    std::atomic<Level> _to;
 };
 
 } // namespace CppLogging

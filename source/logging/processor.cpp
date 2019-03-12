@@ -12,33 +12,45 @@ namespace CppLogging {
 
 Processor::~Processor()
 {
-	// Flush all appenders
-	for (auto& appender : _appenders)
-		appender->Flush();
+    // Flush all appenders
+    for (auto& appender : _appenders)
+        if (appender)
+            appender->Flush();
 
-	// Flush all sub processors
-	for (auto& processor : _processors)
-		processor->Flush();
+    // Flush all sub processors
+    for (auto& processor : _processors)
+        if (processor)
+            processor->Flush();
+}
+
+bool Processor::FilterRecord(Record& record)
+{
+    // Filter the given logging record
+    for (auto& filter : _filters)
+        if (filter && !filter->FilterRecord(record))
+            return false;
+
+    return true;
 }
 
 bool Processor::ProcessRecord(Record& record)
 {
     // Filter the given logging record
-    for (auto& filter : _filters)
-        if (!filter->FilterRecord(record))
-            return false;
+    if (!FilterRecord(record))
+        return false;
 
     // Layout the given logging record
-    for (auto& layout : _layouts)
-        layout->LayoutRecord(record);
+    if (_layout)
+        _layout->LayoutRecord(record);
 
     // Append the given logging record
     for (auto& appender : _appenders)
-        appender->AppendRecord(record);
+        if (appender)
+            appender->AppendRecord(record);
 
     // Process the given logging record with sub processors
     for (auto& processor : _processors)
-        if (!processor->ProcessRecord(record))
+        if (processor && !processor->ProcessRecord(record))
             return false;
 
     return true;
@@ -48,11 +60,13 @@ void Processor::Flush()
 {
     // Flush all appenders
     for (auto& appender : _appenders)
-        appender->Flush();
+        if (appender)
+            appender->Flush();
 
     // Flush all sub processors
     for (auto& processor : _processors)
-        processor->Flush();
+        if (processor)
+            processor->Flush();
 }
 
 } // namespace CppLogging

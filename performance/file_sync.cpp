@@ -17,8 +17,7 @@ class BinaryConfigFixture
 protected:
     BinaryConfigFixture()
     {
-        auto binary_sink = std::make_shared<SyncProcessor>();
-        binary_sink->layouts().push_back(std::make_shared<BinaryLayout>());
+        auto binary_sink = std::make_shared<SyncProcessor>(std::make_shared<BinaryLayout>());
         binary_sink->appenders().push_back(std::make_shared<FileAppender>(File("test.bin.log")));
         Config::ConfigLogger("binary", binary_sink);
     }
@@ -34,8 +33,7 @@ class TextConfigFixture
 protected:
     TextConfigFixture()
     {
-        auto text_sink = std::make_shared<SyncProcessor>();
-        text_sink->layouts().push_back(std::make_shared<TextLayout>());
+        auto text_sink = std::make_shared<SyncProcessor>(std::make_shared<TextLayout>());
         text_sink->appenders().push_back(std::make_shared<FileAppender>(File("test.log")));
         Config::ConfigLogger("text", text_sink);
     }
