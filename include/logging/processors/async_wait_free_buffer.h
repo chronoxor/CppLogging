@@ -1,13 +1,13 @@
 /*!
-    \file async_buffer.h
-    \brief Asynchronous logging buffer definition
+    \file async_wait_free_buffer.h
+    \brief Asynchronous wait-free logging buffer definition
     \author Ivan Shynkarenka
     \date 04.08.2016
     \copyright MIT License
 */
 
-#ifndef CPPLOGGING_PROCESSORS_ASYNC_BUFFER_H
-#define CPPLOGGING_PROCESSORS_ASYNC_BUFFER_H
+#ifndef CPPLOGGING_PROCESSORS_ASYNC_WAIT_FREE_BUFFER_H
+#define CPPLOGGING_PROCESSORS_ASYNC_WAIT_FREE_BUFFER_H
 
 #include "logging/record.h"
 
@@ -19,7 +19,7 @@
 
 namespace CppLogging {
 
-//! Asynchronous logging buffer
+//! Asynchronous wait-free logging buffer
 /*!
     Multiple producers / multiple consumers wait-free ring buffer use only atomic operations to provide thread-safe
     enqueue and dequeue operations. Ring buffer size is limited to the capacity provided in the constructor.
@@ -29,20 +29,20 @@ namespace CppLogging {
     C++ implementation of Dmitry Vyukov's non-intrusive lock free unbound MPSC queue
     http://www.1024cores.net/home/lock-free-algorithms/queues/non-intrusive-mpsc-node-based-queue
 */
-class AsyncBuffer
+class AsyncWaitFreeBuffer
 {
 public:
     //! Default class constructor
     /*!
         \param capacity - Ring buffer capacity (must be a power of two)
     */
-    explicit AsyncBuffer(size_t capacity);
-    AsyncBuffer(const AsyncBuffer&) = delete;
-    AsyncBuffer(AsyncBuffer&&) = default;
-    ~AsyncBuffer() { delete[] _buffer; }
+    explicit AsyncWaitFreeBuffer(size_t capacity);
+    AsyncWaitFreeBuffer(const AsyncWaitFreeBuffer&) = delete;
+    AsyncWaitFreeBuffer(AsyncWaitFreeBuffer&&) = default;
+    ~AsyncWaitFreeBuffer() { delete[] _buffer; }
 
-    AsyncBuffer& operator=(const AsyncBuffer&) = delete;
-    AsyncBuffer& operator=(AsyncBuffer&&) = default;
+    AsyncWaitFreeBuffer& operator=(const AsyncWaitFreeBuffer&) = delete;
+    AsyncWaitFreeBuffer& operator=(AsyncWaitFreeBuffer&&) = default;
 
     //! Get ring buffer capacity
     size_t capacity() const noexcept { return _capacity; }
@@ -86,6 +86,6 @@ private:
 
 } // namespace CppLogging
 
-#include "async_buffer.inl"
+#include "async_wait_free_buffer.inl"
 
-#endif // CPPLOGGING_PROCESSORS_ASYNC_BUFFER_H
+#endif // CPPLOGGING_PROCESSORS_ASYNC_WAIT_FREE_BUFFER_H

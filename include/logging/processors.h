@@ -9,8 +9,9 @@
 #ifndef CPPLOGGING_PROCESSORS_H
 #define CPPLOGGING_PROCESSORS_H
 
-#include "logging/processors/sync_processor.h"
-#include "logging/processors/async_processor.h"
 #include "logging/processors/buffered_processor.h"
+#include "logging/processors/async_wait_processor.h"
+#include "logging/processors/async_wait_free_processor.h"
+#include "logging/processors/sync_processor.h"
 
 #endif // CPPLOGGING_PROCESSORS_H

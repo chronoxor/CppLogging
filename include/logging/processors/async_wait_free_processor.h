@@ -1,27 +1,27 @@
 /*!
-    \file async_processor.h
-    \brief Asynchronous logging processor definition
+    \file async_wait_free_processor.h
+    \brief Asynchronous wait-free logging processor definition
     \author Ivan Shynkarenka
     \date 01.08.2016
     \copyright MIT License
 */
 
-#ifndef CPPLOGGING_PROCESSORS_ASYNC_PROCESSOR_H
-#define CPPLOGGING_PROCESSORS_ASYNC_PROCESSOR_H
+#ifndef CPPLOGGING_PROCESSORS_ASYNC_WAIT_FREE_PROCESSOR_H
+#define CPPLOGGING_PROCESSORS_ASYNC_WAIT_FREE_PROCESSOR_H
 
 #include "logging/processor.h"
 
-#include "logging/processors/async_buffer.h"
+#include "logging/processors/async_wait_free_buffer.h"
 
 #include <cassert>
 #include <functional>
 
 namespace CppLogging {
 
-//! Asynchronous logging processor
+//! Asynchronous wait-free logging processor
 /*!
-    Asynchronous logging processor stores the given logging record
-    into thread-safe buffer and process it in the separate thread.
+    Asynchronous wait-free logging processor stores the given logging
+    record into thread-safe buffer and process it in the separate thread.
 
     Please note that asynchronous logging processor moves the given
     logging record (ProcessRecord() method always returns false)
@@ -29,7 +29,7 @@ namespace CppLogging {
 
     Thread-safe.
 */
-class AsyncProcessor : public Processor
+class AsyncWaitFreeProcessor : public Processor
 {
 public:
     //! Initialize asynchronous processor with a given layout interface, overflow policy and buffer capacity
@@ -40,13 +40,13 @@ public:
          \param on_thread_initialize - Thread initialize handler can be used to initialize priority or affinity of the logging thread (default does nothing)
          \param on_thread_clenup - Thread cleanup handler can be used to cleanup priority or affinity of the logging thread (default does nothing)
     */
-    explicit AsyncProcessor(const std::shared_ptr<Layout>& layout, bool discard_on_overflow = false, size_t capacity = 8192, const std::function<void ()>& on_thread_initialize = [](){}, const std::function<void ()>& on_thread_clenup = [](){});
-    AsyncProcessor(const AsyncProcessor&) = delete;
-    AsyncProcessor(AsyncProcessor&&) = default;
-    virtual ~AsyncProcessor();
+    explicit AsyncWaitFreeProcessor(const std::shared_ptr<Layout>& layout, bool discard_on_overflow = false, size_t capacity = 8192, const std::function<void ()>& on_thread_initialize = [](){}, const std::function<void ()>& on_thread_clenup = [](){});
+    AsyncWaitFreeProcessor(const AsyncWaitFreeProcessor&) = delete;
+    AsyncWaitFreeProcessor(AsyncWaitFreeProcessor&&) = default;
+    virtual ~AsyncWaitFreeProcessor();
 
-    AsyncProcessor& operator=(const AsyncProcessor&) = delete;
-    AsyncProcessor& operator=(AsyncProcessor&&) = default;
+    AsyncWaitFreeProcessor& operator=(const AsyncWaitFreeProcessor&) = delete;
+    AsyncWaitFreeProcessor& operator=(AsyncWaitFreeProcessor&&) = default;
 
     // Implementation of Processor
     bool ProcessRecord(Record& record) override;
@@ -54,7 +54,7 @@ public:
 
 private:
     bool _discard_on_overflow;
-    AsyncBuffer _buffer;
+    AsyncWaitFreeBuffer _buffer;
     std::thread _thread;
 
     bool EnqueueRecord(bool discard_on_overflow, Record& record);
@@ -63,6 +63,4 @@ private:
 
 } // namespace CppLogging
 
-/*! \example async.cpp Asynchronous logger processor example */
-
-#endif // CPPLOGGING_PROCESSORS_SYNC_PROCESSOR_H
+#endif // CPPLOGGING_PROCESSORS_ASYNC_WAIT_FREE_PROCESSOR_H

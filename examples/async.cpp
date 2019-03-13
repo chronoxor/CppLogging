@@ -17,7 +17,7 @@
 void ConfigureLogger()
 {
     // Create default logging sink processor with a text layout
-    auto sink = std::make_shared<CppLogging::AsyncProcessor>(std::make_shared<CppLogging::TextLayout>());
+    auto sink = std::make_shared<CppLogging::AsyncWaitProcessor>(std::make_shared<CppLogging::TextLayout>());
     // Add file appender with time-based rolling policy and archivation
     sink->appenders().push_back(std::make_shared<CppLogging::RollingFileAppender>(".", CppLogging::TimeRollingPolicy::SECOND, "{UtcDateTime}.log", true));
 

@@ -1,6 +1,6 @@
 /*!
-    \file async_buffer.inl
-    \brief Asynchronous logging buffer inline implementation
+    \file async_wait_free_buffer.inl
+    \brief Asynchronous wait-free logging buffer inline implementation
     \author Ivan Shynkarenka
     \date 04.08.2016
     \copyright MIT License
@@ -13,7 +13,7 @@
 
 namespace CppLogging {
 
-inline AsyncBuffer::AsyncBuffer(size_t capacity) : _capacity(capacity), _mask(capacity - 1), _buffer(new Node[capacity]), _head(0), _tail(0)
+inline AsyncWaitFreeBuffer::AsyncWaitFreeBuffer(size_t capacity) : _capacity(capacity), _mask(capacity - 1), _buffer(new Node[capacity]), _head(0), _tail(0)
 {
     assert((capacity > 1) && "Ring buffer capacity must be greater than one!");
     assert(((capacity & (capacity - 1)) == 0) && "Ring buffer capacity must be a power of two!");
@@ -27,7 +27,7 @@ inline AsyncBuffer::AsyncBuffer(size_t capacity) : _capacity(capacity), _mask(ca
         _buffer[i].sequence.store(i, std::memory_order_relaxed);
 }
 
-inline size_t AsyncBuffer::size() const noexcept
+inline size_t AsyncWaitFreeBuffer::size() const noexcept
 {
     const size_t head = _head.load(std::memory_order_acquire);
     const size_t tail = _tail.load(std::memory_order_acquire);
@@ -35,7 +35,7 @@ inline size_t AsyncBuffer::size() const noexcept
     return head - tail;
 }
 
-inline bool AsyncBuffer::Enqueue(Record& record)
+inline bool AsyncWaitFreeBuffer::Enqueue(Record& record)
 {
     size_t head_sequence = _head.load(std::memory_order_relaxed);
 
@@ -79,7 +79,7 @@ inline bool AsyncBuffer::Enqueue(Record& record)
     return false;
 }
 
-inline bool AsyncBuffer::Dequeue(Record& record)
+inline bool AsyncWaitFreeBuffer::Dequeue(Record& record)
 {
     size_t tail_sequence = _tail.load(std::memory_order_relaxed);
 

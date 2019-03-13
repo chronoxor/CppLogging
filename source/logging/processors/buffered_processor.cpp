@@ -1,6 +1,6 @@
 /*!
     \file buffered_processor.cpp
-    \brief Buffered logging processor definition
+    \brief Buffered logging processor implementation
     \author Ivan Shynkarenka
     \date 28.07.2016
     \copyright MIT License

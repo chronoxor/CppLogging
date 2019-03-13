@@ -17,7 +17,7 @@ class TextConfigFixture
 protected:
     TextConfigFixture() : _file("test.log")
     {
-        auto text_sink = std::make_shared<AsyncProcessor>(std::make_shared<TextLayout>());
+        auto text_sink = std::make_shared<AsyncWaitProcessor>(std::make_shared<TextLayout>());
         text_sink->appenders().push_back(std::make_shared<FileAppender>(_file));
         Config::ConfigLogger("text", text_sink);
     }

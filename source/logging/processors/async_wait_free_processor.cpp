@@ -1,19 +1,19 @@
 /*!
-    \file async_processor.cpp
-    \brief Asynchronous logging processor definition
+    \file async_wait_free_processor.cpp
+    \brief Asynchronous wait-free logging processor implementation
     \author Ivan Shynkarenka
     \date 01.08.2016
     \copyright MIT License
 */
 
-#include "logging/processors/async_processor.h"
+#include "logging/processors/async_wait_free_processor.h"
 
 #include "errors/fatal.h"
 #include "threads/thread.h"
 
 namespace CppLogging {
 
-AsyncProcessor::AsyncProcessor(const std::shared_ptr<Layout>& layout, bool discard_on_overflow, size_t capacity, const std::function<void ()>& on_thread_initialize, const std::function<void ()>& on_thread_clenup)
+AsyncWaitFreeProcessor::AsyncWaitFreeProcessor(const std::shared_ptr<Layout>& layout, bool discard_on_overflow, size_t capacity, const std::function<void ()>& on_thread_initialize, const std::function<void ()>& on_thread_clenup)
     : Processor(layout),
       _discard_on_overflow(discard_on_overflow),
       _buffer(capacity)
@@ -22,7 +22,7 @@ AsyncProcessor::AsyncProcessor(const std::shared_ptr<Layout>& layout, bool disca
     _thread = CppCommon::Thread::Start([this, on_thread_initialize, on_thread_clenup]() { ProcessBufferedRecords(on_thread_initialize, on_thread_clenup); });
 }
 
-AsyncProcessor::~AsyncProcessor()
+AsyncWaitFreeProcessor::~AsyncWaitFreeProcessor()
 {
     // Thread local stop operation record
     thread_local Record stop;
@@ -35,13 +35,13 @@ AsyncProcessor::~AsyncProcessor()
     _thread.join();
 }
 
-bool AsyncProcessor::ProcessRecord(Record& record)
+bool AsyncWaitFreeProcessor::ProcessRecord(Record& record)
 {
     // Enqueue the given logger record
     return EnqueueRecord(_discard_on_overflow, record);
 }
 
-bool AsyncProcessor::EnqueueRecord(bool discard_on_overflow, Record& record)
+bool AsyncWaitFreeProcessor::EnqueueRecord(bool discard_on_overflow, Record& record)
 {
     // Try to enqueue the given logger record
     if (!_buffer.Enqueue(record))
@@ -58,7 +58,7 @@ bool AsyncProcessor::EnqueueRecord(bool discard_on_overflow, Record& record)
     return true;
 }
 
-void AsyncProcessor::ProcessBufferedRecords(const std::function<void ()>& on_thread_initialize, const std::function<void ()>& on_thread_clenup)
+void AsyncWaitFreeProcessor::ProcessBufferedRecords(const std::function<void ()>& on_thread_initialize, const std::function<void ()>& on_thread_clenup)
 {
     // Call the thread initialize handler
     assert((on_thread_initialize) && "Thread initialize handler must be valid!");
@@ -94,7 +94,7 @@ void AsyncProcessor::ProcessBufferedRecords(const std::function<void ()>& on_thr
     }
     catch (...)
     {
-        fatality("Asynchronous logging processor terminated!");
+        fatality("Asynchronous wait-free logging processor terminated!");
     }
 
     // Call the thread cleanup handler
@@ -103,7 +103,7 @@ void AsyncProcessor::ProcessBufferedRecords(const std::function<void ()>& on_thr
         on_thread_clenup();
 }
 
-void AsyncProcessor::Flush()
+void AsyncWaitFreeProcessor::Flush()
 {
     // Thread local flush operation record
     thread_local Record flush;
