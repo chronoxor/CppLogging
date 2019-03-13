@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['capacity',['capacity',['../class_cpp_logging_1_1_async_buffer.html#ab4a7d19933ed60cdf4a07e4732e5f966',1,'CppLogging::AsyncBuffer']]],
+  ['capacity',['capacity',['../class_cpp_logging_1_1_async_wait_free_buffer.html#af549a3fc872f924c1d13114b708c85a4',1,'CppLogging::AsyncWaitFreeBuffer']]],
   ['clear',['Clear',['../class_cpp_logging_1_1_record.html#a329f4aee55d7a67be3f313449b4bdf21',1,'CppLogging::Record']]],
   ['config',['Config',['../class_cpp_logging_1_1_config.html#a36b0110d0dab4d9ff1a273ee527b03d8',1,'CppLogging::Config::Config(const Config &amp;)=delete'],['../class_cpp_logging_1_1_config.html#ab49e7effb10954f0f8740c5be34f4f0b',1,'CppLogging::Config::Config(Config &amp;&amp;) noexcept=delete']]],
   ['configlogger',['ConfigLogger',['../class_cpp_logging_1_1_config.html#aa3e1df3aa623bada0b5523294e9fde14',1,'CppLogging::Config::ConfigLogger(const std::shared_ptr&lt; Processor &gt; &amp;sink)'],['../class_cpp_logging_1_1_config.html#a8c0cea746d092d4e48ed10796fa7cea1',1,'CppLogging::Config::ConfigLogger(const std::string &amp;name, const std::shared_ptr&lt; Processor &gt; &amp;sink)']]],
