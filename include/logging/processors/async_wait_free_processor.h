@@ -23,6 +23,8 @@ namespace CppLogging {
     Asynchronous wait-free logging processor stores the given logging
     record into thread-safe buffer and process it in the separate thread.
 
+    This processor use fixed size async buffer which can overflow.
+
     Please note that asynchronous logging processor moves the given
     logging record (ProcessRecord() method always returns false)
     into the buffer!

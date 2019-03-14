@@ -24,6 +24,9 @@ namespace CppLogging {
     record into thread-safe buffer and process it in the separate
     thread.
 
+    This processor use dynamic size async buffer which cannot overflow,
+    buy might lead to out of memory error.
+
     Please note that asynchronous logging processor moves the given
     logging record (ProcessRecord() method always returns false)
     into the buffer!
@@ -36,10 +39,11 @@ public:
     //! Initialize asynchronous processor with a given layout interface
     /*!
          \param layout - Logging layout interface
+         \param capacity - Buffer capacity in logging records (default is 8192)
          \param on_thread_initialize - Thread initialize handler can be used to initialize priority or affinity of the logging thread (default does nothing)
          \param on_thread_clenup - Thread cleanup handler can be used to cleanup priority or affinity of the logging thread (default does nothing)
     */
-    explicit AsyncWaitProcessor(const std::shared_ptr<Layout>& layout, const std::function<void ()>& on_thread_initialize = [](){}, const std::function<void ()>& on_thread_clenup = [](){});
+    explicit AsyncWaitProcessor(const std::shared_ptr<Layout>& layout, size_t capacity = 8192, const std::function<void ()>& on_thread_initialize = [](){}, const std::function<void ()>& on_thread_clenup = [](){});
     AsyncWaitProcessor(const AsyncWaitProcessor&) = delete;
     AsyncWaitProcessor(AsyncWaitProcessor&&) = default;
     virtual ~AsyncWaitProcessor();
