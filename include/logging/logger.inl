@@ -18,7 +18,7 @@ inline Logger::~Logger()
 }
 
 template <typename... Args>
-inline void Logger::Log(Level level, const char* message, const Args&... args)
+inline void Logger::Log(Level level, bool format, const char* message, const Args&... args)
 {
     // Thread local thread Id
     thread_local uint64_t thread = CppCommon::Thread::CurrentThreadId();
@@ -40,11 +40,23 @@ inline void Logger::Log(Level level, const char* message, const Args&... args)
             return;
 
     // Format arguments list
-    record.Format(message, args...);
+    if (format)
+        record.Format(message, args...);
+    else
+        record.message = message;
 
     // Process the logging record
     if (_sink)
         _sink->ProcessRecord(record);
+}
+
+inline void Logger::Debug(const std::string& debug)
+{
+#if defined(NDEBUG)
+    // Log nothing in release mode...
+#else
+    Log(Level::DEBUG, false, debug.c_str());
+#endif
 }
 
 template <typename... Args>
@@ -53,32 +65,52 @@ inline void Logger::Debug(const char* debug, const Args&... args)
 #if defined(NDEBUG)
     // Log nothing in release mode...
 #else
-    Log(Level::DEBUG, debug, args...);
+    Log(Level::DEBUG, true, debug, args...);
 #endif
+}
+
+inline void Logger::Info(const std::string& info)
+{
+    Log(Level::INFO, false, info.c_str());
 }
 
 template <typename... Args>
 inline void Logger::Info(const char* info, const Args&... args)
 {
-    Log(Level::INFO, info, args...);
+    Log(Level::INFO, true, info, args...);
+}
+
+inline void Logger::Warn(const std::string& warn)
+{
+    Log(Level::WARN, false, warn.c_str());
 }
 
 template <typename... Args>
 inline void Logger::Warn(const char* warn, const Args&... args)
 {
-    Log(Level::WARN, warn, args...);
+    Log(Level::WARN, true, warn, args...);
+}
+
+inline void Logger::Error(const std::string& error)
+{
+    Log(Level::ERROR, false, error.c_str());
 }
 
 template <typename... Args>
 inline void Logger::Error(const char* error, const Args&... args)
 {
-    Log(Level::ERROR, error, args...);
+    Log(Level::ERROR, true, error, args...);
+}
+
+inline void Logger::Fatal(const std::string& fatal)
+{
+    Log(Level::FATAL, false, fatal.c_str());
 }
 
 template <typename... Args>
 inline void Logger::Fatal(const char* fatal, const Args&... args)
 {
-    Log(Level::FATAL, fatal, args...);
+    Log(Level::FATAL, true, fatal, args...);
 }
 
 inline void Logger::Flush()

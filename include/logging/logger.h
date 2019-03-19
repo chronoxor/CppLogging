@@ -44,7 +44,7 @@ public:
 
          \param debug - Debug message
     */
-    void Debug(const std::string& debug) { Debug(debug.c_str()); }
+    void Debug(const std::string& debug);
     //! Log debug message with format arguments
     /*!
          Will log only in debug mode!
@@ -59,7 +59,7 @@ public:
     /*!
          \param info - Information message
     */
-    void Info(const std::string& info) { Info(info.c_str()); }
+    void Info(const std::string& info);
     //! Log information message with format arguments
     /*!
          \param info - Information message
@@ -72,7 +72,7 @@ public:
     /*!
          \param warn - Warning message
     */
-    void Warn(const std::string& warn) { Warn(warn.c_str()); }
+    void Warn(const std::string& warn);
     //! Log warning message with format arguments
     /*!
          \param warn - Warning message
@@ -85,7 +85,7 @@ public:
     /*!
          \param error - Error message
     */
-    void Error(const std::string& error) { Error(error.c_str()); }
+    void Error(const std::string& error);
     //! Log error message with format arguments
     /*!
          \param error - Error message
@@ -98,7 +98,7 @@ public:
     /*!
          \param fatal - Fatal message
     */
-    void Fatal(const std::string& fatal) { Fatal(fatal.c_str()); }
+    void Fatal(const std::string& fatal);
     //! Log fatal message with format arguments
     /*!
          \param fatal - Fatal message
@@ -127,11 +127,12 @@ private:
     //! Log the given message with a given level and format arguments list
     /*!
          \param level - Logging level
+         \param format - Format flag
          \param message - Logging message
          \param args - Format arguments list
     */
     template <typename... Args>
-    void Log(Level level, const char* message, const Args&... args);
+    void Log(Level level, bool format, const char* message, const Args&... args);
 };
 
 } // namespace CppLogging
