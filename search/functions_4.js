@@ -4,6 +4,6 @@ var searchData=
   ['enable',['Enable',['../class_cpp_logging_1_1_trigger.html#a2df9ab0b929772cd7b4b5a990102b1d5',1,'CppLogging::Trigger']]],
   ['enabled',['enabled',['../class_cpp_logging_1_1_switch_filter.html#aa1e80e8851bb84fccb6d467823fe7032',1,'CppLogging::SwitchFilter']]],
   ['enqueue',['Enqueue',['../class_cpp_logging_1_1_async_wait_free_buffer.html#a89f5e59beadfa0221938a68187a21ed5',1,'CppLogging::AsyncWaitFreeBuffer']]],
-  ['error',['Error',['../class_cpp_logging_1_1_logger.html#adf1007f91f6230482706c04c384b9046',1,'CppLogging::Logger::Error(const std::string &amp;error)'],['../class_cpp_logging_1_1_logger.html#a29beea93f046e04348f2a47dcd3e3603',1,'CppLogging::Logger::Error(const char *error, const Args &amp;... args)']]],
+  ['error',['Error',['../class_cpp_logging_1_1_logger.html#adf1007f91f6230482706c04c384b9046',1,'CppLogging::Logger::Error(const std::string &amp;error)'],['../class_cpp_logging_1_1_logger.html#ac6a9f7a2fbf3d8024a24b3c0bd5d7f25',1,'CppLogging::Logger::Error(const char *error, const Args &amp;...args)']]],
   ['errorappender',['ErrorAppender',['../class_cpp_logging_1_1_error_appender.html#abe2c0effcb87d346003d28756fa7a43e',1,'CppLogging::ErrorAppender::ErrorAppender()=default'],['../class_cpp_logging_1_1_error_appender.html#a6687f19113878c2f39cf18a5673982e8',1,'CppLogging::ErrorAppender::ErrorAppender(const ErrorAppender &amp;)=delete'],['../class_cpp_logging_1_1_error_appender.html#a444732715c4a4b206fc45293335a2687',1,'CppLogging::ErrorAppender::ErrorAppender(ErrorAppender &amp;&amp;) noexcept=default']]]
 ];
