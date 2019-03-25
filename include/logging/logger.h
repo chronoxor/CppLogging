@@ -124,6 +124,13 @@ private:
     */
     explicit Logger(const std::string& name, const std::shared_ptr<Processor>& sink);
 
+    //! Log the given message with a given level and logging message
+    /*!
+         \param level - Logging level
+         \param message - Logging message
+    */
+    void Log(Level level, const char* message) { Log(level, false, message); }
+
     //! Log the given message with a given level and format arguments list
     /*!
          \param level - Logging level

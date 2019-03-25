@@ -13,7 +13,6 @@
 
 #include "logging/processors/async_wait_free_buffer.h"
 
-#include <cassert>
 #include <functional>
 
 namespace CppLogging {

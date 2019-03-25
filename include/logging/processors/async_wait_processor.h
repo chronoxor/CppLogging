@@ -13,7 +13,6 @@
 
 #include "threads/wait_batcher.h"
 
-#include <cassert>
 #include <functional>
 
 namespace CppLogging {

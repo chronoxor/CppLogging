@@ -14,10 +14,22 @@ BENCHMARK("Format(int)")
     record.Format("test {} test", context.metrics().total_operations());
 }
 
+BENCHMARK("Serialize(int)")
+{
+    static Record record;
+    record.Serialize("test {} test", context.metrics().total_operations());
+}
+
 BENCHMARK("Format(int, double, string)")
 {
     static Record record;
     record.Format("test {}.{}.{} test", context.metrics().total_operations(), context.metrics().total_operations() / 1000.0, context.name());
+}
+
+BENCHMARK("Serialize(int, double, string)")
+{
+    static Record record;
+    record.Serialize("test {}.{}.{} test", context.metrics().total_operations(), context.metrics().total_operations() / 1000.0, context.name());
 }
 
 BENCHMARK_MAIN()

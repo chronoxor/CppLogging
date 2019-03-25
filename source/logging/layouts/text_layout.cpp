@@ -339,6 +339,16 @@ public:
         // Clear raw buffer of the logging record
         record.raw.clear();
 
+        // Deserialize format message
+        if (record.IsSerialized())
+        {
+#if !defined(NDEBUG)
+            // Validate format message in debug mode
+            assert(record.Validate() && "Invalid format message!");
+#endif
+            record.message = record.Deserialize();
+        }
+
         // Iterate through all placeholders
         for (auto& placeholder : _placeholders)
         {

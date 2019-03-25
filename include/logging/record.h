@@ -15,6 +15,7 @@
 #include "threads/thread.h"
 #include "time/timestamp.h"
 
+#include <cassert>
 #include <string>
 #include <vector>
 #include <utility>
@@ -63,9 +64,22 @@ public:
     Record& operator=(const Record&) = default;
     Record& operator=(Record&&) = default;
 
-    //! Format message of the logging record
+    //! Format message and its arguments
     template <typename... Args>
     void Format(const char* pattern, const Args&... args);
+
+    //! Is the record contains serialized format message and its arguments
+    bool IsSerialized() const noexcept { return !buffer.empty(); }
+
+    //! Serialize format message and its arguments
+    template <typename... Args>
+    void Serialize(const char* pattern, const Args&... args);
+
+    //! Deserialize format message and its arguments
+    std::string Deserialize();
+
+    //! Validate format message and its arguments
+    bool Validate();
 
     //! Clear logging record
     void Clear();

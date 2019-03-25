@@ -11,6 +11,8 @@
 #include "errors/fatal.h"
 #include "threads/thread.h"
 
+#include <cassert>
+
 namespace CppLogging {
 
 AsyncWaitProcessor::AsyncWaitProcessor(const std::shared_ptr<Layout>& layout, size_t capacity, const std::function<void ()>& on_thread_initialize, const std::function<void ()>& on_thread_clenup)
