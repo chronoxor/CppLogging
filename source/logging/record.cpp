@@ -8,7 +8,24 @@
 
 #include "logging/record.h"
 
+#include <map>
+
 namespace {
+
+bool IsDigit(char ch)
+{
+    return (ch >= '0') && (ch <= '9');
+}
+
+bool IsStartName(char ch)
+{
+    return ((ch >= 'A') && (ch <= 'Z')) || ((ch >= 'a') && (ch <= 'z')) || (ch == '_');
+}
+
+bool IsMiddleName(char ch)
+{
+    return IsStartName(ch) || IsDigit(ch);
+}
 
 struct Argument
 {
@@ -85,9 +102,68 @@ struct Argument
     }
 };
 
-std::vector<Argument> ParseArguments(const std::vector<uint8_t>& buffer)
+struct Arguments
 {
-    std::vector<Argument> result;
+    std::vector<Argument> arguments;
+    std::map<std::string, Argument> named_arguments;
+};
+
+Argument ParseArgument(const std::vector<uint8_t>& buffer, size_t index)
+{
+    // Parse the argument type 
+    CppLogging::ArgumentType type;
+    std::memcpy(&type, buffer.data() + index, sizeof(uint8_t));
+    index += sizeof(uint8_t);
+
+    // Parse the argument value
+    switch (type)
+    {
+        case CppLogging::ArgumentType::ARG_BOOL:
+            return Argument{ type, index, sizeof(uint8_t) };
+        case CppLogging::ArgumentType::ARG_CHAR:
+            return Argument{ type, index, sizeof(uint8_t) };
+        case CppLogging::ArgumentType::ARG_WCHAR:
+            return Argument{ type, index, sizeof(uint32_t) };
+        case CppLogging::ArgumentType::ARG_INT8:
+            return Argument{ type, index, sizeof(int8_t) };
+        case CppLogging::ArgumentType::ARG_UINT8:
+            return Argument{ type, index, sizeof(uint8_t) };
+        case CppLogging::ArgumentType::ARG_INT16:
+            return Argument{ type, index, sizeof(int16_t) };
+        case CppLogging::ArgumentType::ARG_UINT16:
+            return Argument{ type, index, sizeof(uint16_t) };
+        case CppLogging::ArgumentType::ARG_INT32:
+            return Argument{ type, index, sizeof(int32_t) };
+        case CppLogging::ArgumentType::ARG_UINT32:
+            return Argument{ type, index, sizeof(uint32_t) };
+        case CppLogging::ArgumentType::ARG_INT64:
+            return Argument{ type, index, sizeof(int64_t) };
+        case CppLogging::ArgumentType::ARG_UINT64:
+            return Argument{ type, index, sizeof(uint64_t) };
+        case CppLogging::ArgumentType::ARG_FLOAT:
+            return Argument{ type, index, sizeof(float) };
+        case CppLogging::ArgumentType::ARG_DOUBLE:
+            return Argument{ type, index, sizeof(double) };
+        case CppLogging::ArgumentType::ARG_STRING:
+        {
+            uint32_t size;
+            std::memcpy(&size, buffer.data() + index, sizeof(uint32_t));
+
+            return Argument{ type, index, sizeof(uint32_t) + size };
+        }
+        case CppLogging::ArgumentType::ARG_POINTER:
+            return Argument{ type, index, sizeof(uint64_t) };
+        default:
+        {
+            assert(false && "Unsupported argument type!");
+            return Argument{ CppLogging::ArgumentType::ARG_UNKNOWN, 0, 0 };
+        }
+    }    
+}
+
+Arguments ParseArguments(const std::vector<uint8_t>& buffer)
+{
+    Arguments result;
 
     size_t index = 0;
     while (index < buffer.size())
@@ -95,109 +171,29 @@ std::vector<Argument> ParseArguments(const std::vector<uint8_t>& buffer)
         // Parse the argument type 
         CppLogging::ArgumentType type;
         std::memcpy(&type, buffer.data() + index, sizeof(uint8_t));
-        index += sizeof(uint8_t);
 
-        // Parse the argument value
-        switch (type)
+        if (type == CppLogging::ArgumentType::ARG_NAMED_ARG)
         {
-            case CppLogging::ArgumentType::ARG_BOOL:
-            {
-                result.emplace_back(Argument{ type, index, sizeof(uint8_t) });
-                index += sizeof(uint8_t);
-                break;
-            }
-            case CppLogging::ArgumentType::ARG_CHAR:
-            {
-                result.emplace_back(Argument{ type, index, sizeof(uint8_t) });
-                index += sizeof(uint8_t);
-                break;
-            }
-            case CppLogging::ArgumentType::ARG_WCHAR:
-            {
-                result.emplace_back(Argument{ type, index, sizeof(uint32_t) });
-                index += sizeof(uint32_t);
-                break;
-            }
-            case CppLogging::ArgumentType::ARG_INT8:
-            {
-                result.emplace_back(Argument{ type, index, sizeof(int8_t) });
-                index += sizeof(int8_t);
-                break;
-            }
-            case CppLogging::ArgumentType::ARG_UINT8:
-            {
-                result.emplace_back(Argument{ type, index, sizeof(uint8_t) });
-                index += sizeof(uint8_t);
-                break;
-            }
-            case CppLogging::ArgumentType::ARG_INT16:
-            {
-                result.emplace_back(Argument{ type, index, sizeof(int16_t) });
-                index += sizeof(int16_t);
-                break;
-            }
-            case CppLogging::ArgumentType::ARG_UINT16:
-            {
-                result.emplace_back(Argument{ type, index, sizeof(uint16_t) });
-                index += sizeof(uint16_t);
-                break;
-            }
-            case CppLogging::ArgumentType::ARG_INT32:
-            {
-                result.emplace_back(Argument{ type, index, sizeof(int32_t) });
-                index += sizeof(int32_t);
-                break;
-            }
-            case CppLogging::ArgumentType::ARG_UINT32:
-            {
-                result.emplace_back(Argument{ type, index, sizeof(uint32_t) });
-                index += sizeof(uint32_t);
-                break;
-            }
-            case CppLogging::ArgumentType::ARG_INT64:
-            {
-                result.emplace_back(Argument{ type, index, sizeof(int64_t) });
-                index += sizeof(int64_t);
-                break;
-            }
-            case CppLogging::ArgumentType::ARG_UINT64:
-            {
-                result.emplace_back(Argument{ type, index, sizeof(uint64_t) });
-                index += sizeof(uint64_t);
-                break;
-            }
-            case CppLogging::ArgumentType::ARG_FLOAT:
-            {
-                result.emplace_back(Argument{ type, index, sizeof(float) });
-                index += sizeof(float);
-                break;
-            }
-            case CppLogging::ArgumentType::ARG_DOUBLE:
-            {
-                result.emplace_back(Argument{ type, index, sizeof(double) });
-                index += sizeof(double);
-                break;
-            }
-            case CppLogging::ArgumentType::ARG_STRING:
-            {
-                uint32_t size;
-                std::memcpy(&size, buffer.data() + index, sizeof(uint32_t));
+            index += sizeof(uint8_t);
 
-                result.emplace_back(Argument{ type, index, sizeof(uint32_t) + size });
-                index += sizeof(uint32_t) + size;
-                break;
-            }
-            case CppLogging::ArgumentType::ARG_POINTER:
-            {
-                result.emplace_back(Argument{ type, index, sizeof(uint64_t) });
-                index += sizeof(uint64_t);
-                break;
-            }
-            default:
-            {
-                assert(false && "Unsupported argument type!");
-                break;
-            }
+            uint32_t size;
+            std::memcpy(&size, buffer.data() + index, sizeof(uint32_t));
+            index += sizeof(uint32_t);
+
+            std::string name;
+            name.resize(size);
+            std::memcpy(name.data(), buffer.data() + index, size);
+            index += size;
+
+            Argument argument = ParseArgument(buffer, index);
+            index += sizeof(uint8_t) + argument.size;
+            result.named_arguments[name] = argument;
+        }
+        else
+        {
+            Argument argument = ParseArgument(buffer, index);
+            index += sizeof(uint8_t) + argument.size;
+            result.arguments.emplace_back(argument);
         }
     }
 
@@ -210,7 +206,7 @@ bool ParseUnsigned(std::string::iterator& it, const std::string::iterator& end, 
     size_t max_int = std::numeric_limits<int>::max();
     size_t big_int = max_int / 10;
     char current = *it;
-    while ((current >= '0') && (current <= '9'))
+    while (IsDigit(current))
     {
         // Check for overflow.
         if (result > big_int)
@@ -234,6 +230,30 @@ bool ParseUnsigned(std::string::iterator& it, const std::string::iterator& end, 
     return true;
 }
 
+bool ParseName(std::string::iterator& it, const std::string::iterator& end, std::string& result)
+{
+    result = "";
+    char current = *it;
+    if (IsStartName(current))
+    {
+        result.push_back(current);
+        while (it != end)
+        {
+            if (++it == end)
+            {
+                assert(false && "Invalid format message! Unmatched '}' in the format string.");
+                return false;
+            }
+            current = *it;
+            if (IsMiddleName(current))
+                result.push_back(current);
+            else
+                break;
+        }
+    }
+    return true;
+}
+
 } // namespace
 
 namespace CppLogging {
@@ -243,7 +263,7 @@ std::string Record::Deserialize()
     std::string result;
 
     size_t argument_current_index = 0;
-    auto arguments = ParseArguments(buffer);
+    auto args = ParseArguments(buffer);
 
     // Parse the format message pattern
     for (auto it = message.begin(); it != message.end(); ++it)
@@ -286,20 +306,29 @@ std::string Record::Deserialize()
 
             // Argument settings
             size_t argument_index = argument_current_index++;
+            std::string argument_name;
             bool argument_width = false;
             size_t argument_width_index = 0;
+            std::string argument_width_name;
             bool argument_precision = false;
             size_t argument_precision_index = 0;
+            std::string argument_precision_name;
             fmt::v5::alignment align_type = fmt::v5::alignment::ALIGN_DEFAULT;
             char align_fill = ' ';
             int flags = 0;
             size_t width = 0;
             int precision = -1;
+            char type = 0;
 
             // Parse argument index
-            if ((current >= '0') && (current <= '9'))
+            if (IsDigit(current))
             {
                 if (!ParseUnsigned(it, message.end(), argument_index))
+                    return message;
+            }
+            else if (IsStartName(current))
+            {
+                if (!ParseName(it, message.end(), argument_name))
                     return message;
             }
 
@@ -345,14 +374,14 @@ std::string Record::Deserialize()
                                 assert(false && "Invalid format message! Invalid fill character '{' in the format string.");
                                 return message;
                             }
-                            ++it;
+                            it += 2;
                             align_fill = ch;
                         }
+                        else
+                            ++it;
                         break;
                     }
                 } while (align_index-- > 0);
-
-                ++it;
 
                 // Parse sign
                 if (it != message.end())
@@ -404,7 +433,7 @@ std::string Record::Deserialize()
                 if (it != message.end())
                 {
                     current = *it;
-                    if ((current >= '0') && (current <= '9'))
+                    if (IsDigit(current))
                     {
                         if (!ParseUnsigned(it, message.end(), width))
                             return message;
@@ -419,9 +448,15 @@ std::string Record::Deserialize()
 
                         current = *it;
 
-                        if ((current >= '0') && (current <= '9'))
+                        if (IsDigit(current))
                         {
                             if (!ParseUnsigned(it, message.end(), argument_width_index))
+                                return message;
+                            argument_width = true;
+                        }
+                        else if (IsStartName(current))
+                        {
+                            if (!ParseName(it, message.end(), argument_width_name))
                                 return message;
                             argument_width = true;
                         }
@@ -437,10 +472,22 @@ std::string Record::Deserialize()
                         }
 
                         // Parse width argument
-                        if ((argument_width_index > arguments.size()) || !arguments[argument_width_index].GetUnsigned(buffer, width))
+                        if (!argument_width_name.empty())
                         {
-                            assert(false && "Invalid format message! Cannot parse argument width specifier.");
-                            return message;
+                            auto it_width = args.named_arguments.find(argument_width_name);
+                            if ((it_width == args.named_arguments.end()) || !it_width->second.GetUnsigned(buffer, width))
+                            {
+                                assert(false && "Invalid format message! Cannot find argument width specifier by name.");
+                                return message;
+                            }
+                        }
+                        else
+                        {
+                            if ((argument_width_index > args.arguments.size()) || !args.arguments[argument_width_index].GetUnsigned(buffer, width))
+                            {
+                                assert(false && "Invalid format message! Cannot find or parse argument width specifier.");
+                                return message;
+                            }
                         }
                     }
                 }
@@ -459,7 +506,7 @@ std::string Record::Deserialize()
 
                         current = *it;
 
-                        if ((current >= '0') && (current <= '9'))
+                        if (IsDigit(current))
                         {
                             size_t prec;
                             if (!ParseUnsigned(it, message.end(), prec))
@@ -476,9 +523,15 @@ std::string Record::Deserialize()
 
                             current = *it;
 
-                            if ((current >= '0') && (current <= '9'))
+                            if (IsDigit(current))
                             {
                                 if (!ParseUnsigned(it, message.end(), argument_precision_index))
+                                    return message;
+                                argument_precision = true;
+                            }
+                            else if (IsStartName(current))
+                            {
+                                if (!ParseName(it, message.end(), argument_precision_name))
                                     return message;
                                 argument_precision = true;
                             }
@@ -494,11 +547,23 @@ std::string Record::Deserialize()
                             }
 
                             // Parse precision argument
-                            size_t prec;
-                            if ((argument_precision_index > arguments.size()) || !arguments[argument_precision_index].GetUnsigned(buffer, prec))
+                            size_t prec = 0;
+                            if (!argument_precision_name.empty())
                             {
-                                assert(false && "Invalid format message! Cannot parse argument precision specifier.");
-                                return message;
+                                auto it_prec = args.named_arguments.find(argument_precision_name);
+                                if ((it_prec == args.named_arguments.end()) || !it_prec->second.GetUnsigned(buffer, prec))
+                                {
+                                    assert(false && "Invalid format message! Cannot find argument precision specifier by name.");
+                                    return message;
+                                }
+                            }
+                            else
+                            {
+                                if ((argument_precision_index > args.arguments.size()) || !args.arguments[argument_precision_index].GetUnsigned(buffer, prec))
+                                {
+                                    assert(false && "Invalid format message! Cannot find or parse argument precision specifier.");
+                                    return message;
+                                }
                             }
                             precision = (int)prec;
                         }
@@ -506,6 +571,15 @@ std::string Record::Deserialize()
                 }
             }
 
+            // Parse type
+            if (it != message.end() && (*it != '}'))
+            {
+                current = *it;
+                type = current;
+                ++it;
+            }
+
+            // Parse the end of argument
             if (it == message.end() || (*it != '}'))
             {
                 assert(false && "Invalid format message! Unmatched '}' in the format string.");
@@ -518,10 +592,30 @@ std::string Record::Deserialize()
             specs.flags = (uint_least8_t)flags;
             specs.width_ = (unsigned)width;
             specs.precision = precision;
+            specs.type = type;
 
             fmt::v5::basic_writer<fmt::v5::back_insert_range<std::string>> writer(result);
 
-            auto& argument = arguments[argument_index];
+            Argument argument;
+            if (!argument_name.empty())
+            {
+                auto it_arg = args.named_arguments.find(argument_name);
+                if (it_arg == args.named_arguments.end())
+                {
+                    assert(false && "Invalid format message! Cannot find argument by name.");
+                    return message;
+                }
+                argument = args.named_arguments[argument_name];
+            }
+            else
+            {
+                if (argument_index > args.arguments.size())
+                {
+                    assert(false && "Invalid format message! Cannot find argument by index.");
+                    return message;
+                }
+                argument = args.arguments[argument_index];
+            }
             switch (argument.type)
             {
                 case ArgumentType::ARG_BOOL:
@@ -601,12 +695,26 @@ std::string Record::Deserialize()
                     writer.write(value, specs);
                     break;
                 }
+                case ArgumentType::ARG_FLOAT:
+                {
+                    float value;
+                    std::memcpy(&value, buffer.data() + argument.offset, sizeof(float));
+                    writer.write(value, specs);
+                    break;
+                }
+                case ArgumentType::ARG_DOUBLE:
+                {
+                    double value;
+                    std::memcpy(&value, buffer.data() + argument.offset, sizeof(double));
+                    writer.write(value, specs);
+                    break;
+                }
                 case ArgumentType::ARG_STRING:
                 {
                     uint32_t size;
                     std::memcpy(&size, buffer.data() + argument.offset, sizeof(uint32_t));
 
-                    writer.write(buffer.data() + argument.offset + sizeof(uint32_t), size, specs);
+                    writer.write(fmt::string_view((const char*)buffer.data() + argument.offset + sizeof(uint32_t), size), specs);
                     break;
                 }
                 case ArgumentType::ARG_POINTER:

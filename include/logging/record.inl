@@ -36,7 +36,8 @@ enum class ArgumentType : uint8_t
     ARG_FLOAT,
     ARG_DOUBLE,
     ARG_STRING,
-    ARG_POINTER
+    ARG_POINTER,
+    ARG_NAMED_ARG
 };
 
 inline void SerializeArgument(std::vector<uint8_t>& buffer)
@@ -254,6 +255,27 @@ inline void SerializeArgument(std::vector<uint8_t>& buffer, const T* argument)
     size_t size = sizeof(value);
     buffer.resize(buffer.size() + size);
     std::memcpy(buffer.data() + buffer.size() - size, &value, size);
+}
+
+template <typename T>
+inline void SerializeArgument(std::vector<uint8_t>& buffer, const fmt::internal::named_arg<T, char>& argument)
+{
+    // Append the argument type
+    buffer.emplace_back((uint8_t)ArgumentType::ARG_NAMED_ARG);
+
+    uint32_t length = (uint32_t)argument.name.size();
+
+    // Append the argument name length
+    size_t size = sizeof(length);
+    buffer.resize(buffer.size() + size);
+    std::memcpy(buffer.data() + buffer.size() - size, &length, size);
+
+    // Append the argument name value
+    size = length;
+    buffer.resize(buffer.size() + size);
+    std::memcpy(buffer.data() + buffer.size() - size, argument.name.data(), size);
+
+    SerializeArgument(buffer, argument.value);
 }
 
 template <typename T>
