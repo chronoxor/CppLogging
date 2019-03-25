@@ -46,8 +46,9 @@ inline void Logger::Log(Level level, bool format, const char* message, const Arg
         record.Serialize(message, args...);
 
 #if !defined(NDEBUG)
-    // Validate format message in debug mode
-    assert(record.Validate() && "Invalid format message!");
+    // Validate serialization/deserialization of the logging message in debug mode
+    auto tmp = CppCommon::format(message, args...);
+    assert((record.Deserialize() == CppCommon::format(message, args...)) && "Invalid serialization/deserialization of the logging message!");
 #endif
 
     // Process the logging record
