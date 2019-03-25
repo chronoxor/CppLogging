@@ -43,11 +43,11 @@ inline void Logger::Log(Level level, bool format, std::string_view message, cons
     if (format)
         record.Format(message, args...);
     else
-        record.Serialize(message, args...);
+        record.StoreFormat(message, args...);
 
 #if !defined(NDEBUG)
     // Validate serialization/deserialization of the logging message in debug mode
-    assert((record.Deserialize() == CppCommon::format(message, args...)) && "Invalid serialization/deserialization of the logging message!");
+    assert((record.RestoreFormat() == CppCommon::format(message, args...)) && "Invalid serialization/deserialization of the logging message!");
 #endif
 
     // Process the logging record

@@ -339,9 +339,9 @@ public:
         // Clear raw buffer of the logging record
         record.raw.clear();
 
-        // Deserialize format message
-        if (record.IsSerialized())
-            record.message = record.Deserialize();
+        // Restore format message
+        if (record.IsFormatStored())
+            record.message = record.RestoreFormat();
 
         // Iterate through all placeholders
         for (auto& placeholder : _placeholders)

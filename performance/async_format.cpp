@@ -12,30 +12,36 @@ using namespace CppLogging;
 
 const auto settings = CppBenchmark::Settings().ThreadsRange(1, 8, [](int from, int to, int& result) { int r = result; result *= 2; return r; });
 
-class TextConfigFixture
+class BinaryConfigFixture
 {
 protected:
-    TextConfigFixture() : _file("test.log")
+    BinaryConfigFixture()
     {
-        auto text_sink = std::make_shared<AsyncWaitProcessor>(std::make_shared<TextLayout>());
-        text_sink->appenders().push_back(std::make_shared<FileAppender>(_file));
-        Config::ConfigLogger("text", text_sink);
+        auto binary_sink = std::make_shared<AsyncWaitProcessor>(std::make_shared<BinaryLayout>());
+        binary_sink->appenders().push_back(std::make_shared<FileAppender>(_file));
+        Config::ConfigLogger("binary", binary_sink);
     }
 
-    ~TextConfigFixture()
+    ~BinaryConfigFixture()
     {
         if (_file.IsFileExists())
             File::Remove(_file);
     }
 
 private:
-    File _file;
+    File _file{"test.bin.log"};
 };
 
-BENCHMARK_THREADS_FIXTURE(TextConfigFixture, "Format", settings)
+BENCHMARK_THREADS_FIXTURE(BinaryConfigFixture, "Format(int, double, string)", settings)
 {
-    thread_local Logger logger = Config::CreateLogger("text");
-    logger.Info("Test message {}", context.metrics().total_operations());
+    thread_local Logger logger = Config::CreateLogger("binary");
+    logger.Info("Test {}.{}.{} message"_format(context.metrics().total_operations(), context.metrics().total_operations() / 1000.0, context.name()));
+}
+
+BENCHMARK_THREADS_FIXTURE(BinaryConfigFixture, "Serialize(int, double, string)", settings)
+{
+    thread_local Logger logger = Config::CreateLogger("binary");
+    logger.Info("Test {}.{}.{} message", context.metrics().total_operations(), context.metrics().total_operations() / 1000.0, context.name());
 }
 
 BENCHMARK_MAIN()

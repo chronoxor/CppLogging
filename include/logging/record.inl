@@ -37,14 +37,16 @@ enum class ArgumentType : uint8_t
     ARG_DOUBLE,
     ARG_STRING,
     ARG_POINTER,
-    ARG_NAMEDARG
+    ARG_NAMEDARG,
+    ARG_CUSTOM
 };
 
-inline void SerializeArgument(std::vector<uint8_t>& buffer)
+inline size_t SerializeArgument(std::vector<uint8_t>& buffer)
 {
+    return 0;
 }
 
-inline void SerializeArgument(std::vector<uint8_t>& buffer, bool argument)
+inline size_t SerializeArgument(std::vector<uint8_t>& buffer, bool argument)
 {
     // Append the argument type
     buffer.emplace_back((uint8_t)ArgumentType::ARG_BOOL);
@@ -55,9 +57,10 @@ inline void SerializeArgument(std::vector<uint8_t>& buffer, bool argument)
     size_t size = sizeof(value);
     buffer.resize(buffer.size() + size);
     std::memcpy(buffer.data() + buffer.size() - size, &value, size);
+    return 1;
 }
 
-inline void SerializeArgument(std::vector<uint8_t>& buffer, char argument)
+inline size_t SerializeArgument(std::vector<uint8_t>& buffer, char argument)
 {
     // Append the argument type
     buffer.emplace_back((uint8_t)ArgumentType::ARG_CHAR);
@@ -68,9 +71,10 @@ inline void SerializeArgument(std::vector<uint8_t>& buffer, char argument)
     size_t size = sizeof(value);
     buffer.resize(buffer.size() + size);
     std::memcpy(buffer.data() + buffer.size() - size, &value, size);
+    return 1;
 }
 
-inline void SerializeArgument(std::vector<uint8_t>& buffer, wchar_t argument)
+inline size_t SerializeArgument(std::vector<uint8_t>& buffer, wchar_t argument)
 {
     // Append the argument type
     buffer.emplace_back((uint8_t)ArgumentType::ARG_WCHAR);
@@ -81,9 +85,10 @@ inline void SerializeArgument(std::vector<uint8_t>& buffer, wchar_t argument)
     size_t size = sizeof(value);
     buffer.resize(buffer.size() + size);
     std::memcpy(buffer.data() + buffer.size() - size, &value, size);
+    return 1;
 }
 
-inline void SerializeArgument(std::vector<uint8_t>& buffer, int8_t argument)
+inline size_t SerializeArgument(std::vector<uint8_t>& buffer, int8_t argument)
 {
     // Append the argument type
     buffer.emplace_back((uint8_t)ArgumentType::ARG_INT8);
@@ -92,9 +97,10 @@ inline void SerializeArgument(std::vector<uint8_t>& buffer, int8_t argument)
     size_t size = sizeof(argument);
     buffer.resize(buffer.size() + size);
     std::memcpy(buffer.data() + buffer.size() - size, &argument, size);
+    return 1;
 }
 
-inline void SerializeArgument(std::vector<uint8_t>& buffer, uint8_t argument)
+inline size_t SerializeArgument(std::vector<uint8_t>& buffer, uint8_t argument)
 {
     // Append the argument type
     buffer.emplace_back((uint8_t)ArgumentType::ARG_UINT8);
@@ -103,9 +109,10 @@ inline void SerializeArgument(std::vector<uint8_t>& buffer, uint8_t argument)
     size_t size = sizeof(argument);
     buffer.resize(buffer.size() + size);
     std::memcpy(buffer.data() + buffer.size() - size, &argument, size);
+    return 1;
 }
 
-inline void SerializeArgument(std::vector<uint8_t>& buffer, int16_t argument)
+inline size_t SerializeArgument(std::vector<uint8_t>& buffer, int16_t argument)
 {
     // Append the argument type
     buffer.emplace_back((uint8_t)ArgumentType::ARG_INT16);
@@ -114,9 +121,10 @@ inline void SerializeArgument(std::vector<uint8_t>& buffer, int16_t argument)
     size_t size = sizeof(argument);
     buffer.resize(buffer.size() + size);
     std::memcpy(buffer.data() + buffer.size() - size, &argument, size);
+    return 1;
 }
 
-inline void SerializeArgument(std::vector<uint8_t>& buffer, uint16_t argument)
+inline size_t SerializeArgument(std::vector<uint8_t>& buffer, uint16_t argument)
 {
     // Append the argument type
     buffer.emplace_back((uint8_t)ArgumentType::ARG_UINT16);
@@ -125,9 +133,10 @@ inline void SerializeArgument(std::vector<uint8_t>& buffer, uint16_t argument)
     size_t size = sizeof(argument);
     buffer.resize(buffer.size() + size);
     std::memcpy(buffer.data() + buffer.size() - size, &argument, size);
+    return 1;
 }
 
-inline void SerializeArgument(std::vector<uint8_t>& buffer, int32_t argument)
+inline size_t SerializeArgument(std::vector<uint8_t>& buffer, int32_t argument)
 {
     // Append the argument type
     buffer.emplace_back((uint8_t)ArgumentType::ARG_INT32);
@@ -136,9 +145,10 @@ inline void SerializeArgument(std::vector<uint8_t>& buffer, int32_t argument)
     size_t size = sizeof(argument);
     buffer.resize(buffer.size() + size);
     std::memcpy(buffer.data() + buffer.size() - size, &argument, size);
+    return 1;
 }
 
-inline void SerializeArgument(std::vector<uint8_t>& buffer, uint32_t argument)
+inline size_t SerializeArgument(std::vector<uint8_t>& buffer, uint32_t argument)
 {
     // Append the argument type
     buffer.emplace_back((uint8_t)ArgumentType::ARG_UINT32);
@@ -147,9 +157,10 @@ inline void SerializeArgument(std::vector<uint8_t>& buffer, uint32_t argument)
     size_t size = sizeof(argument);
     buffer.resize(buffer.size() + size);
     std::memcpy(buffer.data() + buffer.size() - size, &argument, size);
+    return 1;
 }
 
-inline void SerializeArgument(std::vector<uint8_t>& buffer, int64_t argument)
+inline size_t SerializeArgument(std::vector<uint8_t>& buffer, int64_t argument)
 {
     // Append the argument type
     buffer.emplace_back((uint8_t)ArgumentType::ARG_INT64);
@@ -158,9 +169,10 @@ inline void SerializeArgument(std::vector<uint8_t>& buffer, int64_t argument)
     size_t size = sizeof(argument);
     buffer.resize(buffer.size() + size);
     std::memcpy(buffer.data() + buffer.size() - size, &argument, size);
+    return 1;
 }
 
-inline void SerializeArgument(std::vector<uint8_t>& buffer, uint64_t argument)
+inline size_t SerializeArgument(std::vector<uint8_t>& buffer, uint64_t argument)
 {
     // Append the argument type
     buffer.emplace_back((uint8_t)ArgumentType::ARG_UINT64);
@@ -169,9 +181,10 @@ inline void SerializeArgument(std::vector<uint8_t>& buffer, uint64_t argument)
     size_t size = sizeof(argument);
     buffer.resize(buffer.size() + size);
     std::memcpy(buffer.data() + buffer.size() - size, &argument, size);
+    return 1;
 }
 
-inline void SerializeArgument(std::vector<uint8_t>& buffer, float argument)
+inline size_t SerializeArgument(std::vector<uint8_t>& buffer, float argument)
 {
     // Append the argument type
     buffer.emplace_back((uint8_t)ArgumentType::ARG_FLOAT);
@@ -180,9 +193,10 @@ inline void SerializeArgument(std::vector<uint8_t>& buffer, float argument)
     size_t size = sizeof(argument);
     buffer.resize(buffer.size() + size);
     std::memcpy(buffer.data() + buffer.size() - size, &argument, size);
+    return 1;
 }
 
-inline void SerializeArgument(std::vector<uint8_t>& buffer, double argument)
+inline size_t SerializeArgument(std::vector<uint8_t>& buffer, double argument)
 {
     // Append the argument type
     buffer.emplace_back((uint8_t)ArgumentType::ARG_DOUBLE);
@@ -191,9 +205,10 @@ inline void SerializeArgument(std::vector<uint8_t>& buffer, double argument)
     size_t size = sizeof(argument);
     buffer.resize(buffer.size() + size);
     std::memcpy(buffer.data() + buffer.size() - size, &argument, size);
+    return 1;
 }
 
-inline void SerializeArgument(std::vector<uint8_t>& buffer, const char* argument)
+inline size_t SerializeArgument(std::vector<uint8_t>& buffer, const char* argument)
 {
     // Append the argument type
     buffer.emplace_back((uint8_t)ArgumentType::ARG_STRING);
@@ -209,9 +224,10 @@ inline void SerializeArgument(std::vector<uint8_t>& buffer, const char* argument
     size = length;
     buffer.resize(buffer.size() + size);
     std::memcpy(buffer.data() + buffer.size() - size, argument, size);
+    return 1;
 }
 
-inline void SerializeArgument(std::vector<uint8_t>& buffer, std::string_view argument)
+inline size_t SerializeArgument(std::vector<uint8_t>& buffer, std::string_view argument)
 {
     // Append the argument type
     buffer.emplace_back((uint8_t)ArgumentType::ARG_STRING);
@@ -227,9 +243,10 @@ inline void SerializeArgument(std::vector<uint8_t>& buffer, std::string_view arg
     size = length;
     buffer.resize(buffer.size() + size);
     std::memcpy(buffer.data() + buffer.size() - size, argument.data(), size);
+    return 1;
 }
 
-inline void SerializeArgument(std::vector<uint8_t>& buffer, const std::string& argument)
+inline size_t SerializeArgument(std::vector<uint8_t>& buffer, const std::string& argument)
 {
     // Append the argument type
     buffer.emplace_back((uint8_t)ArgumentType::ARG_STRING);
@@ -245,10 +262,11 @@ inline void SerializeArgument(std::vector<uint8_t>& buffer, const std::string& a
     size = length;
     buffer.resize(buffer.size() + size);
     std::memcpy(buffer.data() + buffer.size() - size, argument.data(), size);
+    return 1;
 }
 
 template <typename T>
-inline void SerializeArgument(std::vector<uint8_t>& buffer, T* argument)
+inline size_t SerializeArgument(std::vector<uint8_t>& buffer, T* argument)
 {
     // Append the argument type
     buffer.emplace_back((uint8_t)ArgumentType::ARG_POINTER);
@@ -259,10 +277,11 @@ inline void SerializeArgument(std::vector<uint8_t>& buffer, T* argument)
     size_t size = sizeof(value);
     buffer.resize(buffer.size() + size);
     std::memcpy(buffer.data() + buffer.size() - size, &value, size);
+    return 1;
 }
 
 template <typename T>
-inline void SerializeArgument(std::vector<uint8_t>& buffer, const T* argument)
+inline size_t SerializeArgument(std::vector<uint8_t>& buffer, const T* argument)
 {
     // Append the argument type
     buffer.emplace_back((uint8_t)ArgumentType::ARG_POINTER);
@@ -273,10 +292,11 @@ inline void SerializeArgument(std::vector<uint8_t>& buffer, const T* argument)
     size_t size = sizeof(value);
     buffer.resize(buffer.size() + size);
     std::memcpy(buffer.data() + buffer.size() - size, &value, size);
+    return 1;
 }
 
 template <typename T>
-inline void SerializeArgument(std::vector<uint8_t>& buffer, const fmt::internal::named_arg<T, char>& argument)
+inline size_t SerializeArgument(std::vector<uint8_t>& buffer, const fmt::internal::named_arg<T, char>& argument)
 {
     // Append the argument type
     buffer.emplace_back((uint8_t)ArgumentType::ARG_NAMEDARG);
@@ -294,19 +314,32 @@ inline void SerializeArgument(std::vector<uint8_t>& buffer, const fmt::internal:
     std::memcpy(buffer.data() + buffer.size() - size, argument.name.data(), size);
 
     SerializeArgument(buffer, argument.value);
+
+    return 1;
 }
 
 template <typename T>
-inline void SerializeArgument(std::vector<uint8_t>& buffer, const T& argument)
+inline size_t SerializeArgument(std::vector<uint8_t>& buffer, const T& argument)
 {
-    assert(false && "Unsupported format argument type!");
+    // Append the argument type
+    buffer.emplace_back((uint8_t)ArgumentType::ARG_CUSTOM);
+
+    // Serialize the custom argument
+    size_t offset = buffer.size();
+    buffer.resize(buffer.size() + sizeof(uint32_t));
+    argument.StoreFormat(buffer);
+    size_t size = buffer.size() - offset;
+    std::memcpy(buffer.data() + offset, &size, sizeof(uint32_t));
+
+    return 1;
 }
 
 template <typename T, typename... Args>
-inline void SerializeArgument(std::vector<uint8_t>& buffer, const T& argument, const Args&... args)
+inline size_t SerializeArgument(std::vector<uint8_t>& buffer, const T& argument, const Args&... args)
 {
-    SerializeArgument(buffer, argument);
-    SerializeArgument(buffer, args...);
+    size_t result1 = SerializeArgument(buffer, argument);
+    size_t result2 = SerializeArgument(buffer, args...);
+    return result1 + result2;
 }
 
 template <typename... Args>
@@ -316,10 +349,37 @@ inline void Record::Format(std::string_view pattern, const Args&... args)
 }
 
 template <typename... Args>
-inline void Record::Serialize(std::string_view pattern, const Args&... args)
+inline void Record::StoreFormat(std::string_view pattern, const Args&... args)
 {
     message = pattern;
-    SerializeArgument(buffer, args...);
+
+    // Serialize arguments
+    size_t offset = buffer.size();
+    buffer.resize(buffer.size() + sizeof(uint32_t));
+    size_t count = SerializeArgument(buffer, args...);
+    std::memcpy(buffer.data() + offset, &count, sizeof(uint32_t));
+}
+
+template <typename... Args>
+inline void Record::StoreFormat(std::vector<uint8_t>& buffer, std::string_view pattern, const Args&... args)
+{
+    uint32_t length = (uint32_t)pattern.size();
+
+    // Append the pattern length
+    size_t size = sizeof(length);
+    buffer.resize(buffer.size() + size);
+    std::memcpy(buffer.data() + buffer.size() - size, &length, size);
+
+    // Append the pattern value
+    size = length;
+    buffer.resize(buffer.size() + size);
+    std::memcpy(buffer.data() + buffer.size() - size, pattern.data(), size);
+
+    // Serialize arguments
+    size_t offset = buffer.size();
+    buffer.resize(buffer.size() + sizeof(uint32_t));
+    size_t count = SerializeArgument(buffer, args...);
+    std::memcpy(buffer.data() + offset, &count, sizeof(uint32_t));
 }
 
 inline void Record::Clear()

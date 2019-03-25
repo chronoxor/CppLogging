@@ -153,6 +153,13 @@ Argument ParseArgument(const std::vector<uint8_t>& buffer, size_t index)
         }
         case CppLogging::ArgumentType::ARG_POINTER:
             return Argument{ type, index, sizeof(uint64_t) };
+        case CppLogging::ArgumentType::ARG_CUSTOM:
+        {
+            uint32_t size;
+            std::memcpy(&size, buffer.data() + index, sizeof(uint32_t));
+
+            return Argument{ type, index, sizeof(uint32_t) + size };
+        }
         default:
         {
             assert(false && "Unsupported argument type!");
@@ -161,12 +168,18 @@ Argument ParseArgument(const std::vector<uint8_t>& buffer, size_t index)
     }
 }
 
-Arguments ParseArguments(const std::vector<uint8_t>& buffer, size_t offset, size_t size)
+Arguments ParseArguments(const std::vector<uint8_t>& buffer, size_t offset)
 {
     Arguments result;
 
     size_t index = offset;
-    while (index < size)
+
+    // Parse arguments count
+    size_t count;
+    std::memcpy(&count, buffer.data() + index, sizeof(uint32_t));
+    index += sizeof(uint32_t);
+
+    while ((index < buffer.size()) && (count-- > 0))
     {
         // Parse the argument type
         CppLogging::ArgumentType type;
@@ -258,12 +271,12 @@ bool ParseName(std::string_view::iterator& it, const std::string_view::iterator&
 
 namespace CppLogging {
 
-std::string Record::Deserialize(std::string_view pattern, const std::vector<uint8_t> buffer, size_t offset, size_t size)
+std::string Record::RestoreFormat(std::string_view pattern, const std::vector<uint8_t> buffer, size_t offset)
 {
     std::string result;
 
     // Parse arguments and check arguments count before formatting
-    auto args = ParseArguments(buffer, offset, size);
+    auto args = ParseArguments(buffer, offset);
     if (args.arguments.empty() && args.named_arguments.empty())
         return std::string(pattern);
 
@@ -726,6 +739,31 @@ std::string Record::Deserialize(std::string_view pattern, const std::vector<uint
                     uint64_t value;
                     std::memcpy(&value, buffer.data() + argument.offset, sizeof(uint64_t));
                     writer.write((void*)value);
+                    break;
+                }
+                case ArgumentType::ARG_CUSTOM:
+                {
+                    size_t index = argument.offset;
+
+                    // Parse the custom data type size
+                    uint32_t size;
+                    std::memcpy(&size, buffer.data() + index, sizeof(uint32_t));
+                    index += sizeof(uint32_t);
+
+                    // Parse the pattern length
+                    uint32_t length;
+                    std::memcpy(&length, buffer.data() + index, sizeof(uint32_t));
+                    index += sizeof(uint32_t);
+
+                    // Parse the pattern value
+                    std::string custom_pattern;
+                    custom_pattern.resize(length);
+                    std::memcpy(custom_pattern.data(), buffer.data() + index, length);
+                    index += length;
+
+                    std::string custom = RestoreFormat(custom_pattern, buffer, index);
+
+                    writer.write(custom);
                     break;
                 }
                 default:
