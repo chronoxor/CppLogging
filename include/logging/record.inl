@@ -37,7 +37,7 @@ enum class ArgumentType : uint8_t
     ARG_DOUBLE,
     ARG_STRING,
     ARG_POINTER,
-    ARG_NAMED_ARG
+    ARG_NAMEDARG
 };
 
 inline void SerializeArgument(std::vector<uint8_t>& buffer)
@@ -211,6 +211,24 @@ inline void SerializeArgument(std::vector<uint8_t>& buffer, const char* argument
     std::memcpy(buffer.data() + buffer.size() - size, argument, size);
 }
 
+inline void SerializeArgument(std::vector<uint8_t>& buffer, std::string_view argument)
+{
+    // Append the argument type
+    buffer.emplace_back((uint8_t)ArgumentType::ARG_STRING);
+
+    uint32_t length = (uint32_t)argument.length();
+
+    // Append the string length
+    size_t size = sizeof(length);
+    buffer.resize(buffer.size() + size);
+    std::memcpy(buffer.data() + buffer.size() - size, &length, size);
+
+    // Append the string value
+    size = length;
+    buffer.resize(buffer.size() + size);
+    std::memcpy(buffer.data() + buffer.size() - size, argument.data(), size);
+}
+
 inline void SerializeArgument(std::vector<uint8_t>& buffer, const std::string& argument)
 {
     // Append the argument type
@@ -261,7 +279,7 @@ template <typename T>
 inline void SerializeArgument(std::vector<uint8_t>& buffer, const fmt::internal::named_arg<T, char>& argument)
 {
     // Append the argument type
-    buffer.emplace_back((uint8_t)ArgumentType::ARG_NAMED_ARG);
+    buffer.emplace_back((uint8_t)ArgumentType::ARG_NAMEDARG);
 
     uint32_t length = (uint32_t)argument.name.size();
 
@@ -292,13 +310,13 @@ inline void SerializeArgument(std::vector<uint8_t>& buffer, const T& argument, c
 }
 
 template <typename... Args>
-inline void Record::Format(const char* pattern, const Args&... args)
+inline void Record::Format(std::string_view pattern, const Args&... args)
 {
     message = CppCommon::format(pattern, args...);
 }
 
 template <typename... Args>
-inline void Record::Serialize(const char* pattern, const Args&... args)
+inline void Record::Serialize(std::string_view pattern, const Args&... args)
 {
     message = pattern;
     SerializeArgument(buffer, args...);

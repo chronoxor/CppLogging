@@ -110,7 +110,7 @@ struct Arguments
 
 Argument ParseArgument(const std::vector<uint8_t>& buffer, size_t index)
 {
-    // Parse the argument type 
+    // Parse the argument type
     CppLogging::ArgumentType type;
     std::memcpy(&type, buffer.data() + index, sizeof(uint8_t));
     index += sizeof(uint8_t);
@@ -158,32 +158,32 @@ Argument ParseArgument(const std::vector<uint8_t>& buffer, size_t index)
             assert(false && "Unsupported argument type!");
             return Argument{ CppLogging::ArgumentType::ARG_UNKNOWN, 0, 0 };
         }
-    }    
+    }
 }
 
-Arguments ParseArguments(const std::vector<uint8_t>& buffer)
+Arguments ParseArguments(const std::vector<uint8_t>& buffer, size_t offset, size_t size)
 {
     Arguments result;
 
-    size_t index = 0;
-    while (index < buffer.size())
+    size_t index = offset;
+    while (index < size)
     {
-        // Parse the argument type 
+        // Parse the argument type
         CppLogging::ArgumentType type;
         std::memcpy(&type, buffer.data() + index, sizeof(uint8_t));
 
-        if (type == CppLogging::ArgumentType::ARG_NAMED_ARG)
+        if (type == CppLogging::ArgumentType::ARG_NAMEDARG)
         {
             index += sizeof(uint8_t);
 
-            uint32_t size;
-            std::memcpy(&size, buffer.data() + index, sizeof(uint32_t));
+            uint32_t length;
+            std::memcpy(&length, buffer.data() + index, sizeof(uint32_t));
             index += sizeof(uint32_t);
 
             std::string name;
-            name.resize(size);
-            std::memcpy(name.data(), buffer.data() + index, size);
-            index += size;
+            name.resize(length);
+            std::memcpy(name.data(), buffer.data() + index, length);
+            index += length;
 
             Argument argument = ParseArgument(buffer, index);
             index += sizeof(uint8_t) + argument.size;
@@ -200,7 +200,7 @@ Arguments ParseArguments(const std::vector<uint8_t>& buffer)
     return result;
 }
 
-bool ParseUnsigned(std::string::iterator& it, const std::string::iterator& end, size_t& result)
+bool ParseUnsigned(std::string_view::iterator& it, const std::string_view::iterator& end, size_t& result)
 {
     result = 0;
     size_t max_int = std::numeric_limits<int>::max();
@@ -230,7 +230,7 @@ bool ParseUnsigned(std::string::iterator& it, const std::string::iterator& end, 
     return true;
 }
 
-bool ParseName(std::string::iterator& it, const std::string::iterator& end, std::string& result)
+bool ParseName(std::string_view::iterator& it, const std::string_view::iterator& end, std::string& result)
 {
     result = "";
     char current = *it;
@@ -258,24 +258,28 @@ bool ParseName(std::string::iterator& it, const std::string::iterator& end, std:
 
 namespace CppLogging {
 
-std::string Record::Deserialize()
+std::string Record::Deserialize(std::string_view pattern, const std::vector<uint8_t> buffer, size_t offset, size_t size)
 {
     std::string result;
 
+    // Parse arguments and check arguments count before formatting
+    auto args = ParseArguments(buffer, offset, size);
+    if (args.arguments.empty() && args.named_arguments.empty())
+        return std::string(pattern);
+
     size_t argument_current_index = 0;
-    auto args = ParseArguments(buffer);
 
     // Parse the format message pattern
-    for (auto it = message.begin(); it != message.end(); ++it)
+    for (auto it = pattern.begin(); it < pattern.end(); ++it)
     {
         char current = *it;
 
         if (current == '{')
         {
-            if (++it == message.end())
+            if (++it == pattern.end())
             {
                 assert(false && "Invalid format message! Unmatched '}' in the format string.");
-                return message;
+                return std::string(pattern);
             }
 
             char next = *it;
@@ -290,7 +294,7 @@ std::string Record::Deserialize()
             // Match '}}' pattern
             if (next == '}')
             {
-                if (++it != message.end())
+                if (++it != pattern.end())
                 {
                     if (*it == '}')
                     {
@@ -323,23 +327,23 @@ std::string Record::Deserialize()
             // Parse argument index
             if (IsDigit(current))
             {
-                if (!ParseUnsigned(it, message.end(), argument_index))
-                    return message;
+                if (!ParseUnsigned(it, pattern.end(), argument_index))
+                    return std::string(pattern);
             }
             else if (IsStartName(current))
             {
-                if (!ParseName(it, message.end(), argument_name))
-                    return message;
+                if (!ParseName(it, pattern.end(), argument_name))
+                    return std::string(pattern);
             }
 
             current = *it;
 
             // Parse argument settings
-            if ((current == ':') && (it != message.end()))
+            if ((current == ':') && (it != pattern.end()))
             {
                 // Parse align settings
                 int align_index = 0;
-                if (it + 1 != message.end())
+                if ((it + 1) != pattern.end())
                 {
                     ++align_index;
                     ++it;
@@ -372,7 +376,7 @@ std::string Record::Deserialize()
                             if (ch == '{')
                             {
                                 assert(false && "Invalid format message! Invalid fill character '{' in the format string.");
-                                return message;
+                                return std::string(pattern);
                             }
                             it += 2;
                             align_fill = ch;
@@ -384,7 +388,7 @@ std::string Record::Deserialize()
                 } while (align_index-- > 0);
 
                 // Parse sign
-                if (it != message.end())
+                if (it != pattern.end())
                 {
                     current = *it;
                     switch (current)
@@ -407,7 +411,7 @@ std::string Record::Deserialize()
                 }
 
                 // Parse hash
-                if (it != message.end())
+                if (it != pattern.end())
                 {
                     current = *it;
                     if (current == '#')
@@ -418,7 +422,7 @@ std::string Record::Deserialize()
                 }
 
                 // Parse zero flag
-                if (it != message.end())
+                if (it != pattern.end())
                 {
                     current = *it;
                     if (current == '0')
@@ -430,40 +434,40 @@ std::string Record::Deserialize()
                 }
 
                 // Parse width
-                if (it != message.end())
+                if (it != pattern.end())
                 {
                     current = *it;
                     if (IsDigit(current))
                     {
-                        if (!ParseUnsigned(it, message.end(), width))
-                            return message;
+                        if (!ParseUnsigned(it, pattern.end(), width))
+                            return std::string(pattern);
                     }
                     else if (current == '{')
                     {
-                        if (++it == message.end())
+                        if (++it == pattern.end())
                         {
                             assert(false && "Invalid format message! Invalid format width specifier.");
-                            return message;
+                            return std::string(pattern);
                         }
 
                         current = *it;
 
                         if (IsDigit(current))
                         {
-                            if (!ParseUnsigned(it, message.end(), argument_width_index))
-                                return message;
+                            if (!ParseUnsigned(it, pattern.end(), argument_width_index))
+                                return std::string(pattern);
                             argument_width = true;
                         }
                         else if (IsStartName(current))
                         {
-                            if (!ParseName(it, message.end(), argument_width_name))
-                                return message;
+                            if (!ParseName(it, pattern.end(), argument_width_name))
+                                return std::string(pattern);
                             argument_width = true;
                         }
-                        if ((it == message.end()) || (*it++ != '}'))
+                        if ((it == pattern.end()) || (*it++ != '}'))
                         {
                             assert(false && "Invalid format message! Invalid format width specifier.");
-                            return message;
+                            return std::string(pattern);
                         }
                         if (!argument_width)
                         {
@@ -478,7 +482,7 @@ std::string Record::Deserialize()
                             if ((it_width == args.named_arguments.end()) || !it_width->second.GetUnsigned(buffer, width))
                             {
                                 assert(false && "Invalid format message! Cannot find argument width specifier by name.");
-                                return message;
+                                return std::string(pattern);
                             }
                         }
                         else
@@ -486,22 +490,22 @@ std::string Record::Deserialize()
                             if ((argument_width_index > args.arguments.size()) || !args.arguments[argument_width_index].GetUnsigned(buffer, width))
                             {
                                 assert(false && "Invalid format message! Cannot find or parse argument width specifier.");
-                                return message;
+                                return std::string(pattern);
                             }
                         }
                     }
                 }
 
                 // Parse precision
-                if (it != message.end())
+                if (it != pattern.end())
                 {
                     current = *it;
                     if (current == '.')
                     {
-                        if (++it == message.end())
+                        if (++it == pattern.end())
                         {
                             assert(false && "Invalid format message! Invalid format precision specifier.");
-                            return message;
+                            return std::string(pattern);
                         }
 
                         current = *it;
@@ -509,36 +513,36 @@ std::string Record::Deserialize()
                         if (IsDigit(current))
                         {
                             size_t prec;
-                            if (!ParseUnsigned(it, message.end(), prec))
-                                return message;
+                            if (!ParseUnsigned(it, pattern.end(), prec))
+                                return std::string(pattern);
                             precision = (int)prec;
                         }
                         else if (current == '{')
                         {
-                            if (++it == message.end())
+                            if (++it == pattern.end())
                             {
                                 assert(false && "Invalid format message! Invalid format precision specifier.");
-                                return message;
+                                return std::string(pattern);
                             }
 
                             current = *it;
 
                             if (IsDigit(current))
                             {
-                                if (!ParseUnsigned(it, message.end(), argument_precision_index))
-                                    return message;
+                                if (!ParseUnsigned(it, pattern.end(), argument_precision_index))
+                                    return std::string(pattern);
                                 argument_precision = true;
                             }
                             else if (IsStartName(current))
                             {
-                                if (!ParseName(it, message.end(), argument_precision_name))
-                                    return message;
+                                if (!ParseName(it, pattern.end(), argument_precision_name))
+                                    return std::string(pattern);
                                 argument_precision = true;
                             }
-                            if ((it == message.end()) || (*it++ != '}'))
+                            if ((it == pattern.end()) || (*it++ != '}'))
                             {
                                 assert(false && "Invalid format message! Invalid format precision specifier.");
-                                return message;
+                                return std::string(pattern);
                             }
                             if (!argument_precision)
                             {
@@ -554,7 +558,7 @@ std::string Record::Deserialize()
                                 if ((it_prec == args.named_arguments.end()) || !it_prec->second.GetUnsigned(buffer, prec))
                                 {
                                     assert(false && "Invalid format message! Cannot find argument precision specifier by name.");
-                                    return message;
+                                    return std::string(pattern);
                                 }
                             }
                             else
@@ -562,7 +566,7 @@ std::string Record::Deserialize()
                                 if ((argument_precision_index > args.arguments.size()) || !args.arguments[argument_precision_index].GetUnsigned(buffer, prec))
                                 {
                                     assert(false && "Invalid format message! Cannot find or parse argument precision specifier.");
-                                    return message;
+                                    return std::string(pattern);
                                 }
                             }
                             precision = (int)prec;
@@ -572,7 +576,7 @@ std::string Record::Deserialize()
             }
 
             // Parse type
-            if (it != message.end() && (*it != '}'))
+            if ((it != pattern.end()) && (*it != '}'))
             {
                 current = *it;
                 type = current;
@@ -580,10 +584,10 @@ std::string Record::Deserialize()
             }
 
             // Parse the end of argument
-            if (it == message.end() || (*it != '}'))
+            if ((it == pattern.end()) || (*it != '}'))
             {
                 assert(false && "Invalid format message! Unmatched '}' in the format string.");
-                return message;
+                return std::string(pattern);
             }
 
             fmt::v5::format_specs specs;
@@ -603,7 +607,7 @@ std::string Record::Deserialize()
                 if (it_arg == args.named_arguments.end())
                 {
                     assert(false && "Invalid format message! Cannot find argument by name.");
-                    return message;
+                    return std::string(pattern);
                 }
                 argument = args.named_arguments[argument_name];
             }
@@ -612,7 +616,7 @@ std::string Record::Deserialize()
                 if (argument_index > args.arguments.size())
                 {
                     assert(false && "Invalid format message! Cannot find argument by index.");
-                    return message;
+                    return std::string(pattern);
                 }
                 argument = args.arguments[argument_index];
             }
@@ -711,10 +715,10 @@ std::string Record::Deserialize()
                 }
                 case ArgumentType::ARG_STRING:
                 {
-                    uint32_t size;
-                    std::memcpy(&size, buffer.data() + argument.offset, sizeof(uint32_t));
+                    uint32_t length;
+                    std::memcpy(&length, buffer.data() + argument.offset, sizeof(uint32_t));
 
-                    writer.write(fmt::string_view((const char*)buffer.data() + argument.offset + sizeof(uint32_t), size), specs);
+                    writer.write(fmt::string_view((const char*)buffer.data() + argument.offset + sizeof(uint32_t), length), specs);
                     break;
                 }
                 case ArgumentType::ARG_POINTER:
@@ -727,7 +731,7 @@ std::string Record::Deserialize()
                 default:
                 {
                     assert(false && "Unsupported argument type!");
-                    return message;
+                    return std::string(pattern);
                 }
             }
         }
@@ -736,11 +740,6 @@ std::string Record::Deserialize()
     }
 
     return result;
-}
-
-bool Record::Validate()
-{
-    return true;
 }
 
 } // namespace CppLogging

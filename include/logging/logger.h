@@ -38,13 +38,6 @@ public:
     Logger& operator=(const Logger&) = default;
     Logger& operator=(Logger&&) = default;
 
-    //! Log debug message
-    /*!
-         Will log only in debug mode!
-
-         \param debug - Debug message
-    */
-    void Debug(const std::string& debug);
     //! Log debug message with format arguments
     /*!
          Will log only in debug mode!
@@ -53,59 +46,39 @@ public:
          \param args - Format arguments
     */
     template <typename... Args>
-    void Debug(const char* debug, const Args&... args);
+    void Debug(std::string_view debug, const Args&... args);
 
-    //! Log information message
-    /*!
-         \param info - Information message
-    */
-    void Info(const std::string& info);
     //! Log information message with format arguments
     /*!
          \param info - Information message
          \param args - Format arguments
     */
     template <typename... Args>
-    void Info(const char* info, const Args&... args);
+    void Info(std::string_view info, const Args&... args);
 
-    //! Log warning message
-    /*!
-         \param warn - Warning message
-    */
-    void Warn(const std::string& warn);
     //! Log warning message with format arguments
     /*!
          \param warn - Warning message
          \param args - Format arguments
     */
     template <typename... Args>
-    void Warn(const char* warn, const Args&... args);
+    void Warn(std::string_view warn, const Args&... args);
 
-    //! Log error message
-    /*!
-         \param error - Error message
-    */
-    void Error(const std::string& error);
     //! Log error message with format arguments
     /*!
          \param error - Error message
          \param args - Format arguments
     */
     template <typename... Args>
-    void Error(const char* error, const Args&... args);
+    void Error(std::string_view error, const Args&... args);
 
-    //! Log fatal message
-    /*!
-         \param fatal - Fatal message
-    */
-    void Fatal(const std::string& fatal);
     //! Log fatal message with format arguments
     /*!
          \param fatal - Fatal message
          \param args - Format arguments
     */
     template <typename... Args>
-    void Fatal(const char* fatal, const Args&... args);
+    void Fatal(std::string_view fatal, const Args&... args);
 
     //! Flush the current logger
     void Flush();
@@ -124,13 +97,6 @@ private:
     */
     explicit Logger(const std::string& name, const std::shared_ptr<Processor>& sink);
 
-    //! Log the given message with a given level and logging message
-    /*!
-         \param level - Logging level
-         \param message - Logging message
-    */
-    void Log(Level level, const char* message) { Log(level, false, message); }
-
     //! Log the given message with a given level and format arguments list
     /*!
          \param level - Logging level
@@ -139,7 +105,7 @@ private:
          \param args - Format arguments list
     */
     template <typename... Args>
-    void Log(Level level, bool format, const char* message, const Args&... args);
+    void Log(Level level, bool format, std::string_view message, const Args&... args);
 };
 
 } // namespace CppLogging

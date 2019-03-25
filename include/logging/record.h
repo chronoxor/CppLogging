@@ -66,20 +66,18 @@ public:
 
     //! Format message and its arguments
     template <typename... Args>
-    void Format(const char* pattern, const Args&... args);
+    void Format(std::string_view pattern, const Args&... args);
 
     //! Is the record contains serialized format message and its arguments
     bool IsSerialized() const noexcept { return !buffer.empty(); }
 
     //! Serialize format message and its arguments
     template <typename... Args>
-    void Serialize(const char* pattern, const Args&... args);
+    void Serialize(std::string_view pattern, const Args&... args);
 
     //! Deserialize format message and its arguments
-    std::string Deserialize();
-
-    //! Validate format message and its arguments
-    bool Validate();
+    std::string Deserialize() { return Deserialize(message, buffer, 0, buffer.size()); }
+    static std::string Deserialize(std::string_view pattern, const std::vector<uint8_t> buffer, size_t offset, size_t size);
 
     //! Clear logging record
     void Clear();
