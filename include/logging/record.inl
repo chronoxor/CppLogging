@@ -15,7 +15,7 @@ inline Record::Record()
 {
     logger.reserve(32);
     message.reserve(512);
-    buffer.reserve(1024);
+    buffer.reserve(512);
     raw.reserve(512);
 }
 
