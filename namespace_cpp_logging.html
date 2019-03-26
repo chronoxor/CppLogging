@@ -196,9 +196,84 @@ Enumerations</h2></td></tr>
  }</td></tr>
 <tr class="memdesc:ac4e889a814b82af010ef93be2e618f3b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Logging level enumeration.  <a href="namespace_cpp_logging.html#ac4e889a814b82af010ef93be2e618f3b">More...</a><br /></td></tr>
 <tr class="separator:ac4e889a814b82af010ef93be2e618f3b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad0a038e772114c7703cd5a26060453d5"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_cpp_logging.html#ad0a038e772114c7703cd5a26060453d5">ArgumentType</a> : uint8_t { <br />
+&#160;&#160;<a class="el" href="namespace_cpp_logging.html#ad0a038e772114c7703cd5a26060453d5a54541431724aad8311ebd33006d26660">ArgumentType::ARG_UNKNOWN</a>, 
+<a class="el" href="namespace_cpp_logging.html#ad0a038e772114c7703cd5a26060453d5a090955efa8ad94d96f1f64a5f8556cb9">ArgumentType::ARG_BOOL</a>, 
+<a class="el" href="namespace_cpp_logging.html#ad0a038e772114c7703cd5a26060453d5a1c75719bb982f50b7ab6b189297bbbdb">ArgumentType::ARG_CHAR</a>, 
+<a class="el" href="namespace_cpp_logging.html#ad0a038e772114c7703cd5a26060453d5ad848f531a53743276d80ead655773c97">ArgumentType::ARG_WCHAR</a>, 
+<br />
+&#160;&#160;<a class="el" href="namespace_cpp_logging.html#ad0a038e772114c7703cd5a26060453d5ac88acac43639aedc581bc330cbd5d58c">ArgumentType::ARG_INT8</a>, 
+<a class="el" href="namespace_cpp_logging.html#ad0a038e772114c7703cd5a26060453d5a02d826d641b528289c9af49e096dd7ec">ArgumentType::ARG_UINT8</a>, 
+<a class="el" href="namespace_cpp_logging.html#ad0a038e772114c7703cd5a26060453d5ab274ba44727ae7901ddd9099b101f8f5">ArgumentType::ARG_INT16</a>, 
+<a class="el" href="namespace_cpp_logging.html#ad0a038e772114c7703cd5a26060453d5a612507520d09c92a541227c4256bcd91">ArgumentType::ARG_UINT16</a>, 
+<br />
+&#160;&#160;<a class="el" href="namespace_cpp_logging.html#ad0a038e772114c7703cd5a26060453d5ab7afdbc7cd64d4e8650e81056588f8b0">ArgumentType::ARG_INT32</a>, 
+<a class="el" href="namespace_cpp_logging.html#ad0a038e772114c7703cd5a26060453d5ad6e9bc9419a946e119f1586e72cb27a4">ArgumentType::ARG_UINT32</a>, 
+<a class="el" href="namespace_cpp_logging.html#ad0a038e772114c7703cd5a26060453d5a8c5127a2f63bdaca25b792e17fc7bed6">ArgumentType::ARG_INT64</a>, 
+<a class="el" href="namespace_cpp_logging.html#ad0a038e772114c7703cd5a26060453d5a9f98ecd4c5db167bed0c88700e5b7ded">ArgumentType::ARG_UINT64</a>, 
+<br />
+&#160;&#160;<a class="el" href="namespace_cpp_logging.html#ad0a038e772114c7703cd5a26060453d5a1ba2ad302350984899e34dddf6447619">ArgumentType::ARG_FLOAT</a>, 
+<a class="el" href="namespace_cpp_logging.html#ad0a038e772114c7703cd5a26060453d5a9b7234e01b7798c303c44a7e5623bee1">ArgumentType::ARG_DOUBLE</a>, 
+<a class="el" href="namespace_cpp_logging.html#ad0a038e772114c7703cd5a26060453d5a5b3fbb1e4dac993c4eea2a69a366aedb">ArgumentType::ARG_STRING</a>, 
+<a class="el" href="namespace_cpp_logging.html#ad0a038e772114c7703cd5a26060453d5a4869467eec409fcda6a460bef8b116ce">ArgumentType::ARG_POINTER</a>, 
+<br />
+&#160;&#160;<a class="el" href="namespace_cpp_logging.html#ad0a038e772114c7703cd5a26060453d5a579b756cb2f8c17999c9c9d14f7135fd">ArgumentType::ARG_NAMEDARG</a>, 
+<a class="el" href="namespace_cpp_logging.html#ad0a038e772114c7703cd5a26060453d5af3776a673fe07ff14604eebdfbe9bc7a">ArgumentType::ARG_CUSTOM</a>
+<br />
+ }</td></tr>
+<tr class="separator:ad0a038e772114c7703cd5a26060453d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
+<tr class="memitem:a1af4303419abc7cf1a80e9d2291b5a8f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_cpp_logging.html#a1af4303419abc7cf1a80e9d2291b5a8f">SerializeArgument</a> (std::vector&lt; uint8_t &gt; &amp;buffer)</td></tr>
+<tr class="separator:a1af4303419abc7cf1a80e9d2291b5a8f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aec0f3eba46fa440314f68fd7a0bf3bb4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_cpp_logging.html#aec0f3eba46fa440314f68fd7a0bf3bb4">SerializeArgument</a> (std::vector&lt; uint8_t &gt; &amp;buffer, bool argument)</td></tr>
+<tr class="separator:aec0f3eba46fa440314f68fd7a0bf3bb4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a374f2a9a5148748c7c568d98ca11edeb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_cpp_logging.html#a374f2a9a5148748c7c568d98ca11edeb">SerializeArgument</a> (std::vector&lt; uint8_t &gt; &amp;buffer, char argument)</td></tr>
+<tr class="separator:a374f2a9a5148748c7c568d98ca11edeb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae91f6307747e2f88acf79fe5baded0e0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_cpp_logging.html#ae91f6307747e2f88acf79fe5baded0e0">SerializeArgument</a> (std::vector&lt; uint8_t &gt; &amp;buffer, wchar_t argument)</td></tr>
+<tr class="separator:ae91f6307747e2f88acf79fe5baded0e0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abd3f5cdcaa0cd40d103f41afa06d7d8f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_cpp_logging.html#abd3f5cdcaa0cd40d103f41afa06d7d8f">SerializeArgument</a> (std::vector&lt; uint8_t &gt; &amp;buffer, int8_t argument)</td></tr>
+<tr class="separator:abd3f5cdcaa0cd40d103f41afa06d7d8f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af7d884849ffe9fb52e9463224b6accfd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_cpp_logging.html#af7d884849ffe9fb52e9463224b6accfd">SerializeArgument</a> (std::vector&lt; uint8_t &gt; &amp;buffer, uint8_t argument)</td></tr>
+<tr class="separator:af7d884849ffe9fb52e9463224b6accfd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4ed11428255613eb05c5638ccf035b3f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_cpp_logging.html#a4ed11428255613eb05c5638ccf035b3f">SerializeArgument</a> (std::vector&lt; uint8_t &gt; &amp;buffer, int16_t argument)</td></tr>
+<tr class="separator:a4ed11428255613eb05c5638ccf035b3f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8a827d87c7e384228974180cffc730ee"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_cpp_logging.html#a8a827d87c7e384228974180cffc730ee">SerializeArgument</a> (std::vector&lt; uint8_t &gt; &amp;buffer, uint16_t argument)</td></tr>
+<tr class="separator:a8a827d87c7e384228974180cffc730ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abb7840a3a06fd7f23995c5418c7f22ea"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_cpp_logging.html#abb7840a3a06fd7f23995c5418c7f22ea">SerializeArgument</a> (std::vector&lt; uint8_t &gt; &amp;buffer, int32_t argument)</td></tr>
+<tr class="separator:abb7840a3a06fd7f23995c5418c7f22ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae0a96b4d7efc035c44d4964677b4fe2a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_cpp_logging.html#ae0a96b4d7efc035c44d4964677b4fe2a">SerializeArgument</a> (std::vector&lt; uint8_t &gt; &amp;buffer, uint32_t argument)</td></tr>
+<tr class="separator:ae0a96b4d7efc035c44d4964677b4fe2a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa001ae6378b6eff5f7b4c819d824b4e9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_cpp_logging.html#aa001ae6378b6eff5f7b4c819d824b4e9">SerializeArgument</a> (std::vector&lt; uint8_t &gt; &amp;buffer, int64_t argument)</td></tr>
+<tr class="separator:aa001ae6378b6eff5f7b4c819d824b4e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa14a67ec967303addc6903e974b009bc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_cpp_logging.html#aa14a67ec967303addc6903e974b009bc">SerializeArgument</a> (std::vector&lt; uint8_t &gt; &amp;buffer, uint64_t argument)</td></tr>
+<tr class="separator:aa14a67ec967303addc6903e974b009bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6740054c76d6ec04419308e1f8803444"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_cpp_logging.html#a6740054c76d6ec04419308e1f8803444">SerializeArgument</a> (std::vector&lt; uint8_t &gt; &amp;buffer, float argument)</td></tr>
+<tr class="separator:a6740054c76d6ec04419308e1f8803444"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac063fbd862c4b127ba00099215fee663"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_cpp_logging.html#ac063fbd862c4b127ba00099215fee663">SerializeArgument</a> (std::vector&lt; uint8_t &gt; &amp;buffer, double argument)</td></tr>
+<tr class="separator:ac063fbd862c4b127ba00099215fee663"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad66e12f6113aa8917251d132f74b1c9d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_cpp_logging.html#ad66e12f6113aa8917251d132f74b1c9d">SerializeArgument</a> (std::vector&lt; uint8_t &gt; &amp;buffer, const char *argument)</td></tr>
+<tr class="separator:ad66e12f6113aa8917251d132f74b1c9d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a899841a87be280c164b0877b847c04a5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_cpp_logging.html#a899841a87be280c164b0877b847c04a5">SerializeArgument</a> (std::vector&lt; uint8_t &gt; &amp;buffer, std::string_view argument)</td></tr>
+<tr class="separator:a899841a87be280c164b0877b847c04a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5691623ea38da8f540c323504cb65a0e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_cpp_logging.html#a5691623ea38da8f540c323504cb65a0e">SerializeArgument</a> (std::vector&lt; uint8_t &gt; &amp;buffer, const std::string &amp;argument)</td></tr>
+<tr class="separator:a5691623ea38da8f540c323504cb65a0e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adbf7e33ca1656b2d30fd1cbe784fa4c2"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:adbf7e33ca1656b2d30fd1cbe784fa4c2"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_cpp_logging.html#adbf7e33ca1656b2d30fd1cbe784fa4c2">SerializeArgument</a> (std::vector&lt; uint8_t &gt; &amp;buffer, T *argument)</td></tr>
+<tr class="separator:adbf7e33ca1656b2d30fd1cbe784fa4c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a70e85de9bc8ae3456b66cf5aa26abea9"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a70e85de9bc8ae3456b66cf5aa26abea9"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_cpp_logging.html#a70e85de9bc8ae3456b66cf5aa26abea9">SerializeArgument</a> (std::vector&lt; uint8_t &gt; &amp;buffer, const T *argument)</td></tr>
+<tr class="separator:a70e85de9bc8ae3456b66cf5aa26abea9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a705fd60b2ba7362b7a4d910e0cbfda4c"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a705fd60b2ba7362b7a4d910e0cbfda4c"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_cpp_logging.html#a705fd60b2ba7362b7a4d910e0cbfda4c">SerializeArgument</a> (std::vector&lt; uint8_t &gt; &amp;buffer, const fmt::internal::named_arg&lt; T, char &gt; &amp;argument)</td></tr>
+<tr class="separator:a705fd60b2ba7362b7a4d910e0cbfda4c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0ffa6ecf3382eaeeca8b7236a27b77c3"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a0ffa6ecf3382eaeeca8b7236a27b77c3"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_cpp_logging.html#a0ffa6ecf3382eaeeca8b7236a27b77c3">SerializeArgument</a> (std::vector&lt; uint8_t &gt; &amp;buffer, const T &amp;argument)</td></tr>
+<tr class="separator:a0ffa6ecf3382eaeeca8b7236a27b77c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4e5f0885c695ba8e0ebee43062c745e1"><td class="memTemplParams" colspan="2">template&lt;typename T , typename... Args&gt; </td></tr>
+<tr class="memitem:a4e5f0885c695ba8e0ebee43062c745e1"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_cpp_logging.html#a4e5f0885c695ba8e0ebee43062c745e1">SerializeArgument</a> (std::vector&lt; uint8_t &gt; &amp;buffer, const T &amp;argument, const Args &amp;... args)</td></tr>
+<tr class="separator:a4e5f0885c695ba8e0ebee43062c745e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a483acf995015b6623510acb20a4017d8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_cpp_logging.html#a483acf995015b6623510acb20a4017d8">swap</a> (<a class="el" href="class_cpp_logging_1_1_record.html">Record</a> &amp;record1, <a class="el" href="class_cpp_logging_1_1_record.html">Record</a> &amp;record2) noexcept</td></tr>
 <tr class="separator:a483acf995015b6623510acb20a4017d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -211,6 +286,50 @@ Variables</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>C++ Logging project definitions. </p>
 </div><h2 class="groupheader">Enumeration Type Documentation</h2>
+<a id="ad0a038e772114c7703cd5a26060453d5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad0a038e772114c7703cd5a26060453d5">&#9670;&nbsp;</a></span>ArgumentType</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="namespace_cpp_logging.html#ad0a038e772114c7703cd5a26060453d5">CppLogging::ArgumentType</a> : uint8_t</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">strong</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="ad0a038e772114c7703cd5a26060453d5a54541431724aad8311ebd33006d26660"></a>ARG_UNKNOWN&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ad0a038e772114c7703cd5a26060453d5a090955efa8ad94d96f1f64a5f8556cb9"></a>ARG_BOOL&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ad0a038e772114c7703cd5a26060453d5a1c75719bb982f50b7ab6b189297bbbdb"></a>ARG_CHAR&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ad0a038e772114c7703cd5a26060453d5ad848f531a53743276d80ead655773c97"></a>ARG_WCHAR&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ad0a038e772114c7703cd5a26060453d5ac88acac43639aedc581bc330cbd5d58c"></a>ARG_INT8&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ad0a038e772114c7703cd5a26060453d5a02d826d641b528289c9af49e096dd7ec"></a>ARG_UINT8&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ad0a038e772114c7703cd5a26060453d5ab274ba44727ae7901ddd9099b101f8f5"></a>ARG_INT16&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ad0a038e772114c7703cd5a26060453d5a612507520d09c92a541227c4256bcd91"></a>ARG_UINT16&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ad0a038e772114c7703cd5a26060453d5ab7afdbc7cd64d4e8650e81056588f8b0"></a>ARG_INT32&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ad0a038e772114c7703cd5a26060453d5ad6e9bc9419a946e119f1586e72cb27a4"></a>ARG_UINT32&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ad0a038e772114c7703cd5a26060453d5a8c5127a2f63bdaca25b792e17fc7bed6"></a>ARG_INT64&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ad0a038e772114c7703cd5a26060453d5a9f98ecd4c5db167bed0c88700e5b7ded"></a>ARG_UINT64&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ad0a038e772114c7703cd5a26060453d5a1ba2ad302350984899e34dddf6447619"></a>ARG_FLOAT&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ad0a038e772114c7703cd5a26060453d5a9b7234e01b7798c303c44a7e5623bee1"></a>ARG_DOUBLE&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ad0a038e772114c7703cd5a26060453d5a5b3fbb1e4dac993c4eea2a69a366aedb"></a>ARG_STRING&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ad0a038e772114c7703cd5a26060453d5a4869467eec409fcda6a460bef8b116ce"></a>ARG_POINTER&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ad0a038e772114c7703cd5a26060453d5a579b756cb2f8c17999c9c9d14f7135fd"></a>ARG_NAMEDARG&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ad0a038e772114c7703cd5a26060453d5af3776a673fe07ff14604eebdfbe9bc7a"></a>ARG_CUSTOM&#160;</td><td class="fielddoc"></td></tr>
+</table>
+
+<p class="definition">Definition at line <a class="el" href="record_8inl_source.html#l00022">22</a> of file <a class="el" href="record_8inl_source.html">record.inl</a>.</p>
+
+</div>
+</div>
 <a id="ac4e889a814b82af010ef93be2e618f3b"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ac4e889a814b82af010ef93be2e618f3b">&#9670;&nbsp;</a></span>Level</h2>
 
@@ -294,6 +413,848 @@ Variables</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Function Documentation</h2>
+<a id="a1af4303419abc7cf1a80e9d2291b5a8f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1af4303419abc7cf1a80e9d2291b5a8f">&#9670;&nbsp;</a></span>SerializeArgument() <span class="overload">[1/22]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void CppLogging::SerializeArgument </td>
+          <td>(</td>
+          <td class="paramtype">std::vector&lt; uint8_t &gt; &amp;&#160;</td>
+          <td class="paramname"><em>buffer</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="record_8inl_source.html#l00044">44</a> of file <a class="el" href="record_8inl_source.html">record.inl</a>.</p>
+
+</div>
+</div>
+<a id="aec0f3eba46fa440314f68fd7a0bf3bb4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aec0f3eba46fa440314f68fd7a0bf3bb4">&#9670;&nbsp;</a></span>SerializeArgument() <span class="overload">[2/22]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void CppLogging::SerializeArgument </td>
+          <td>(</td>
+          <td class="paramtype">std::vector&lt; uint8_t &gt; &amp;&#160;</td>
+          <td class="paramname"><em>buffer</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>argument</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="record_8inl_source.html#l00048">48</a> of file <a class="el" href="record_8inl_source.html">record.inl</a>.</p>
+
+</div>
+</div>
+<a id="a374f2a9a5148748c7c568d98ca11edeb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a374f2a9a5148748c7c568d98ca11edeb">&#9670;&nbsp;</a></span>SerializeArgument() <span class="overload">[3/22]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void CppLogging::SerializeArgument </td>
+          <td>(</td>
+          <td class="paramtype">std::vector&lt; uint8_t &gt; &amp;&#160;</td>
+          <td class="paramname"><em>buffer</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char&#160;</td>
+          <td class="paramname"><em>argument</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="record_8inl_source.html#l00061">61</a> of file <a class="el" href="record_8inl_source.html">record.inl</a>.</p>
+
+</div>
+</div>
+<a id="ae91f6307747e2f88acf79fe5baded0e0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae91f6307747e2f88acf79fe5baded0e0">&#9670;&nbsp;</a></span>SerializeArgument() <span class="overload">[4/22]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void CppLogging::SerializeArgument </td>
+          <td>(</td>
+          <td class="paramtype">std::vector&lt; uint8_t &gt; &amp;&#160;</td>
+          <td class="paramname"><em>buffer</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">wchar_t&#160;</td>
+          <td class="paramname"><em>argument</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="record_8inl_source.html#l00074">74</a> of file <a class="el" href="record_8inl_source.html">record.inl</a>.</p>
+
+</div>
+</div>
+<a id="abd3f5cdcaa0cd40d103f41afa06d7d8f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abd3f5cdcaa0cd40d103f41afa06d7d8f">&#9670;&nbsp;</a></span>SerializeArgument() <span class="overload">[5/22]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void CppLogging::SerializeArgument </td>
+          <td>(</td>
+          <td class="paramtype">std::vector&lt; uint8_t &gt; &amp;&#160;</td>
+          <td class="paramname"><em>buffer</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int8_t&#160;</td>
+          <td class="paramname"><em>argument</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="record_8inl_source.html#l00087">87</a> of file <a class="el" href="record_8inl_source.html">record.inl</a>.</p>
+
+</div>
+</div>
+<a id="af7d884849ffe9fb52e9463224b6accfd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af7d884849ffe9fb52e9463224b6accfd">&#9670;&nbsp;</a></span>SerializeArgument() <span class="overload">[6/22]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void CppLogging::SerializeArgument </td>
+          <td>(</td>
+          <td class="paramtype">std::vector&lt; uint8_t &gt; &amp;&#160;</td>
+          <td class="paramname"><em>buffer</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>argument</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="record_8inl_source.html#l00098">98</a> of file <a class="el" href="record_8inl_source.html">record.inl</a>.</p>
+
+</div>
+</div>
+<a id="a4ed11428255613eb05c5638ccf035b3f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4ed11428255613eb05c5638ccf035b3f">&#9670;&nbsp;</a></span>SerializeArgument() <span class="overload">[7/22]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void CppLogging::SerializeArgument </td>
+          <td>(</td>
+          <td class="paramtype">std::vector&lt; uint8_t &gt; &amp;&#160;</td>
+          <td class="paramname"><em>buffer</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int16_t&#160;</td>
+          <td class="paramname"><em>argument</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="record_8inl_source.html#l00109">109</a> of file <a class="el" href="record_8inl_source.html">record.inl</a>.</p>
+
+</div>
+</div>
+<a id="a8a827d87c7e384228974180cffc730ee"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8a827d87c7e384228974180cffc730ee">&#9670;&nbsp;</a></span>SerializeArgument() <span class="overload">[8/22]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void CppLogging::SerializeArgument </td>
+          <td>(</td>
+          <td class="paramtype">std::vector&lt; uint8_t &gt; &amp;&#160;</td>
+          <td class="paramname"><em>buffer</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint16_t&#160;</td>
+          <td class="paramname"><em>argument</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="record_8inl_source.html#l00121">121</a> of file <a class="el" href="record_8inl_source.html">record.inl</a>.</p>
+
+</div>
+</div>
+<a id="abb7840a3a06fd7f23995c5418c7f22ea"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abb7840a3a06fd7f23995c5418c7f22ea">&#9670;&nbsp;</a></span>SerializeArgument() <span class="overload">[9/22]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void CppLogging::SerializeArgument </td>
+          <td>(</td>
+          <td class="paramtype">std::vector&lt; uint8_t &gt; &amp;&#160;</td>
+          <td class="paramname"><em>buffer</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int32_t&#160;</td>
+          <td class="paramname"><em>argument</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="record_8inl_source.html#l00132">132</a> of file <a class="el" href="record_8inl_source.html">record.inl</a>.</p>
+
+</div>
+</div>
+<a id="ae0a96b4d7efc035c44d4964677b4fe2a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae0a96b4d7efc035c44d4964677b4fe2a">&#9670;&nbsp;</a></span>SerializeArgument() <span class="overload">[10/22]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void CppLogging::SerializeArgument </td>
+          <td>(</td>
+          <td class="paramtype">std::vector&lt; uint8_t &gt; &amp;&#160;</td>
+          <td class="paramname"><em>buffer</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>argument</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="record_8inl_source.html#l00143">143</a> of file <a class="el" href="record_8inl_source.html">record.inl</a>.</p>
+
+</div>
+</div>
+<a id="aa001ae6378b6eff5f7b4c819d824b4e9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa001ae6378b6eff5f7b4c819d824b4e9">&#9670;&nbsp;</a></span>SerializeArgument() <span class="overload">[11/22]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void CppLogging::SerializeArgument </td>
+          <td>(</td>
+          <td class="paramtype">std::vector&lt; uint8_t &gt; &amp;&#160;</td>
+          <td class="paramname"><em>buffer</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int64_t&#160;</td>
+          <td class="paramname"><em>argument</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="record_8inl_source.html#l00154">154</a> of file <a class="el" href="record_8inl_source.html">record.inl</a>.</p>
+
+</div>
+</div>
+<a id="aa14a67ec967303addc6903e974b009bc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa14a67ec967303addc6903e974b009bc">&#9670;&nbsp;</a></span>SerializeArgument() <span class="overload">[12/22]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void CppLogging::SerializeArgument </td>
+          <td>(</td>
+          <td class="paramtype">std::vector&lt; uint8_t &gt; &amp;&#160;</td>
+          <td class="paramname"><em>buffer</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint64_t&#160;</td>
+          <td class="paramname"><em>argument</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="record_8inl_source.html#l00165">165</a> of file <a class="el" href="record_8inl_source.html">record.inl</a>.</p>
+
+</div>
+</div>
+<a id="a6740054c76d6ec04419308e1f8803444"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6740054c76d6ec04419308e1f8803444">&#9670;&nbsp;</a></span>SerializeArgument() <span class="overload">[13/22]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void CppLogging::SerializeArgument </td>
+          <td>(</td>
+          <td class="paramtype">std::vector&lt; uint8_t &gt; &amp;&#160;</td>
+          <td class="paramname"><em>buffer</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>argument</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="record_8inl_source.html#l00176">176</a> of file <a class="el" href="record_8inl_source.html">record.inl</a>.</p>
+
+</div>
+</div>
+<a id="ac063fbd862c4b127ba00099215fee663"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac063fbd862c4b127ba00099215fee663">&#9670;&nbsp;</a></span>SerializeArgument() <span class="overload">[14/22]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void CppLogging::SerializeArgument </td>
+          <td>(</td>
+          <td class="paramtype">std::vector&lt; uint8_t &gt; &amp;&#160;</td>
+          <td class="paramname"><em>buffer</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>argument</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="record_8inl_source.html#l00187">187</a> of file <a class="el" href="record_8inl_source.html">record.inl</a>.</p>
+
+</div>
+</div>
+<a id="ad66e12f6113aa8917251d132f74b1c9d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad66e12f6113aa8917251d132f74b1c9d">&#9670;&nbsp;</a></span>SerializeArgument() <span class="overload">[15/22]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void CppLogging::SerializeArgument </td>
+          <td>(</td>
+          <td class="paramtype">std::vector&lt; uint8_t &gt; &amp;&#160;</td>
+          <td class="paramname"><em>buffer</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>argument</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="record_8inl_source.html#l00198">198</a> of file <a class="el" href="record_8inl_source.html">record.inl</a>.</p>
+
+</div>
+</div>
+<a id="a899841a87be280c164b0877b847c04a5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a899841a87be280c164b0877b847c04a5">&#9670;&nbsp;</a></span>SerializeArgument() <span class="overload">[16/22]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void CppLogging::SerializeArgument </td>
+          <td>(</td>
+          <td class="paramtype">std::vector&lt; uint8_t &gt; &amp;&#160;</td>
+          <td class="paramname"><em>buffer</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::string_view&#160;</td>
+          <td class="paramname"><em>argument</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="record_8inl_source.html#l00216">216</a> of file <a class="el" href="record_8inl_source.html">record.inl</a>.</p>
+
+</div>
+</div>
+<a id="a5691623ea38da8f540c323504cb65a0e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5691623ea38da8f540c323504cb65a0e">&#9670;&nbsp;</a></span>SerializeArgument() <span class="overload">[17/22]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void CppLogging::SerializeArgument </td>
+          <td>(</td>
+          <td class="paramtype">std::vector&lt; uint8_t &gt; &amp;&#160;</td>
+          <td class="paramname"><em>buffer</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>argument</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="record_8inl_source.html#l00234">234</a> of file <a class="el" href="record_8inl_source.html">record.inl</a>.</p>
+
+</div>
+</div>
+<a id="adbf7e33ca1656b2d30fd1cbe784fa4c2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adbf7e33ca1656b2d30fd1cbe784fa4c2">&#9670;&nbsp;</a></span>SerializeArgument() <span class="overload">[18/22]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void CppLogging::SerializeArgument </td>
+          <td>(</td>
+          <td class="paramtype">std::vector&lt; uint8_t &gt; &amp;&#160;</td>
+          <td class="paramname"><em>buffer</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">T *&#160;</td>
+          <td class="paramname"><em>argument</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="record_8inl_source.html#l00253">253</a> of file <a class="el" href="record_8inl_source.html">record.inl</a>.</p>
+
+</div>
+</div>
+<a id="a70e85de9bc8ae3456b66cf5aa26abea9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a70e85de9bc8ae3456b66cf5aa26abea9">&#9670;&nbsp;</a></span>SerializeArgument() <span class="overload">[19/22]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void CppLogging::SerializeArgument </td>
+          <td>(</td>
+          <td class="paramtype">std::vector&lt; uint8_t &gt; &amp;&#160;</td>
+          <td class="paramname"><em>buffer</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const T *&#160;</td>
+          <td class="paramname"><em>argument</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="record_8inl_source.html#l00267">267</a> of file <a class="el" href="record_8inl_source.html">record.inl</a>.</p>
+
+</div>
+</div>
+<a id="a705fd60b2ba7362b7a4d910e0cbfda4c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a705fd60b2ba7362b7a4d910e0cbfda4c">&#9670;&nbsp;</a></span>SerializeArgument() <span class="overload">[20/22]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void CppLogging::SerializeArgument </td>
+          <td>(</td>
+          <td class="paramtype">std::vector&lt; uint8_t &gt; &amp;&#160;</td>
+          <td class="paramname"><em>buffer</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const fmt::internal::named_arg&lt; T, char &gt; &amp;&#160;</td>
+          <td class="paramname"><em>argument</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="record_8inl_source.html#l00281">281</a> of file <a class="el" href="record_8inl_source.html">record.inl</a>.</p>
+
+</div>
+</div>
+<a id="a0ffa6ecf3382eaeeca8b7236a27b77c3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0ffa6ecf3382eaeeca8b7236a27b77c3">&#9670;&nbsp;</a></span>SerializeArgument() <span class="overload">[21/22]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void CppLogging::SerializeArgument </td>
+          <td>(</td>
+          <td class="paramtype">std::vector&lt; uint8_t &gt; &amp;&#160;</td>
+          <td class="paramname"><em>buffer</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const T &amp;&#160;</td>
+          <td class="paramname"><em>argument</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="record_8inl_source.html#l00302">302</a> of file <a class="el" href="record_8inl_source.html">record.inl</a>.</p>
+
+</div>
+</div>
+<a id="a4e5f0885c695ba8e0ebee43062c745e1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4e5f0885c695ba8e0ebee43062c745e1">&#9670;&nbsp;</a></span>SerializeArgument() <span class="overload">[22/22]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename... Args&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void CppLogging::SerializeArgument </td>
+          <td>(</td>
+          <td class="paramtype">std::vector&lt; uint8_t &gt; &amp;&#160;</td>
+          <td class="paramname"><em>buffer</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const T &amp;&#160;</td>
+          <td class="paramname"><em>argument</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const Args &amp;...&#160;</td>
+          <td class="paramname"><em>args</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="record_8inl_source.html#l00316">316</a> of file <a class="el" href="record_8inl_source.html">record.inl</a>.</p>
+
+</div>
+</div>
 <a id="a483acf995015b6623510acb20a4017d8"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a483acf995015b6623510acb20a4017d8">&#9670;&nbsp;</a></span>swap()</h2>
 
@@ -328,7 +1289,7 @@ Variables</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="record_8inl_source.html#l00051">51</a> of file <a class="el" href="record_8inl_source.html">record.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="record_8inl_source.html#l00378">378</a> of file <a class="el" href="record_8inl_source.html">record.inl</a>.</p>
 
 </div>
 </div>

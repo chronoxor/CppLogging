@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['level',['Level',['../namespace_cpp_logging.html#ac4e889a814b82af010ef93be2e618f3b',1,'CppLogging']]]
+  ['argumenttype',['ArgumentType',['../namespace_cpp_logging.html#ad0a038e772114c7703cd5a26060453d5',1,'CppLogging']]]
 ];
