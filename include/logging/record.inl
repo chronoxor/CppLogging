@@ -328,6 +328,15 @@ inline Record& Record::StoreFormat(std::string_view pattern, const Args&... args
     return *this;
 }
 
+template <typename Arg>
+inline Record& Record::StoreCustom(const Arg& arg)
+{
+    // Serialize argument
+    SerializeArgument(*this, arg);
+
+    return *this;
+}
+
 template <typename... Args>
 inline Record& Record::StoreCustomFormat(std::string_view pattern, const Args&... args)
 {

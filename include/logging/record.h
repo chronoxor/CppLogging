@@ -76,6 +76,8 @@ public:
     Record& StoreFormat(std::string_view pattern, const Args&... args);
 
     //! Store custom format message and its arguments
+    template <typename Arg>
+    Record& StoreCustom(const Arg& arg);
     template <typename... Args>
     Record& StoreCustomFormat(std::string_view pattern, const Args&... args);
 
