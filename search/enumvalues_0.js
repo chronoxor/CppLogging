@@ -10,6 +10,7 @@ var searchData=
   ['arg_5fint32',['ARG_INT32',['../namespace_cpp_logging.html#ad0a038e772114c7703cd5a26060453d5ab7afdbc7cd64d4e8650e81056588f8b0',1,'CppLogging']]],
   ['arg_5fint64',['ARG_INT64',['../namespace_cpp_logging.html#ad0a038e772114c7703cd5a26060453d5a8c5127a2f63bdaca25b792e17fc7bed6',1,'CppLogging']]],
   ['arg_5fint8',['ARG_INT8',['../namespace_cpp_logging.html#ad0a038e772114c7703cd5a26060453d5ac88acac43639aedc581bc330cbd5d58c',1,'CppLogging']]],
+  ['arg_5flist',['ARG_LIST',['../namespace_cpp_logging.html#ad0a038e772114c7703cd5a26060453d5aa5b3f06b332b6e66e6588e5a896350d5',1,'CppLogging']]],
   ['arg_5fnamedarg',['ARG_NAMEDARG',['../namespace_cpp_logging.html#ad0a038e772114c7703cd5a26060453d5a579b756cb2f8c17999c9c9d14f7135fd',1,'CppLogging']]],
   ['arg_5fpointer',['ARG_POINTER',['../namespace_cpp_logging.html#ad0a038e772114c7703cd5a26060453d5a4869467eec409fcda6a460bef8b116ce',1,'CppLogging']]],
   ['arg_5fstring',['ARG_STRING',['../namespace_cpp_logging.html#ad0a038e772114c7703cd5a26060453d5a5b3fbb1e4dac993c4eea2a69a366aedb',1,'CppLogging']]],
