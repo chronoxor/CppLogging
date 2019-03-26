@@ -141,6 +141,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ac539aeb4129632d33ae7205ddd7b9589"><td class="memTemplParams" colspan="2">template&lt;typename... Args&gt; </td></tr>
 <tr class="memitem:ac539aeb4129632d33ae7205ddd7b9589"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="class_cpp_logging_1_1_record.html">Record</a> &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="class_cpp_logging_1_1_record.html#ac539aeb4129632d33ae7205ddd7b9589">StoreListNext</a> (const Args &amp;...args)</td></tr>
 <tr class="separator:ac539aeb4129632d33ae7205ddd7b9589"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a26d69881643d5a4d9f06aba6b738a626"><td class="memTemplParams" colspan="2">template&lt;typename... Args&gt; </td></tr>
+<tr class="memitem:a26d69881643d5a4d9f06aba6b738a626"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="class_cpp_logging_1_1_record.html">Record</a> &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="class_cpp_logging_1_1_record.html#a26d69881643d5a4d9f06aba6b738a626">StoreListNext</a> (std::string_view pattern, const Args &amp;...args)</td></tr>
+<tr class="separator:a26d69881643d5a4d9f06aba6b738a626"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a412f1f2fe2c6e233b2b774b7d7ae9a98"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_cpp_logging_1_1_record.html">Record</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cpp_logging_1_1_record.html#a412f1f2fe2c6e233b2b774b7d7ae9a98">StoreListEnd</a> (size_t begin)</td></tr>
 <tr class="separator:a412f1f2fe2c6e233b2b774b7d7ae9a98"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaa77e1fc13a990ebed352efb4f27f45b"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cpp_logging_1_1_record.html#aaa77e1fc13a990ebed352efb4f27f45b">RestoreFormat</a> () const </td></tr>
@@ -324,7 +327,7 @@ Friends</h2></td></tr>
 
 <p>Clear logging record. </p>
 
-<p>Definition at line <a class="el" href="record_8inl_source.html#l00389">389</a> of file <a class="el" href="record_8inl_source.html">record.inl</a>.</p>
+<p>Definition at line <a class="el" href="record_8inl_source.html#l00395">395</a> of file <a class="el" href="record_8inl_source.html">record.inl</a>.</p>
 
 </div>
 </div>
@@ -466,7 +469,7 @@ template&lt;typename... Args&gt; </div>
 
 <p>Restore format message and its arguments. </p>
 
-<p>Definition at line <a class="el" href="record_8h_source.html#l00089">89</a> of file <a class="el" href="record_8h_source.html">record.h</a>.</p>
+<p>Definition at line <a class="el" href="record_8h_source.html#l00091">91</a> of file <a class="el" href="record_8h_source.html">record.h</a>.</p>
 
 </div>
 </div>
@@ -652,7 +655,7 @@ template&lt;typename... Args&gt; </div>
 </div><div class="memdoc">
 <dl><dt><b>Examples: </b></dt><dd><a class="el" href="format_8cpp-example.html#a4">format.cpp</a>.</dd>
 </dl>
-<p>Definition at line <a class="el" href="record_8inl_source.html#l00381">381</a> of file <a class="el" href="record_8inl_source.html">record.inl</a>.</p>
+<p>Definition at line <a class="el" href="record_8inl_source.html#l00387">387</a> of file <a class="el" href="record_8inl_source.html">record.inl</a>.</p>
 
 </div>
 </div>
@@ -685,6 +688,44 @@ template&lt;typename... Args&gt; </div>
 
 </div>
 </div>
+<a class="anchor" id="a26d69881643d5a4d9f06aba6b738a626"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename... Args&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_cpp_logging_1_1_record.html">Record</a> &amp; CppLogging::Record::StoreListNext </td>
+          <td>(</td>
+          <td class="paramtype">std::string_view&#160;</td>
+          <td class="paramname"><em>pattern</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const Args &amp;...&#160;</td>
+          <td class="paramname"><em>args</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="record_8inl_source.html#l00382">382</a> of file <a class="el" href="record_8inl_source.html">record.inl</a>.</p>
+
+</div>
+</div>
 <a class="anchor" id="a05103353f6464abaed30526a45b6ad39"></a>
 <div class="memitem">
 <div class="memproto">
@@ -709,7 +750,7 @@ template&lt;typename... Args&gt; </div>
 
 <p>Swap two instances. </p>
 
-<p>Definition at line <a class="el" href="record_8inl_source.html#l00400">400</a> of file <a class="el" href="record_8inl_source.html">record.inl</a>.</p>
+<p>Definition at line <a class="el" href="record_8inl_source.html#l00406">406</a> of file <a class="el" href="record_8inl_source.html">record.inl</a>.</p>
 
 </div>
 </div>
@@ -746,7 +787,7 @@ template&lt;typename... Args&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="record_8inl_source.html#l00412">412</a> of file <a class="el" href="record_8inl_source.html">record.inl</a>.</p>
+<p>Definition at line <a class="el" href="record_8inl_source.html#l00418">418</a> of file <a class="el" href="record_8inl_source.html">record.inl</a>.</p>
 
 </div>
 </div>
