@@ -64,26 +64,23 @@ public:
     Record& operator=(const Record&) = default;
     Record& operator=(Record&&) = default;
 
-    //! Format message and its arguments
-    template <typename... Args>
-    void Format(std::string_view pattern, const Args&... args);
-
     //! Is the record contains stored format message and its arguments
     bool IsFormatStored() const noexcept { return !buffer.empty(); }
 
+    //! Format message and its arguments
+    template <typename... Args>
+    Record& Format(std::string_view pattern, const Args&... args);
+
     //! Store format message and its arguments
     template <typename... Args>
-    void StoreFormat(std::string_view pattern, const Args&... args);
+    Record& StoreFormat(std::string_view pattern, const Args&... args);
+
+    //! Store custom format message and its arguments
+    template <typename... Args>
+    Record& StoreCustomFormat(std::string_view pattern, const Args&... args);
 
     //! Restore format message and its arguments
     std::string RestoreFormat() { return RestoreFormat(message, buffer, 0, buffer.size()); }
-
-    //! Store format of the custom data type
-    template <typename... Args>
-    static void StoreFormat(std::vector<uint8_t>& buffer, std::string_view pattern, const Args&... args);
-
-    //! Restore format of the custom data type
-    static std::string RestoreFormat(std::string_view pattern, const std::vector<uint8_t> buffer, size_t offset, size_t size);
 
     //! Clear logging record
     void Clear();
@@ -91,6 +88,10 @@ public:
     //! Swap two instances
     void swap(Record& record) noexcept;
     friend void swap(Record& record1, Record& record2) noexcept;
+
+private:
+    //! Restore format of the custom data type
+    static std::string RestoreFormat(std::string_view pattern, const std::vector<uint8_t> buffer, size_t offset, size_t size);
 };
 
 } // namespace CppLogging

@@ -13,10 +13,11 @@ class Date
 public:
     Date(int year, int month, int day) : _year(year), _month(month), _day(day) {}
 
-    void StoreFormat(std::vector<uint8_t>& buffer) const { CppLogging::Record::StoreFormat(buffer, "{}-{}-{}", _year, _month, _day); }
-
     friend std::ostream& operator<<(std::ostream& os, const Date& date)
     { return os << date._year << '-' << date._month << '-' << date._day; }
+
+    friend CppLogging::Record& operator<<(CppLogging::Record& record, const Date& date)
+    { return record.StoreCustomFormat("{}-{}-{}", date._year, date._month, date._day); }
 
 private:
     int _year, _month, _day;
