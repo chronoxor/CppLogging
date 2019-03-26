@@ -83,6 +83,8 @@ public:
     size_t StoreListBegin();
     template <typename... Args>
     Record& StoreListNext(const Args&... args);
+    template <typename... Args>
+    Record& StoreListNext(std::string_view pattern, const Args&... args);
     Record& StoreListEnd(size_t begin);
 
     //! Restore format message and its arguments

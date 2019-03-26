@@ -378,6 +378,12 @@ inline Record& Record::StoreListNext(const Args&... args)
     return *this;
 }
 
+template <typename... Args>
+inline Record& Record::StoreListNext(std::string_view pattern, const Args&... args)
+{
+    return StoreCustomFormat(pattern, args...);
+}
+
 inline Record& Record::StoreListEnd(size_t begin)
 {
     size_t size = buffer.size() - begin;
