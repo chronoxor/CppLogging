@@ -108,9 +108,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a1328d4b51ae767ebbf1075db5ec4d32b"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="class_cpp_logging_1_1_record.html">Record</a> &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="class_cpp_logging_1_1_record.html#a1328d4b51ae767ebbf1075db5ec4d32b">StoreFormat</a> (std::string_view pattern, const Args &amp;... args)</td></tr>
 <tr class="memdesc:a1328d4b51ae767ebbf1075db5ec4d32b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Store format message and its arguments.  <a href="#a1328d4b51ae767ebbf1075db5ec4d32b">More...</a><br /></td></tr>
 <tr class="separator:a1328d4b51ae767ebbf1075db5ec4d32b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaae5bbd73983a791ba99f716a441e6a6"><td class="memTemplParams" colspan="2">template&lt;typename Arg &gt; </td></tr>
+<tr class="memitem:aaae5bbd73983a791ba99f716a441e6a6"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="class_cpp_logging_1_1_record.html">Record</a> &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="class_cpp_logging_1_1_record.html#aaae5bbd73983a791ba99f716a441e6a6">StoreCustom</a> (const Arg &amp;arg)</td></tr>
+<tr class="memdesc:aaae5bbd73983a791ba99f716a441e6a6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Store custom format message and its arguments.  <a href="#aaae5bbd73983a791ba99f716a441e6a6">More...</a><br /></td></tr>
+<tr class="separator:aaae5bbd73983a791ba99f716a441e6a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a68afce78439776cd9dfc91d043e3215e"><td class="memTemplParams" colspan="2">template&lt;typename... Args&gt; </td></tr>
 <tr class="memitem:a68afce78439776cd9dfc91d043e3215e"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="class_cpp_logging_1_1_record.html">Record</a> &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="class_cpp_logging_1_1_record.html#a68afce78439776cd9dfc91d043e3215e">StoreCustomFormat</a> (std::string_view pattern, const Args &amp;... args)</td></tr>
-<tr class="memdesc:a68afce78439776cd9dfc91d043e3215e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Store custom format message and its arguments.  <a href="#a68afce78439776cd9dfc91d043e3215e">More...</a><br /></td></tr>
 <tr class="separator:a68afce78439776cd9dfc91d043e3215e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abc400115d65d1c730800bd76a4432589"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cpp_logging_1_1_record.html#abc400115d65d1c730800bd76a4432589">StoreListBegin</a> ()</td></tr>
 <tr class="memdesc:abc400115d65d1c730800bd76a4432589"><td class="mdescLeft">&#160;</td><td class="mdescRight">Store list format message.  <a href="#abc400115d65d1c730800bd76a4432589">More...</a><br /></td></tr>
@@ -315,7 +318,7 @@ Friends</h2></td></tr>
 
 <p>Clear logging record. </p>
 
-<p class="definition">Definition at line <a class="el" href="record_8inl_source.html#l00395">395</a> of file <a class="el" href="record_8inl_source.html">record.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="record_8inl_source.html#l00404">404</a> of file <a class="el" href="record_8inl_source.html">record.inl</a>.</p>
 
 </div>
 </div>
@@ -467,7 +470,7 @@ template&lt;typename... Args&gt; </div>
 
 <p>Restore format message and its arguments. </p>
 
-<p class="definition">Definition at line <a class="el" href="record_8h_source.html#l00091">91</a> of file <a class="el" href="record_8h_source.html">record.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="record_8h_source.html#l00093">93</a> of file <a class="el" href="record_8h_source.html">record.h</a>.</p>
 
 </div>
 </div>
@@ -523,6 +526,38 @@ template&lt;typename... Args&gt; </div>
 
 </div>
 </div>
+<a id="aaae5bbd73983a791ba99f716a441e6a6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaae5bbd73983a791ba99f716a441e6a6">&#9670;&nbsp;</a></span>StoreCustom()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Arg &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_cpp_logging_1_1_record.html">Record</a> &amp; CppLogging::Record::StoreCustom </td>
+          <td>(</td>
+          <td class="paramtype">const Arg &amp;&#160;</td>
+          <td class="paramname"><em>arg</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Store custom format message and its arguments. </p>
+
+<p class="definition">Definition at line <a class="el" href="record_8inl_source.html#l00332">332</a> of file <a class="el" href="record_8inl_source.html">record.inl</a>.</p>
+
+</div>
+</div>
 <a id="a68afce78439776cd9dfc91d043e3215e"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a68afce78439776cd9dfc91d043e3215e">&#9670;&nbsp;</a></span>StoreCustomFormat()</h2>
 
@@ -558,12 +593,10 @@ template&lt;typename... Args&gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-
-<p>Store custom format message and its arguments. </p>
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="format_8cpp-example.html#a1">format.cpp</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="record_8inl_source.html#l00332">332</a> of file <a class="el" href="record_8inl_source.html">record.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="record_8inl_source.html#l00341">341</a> of file <a class="el" href="record_8inl_source.html">record.inl</a>.</p>
 
 </div>
 </div>
@@ -636,7 +669,7 @@ template&lt;typename... Args&gt; </div>
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="format_8cpp-example.html#a2">format.cpp</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="record_8inl_source.html#l00361">361</a> of file <a class="el" href="record_8inl_source.html">record.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="record_8inl_source.html#l00370">370</a> of file <a class="el" href="record_8inl_source.html">record.inl</a>.</p>
 
 </div>
 </div>
@@ -666,7 +699,7 @@ template&lt;typename... Args&gt; </div>
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="format_8cpp-example.html#a4">format.cpp</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="record_8inl_source.html#l00387">387</a> of file <a class="el" href="record_8inl_source.html">record.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="record_8inl_source.html#l00396">396</a> of file <a class="el" href="record_8inl_source.html">record.inl</a>.</p>
 
 </div>
 </div>
@@ -698,7 +731,7 @@ template&lt;typename... Args&gt; </div>
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="format_8cpp-example.html#a3">format.cpp</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="record_8inl_source.html#l00373">373</a> of file <a class="el" href="record_8inl_source.html">record.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="record_8inl_source.html#l00382">382</a> of file <a class="el" href="record_8inl_source.html">record.inl</a>.</p>
 
 </div>
 </div>
@@ -738,7 +771,7 @@ template&lt;typename... Args&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="record_8inl_source.html#l00382">382</a> of file <a class="el" href="record_8inl_source.html">record.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="record_8inl_source.html#l00391">391</a> of file <a class="el" href="record_8inl_source.html">record.inl</a>.</p>
 
 </div>
 </div>
@@ -768,7 +801,7 @@ template&lt;typename... Args&gt; </div>
 
 <p>Swap two instances. </p>
 
-<p class="definition">Definition at line <a class="el" href="record_8inl_source.html#l00406">406</a> of file <a class="el" href="record_8inl_source.html">record.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="record_8inl_source.html#l00415">415</a> of file <a class="el" href="record_8inl_source.html">record.inl</a>.</p>
 
 </div>
 </div>
@@ -807,7 +840,7 @@ template&lt;typename... Args&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="record_8inl_source.html#l00418">418</a> of file <a class="el" href="record_8inl_source.html">record.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="record_8inl_source.html#l00427">427</a> of file <a class="el" href="record_8inl_source.html">record.inl</a>.</p>
 
 </div>
 </div>
