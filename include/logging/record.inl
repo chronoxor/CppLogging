@@ -379,7 +379,7 @@ inline size_t Record::StoreListBegin()
 }
 
 template <typename... Args>
-inline Record& Record::StoreListNext(const Args&... args)
+inline Record& Record::StoreList(const Args&... args)
 {
     // Serialize list arguments
     SerializeArgument(*this, args...);
@@ -388,7 +388,7 @@ inline Record& Record::StoreListNext(const Args&... args)
 }
 
 template <typename... Args>
-inline Record& Record::StoreListNext(std::string_view pattern, const Args&... args)
+inline Record& Record::StoreListFormat(std::string_view pattern, const Args&... args)
 {
     return StoreCustomFormat(pattern, args...);
 }

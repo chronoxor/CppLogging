@@ -84,9 +84,9 @@ public:
     //! Store list format message
     size_t StoreListBegin();
     template <typename... Args>
-    Record& StoreListNext(const Args&... args);
+    Record& StoreList(const Args&... args);
     template <typename... Args>
-    Record& StoreListNext(std::string_view pattern, const Args&... args);
+    Record& StoreListFormat(std::string_view pattern, const Args&... args);
     Record& StoreListEnd(size_t begin);
 
     //! Restore format message and its arguments

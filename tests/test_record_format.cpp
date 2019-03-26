@@ -36,13 +36,13 @@ public:
     friend CppLogging::Record& operator<<(CppLogging::Record& record, const DateTime& datetime)
     {
         const size_t begin = record.StoreListBegin();
-        record.StoreListNext(datetime._date);
-        record.StoreListNext(' ');
-        record.StoreListNext(datetime._hours);
-        record.StoreListNext(':');
-        record.StoreListNext(datetime._minutes);
-        record.StoreListNext(':');
-        record.StoreListNext(datetime._seconds);
+        record.StoreList(datetime._date);
+        record.StoreList(' ');
+        record.StoreList(datetime._hours);
+        record.StoreList(':');
+        record.StoreList(datetime._minutes);
+        record.StoreList(':');
+        record.StoreList(datetime._seconds);
         return record.StoreListEnd(begin);
     }
 
