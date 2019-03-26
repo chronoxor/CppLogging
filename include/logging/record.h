@@ -79,8 +79,17 @@ public:
     template <typename... Args>
     Record& StoreCustomFormat(std::string_view pattern, const Args&... args);
 
+    //! Store list format message
+    size_t StoreListBegin();
+    template <typename... Args>
+    Record& StoreListNext(const Args&... args);
+    Record& StoreListEnd(size_t begin);
+
     //! Restore format message and its arguments
-    std::string RestoreFormat() { return RestoreFormat(message, buffer, 0, buffer.size()); }
+    std::string RestoreFormat() const { return RestoreFormat(message, buffer, 0, buffer.size()); }
+
+    //! Restore format of the custom data type
+    static std::string RestoreFormat(std::string_view pattern, const std::vector<uint8_t> buffer, size_t offset, size_t size);
 
     //! Clear logging record
     void Clear();
@@ -88,10 +97,6 @@ public:
     //! Swap two instances
     void swap(Record& record) noexcept;
     friend void swap(Record& record1, Record& record2) noexcept;
-
-private:
-    //! Restore format of the custom data type
-    static std::string RestoreFormat(std::string_view pattern, const std::vector<uint8_t> buffer, size_t offset, size_t size);
 };
 
 } // namespace CppLogging

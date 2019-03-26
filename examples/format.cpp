@@ -23,6 +23,32 @@ private:
     int _year, _month, _day;
 };
 
+class DateTime
+{
+public:
+    DateTime(Date date, int hours, int minutes, int seconds) : _date(date), _hours(hours), _minutes(minutes), _seconds(seconds) {}
+
+    friend std::ostream& operator<<(std::ostream& os, const DateTime& datetime)
+    { return os << datetime._date << " " << datetime._hours << ':' << datetime._minutes << ':' << datetime._seconds; }
+
+    friend CppLogging::Record& operator<<(CppLogging::Record& record, const DateTime& datetime)
+    {
+        const size_t begin = record.StoreListBegin();
+        record.StoreListNext(datetime._date);
+        record.StoreListNext(' ');
+        record.StoreListNext(datetime._hours);
+        record.StoreListNext(':');
+        record.StoreListNext(datetime._minutes);
+        record.StoreListNext(':');
+        record.StoreListNext(datetime._seconds);
+        return record.StoreListEnd(begin);
+    }
+
+private:
+    Date _date;
+    int _hours, _minutes, _seconds;
+};
+
 int main(int argc, char** argv)
 {
     // Create default logger
@@ -46,6 +72,7 @@ int main(int argc, char** argv)
     logger.Info("int: {0:d};  hex: {0:x};  oct: {0:o}; bin: {0:b}", 42);
     logger.Info("int: {0:d};  hex: {0:#x};  oct: {0:#o};  bin: {0:#b}", 42);
     logger.Info("The date is {}", Date(2012, 12, 9));
+    logger.Info("The datetime is {}", DateTime(Date(2012, 12, 9), 13, 15, 57));
     logger.Info("Elapsed time: {s:.2f} seconds", "s"_a = 1.23);
     logger.Info("The answer is {}"_format(42));
 

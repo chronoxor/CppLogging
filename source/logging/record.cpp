@@ -158,7 +158,14 @@ Argument ParseArgument(const std::vector<uint8_t>& buffer, size_t index)
             uint32_t size;
             std::memcpy(&size, buffer.data() + index, sizeof(uint32_t));
 
-            return Argument{ type, index, sizeof(uint32_t) + size };
+            return Argument{ type, index, size };
+        }
+        case CppLogging::ArgumentType::ARG_LIST:
+        {
+            uint32_t size;
+            std::memcpy(&size, buffer.data() + index, sizeof(uint32_t));
+
+            return Argument{ type, index, size };
         }
         default:
         {
@@ -260,6 +267,173 @@ bool ParseName(std::string_view::iterator& it, const std::string_view::iterator&
         }
     }
     return true;
+}
+
+bool WriteFormatArgument(fmt::v5::basic_writer<fmt::v5::back_insert_range<std::string>>& writer, const fmt::v5::format_specs& specs, const Argument& argument, const std::vector<uint8_t> buffer)
+{
+    switch (argument.type)
+    {
+        case CppLogging::ArgumentType::ARG_BOOL:
+        {
+            uint8_t value;
+            std::memcpy(&value, buffer.data() + argument.offset, sizeof(uint8_t));
+            writer.write(value != 0, specs);
+            return true;
+        }
+        case CppLogging::ArgumentType::ARG_CHAR:
+        {
+            uint8_t value;
+            std::memcpy(&value, buffer.data() + argument.offset, sizeof(uint8_t));
+            writer.write((char)value);
+            return true;
+        }
+        case CppLogging::ArgumentType::ARG_WCHAR:
+        {
+            uint32_t value;
+            std::memcpy(&value, buffer.data() + argument.offset, sizeof(uint32_t));
+            writer.write((char)value);
+            return true;
+        }
+        case CppLogging::ArgumentType::ARG_INT8:
+        {
+            int8_t value;
+            std::memcpy(&value, buffer.data() + argument.offset, sizeof(int8_t));
+            writer.write(value, specs);
+            return true;
+        }
+        case CppLogging::ArgumentType::ARG_UINT8:
+        {
+            uint8_t value;
+            std::memcpy(&value, buffer.data() + argument.offset, sizeof(uint8_t));
+            writer.write(value, specs);
+            return true;
+        }
+        case CppLogging::ArgumentType::ARG_INT16:
+        {
+            int16_t value;
+            std::memcpy(&value, buffer.data() + argument.offset, sizeof(int16_t));
+            writer.write(value, specs);
+            return true;
+        }
+        case CppLogging::ArgumentType::ARG_UINT16:
+        {
+            uint16_t value;
+            std::memcpy(&value, buffer.data() + argument.offset, sizeof(uint16_t));
+            writer.write(value, specs);
+            return true;
+        }
+        case CppLogging::ArgumentType::ARG_INT32:
+        {
+            int32_t value;
+            std::memcpy(&value, buffer.data() + argument.offset, sizeof(int32_t));
+            writer.write(value, specs);
+            return true;
+        }
+        case CppLogging::ArgumentType::ARG_UINT32:
+        {
+            uint32_t value;
+            std::memcpy(&value, buffer.data() + argument.offset, sizeof(uint32_t));
+            writer.write(value, specs);
+            return true;
+        }
+        case CppLogging::ArgumentType::ARG_INT64:
+        {
+            int64_t value;
+            std::memcpy(&value, buffer.data() + argument.offset, sizeof(int64_t));
+            writer.write(value, specs);
+            return true;
+        }
+        case CppLogging::ArgumentType::ARG_UINT64:
+        {
+            uint64_t value;
+            std::memcpy(&value, buffer.data() + argument.offset, sizeof(uint64_t));
+            writer.write(value, specs);
+            return true;
+        }
+        case CppLogging::ArgumentType::ARG_FLOAT:
+        {
+            float value;
+            std::memcpy(&value, buffer.data() + argument.offset, sizeof(float));
+            writer.write(value, specs);
+            return true;
+        }
+        case CppLogging::ArgumentType::ARG_DOUBLE:
+        {
+            double value;
+            std::memcpy(&value, buffer.data() + argument.offset, sizeof(double));
+            writer.write(value, specs);
+            return true;
+        }
+        case CppLogging::ArgumentType::ARG_STRING:
+        {
+            uint32_t length;
+            std::memcpy(&length, buffer.data() + argument.offset, sizeof(uint32_t));
+
+            writer.write(fmt::string_view((const char*)buffer.data() + argument.offset + sizeof(uint32_t), length), specs);
+            return true;
+        }
+        case CppLogging::ArgumentType::ARG_POINTER:
+        {
+            uint64_t value;
+            std::memcpy(&value, buffer.data() + argument.offset, sizeof(uint64_t));
+            writer.write((void*)value);
+            return true;
+        }
+        case CppLogging::ArgumentType::ARG_CUSTOM:
+        {
+            size_t index = argument.offset;
+
+            // Parse the custom data type size
+            uint32_t custom_size;
+            std::memcpy(&custom_size, buffer.data() + index, sizeof(uint32_t));
+            index += sizeof(uint32_t);
+            custom_size -= sizeof(uint32_t);
+
+            // Parse the pattern length
+            uint32_t custom_pattern_length;
+            std::memcpy(&custom_pattern_length, buffer.data() + index, sizeof(uint32_t));
+            index += sizeof(uint32_t);
+            custom_size -= sizeof(uint32_t);
+
+            // Parse the pattern value
+            std::string custom_pattern;
+            custom_pattern.resize(custom_pattern_length);
+            std::memcpy(custom_pattern.data(), buffer.data() + index, custom_pattern_length);
+            index += custom_pattern_length;
+            custom_size -= custom_pattern_length;
+
+            std::string custom = CppLogging::Record::RestoreFormat(custom_pattern, buffer, index, custom_size);
+
+            writer.write(custom);
+            return true;
+        }
+        case CppLogging::ArgumentType::ARG_LIST:
+        {
+            size_t index = argument.offset;
+
+            // Parse the list size
+            uint32_t list_size;
+            std::memcpy(&list_size, buffer.data() + index, sizeof(uint32_t));
+            index += sizeof(uint32_t);
+            list_size -= sizeof(uint32_t);
+
+            // Write arguments from the list
+            while (index < (argument.offset + sizeof(uint32_t) + list_size))
+            {
+                Argument arg = ParseArgument(buffer, index);
+                if (!WriteFormatArgument(writer, specs, arg, buffer))
+                    return false;
+                index += sizeof(uint8_t) + arg.size;
+            }
+
+            return true;
+        }
+        default:
+        {
+            assert(false && "Unsupported argument type!");
+            return false;
+        }
+    }    
 }
 
 } // namespace
@@ -608,6 +782,7 @@ std::string Record::RestoreFormat(std::string_view pattern, const std::vector<ui
 
             fmt::v5::basic_writer<fmt::v5::back_insert_range<std::string>> writer(result);
 
+            // Get the format argument
             Argument argument;
             if (!argument_name.empty())
             {
@@ -628,148 +803,10 @@ std::string Record::RestoreFormat(std::string_view pattern, const std::vector<ui
                 }
                 argument = args.arguments[argument_index];
             }
-            switch (argument.type)
-            {
-                case ArgumentType::ARG_BOOL:
-                {
-                    uint8_t value;
-                    std::memcpy(&value, buffer.data() + argument.offset, sizeof(uint8_t));
-                    writer.write(value != 0, specs);
-                    break;
-                }
-                case ArgumentType::ARG_CHAR:
-                {
-                    uint8_t value;
-                    std::memcpy(&value, buffer.data() + argument.offset, sizeof(uint8_t));
-                    writer.write((char)value);
-                    break;
-                }
-                case ArgumentType::ARG_WCHAR:
-                {
-                    uint32_t value;
-                    std::memcpy(&value, buffer.data() + argument.offset, sizeof(uint32_t));
-                    writer.write((char)value);
-                    break;
-                }
-                case ArgumentType::ARG_INT8:
-                {
-                    int8_t value;
-                    std::memcpy(&value, buffer.data() + argument.offset, sizeof(int8_t));
-                    writer.write(value, specs);
-                    break;
-                }
-                case ArgumentType::ARG_UINT8:
-                {
-                    uint8_t value;
-                    std::memcpy(&value, buffer.data() + argument.offset, sizeof(uint8_t));
-                    writer.write(value, specs);
-                    break;
-                }
-                case ArgumentType::ARG_INT16:
-                {
-                    int16_t value;
-                    std::memcpy(&value, buffer.data() + argument.offset, sizeof(int16_t));
-                    writer.write(value, specs);
-                    break;
-                }
-                case ArgumentType::ARG_UINT16:
-                {
-                    uint16_t value;
-                    std::memcpy(&value, buffer.data() + argument.offset, sizeof(uint16_t));
-                    writer.write(value, specs);
-                    break;
-                }
-                case ArgumentType::ARG_INT32:
-                {
-                    int32_t value;
-                    std::memcpy(&value, buffer.data() + argument.offset, sizeof(int32_t));
-                    writer.write(value, specs);
-                    break;
-                }
-                case ArgumentType::ARG_UINT32:
-                {
-                    uint32_t value;
-                    std::memcpy(&value, buffer.data() + argument.offset, sizeof(uint32_t));
-                    writer.write(value, specs);
-                    break;
-                }
-                case ArgumentType::ARG_INT64:
-                {
-                    int64_t value;
-                    std::memcpy(&value, buffer.data() + argument.offset, sizeof(int64_t));
-                    writer.write(value, specs);
-                    break;
-                }
-                case ArgumentType::ARG_UINT64:
-                {
-                    uint64_t value;
-                    std::memcpy(&value, buffer.data() + argument.offset, sizeof(uint64_t));
-                    writer.write(value, specs);
-                    break;
-                }
-                case ArgumentType::ARG_FLOAT:
-                {
-                    float value;
-                    std::memcpy(&value, buffer.data() + argument.offset, sizeof(float));
-                    writer.write(value, specs);
-                    break;
-                }
-                case ArgumentType::ARG_DOUBLE:
-                {
-                    double value;
-                    std::memcpy(&value, buffer.data() + argument.offset, sizeof(double));
-                    writer.write(value, specs);
-                    break;
-                }
-                case ArgumentType::ARG_STRING:
-                {
-                    uint32_t length;
-                    std::memcpy(&length, buffer.data() + argument.offset, sizeof(uint32_t));
 
-                    writer.write(fmt::string_view((const char*)buffer.data() + argument.offset + sizeof(uint32_t), length), specs);
-                    break;
-                }
-                case ArgumentType::ARG_POINTER:
-                {
-                    uint64_t value;
-                    std::memcpy(&value, buffer.data() + argument.offset, sizeof(uint64_t));
-                    writer.write((void*)value);
-                    break;
-                }
-                case ArgumentType::ARG_CUSTOM:
-                {
-                    size_t index = argument.offset;
-
-                    // Parse the custom data type size
-                    uint32_t custom_size;
-                    std::memcpy(&custom_size, buffer.data() + index, sizeof(uint32_t));
-                    index += sizeof(uint32_t);
-                    custom_size -= sizeof(uint32_t);
-
-                    // Parse the pattern length
-                    uint32_t custom_pattern_length;
-                    std::memcpy(&custom_pattern_length, buffer.data() + index, sizeof(uint32_t));
-                    index += sizeof(uint32_t);
-                    custom_size -= sizeof(uint32_t);
-
-                    // Parse the pattern value
-                    std::string custom_pattern;
-                    custom_pattern.resize(custom_pattern_length);
-                    std::memcpy(custom_pattern.data(), buffer.data() + index, custom_pattern_length);
-                    index += custom_pattern_length;
-                    custom_size -= custom_pattern_length;
-
-                    std::string custom = RestoreFormat(custom_pattern, buffer, index, custom_size);
-
-                    writer.write(custom);
-                    break;
-                }
-                default:
-                {
-                    assert(false && "Unsupported argument type!");
-                    return std::string(pattern);
-                }
-            }
+            // Write format argument
+            if (!WriteFormatArgument(writer, specs, argument, buffer))
+                return std::string(pattern);
         }
         else
             result.push_back(current);

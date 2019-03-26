@@ -38,7 +38,8 @@ enum class ArgumentType : uint8_t
     ARG_STRING,
     ARG_POINTER,
     ARG_NAMEDARG,
-    ARG_CUSTOM
+    ARG_CUSTOM,
+    ARG_LIST
 };
 
 inline void SerializeArgument(Record& record)
@@ -301,15 +302,8 @@ inline void SerializeArgument(Record& record, const fmt::internal::named_arg<T, 
 template <typename T>
 inline void SerializeArgument(Record& record, const T& argument)
 {
-    // Append the argument type
-    record.buffer.emplace_back((uint8_t)ArgumentType::ARG_CUSTOM);
-
     // Serialize the custom argument
-    size_t offset = record.buffer.size();
-    record.buffer.resize(record.buffer.size() + sizeof(uint32_t));
     record << argument;
-    size_t size = record.buffer.size() - offset;
-    std::memcpy(record.buffer.data() + offset, &size, sizeof(uint32_t));
 }
 
 template <typename T, typename... Args>
@@ -330,7 +324,6 @@ template <typename... Args>
 inline Record& Record::StoreFormat(std::string_view pattern, const Args&... args)
 {
     message = pattern;
-    buffer.clear();
     SerializeArgument(*this, args...);
     return *this;
 }
@@ -338,6 +331,12 @@ inline Record& Record::StoreFormat(std::string_view pattern, const Args&... args
 template <typename... Args>
 inline Record& Record::StoreCustomFormat(std::string_view pattern, const Args&... args)
 {
+    // Append the argument type
+    buffer.emplace_back((uint8_t)ArgumentType::ARG_CUSTOM);
+
+    size_t offset = buffer.size();
+    buffer.resize(buffer.size() + sizeof(uint32_t));
+
     uint32_t length = (uint32_t)pattern.size();
 
     // Append the pattern length
@@ -352,6 +351,37 @@ inline Record& Record::StoreCustomFormat(std::string_view pattern, const Args&..
 
     // Serialize arguments
     SerializeArgument(*this, args...);
+
+    size = buffer.size() - offset;
+    std::memcpy(buffer.data() + offset, &size, sizeof(uint32_t));
+
+    return *this;
+}
+
+inline size_t Record::StoreListBegin()
+{
+    // Append the argument type
+    buffer.emplace_back((uint8_t)ArgumentType::ARG_LIST);
+
+    size_t offset = buffer.size();
+    buffer.resize(buffer.size() + sizeof(uint32_t));
+
+    return offset;
+}
+
+template <typename... Args>
+inline Record& Record::StoreListNext(const Args&... args)
+{
+    // Serialize list arguments
+    SerializeArgument(*this, args...);
+
+    return *this;
+}
+
+inline Record& Record::StoreListEnd(size_t begin)
+{
+    size_t size = buffer.size() - begin;
+    std::memcpy(buffer.data() + begin, &size, sizeof(uint32_t));
 
     return *this;
 }
