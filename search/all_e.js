@@ -8,7 +8,7 @@ var searchData=
   ['storeformat',['StoreFormat',['../class_cpp_logging_1_1_record.html#a30c493880cb6b2c25ce09b542e2cd3f2',1,'CppLogging::Record']]],
   ['storelistbegin',['StoreListBegin',['../class_cpp_logging_1_1_record.html#abc400115d65d1c730800bd76a4432589',1,'CppLogging::Record']]],
   ['storelistend',['StoreListEnd',['../class_cpp_logging_1_1_record.html#a412f1f2fe2c6e233b2b774b7d7ae9a98',1,'CppLogging::Record']]],
-  ['storelistnext',['StoreListNext',['../class_cpp_logging_1_1_record.html#ac539aeb4129632d33ae7205ddd7b9589',1,'CppLogging::Record']]],
+  ['storelistnext',['StoreListNext',['../class_cpp_logging_1_1_record.html#ac539aeb4129632d33ae7205ddd7b9589',1,'CppLogging::Record::StoreListNext(const Args &amp;...args)'],['../class_cpp_logging_1_1_record.html#a26d69881643d5a4d9f06aba6b738a626',1,'CppLogging::Record::StoreListNext(std::string_view pattern, const Args &amp;...args)']]],
   ['swap',['swap',['../class_cpp_logging_1_1_record.html#a05103353f6464abaed30526a45b6ad39',1,'CppLogging::Record::swap(Record &amp;record) noexcept'],['../class_cpp_logging_1_1_record.html#a41307f7cef7933943d41aa2f13fcef01',1,'CppLogging::Record::swap()'],['../namespace_cpp_logging.html#a483acf995015b6623510acb20a4017d8',1,'CppLogging::swap()']]],
   ['switch_5ffilter_2ecpp',['switch_filter.cpp',['../switch__filter_8cpp.html',1,'']]],
   ['switch_5ffilter_2eh',['switch_filter.h',['../switch__filter_8h.html',1,'']]],
