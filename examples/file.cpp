@@ -29,11 +29,11 @@ int main(int argc, char** argv)
     CppLogging::Logger logger("example");
 
     // Log some messages with different level
-    logger.Debug("Debug message");
-    logger.Info("Info message");
-    logger.Warn("Warning message");
-    logger.Error("Error message");
-    logger.Fatal("Fatal message");
+    logger.Debug("Debug message {}", 1);
+    logger.Info("Info message {}", 2);
+    logger.Warn("Warning message {}", 3);
+    logger.Error("Error message {}", 4);
+    logger.Fatal("Fatal message {}", 5);
 
     return 0;
 }

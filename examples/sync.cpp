@@ -44,14 +44,18 @@ int main(int argc, char** argv)
             // Create example logger
             CppLogging::Logger logger("example");
 
+            int index = 0;
+
             while (!stop)
             {
+                ++index;
+
                 // Log some messages with different level
-                logger.Debug("Debug message");
-                logger.Info("Info message");
-                logger.Warn("Warning message");
-                logger.Error("Error message");
-                logger.Fatal("Fatal message");
+                logger.Debug("Debug message {}", index);
+                logger.Info("Info message {}", index);
+                logger.Warn("Warning message {}", index);
+                logger.Error("Error message {}", index);
+                logger.Fatal("Fatal message {}", index);
 
                 // Yield for a while...
                 CppCommon::Thread::Yield();
