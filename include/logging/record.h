@@ -76,14 +76,14 @@ public:
     void StoreFormat(std::string_view pattern, const Args&... args);
 
     //! Restore format message and its arguments
-    std::string RestoreFormat() { return RestoreFormat(message, buffer, 0); }
+    std::string RestoreFormat() { return RestoreFormat(message, buffer, 0, buffer.size()); }
 
     //! Store format of the custom data type
     template <typename... Args>
     static void StoreFormat(std::vector<uint8_t>& buffer, std::string_view pattern, const Args&... args);
 
     //! Restore format of the custom data type
-    static std::string RestoreFormat(std::string_view pattern, const std::vector<uint8_t> buffer, size_t offset);
+    static std::string RestoreFormat(std::string_view pattern, const std::vector<uint8_t> buffer, size_t offset, size_t size);
 
     //! Clear logging record
     void Clear();

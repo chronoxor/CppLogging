@@ -168,18 +168,13 @@ Argument ParseArgument(const std::vector<uint8_t>& buffer, size_t index)
     }
 }
 
-Arguments ParseArguments(const std::vector<uint8_t>& buffer, size_t offset)
+Arguments ParseArguments(const std::vector<uint8_t>& buffer, size_t offset, size_t size)
 {
     Arguments result;
 
     size_t index = offset;
 
-    // Parse arguments count
-    size_t count;
-    std::memcpy(&count, buffer.data() + index, sizeof(uint32_t));
-    index += sizeof(uint32_t);
-
-    while ((index < buffer.size()) && (count-- > 0))
+    while (index < (offset + size))
     {
         // Parse the argument type
         CppLogging::ArgumentType type;
@@ -271,12 +266,12 @@ bool ParseName(std::string_view::iterator& it, const std::string_view::iterator&
 
 namespace CppLogging {
 
-std::string Record::RestoreFormat(std::string_view pattern, const std::vector<uint8_t> buffer, size_t offset)
+std::string Record::RestoreFormat(std::string_view pattern, const std::vector<uint8_t> buffer, size_t offset, size_t size)
 {
     std::string result;
 
     // Parse arguments and check arguments count before formatting
-    auto args = ParseArguments(buffer, offset);
+    auto args = ParseArguments(buffer, offset, size);
     if (args.arguments.empty() && args.named_arguments.empty())
         return std::string(pattern);
 
@@ -746,22 +741,25 @@ std::string Record::RestoreFormat(std::string_view pattern, const std::vector<ui
                     size_t index = argument.offset;
 
                     // Parse the custom data type size
-                    uint32_t size;
-                    std::memcpy(&size, buffer.data() + index, sizeof(uint32_t));
+                    uint32_t custom_size;
+                    std::memcpy(&custom_size, buffer.data() + index, sizeof(uint32_t));
                     index += sizeof(uint32_t);
+                    custom_size -= sizeof(uint32_t);
 
                     // Parse the pattern length
-                    uint32_t length;
-                    std::memcpy(&length, buffer.data() + index, sizeof(uint32_t));
+                    uint32_t custom_pattern_length;
+                    std::memcpy(&custom_pattern_length, buffer.data() + index, sizeof(uint32_t));
                     index += sizeof(uint32_t);
+                    custom_size -= sizeof(uint32_t);
 
                     // Parse the pattern value
                     std::string custom_pattern;
-                    custom_pattern.resize(length);
-                    std::memcpy(custom_pattern.data(), buffer.data() + index, length);
-                    index += length;
+                    custom_pattern.resize(custom_pattern_length);
+                    std::memcpy(custom_pattern.data(), buffer.data() + index, custom_pattern_length);
+                    index += custom_pattern_length;
+                    custom_size -= custom_pattern_length;
 
-                    std::string custom = RestoreFormat(custom_pattern, buffer, index);
+                    std::string custom = RestoreFormat(custom_pattern, buffer, index, custom_size);
 
                     writer.write(custom);
                     break;
