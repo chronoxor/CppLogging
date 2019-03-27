@@ -10,7 +10,7 @@
 
 namespace CppLogging {
 
-FileAppender::FileAppender(const CppCommon::File& file, bool truncate, bool auto_flush)
+FileAppender::FileAppender(const CppCommon::Path& file, bool truncate, bool auto_flush)
     : _retry(0), _file(file), _truncate(truncate), _auto_flush(auto_flush)
 {
 }

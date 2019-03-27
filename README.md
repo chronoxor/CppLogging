@@ -158,8 +158,37 @@ public:
     friend std::ostream& operator<<(std::ostream& os, const Date& date)
     { return os << date._year << '-' << date._month << '-' << date._day; }
 
+    friend CppLogging::Record& operator<<(CppLogging::Record& record, const Date& date)
+    { return record.StoreCustomFormat("{}-{}-{}", date._year, date._month, date._day); }
+
 private:
     int _year, _month, _day;
+};
+
+class DateTime
+{
+public:
+    DateTime(Date date, int hours, int minutes, int seconds) : _date(date), _hours(hours), _minutes(minutes), _seconds(seconds) {}
+
+    friend std::ostream& operator<<(std::ostream& os, const DateTime& datetime)
+    { return os << datetime._date << " " << datetime._hours << ':' << datetime._minutes << ':' << datetime._seconds; }
+
+    friend CppLogging::Record& operator<<(CppLogging::Record& record, const DateTime& datetime)
+    {
+        const size_t begin = record.StoreListBegin();
+        record.StoreList(datetime._date);
+        record.StoreList(' ');
+        record.StoreList(datetime._hours);
+        record.StoreList(':');
+        record.StoreList(datetime._minutes);
+        record.StoreList(':');
+        record.StoreList(datetime._seconds);
+        return record.StoreListEnd(begin);
+    }
+
+private:
+    Date _date;
+    int _hours, _minutes, _seconds;
 };
 
 int main(int argc, char** argv)
@@ -185,8 +214,9 @@ int main(int argc, char** argv)
     logger.Info("int: {0:d};  hex: {0:x};  oct: {0:o}; bin: {0:b}", 42);
     logger.Info("int: {0:d};  hex: {0:#x};  oct: {0:#o};  bin: {0:#b}", 42);
     logger.Info("The date is {}", Date(2012, 12, 9));
+    logger.Info("The datetime is {}", DateTime(Date(2012, 12, 9), 13, 15, 57));
     logger.Info("Elapsed time: {s:.2f} seconds", "s"_a = 1.23);
-    logger.Info("The answer is {}"_format(42).c_str());
+    logger.Info("The answer is {}"_format(42));
 
     return 0;
 }
@@ -194,25 +224,26 @@ int main(int argc, char** argv)
 
 Example will create the following log:
 ```
-2016-09-28T13:59:19.970Z [0x000083C8] INFO   - argc: 1, argv: 0x1e5a2aa6b0
-2016-09-28T13:59:19.971Z [0x000083C8] INFO   - no arguments
-2016-09-28T13:59:19.971Z [0x000083C8] INFO   - -1, 0, 1
-2016-09-28T13:59:19.971Z [0x000083C8] INFO   - a, b, c
-2016-09-28T13:59:19.971Z [0x000083C8] INFO   - a, b, c
-2016-09-28T13:59:19.971Z [0x000083C8] INFO   - c, b, a
-2016-09-28T13:59:19.971Z [0x000083C8] INFO   - abracadabra
-2016-09-28T13:59:19.971Z [0x000083C8] INFO   - left aligned
-2016-09-28T13:59:19.971Z [0x000083C8] INFO   -                  right aligned
-2016-09-28T13:59:19.971Z [0x000083C8] INFO   -            centered
-2016-09-28T13:59:19.971Z [0x000083C8] INFO   - ***********centered***********
-2016-09-28T13:59:19.971Z [0x000083C8] INFO   - +3.140000; -3.140000
-2016-09-28T13:59:19.971Z [0x000083C8] INFO   -  3.140000; -3.140000
-2016-09-28T13:59:19.971Z [0x000083C8] INFO   - 3.140000; -3.140000
-2016-09-28T13:59:19.971Z [0x000083C8] INFO   - int: 42;  hex: 2a;  oct: 52; bin: 101010
-2016-09-28T13:59:19.971Z [0x000083C8] INFO   - int: 42;  hex: 0x2a;  oct: 052;  bin: 0b101010
-2016-09-28T13:59:19.971Z [0x000083C8] INFO   - The date is 2012-12-9
-2016-09-28T13:59:19.972Z [0x000083C8] INFO   - Elapsed time: 1.23 seconds
-2016-09-28T13:59:19.972Z [0x000083C8] INFO   - The answer is 42
+2019-03-27T12:04:19.881Z [0x0000FFB8] INFO   - argc: 1, argv: 0x1ff83563210
+2019-03-27T12:04:19.882Z [0x0000FFB8] INFO   - no arguments
+2019-03-27T12:04:19.883Z [0x0000FFB8] INFO   - -1, 0, 1
+2019-03-27T12:04:19.884Z [0x0000FFB8] INFO   - a, b, c
+2019-03-27T12:04:19.884Z [0x0000FFB8] INFO   - a, b, c
+2019-03-27T12:04:19.884Z [0x0000FFB8] INFO   - c, b, a
+2019-03-27T12:04:19.884Z [0x0000FFB8] INFO   - abracadabra
+2019-03-27T12:04:19.885Z [0x0000FFB8] INFO   - left aligned
+2019-03-27T12:04:19.885Z [0x0000FFB8] INFO   -                  right aligned
+2019-03-27T12:04:19.885Z [0x0000FFB8] INFO   -            centered
+2019-03-27T12:04:19.886Z [0x0000FFB8] INFO   - ***********centered***********
+2019-03-27T12:04:19.886Z [0x0000FFB8] INFO   - +3.140000; -3.140000
+2019-03-27T12:04:19.887Z [0x0000FFB8] INFO   -  3.140000; -3.140000
+2019-03-27T12:04:19.887Z [0x0000FFB8] INFO   - 3.140000; -3.140000
+2019-03-27T12:04:19.887Z [0x0000FFB8] INFO   - int: 42;  hex: 2a;  oct: 52; bin: 101010
+2019-03-27T12:04:19.888Z [0x0000FFB8] INFO   - int: 42;  hex: 0x2a;  oct: 052;  bin: 0b101010
+2019-03-27T12:04:19.888Z [0x0000FFB8] INFO   - The date is 2012-12-9
+2019-03-27T12:04:19.888Z [0x0000FFB8] INFO   - The datetime is 2012-12-9 13:15:57
+2019-03-27T12:04:19.889Z [0x0000FFB8] INFO   - Elapsed time: 1.23 seconds
+2019-03-27T12:04:19.889Z [0x0000FFB8] INFO   - The answer is 42
 ```
 
 ## Example 3: Configure custom logger with text layout and console appender
@@ -225,10 +256,8 @@ perform logging with a text layout and console appender sink:
 
 void ConfigureLogger()
 {
-    // Create default logging sink processor
-    auto sink = std::make_shared<CppLogging::Processor>();
-    // Add text layout
-    sink->layouts().push_back(std::make_shared<CppLogging::TextLayout>());
+    // Create default logging sink processor with a text layout
+    auto sink = std::make_shared<CppLogging::Processor>(std::make_shared<CppLogging::TextLayout>());
     // Add console appender
     sink->appenders().push_back(std::make_shared<CppLogging::ConsoleAppender>());
 
@@ -268,10 +297,8 @@ perform logging with a text layout and syslog appender sink:
 
 void ConfigureLogger()
 {
-    // Create default logging sink processor
-    auto sink = std::make_shared<CppLogging::Processor>();
-    // Add text layout
-    sink->layouts().push_back(std::make_shared<CppLogging::TextLayout>());
+    // Create default logging sink processor with a text layout
+    auto sink = std::make_shared<CppLogging::Processor>(std::make_shared<CppLogging::TextLayout>());
     // Add syslog appender
     sink->appenders().push_back(std::make_shared<CppLogging::SyslogAppender>());
 
@@ -308,12 +335,10 @@ perform logging with a binary layout and file appender sink:
 
 void ConfigureLogger()
 {
-    // Create default logging sink processor
-    auto sink = std::make_shared<CppLogging::Processor>();
-    // Add binary layout
-    sink->layouts().push_back(std::make_shared<CppLogging::BinaryLayout>());
+    // Create default logging sink processor with a binary layout
+    auto sink = std::make_shared<CppLogging::Processor>(std::make_shared<CppLogging::BinaryLayout>());
     // Add file appender
-    sink->appenders().push_back(std::make_shared<CppLogging::FileAppender>(CppCommon::File("file.bin.log")));
+    sink->appenders().push_back(std::make_shared<CppLogging::FileAppender>("file.bin.log"));
 
     // Configure example logger
     CppLogging::Config::ConfigLogger("example", sink);
@@ -328,11 +353,11 @@ int main(int argc, char** argv)
     CppLogging::Logger logger("example");
 
     // Log some messages with different level
-    logger.Debug("Debug message");
-    logger.Info("Info message");
-    logger.Warn("Warning message");
-    logger.Error("Error message");
-    logger.Fatal("Fatal message");
+    logger.Debug("Debug message {}", 1);
+    logger.Info("Info message {}", 2);
+    logger.Warn("Warning message {}", 3);
+    logger.Error("Error message {}", 4);
+    logger.Fatal("Fatal message {}", 5);
 
     return 0;
 }
@@ -370,12 +395,10 @@ Supported placeholders:
 void ConfigureLogger()
 {
     // Create a custom text layout pattern
-    std::string pattern = "{UtcYear}-{UtcMonth}-{UtcDay}T{UtcHour}:{UtcMinute}:{UtcSecond}.{Millisecond}{UtcTimezone} - {Microsecond}.{Nanosecond} - [{Thread}] - {Level} - {Logger} - {Message} - {EndLine}";
+    const std::string pattern = "{UtcYear}-{UtcMonth}-{UtcDay}T{UtcHour}:{UtcMinute}:{UtcSecond}.{Millisecond}{UtcTimezone} - {Microsecond}.{Nanosecond} - [{Thread}] - {Level} - {Logger} - {Message} - {EndLine}";
 
-    // Create default logging sink processor
-    auto sink = std::make_shared<CppLogging::Processor>();
-    // Add text layout
-    sink->layouts().push_back(std::make_shared<CppLogging::TextLayout>(pattern));
+    // Create default logging sink processor with a text layout
+    auto sink = std::make_shared<CppLogging::Processor>(std::make_shared<CppLogging::TextLayout>(pattern));
     // Add console appender
     sink->appenders().push_back(std::make_shared<CppLogging::ConsoleAppender>());
 
@@ -425,12 +448,10 @@ following placeholders:
 
 void ConfigureLogger()
 {
-    // Create default logging sink processor
-    auto sink = std::make_shared<CppLogging::Processor>();
-    // Add text layout
-    sink->layouts().push_back(std::make_shared<CppLogging::TextLayout>());
+    // Create default logging sink processor with a text layout
+    auto sink = std::make_shared<CppLogging::Processor>(std::make_shared<CppLogging::TextLayout>());
     // Add rolling file appender which rolls each second and create log file with a pattern "{UtcDateTime}.log"
-    sink->appenders().push_back(std::make_shared<CppLogging::FileAppender>(CppCommon::RollingFileAppender(".", TimeRollingPolicy::SECOND, "{UtcDateTime}.log", true)));
+    sink->appenders().push_back(std::make_shared<CppLogging::RollingFileAppender>(".", CppLogging::TimeRollingPolicy::SECOND, "{UtcDateTime}.log", true));
 
     // Configure example logger
     CppLogging::Config::ConfigLogger("example", sink);
@@ -476,12 +497,10 @@ example.5.log -> remove
 
 void ConfigureLogger()
 {
-    // Create default logging sink processor
-    auto sink = std::make_shared<CppLogging::Processor>();
-    // Add binary layout
-    sink->layouts().push_back(std::make_shared<CppLogging::BinaryLayout>());
+    // Create default logging sink processor with a binary layout
+    auto sink = std::make_shared<CppLogging::Processor>(std::make_shared<CppLogging::BinaryLayout>());
     // Add rolling file appender which rolls after append 4kb of logs and will keep only 5 recent archives
-    sink->appenders().push_back(std::make_shared<CppLogging::FileAppender>(CppCommon::RollingFileAppender(".", "file", "bin.log", 4096, 5, true)));
+    sink->appenders().push_back(std::make_shared<CppLogging::RollingFileAppender>(".", "file", "bin.log", 4096, 5, true));
 
     // Configure example logger
     CppLogging::Config::ConfigLogger("example", sink);
@@ -525,10 +544,8 @@ use synchronous processor in multithreaded environment:
 
 void ConfigureLogger()
 {
-    // Create default logging sink processor
-    auto sink = std::make_shared<CppLogging::SyncProcessor>();
-    // Add binary layout
-    sink->layouts().push_back(std::make_shared<CppLogging::BinaryLayout>());
+    // Create default logging sink processor with a binary layout
+    auto sink = std::make_shared<CppLogging::SyncProcessor>(std::make_shared<CppLogging::BinaryLayout>());
     // Add file appender with size-based rolling policy and archivation
     sink->appenders().push_back(std::make_shared<CppLogging::RollingFileAppender>(".", "rolling", "bin.log", 4096, 9, true));
 
@@ -550,19 +567,23 @@ int main(int argc, char** argv)
     std::vector<std::thread> threads;
     for (int thread = 0; thread < concurrency; ++thread)
     {
-        threads.push_back(std::thread([&stop, thread]()
+        threads.push_back(std::thread([&stop]()
         {
             // Create example logger
             CppLogging::Logger logger("example");
 
+            int index = 0;
+
             while (!stop)
             {
+                ++index;
+
                 // Log some messages with different level
-                logger.Debug("Debug message");
-                logger.Info("Info message");
-                logger.Warn("Warning message");
-                logger.Error("Error message");
-                logger.Fatal("Fatal message");
+                logger.Debug("Debug message {}", index);
+                logger.Info("Info message {}", index);
+                logger.Warn("Warning message {}", index);
+                logger.Error("Error message {}", index);
+                logger.Fatal("Fatal message {}", index);
 
                 // Yield for a while...
                 CppCommon::Thread::Yield();
@@ -602,10 +623,8 @@ comparison with the previous one for lots of threads:
 
 void ConfigureLogger()
 {
-    // Create default logging sink processor
-    auto sink = std::make_shared<CppLogging::AsyncProcessor>();
-    // Add text layout
-    sink->layouts().push_back(std::make_shared<CppLogging::TextLayout>());
+    // Create default logging sink processor with a text layout
+    auto sink = std::make_shared<CppLogging::AsyncWaitProcessor>(std::make_shared<CppLogging::TextLayout>());
     // Add file appender with time-based rolling policy and archivation
     sink->appenders().push_back(std::make_shared<CppLogging::RollingFileAppender>(".", CppLogging::TimeRollingPolicy::SECOND, "{UtcDateTime}.log", true));
 
@@ -627,7 +646,7 @@ int main(int argc, char** argv)
     std::vector<std::thread> threads;
     for (int thread = 0; thread < concurrency; ++thread)
     {
-        threads.push_back(std::thread([&stop, thread]()
+        threads.push_back(std::thread([&stop]()
         {
             // Create example logger
             CppLogging::Logger logger("example");

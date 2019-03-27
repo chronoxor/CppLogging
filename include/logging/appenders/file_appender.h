@@ -29,11 +29,11 @@ class FileAppender : public Appender
 public:
     //! Initialize the appender with a given file, truncate/append and auto-flush flags
     /*!
-         \param file - File
+         \param file - Logging file
          \param truncate - Truncate flag (default is false)
          \param auto_flush - Auto-flush flag (default is false)
     */
-    explicit FileAppender(const CppCommon::File& file, bool truncate = false, bool auto_flush = false);
+    explicit FileAppender(const CppCommon::Path& file, bool truncate = false, bool auto_flush = false);
     FileAppender(const FileAppender&) = delete;
     FileAppender(FileAppender&&) = default;
     virtual ~FileAppender() = default;

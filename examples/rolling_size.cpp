@@ -1,6 +1,6 @@
 /*!
-    \file file.cpp
-    \brief File logger example
+    \file rolling_size.cpp
+    \brief Rolling file appender with size-based policy example
     \author Ivan Shynkarenka
     \date 29.07.2016
     \copyright MIT License
@@ -13,8 +13,8 @@ void ConfigureLogger()
 {
     // Create default logging sink processor with a binary layout
     auto sink = std::make_shared<CppLogging::Processor>(std::make_shared<CppLogging::BinaryLayout>());
-    // Add file appender
-    sink->appenders().push_back(std::make_shared<CppLogging::FileAppender>("file.bin.log"));
+    // Add rolling file appender which rolls after append 4kb of logs and will keep only 5 recent archives
+    sink->appenders().push_back(std::make_shared<CppLogging::RollingFileAppender>(".", "file", "bin.log", 4096, 5, true));
 
     // Configure example logger
     CppLogging::Config::ConfigLogger("example", sink);
@@ -29,11 +29,11 @@ int main(int argc, char** argv)
     CppLogging::Logger logger("example");
 
     // Log some messages with different level
-    logger.Debug("Debug message {}", 1);
-    logger.Info("Info message {}", 2);
-    logger.Warn("Warning message {}", 3);
-    logger.Error("Error message {}", 4);
-    logger.Fatal("Fatal message {}", 5);
+    logger.Debug("Debug message");
+    logger.Info("Info message");
+    logger.Warn("Warning message");
+    logger.Error("Error message");
+    logger.Fatal("Fatal message");
 
     return 0;
 }
