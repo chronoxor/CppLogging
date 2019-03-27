@@ -1435,86 +1435,86 @@ CPU physical cores: 6
 CPU clock speed: 2.208 GHz
 CPU Hyper-Threading: enabled
 RAM total: 31.757 GiB
-RAM free: 21.286 GiB
+RAM free: 20.166 GiB
 ===============================================================================
 OS version: Microsoft Windows 8  (build 9200), 64-bit
 OS bits: 64-bit
 Process bits: 64-bit
 Process configuaraion: release
-Local timestamp: Wed Mar 27 16:43:04 2019
-UTC timestamp: Wed Mar 27 13:43:04 2019
+Local timestamp: Wed Mar 27 17:20:34 2019
+UTC timestamp: Wed Mar 27 14:20:34 2019
 ===============================================================================
 Benchmark: Format(int, double, string)
 Attempts: 5
 Duration: 5 seconds
 -------------------------------------------------------------------------------
 Phase: Format(int, double, string)(threads:1)
-Average time: 722 ns/op
-Minimal time: 722 ns/op
-Maximal time: 754 ns/op
-Total time: 5.899 s
-Total operations: 8162637
-Operations throughput: 1383683 ops/s
+Average time: 555 ns/op
+Minimal time: 555 ns/op
+Maximal time: 598 ns/op
+Total time: 5.574 s
+Total operations: 10034166
+Operations throughput: 1800141 ops/s
 -------------------------------------------------------------------------------
 Phase: Format(int, double, string)(threads:2)
-Average time: 406 ns/op
-Minimal time: 406 ns/op
-Maximal time: 428 ns/op
-Total time: 5.212 s
-Total operations: 12818384
-Operations throughput: 2458961 ops/s
+Average time: 341 ns/op
+Minimal time: 341 ns/op
+Maximal time: 367 ns/op
+Total time: 4.851 s
+Total operations: 14186828
+Operations throughput: 2924181 ops/s
 -------------------------------------------------------------------------------
 Phase: Format(int, double, string)(threads:4)
-Average time: 279 ns/op
-Minimal time: 279 ns/op
-Maximal time: 289 ns/op
-Total time: 6.843 s
-Total operations: 24456284
-Operations throughput: 3573654 ops/s
+Average time: 254 ns/op
+Minimal time: 254 ns/op
+Maximal time: 324 ns/op
+Total time: 6.135 s
+Total operations: 24093844
+Operations throughput: 3927025 ops/s
 -------------------------------------------------------------------------------
 Phase: Format(int, double, string)(threads:8)
-Average time: 462 ns/op
-Minimal time: 462 ns/op
-Maximal time: 496 ns/op
-Total time: 6.494 s
-Total operations: 14031432
-Operations throughput: 2160412 ops/s
+Average time: 404 ns/op
+Minimal time: 404 ns/op
+Maximal time: 470 ns/op
+Total time: 6.368 s
+Total operations: 15755784
+Operations throughput: 2473838 ops/s
 ===============================================================================
 Benchmark: Serialize(int, double, string)
 Attempts: 5
 Duration: 5 seconds
 -------------------------------------------------------------------------------
 Phase: Serialize(int, double, string)(threads:1)
-Average time: 251 ns/op
-Minimal time: 251 ns/op
-Maximal time: 266 ns/op
-Total time: 3.493 s
-Total operations: 13909437
-Operations throughput: 3981181 ops/s
+Average time: 155 ns/op
+Minimal time: 155 ns/op
+Maximal time: 209 ns/op
+Total time: 5.568 s
+Total operations: 35835669
+Operations throughput: 6435608 ops/s
 -------------------------------------------------------------------------------
 Phase: Serialize(int, double, string)(threads:2)
-Average time: 353 ns/op
-Minimal time: 353 ns/op
-Maximal time: 474 ns/op
-Total time: 3.887 s
-Total operations: 11006936
-Operations throughput: 2831139 ops/s
+Average time: 313 ns/op
+Minimal time: 313 ns/op
+Maximal time: 433 ns/op
+Total time: 3.145 s
+Total operations: 10024380
+Operations throughput: 3186436 ops/s
 -------------------------------------------------------------------------------
-Phase: Serialize(int, double, string)(threads:4).thread
-Average time: 1.338 mcs/op
-Minimal time: 1.338 mcs/op
-Maximal time: 1.545 mcs/op
-Total time: 4.916 s
-Total operations: 3671994
-Operations throughput: 746838 ops/s
+Phase: Serialize(int, double, string)(threads:4)
+Average time: 315 ns/op
+Minimal time: 315 ns/op
+Maximal time: 351 ns/op
+Total time: 6.560 s
+Total operations: 20818228
+Operations throughput: 3173394 ops/s
 -------------------------------------------------------------------------------
-Phase: Serialize(int, double, string)(threads:8).thread
-Average time: 3.266 mcs/op
-Minimal time: 3.266 mcs/op
-Maximal time: 4.085 mcs/op
-Total time: 4.269 s
-Total operations: 1307225
-Operations throughput: 306147 ops/s
+Phase: Serialize(int, double, string)(threads:8)
+Average time: 436 ns/op
+Minimal time: 436 ns/op
+Maximal time: 477 ns/op
+Total time: 6.331 s
+Total operations: 14491968
+Operations throughput: 2288785 ops/s
 ===============================================================================
 ```
 

@@ -17,7 +17,7 @@ class BinaryConfigFixture
 protected:
     BinaryConfigFixture()
     {
-        auto binary_sink = std::make_shared<AsyncWaitProcessor>(std::make_shared<BinaryLayout>());
+        auto binary_sink = std::make_shared<AsyncWaitFreeProcessor>(std::make_shared<BinaryLayout>());
         binary_sink->appenders().push_back(std::make_shared<FileAppender>(_file));
         Config::ConfigLogger("binary", binary_sink);
     }
