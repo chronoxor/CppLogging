@@ -690,44 +690,44 @@ Benchmark report is the following:
 ===============================================================================
 CppBenchmark report. Version 1.0.0.0
 ===============================================================================
-CPU architecutre: Intel(R) Core(TM) i7-4790K CPU @ 4.00GHz
-CPU logical cores: 8
-CPU physical cores: 4
-CPU clock speed: 3.998 GHz
+CPU architecutre: Intel(R) Core(TM) i7-8750H CPU @ 2.20GHz
+CPU logical cores: 12
+CPU physical cores: 6
+CPU clock speed: 2.208 GHz
 CPU Hyper-Threading: enabled
-RAM total: 31.962 GiB
-RAM free: 21.688 GiB
+RAM total: 31.757 GiB
+RAM free: 20.778 GiB
 ===============================================================================
-OS version: Microsoft Windows 8 Enterprise Edition (build 9200), 64-bit
+OS version: Microsoft Windows 8  (build 9200), 64-bit
 OS bits: 64-bit
 Process bits: 64-bit
 Process configuaraion: release
-Local timestamp: Wed Sep 28 22:08:14 2016
-UTC timestamp: Wed Sep 28 19:08:14 2016
+Local timestamp: Wed Mar 27 15:53:10 2019
+UTC timestamp: Wed Mar 27 12:53:10 2019
 ===============================================================================
 Benchmark: NullAppender-binary
 Attempts: 5
-Operations: 10000000
+Duration: 5 seconds
 -------------------------------------------------------------------------------
 Phase: NullAppender-binary
-Average time: 62 ns/op
-Minimal time: 62 ns/op
-Maximal time: 63 ns/op
-Total time: 624.974 ms
-Total operations: 10000000
-Operations throughput: 16000657 ops/s
+Average time: 54 ns/op
+Minimal time: 54 ns/op
+Maximal time: 54 ns/op
+Total time: 3.116 s
+Total operations: 57191472
+Operations throughput: 18350957 ops/s
 ===============================================================================
 Benchmark: NullAppender-text
 Attempts: 5
-Operations: 10000000
+Duration: 5 seconds
 -------------------------------------------------------------------------------
 Phase: NullAppender-text
-Average time: 174 ns/op
-Minimal time: 174 ns/op
-Maximal time: 176 ns/op
-Total time: 1.744 s
-Total operations: 10000000
-Operations throughput: 5733126 ops/s
+Average time: 230 ns/op
+Minimal time: 230 ns/op
+Maximal time: 236 ns/op
+Total time: 4.264 s
+Total operations: 18491200
+Operations throughput: 4336537 ops/s
 ===============================================================================
 ```
 
@@ -739,44 +739,44 @@ Benchmark report is the following:
 ===============================================================================
 CppBenchmark report. Version 1.0.0.0
 ===============================================================================
-CPU architecutre: Intel(R) Core(TM) i7-4790K CPU @ 4.00GHz
-CPU logical cores: 8
-CPU physical cores: 4
-CPU clock speed: 3.998 GHz
+CPU architecutre: Intel(R) Core(TM) i7-8750H CPU @ 2.20GHz
+CPU logical cores: 12
+CPU physical cores: 6
+CPU clock speed: 2.208 GHz
 CPU Hyper-Threading: enabled
-RAM total: 31.962 GiB
-RAM free: 21.181 GiB
+RAM total: 31.757 GiB
+RAM free: 19.087 GiB
 ===============================================================================
-OS version: Microsoft Windows 8 Enterprise Edition (build 9200), 64-bit
+OS version: Microsoft Windows 8  (build 9200), 64-bit
 OS bits: 64-bit
 Process bits: 64-bit
 Process configuaraion: release
-Local timestamp: Wed Sep 28 22:12:24 2016
-UTC timestamp: Wed Sep 28 19:12:24 2016
+Local timestamp: Wed Mar 27 15:54:31 2019
+UTC timestamp: Wed Mar 27 12:54:31 2019
 ===============================================================================
 Benchmark: FileAppender-binary
 Attempts: 5
-Operations: 1000000
+Duration: 5 seconds
 -------------------------------------------------------------------------------
 Phase: FileAppender-binary
-Average time: 106 ns/op
-Minimal time: 106 ns/op
-Maximal time: 117 ns/op
-Total time: 106.598 ms
-Total operations: 1000000
-Operations throughput: 9381018 ops/s
+Average time: 90 ns/op
+Minimal time: 90 ns/op
+Maximal time: 93 ns/op
+Total time: 3.605 s
+Total operations: 39912830
+Operations throughput: 11070931 ops/s
 ===============================================================================
 Benchmark: FileAppender-text
 Attempts: 5
-Operations: 1000000
+Duration: 5 seconds
 -------------------------------------------------------------------------------
 Phase: FileAppender-text
-Average time: 229 ns/op
-Minimal time: 229 ns/op
-Maximal time: 249 ns/op
-Total time: 229.126 ms
-Total operations: 1000000
-Operations throughput: 4364404 ops/s
+Average time: 271 ns/op
+Minimal time: 271 ns/op
+Maximal time: 278 ns/op
+Total time: 4.395 s
+Total operations: 16173663
+Operations throughput: 3679369 ops/s
 ===============================================================================
 ```
 
@@ -788,128 +788,128 @@ Benchmark report is the following:
 ===============================================================================
 CppBenchmark report. Version 1.0.0.0
 ===============================================================================
-CPU architecutre: Intel(R) Core(TM) i7-4790K CPU @ 4.00GHz
-CPU logical cores: 8
-CPU physical cores: 4
-CPU clock speed: 3.998 GHz
+CPU architecutre: Intel(R) Core(TM) i7-8750H CPU @ 2.20GHz
+CPU logical cores: 12
+CPU physical cores: 6
+CPU clock speed: 2.208 GHz
 CPU Hyper-Threading: enabled
-RAM total: 31.962 GiB
-RAM free: 21.628 GiB
+RAM total: 31.757 GiB
+RAM free: 21.039 GiB
 ===============================================================================
-OS version: Microsoft Windows 8 Enterprise Edition (build 9200), 64-bit
+OS version: Microsoft Windows 8  (build 9200), 64-bit
 OS bits: 64-bit
 Process bits: 64-bit
 Process configuaraion: release
-Local timestamp: Wed Sep 28 22:16:57 2016
-UTC timestamp: Wed Sep 28 19:16:57 2016
+Local timestamp: Wed Mar 27 16:02:50 2019
+UTC timestamp: Wed Mar 27 13:02:50 2019
 ===============================================================================
 Benchmark: SyncProcessor-null
 Attempts: 5
-Operations: 1000000
+Duration: 5 seconds
 -------------------------------------------------------------------------------
 Phase: SyncProcessor-null(threads:1)
-Average time: 27 ns/op
-Minimal time: 27 ns/op
-Maximal time: 30 ns/op
-Total time: 55.891 ms
-Total operations: 2000000
-Operations throughput: 35783702 ops/s
+Average time: 81 ns/op
+Minimal time: 81 ns/op
+Maximal time: 81 ns/op
+Total time: 4.549 s
+Total operations: 55779606
+Operations throughput: 12260349 ops/s
 -------------------------------------------------------------------------------
 Phase: SyncProcessor-null(threads:2)
-Average time: 22 ns/op
-Minimal time: 22 ns/op
-Maximal time: 29 ns/op
-Total time: 89.344 ms
-Total operations: 4000000
-Operations throughput: 44770342 ops/s
+Average time: 102 ns/op
+Minimal time: 102 ns/op
+Maximal time: 117 ns/op
+Total time: 9.588 s
+Total operations: 93385368
+Operations throughput: 9739525 ops/s
 -------------------------------------------------------------------------------
 Phase: SyncProcessor-null(threads:4)
-Average time: 84 ns/op
-Minimal time: 84 ns/op
-Maximal time: 92 ns/op
-Total time: 674.796 ms
-Total operations: 8000000
-Operations throughput: 11855429 ops/s
+Average time: 177 ns/op
+Minimal time: 177 ns/op
+Maximal time: 193 ns/op
+Total time: 7.746 s
+Total operations: 43538920
+Operations throughput: 5620489 ops/s
 -------------------------------------------------------------------------------
 Phase: SyncProcessor-null(threads:8)
-Average time: 113 ns/op
-Minimal time: 113 ns/op
-Maximal time: 113 ns/op
-Total time: 1.808 s
-Total operations: 16000000
-Operations throughput: 8849109 ops/s
+Average time: 222 ns/op
+Minimal time: 222 ns/op
+Maximal time: 225 ns/op
+Total time: 6.296 s
+Total operations: 28233976
+Operations throughput: 4484415 ops/s
 ===============================================================================
 Benchmark: SyncProcessor-binary
 Attempts: 5
-Operations: 1000000
+Duration: 5 seconds
 -------------------------------------------------------------------------------
 Phase: SyncProcessor-binary(threads:1)
-Average time: 74 ns/op
-Minimal time: 74 ns/op
-Maximal time: 83 ns/op
-Total time: 74.038 ms
-Total operations: 1000000
-Operations throughput: 13506405 ops/s
+Average time: 93 ns/op
+Minimal time: 93 ns/op
+Maximal time: 94 ns/op
+Total time: 4.660 s
+Total operations: 49884690
+Operations throughput: 10703408 ops/s
 -------------------------------------------------------------------------------
 Phase: SyncProcessor-binary(threads:2)
-Average time: 123 ns/op
-Minimal time: 123 ns/op
-Maximal time: 133 ns/op
-Total time: 246.187 ms
-Total operations: 2000000
-Operations throughput: 8123893 ops/s
+Average time: 130 ns/op
+Minimal time: 130 ns/op
+Maximal time: 146 ns/op
+Total time: 9.283 s
+Total operations: 71263812
+Operations throughput: 7676172 ops/s
 -------------------------------------------------------------------------------
 Phase: SyncProcessor-binary(threads:4)
-Average time: 205 ns/op
-Minimal time: 205 ns/op
-Maximal time: 210 ns/op
-Total time: 821.948 ms
-Total operations: 4000000
-Operations throughput: 4866485 ops/s
+Average time: 200 ns/op
+Minimal time: 200 ns/op
+Maximal time: 204 ns/op
+Total time: 6.177 s
+Total operations: 30850384
+Operations throughput: 4993767 ops/s
 -------------------------------------------------------------------------------
 Phase: SyncProcessor-binary(threads:8)
-Average time: 276 ns/op
-Minimal time: 276 ns/op
-Maximal time: 278 ns/op
-Total time: 2.213 s
-Total operations: 8000000
-Operations throughput: 3614274 ops/s
+Average time: 296 ns/op
+Minimal time: 296 ns/op
+Maximal time: 301 ns/op
+Total time: 6.068 s
+Total operations: 20432176
+Operations throughput: 3367129 ops/s
 ===============================================================================
 Benchmark: SyncProcessor-text
 Attempts: 5
-Operations: 1000000
+Duration: 5 seconds
 -------------------------------------------------------------------------------
 Phase: SyncProcessor-text(threads:1)
-Average time: 177 ns/op
-Minimal time: 177 ns/op
-Maximal time: 180 ns/op
-Total time: 177.173 ms
-Total operations: 1000000
-Operations throughput: 5644200 ops/s
+Average time: 297 ns/op
+Minimal time: 297 ns/op
+Maximal time: 304 ns/op
+Total time: 5.460 s
+Total operations: 18352310
+Operations throughput: 3361061 ops/s
 -------------------------------------------------------------------------------
 Phase: SyncProcessor-text(threads:2)
-Average time: 222 ns/op
-Minimal time: 222 ns/op
-Maximal time: 241 ns/op
-Total time: 444.429 ms
-Total operations: 2000000
-Operations throughput: 4500155 ops/s
+Average time: 351 ns/op
+Minimal time: 351 ns/op
+Maximal time: 370 ns/op
+Total time: 6.400 s
+Total operations: 18203816
+Operations throughput: 2843934 ops/s
 -------------------------------------------------------------------------------
 Phase: SyncProcessor-text(threads:4)
-Average time: 308 ns/op
-Minimal time: 308 ns/op
-Maximal time: 315 ns/op
-Total time: 1.235 s
-Total operations: 4000000
-Operations throughput: 3237170 ops/s
+Average time: 476 ns/op
+Minimal time: 476 ns/op
+Maximal time: 491 ns/op
+Total time: 6.152 s
+Total operations: 12920708
+Operations throughput: 2100139 ops/s
 -------------------------------------------------------------------------------
 Phase: SyncProcessor-text(threads:8)
-Average time: 405 ns/op
-Minimal time: 405 ns/op
-Maximal time: 409 ns/op
-Total time: 3.242 s
-Total operations: 8000000
-Operations throughput: 2467338 ops/s
+Average time: 575 ns/op
+Minimal time: 575 ns/op
+Maximal time: 586 ns/op
+Total time: 5.959 s
+Total operations: 10354720
+Operations throughput: 1737508 ops/s
 ===============================================================================
 ```
 
@@ -921,128 +921,236 @@ Benchmark report is the following:
 ===============================================================================
 CppBenchmark report. Version 1.0.0.0
 ===============================================================================
-CPU architecutre: Intel(R) Core(TM) i7-4790K CPU @ 4.00GHz
-CPU logical cores: 8
-CPU physical cores: 4
-CPU clock speed: 3.998 GHz
+CPU architecutre: Intel(R) Core(TM) i7-8750H CPU @ 2.20GHz
+CPU logical cores: 12
+CPU physical cores: 6
+CPU clock speed: 2.208 GHz
 CPU Hyper-Threading: enabled
-RAM total: 31.962 GiB
-RAM free: 21.576 GiB
+RAM total: 31.757 GiB
+RAM free: 21.002 GiB
 ===============================================================================
-OS version: Microsoft Windows 8 Enterprise Edition (build 9200), 64-bit
+OS version: Microsoft Windows 8  (build 9200), 64-bit
 OS bits: 64-bit
 Process bits: 64-bit
 Process configuaraion: release
-Local timestamp: Wed Sep 28 22:21:13 2016
-UTC timestamp: Wed Sep 28 19:21:13 2016
+Local timestamp: Wed Mar 27 16:19:08 2019
+UTC timestamp: Wed Mar 27 13:19:08 2019
 ===============================================================================
-Benchmark: AsyncProcessor-null
+Benchmark: AsyncWaitProcessor-null
 Attempts: 5
-Operations: 1000000
+Duration: 5 seconds
 -------------------------------------------------------------------------------
-Phase: AsyncProcessor-null(threads:1)
-Average time: 71 ns/op
-Minimal time: 71 ns/op
-Maximal time: 79 ns/op
-Total time: 143.543 ms
-Total operations: 2000000
-Operations throughput: 13933096 ops/s
+Phase: AsyncWaitProcessor-null(threads:1)
+Average time: 134 ns/op
+Minimal time: 134 ns/op
+Maximal time: 141 ns/op
+Total time: 6.033 s
+Total operations: 44976168
+Operations throughput: 7455023 ops/s
 -------------------------------------------------------------------------------
-Phase: AsyncProcessor-null(threads:2)
-Average time: 47 ns/op
-Minimal time: 47 ns/op
-Maximal time: 52 ns/op
-Total time: 191.668 ms
-Total operations: 4000000
-Operations throughput: 20869336 ops/s
+Phase: AsyncWaitProcessor-null(threads:2)
+Average time: 110 ns/op
+Minimal time: 110 ns/op
+Maximal time: 115 ns/op
+Total time: 6.438 s
+Total operations: 58195188
+Operations throughput: 9039268 ops/s
 -------------------------------------------------------------------------------
-Phase: AsyncProcessor-null(threads:4)
-Average time: 30 ns/op
-Minimal time: 30 ns/op
-Maximal time: 32 ns/op
-Total time: 244.934 ms
-Total operations: 8000000
-Operations throughput: 32661750 ops/s
+Phase: AsyncWaitProcessor-null(threads:4)
+Average time: 84 ns/op
+Minimal time: 84 ns/op
+Maximal time: 86 ns/op
+Total time: 6.582 s
+Total operations: 78026184
+Operations throughput: 11852964 ops/s
 -------------------------------------------------------------------------------
-Phase: AsyncProcessor-null(threads:8)
-Average time: 44 ns/op
-Minimal time: 44 ns/op
-Maximal time: 44 ns/op
-Total time: 704.504 ms
-Total operations: 16000000
-Operations throughput: 22710985 ops/s
+Phase: AsyncWaitProcessor-null(threads:8)
+Average time: 140 ns/op
+Minimal time: 140 ns/op
+Maximal time: 151 ns/op
+Total time: 6.183 s
+Total operations: 43878216
+Operations throughput: 7095827 ops/s
 ===============================================================================
-Benchmark: AsyncProcessor-binary
+Benchmark: AsyncWaitFreeProcessor-null
 Attempts: 5
-Operations: 1000000
+Duration: 5 seconds
 -------------------------------------------------------------------------------
-Phase: AsyncProcessor-binary(threads:1)
-Average time: 130 ns/op
-Minimal time: 130 ns/op
-Maximal time: 148 ns/op
-Total time: 130.037 ms
-Total operations: 1000000
-Operations throughput: 7690098 ops/s
+Phase: AsyncWaitFreeProcessor-null(threads:1)
+Average time: 133 ns/op
+Minimal time: 133 ns/op
+Maximal time: 146 ns/op
+Total time: 5.940 s
+Total operations: 44474022
+Operations throughput: 7486620 ops/s
 -------------------------------------------------------------------------------
-Phase: AsyncProcessor-binary(threads:2)
-Average time: 86 ns/op
-Minimal time: 86 ns/op
-Maximal time: 100 ns/op
-Total time: 172.245 ms
-Total operations: 2000000
-Operations throughput: 11611351 ops/s
+Phase: AsyncWaitFreeProcessor-null(threads:2)
+Average time: 110 ns/op
+Minimal time: 110 ns/op
+Maximal time: 112 ns/op
+Total time: 6.477 s
+Total operations: 58416282
+Operations throughput: 9017922 ops/s
 -------------------------------------------------------------------------------
-Phase: AsyncProcessor-binary(threads:4)
-Average time: 142 ns/op
-Minimal time: 142 ns/op
-Maximal time: 148 ns/op
-Total time: 570.112 ms
-Total operations: 4000000
-Operations throughput: 7016156 ops/s
+Phase: AsyncWaitFreeProcessor-null(threads:4)
+Average time: 89 ns/op
+Minimal time: 89 ns/op
+Maximal time: 90 ns/op
+Total time: 6.691 s
+Total operations: 75060304
+Operations throughput: 11217520 ops/s
 -------------------------------------------------------------------------------
-Phase: AsyncProcessor-binary(threads:8)
-Average time: 138 ns/op
-Minimal time: 138 ns/op
-Maximal time: 142 ns/op
-Total time: 1.111 s
-Total operations: 8000000
-Operations throughput: 7199789 ops/s
+Phase: AsyncWaitFreeProcessor-null(threads:8)
+Average time: 144 ns/op
+Minimal time: 144 ns/op
+Maximal time: 151 ns/op
+Total time: 6.057 s
+Total operations: 41881240
+Operations throughput: 6913597 ops/s
 ===============================================================================
-Benchmark: AsyncProcessor-text
+Benchmark: AsyncWaitProcessor-binary
 Attempts: 5
-Operations: 1000000
+Duration: 5 seconds
 -------------------------------------------------------------------------------
-Phase: AsyncProcessor-text(threads:1)
-Average time: 216 ns/op
-Minimal time: 216 ns/op
-Maximal time: 241 ns/op
-Total time: 216.754 ms
-Total operations: 1000000
-Operations throughput: 4613522 ops/s
+Phase: AsyncWaitProcessor-binary(threads:1)
+Average time: 116 ns/op
+Minimal time: 116 ns/op
+Maximal time: 130 ns/op
+Total time: 5.133 s
+Total operations: 44014650
+Operations throughput: 8574376 ops/s
 -------------------------------------------------------------------------------
-Phase: AsyncProcessor-text(threads:2)
-Average time: 286 ns/op
-Minimal time: 286 ns/op
-Maximal time: 311 ns/op
-Total time: 573.699 ms
-Total operations: 2000000
-Operations throughput: 3486145 ops/s
+Phase: AsyncWaitProcessor-binary(threads:2)
+Average time: 108 ns/op
+Minimal time: 108 ns/op
+Maximal time: 109 ns/op
+Total time: 6.398 s
+Total operations: 59107374
+Operations throughput: 9237683 ops/s
 -------------------------------------------------------------------------------
-Phase: AsyncProcessor-text(threads:4)
-Average time: 338 ns/op
-Minimal time: 338 ns/op
-Maximal time: 343 ns/op
-Total time: 1.352 s
-Total operations: 4000000
-Operations throughput: 2957581 ops/s
+Phase: AsyncWaitProcessor-binary(threads:4)
+Average time: 191 ns/op
+Minimal time: 191 ns/op
+Maximal time: 283 ns/op
+Total time: 5.715 s
+Total operations: 29837940
+Operations throughput: 5220444 ops/s
 -------------------------------------------------------------------------------
-Phase: AsyncProcessor-text(threads:8)
-Average time: 350 ns/op
-Minimal time: 350 ns/op
-Maximal time: 354 ns/op
-Total time: 2.805 s
-Total operations: 8000000
-Operations throughput: 2851072 ops/s
+Phase: AsyncWaitProcessor-binary(threads:8)
+Average time: 246 ns/op
+Minimal time: 246 ns/op
+Maximal time: 275 ns/op
+Total time: 5.871 s
+Total operations: 23839880
+Operations throughput: 4060572 ops/s
+===============================================================================
+Benchmark: AsyncWaitFreeProcessor-binary
+Attempts: 5
+Duration: 5 seconds
+-------------------------------------------------------------------------------
+Phase: AsyncWaitFreeProcessor-binary(threads:1)
+Average time: 149 ns/op
+Minimal time: 149 ns/op
+Maximal time: 178 ns/op
+Total time: 4.484 s
+Total operations: 30074012
+Operations throughput: 6706715 ops/s
+-------------------------------------------------------------------------------
+Phase: AsyncWaitFreeProcessor-binary(threads:2)
+Average time: 115 ns/op
+Minimal time: 115 ns/op
+Maximal time: 146 ns/op
+Total time: 5.240 s
+Total operations: 45248064
+Operations throughput: 8633681 ops/s
+-------------------------------------------------------------------------------
+Phase: AsyncWaitFreeProcessor-binary(threads:4)
+Average time: 184 ns/op
+Minimal time: 184 ns/op
+Maximal time: 254 ns/op
+Total time: 6.264 s
+Total operations: 33920192
+Operations throughput: 5415030 ops/s
+-------------------------------------------------------------------------------
+Phase: AsyncWaitFreeProcessor-binary(threads:8)
+Average time: 246 ns/op
+Minimal time: 246 ns/op
+Maximal time: 265 ns/op
+Total time: 5.786 s
+Total operations: 23449392
+Operations throughput: 4052628 ops/s
+===============================================================================
+Benchmark: AsyncWaitProcessor-text
+Attempts: 5
+Duration: 5 seconds
+-------------------------------------------------------------------------------
+Phase: AsyncWaitProcessor-text(threads:1)
+Average time: 349 ns/op
+Minimal time: 349 ns/op
+Maximal time: 371 ns/op
+Total time: 6.572 s
+Total operations: 18792224
+Operations throughput: 2859062 ops/s
+-------------------------------------------------------------------------------
+Phase: AsyncWaitProcessor-text(threads:2)
+Average time: 386 ns/op
+Minimal time: 386 ns/op
+Maximal time: 413 ns/op
+Total time: 6.001 s
+Total operations: 15521430
+Operations throughput: 2586115 ops/s
+-------------------------------------------------------------------------------
+Phase: AsyncWaitProcessor-text(threads:4)
+Average time: 493 ns/op
+Minimal time: 493 ns/op
+Maximal time: 525 ns/op
+Total time: 5.930 s
+Total operations: 12021376
+Operations throughput: 2027009 ops/s
+-------------------------------------------------------------------------------
+Phase: AsyncWaitProcessor-text(threads:8)
+Average time: 632 ns/op
+Minimal time: 632 ns/op
+Maximal time: 663 ns/op
+Total time: 5.727 s
+Total operations: 9059896
+Operations throughput: 1581719 ops/s
+===============================================================================
+Benchmark: AsyncWaitFreeProcessor-text
+Attempts: 5
+Duration: 5 seconds
+-------------------------------------------------------------------------------
+Phase: AsyncWaitFreeProcessor-text(threads:1)
+Average time: 355 ns/op
+Minimal time: 355 ns/op
+Maximal time: 379 ns/op
+Total time: 6.515 s
+Total operations: 18329296
+Operations throughput: 2813048 ops/s
+-------------------------------------------------------------------------------
+Phase: AsyncWaitFreeProcessor-text(threads:2)
+Average time: 401 ns/op
+Minimal time: 401 ns/op
+Maximal time: 421 ns/op
+Total time: 6.184 s
+Total operations: 15414816
+Operations throughput: 2492408 ops/s
+-------------------------------------------------------------------------------
+Phase: AsyncWaitFreeProcessor-text(threads:4)
+Average time: 517 ns/op
+Minimal time: 517 ns/op
+Maximal time: 533 ns/op
+Total time: 5.985 s
+Total operations: 11559852
+Operations throughput: 1931368 ops/s
+-------------------------------------------------------------------------------
+Phase: AsyncWaitFreeProcessor-text(threads:8)
+Average time: 722 ns/op
+Minimal time: 722 ns/op
+Maximal time: 735 ns/op
+Total time: 5.930 s
+Total operations: 8208632
+Operations throughput: 1384127 ops/s
 ===============================================================================
 ```
 
@@ -1054,92 +1162,92 @@ Benchmark report is the following:
 ===============================================================================
 CppBenchmark report. Version 1.0.0.0
 ===============================================================================
-CPU architecutre: Intel(R) Core(TM) i7-4790K CPU @ 4.00GHz
-CPU logical cores: 8
-CPU physical cores: 4
-CPU clock speed: 3.998 GHz
+CPU architecutre: Intel(R) Core(TM) i7-8750H CPU @ 2.20GHz
+CPU logical cores: 12
+CPU physical cores: 6
+CPU clock speed: 2.208 GHz
 CPU Hyper-Threading: enabled
-RAM total: 31.962 GiB
-RAM free: 21.657 GiB
+RAM total: 31.757 GiB
+RAM free: 21.136 GiB
 ===============================================================================
-OS version: Microsoft Windows 8 Enterprise Edition (build 9200), 64-bit
+OS version: Microsoft Windows 8  (build 9200), 64-bit
 OS bits: 64-bit
 Process bits: 64-bit
 Process configuaraion: release
-Local timestamp: Wed Sep 28 22:39:44 2016
-UTC timestamp: Wed Sep 28 19:39:44 2016
+Local timestamp: Wed Mar 27 16:27:31 2019
+UTC timestamp: Wed Mar 27 13:27:31 2019
 ===============================================================================
 Benchmark: FileSync-binary
 Attempts: 5
-Operations: 1000000
+Duration: 5 seconds
 -------------------------------------------------------------------------------
 Phase: FileSync-binary(threads:1)
-Average time: 217 ns/op
-Minimal time: 217 ns/op
-Maximal time: 241 ns/op
-Total time: 217.972 ms
-Total operations: 1000000
-Operations throughput: 4587743 ops/s
+Average time: 148 ns/op
+Minimal time: 148 ns/op
+Maximal time: 154 ns/op
+Total time: 5.386 s
+Total operations: 36302916
+Operations throughput: 6739413 ops/s
 -------------------------------------------------------------------------------
 Phase: FileSync-binary(threads:2)
-Average time: 328 ns/op
-Minimal time: 328 ns/op
-Maximal time: 349 ns/op
-Total time: 657.976 ms
-Total operations: 2000000
-Operations throughput: 3039622 ops/s
+Average time: 210 ns/op
+Minimal time: 210 ns/op
+Maximal time: 224 ns/op
+Total time: 6.955 s
+Total operations: 33089598
+Operations throughput: 4757379 ops/s
 -------------------------------------------------------------------------------
 Phase: FileSync-binary(threads:4)
-Average time: 375 ns/op
-Minimal time: 375 ns/op
-Maximal time: 399 ns/op
-Total time: 1.500 s
-Total operations: 4000000
-Operations throughput: 2666189 ops/s
+Average time: 307 ns/op
+Minimal time: 307 ns/op
+Maximal time: 319 ns/op
+Total time: 6.660 s
+Total operations: 21686472
+Operations throughput: 3256093 ops/s
 -------------------------------------------------------------------------------
 Phase: FileSync-binary(threads:8)
-Average time: 431 ns/op
-Minimal time: 431 ns/op
-Maximal time: 451 ns/op
-Total time: 3.455 s
-Total operations: 8000000
-Operations throughput: 2315052 ops/s
+Average time: 472 ns/op
+Minimal time: 472 ns/op
+Maximal time: 502 ns/op
+Total time: 6.042 s
+Total operations: 12776416
+Operations throughput: 2114452 ops/s
 ===============================================================================
 Benchmark: FileSync-text
 Attempts: 5
-Operations: 1000000
+Duration: 5 seconds
 -------------------------------------------------------------------------------
 Phase: FileSync-text(threads:1)
-Average time: 359 ns/op
-Minimal time: 359 ns/op
-Maximal time: 408 ns/op
-Total time: 359.330 ms
-Total operations: 1000000
-Operations throughput: 2782949 ops/s
+Average time: 388 ns/op
+Minimal time: 388 ns/op
+Maximal time: 403 ns/op
+Total time: 5.673 s
+Total operations: 14598922
+Operations throughput: 2573139 ops/s
 -------------------------------------------------------------------------------
 Phase: FileSync-text(threads:2)
-Average time: 473 ns/op
-Minimal time: 473 ns/op
-Maximal time: 494 ns/op
-Total time: 946.856 ms
-Total operations: 2000000
-Operations throughput: 2112253 ops/s
+Average time: 455 ns/op
+Minimal time: 455 ns/op
+Maximal time: 478 ns/op
+Total time: 6.650 s
+Total operations: 14603576
+Operations throughput: 2196023 ops/s
 -------------------------------------------------------------------------------
 Phase: FileSync-text(threads:4)
-Average time: 531 ns/op
-Minimal time: 531 ns/op
-Maximal time: 579 ns/op
-Total time: 2.127 s
-Total operations: 4000000
-Operations throughput: 1880220 ops/s
+Average time: 578 ns/op
+Minimal time: 578 ns/op
+Maximal time: 582 ns/op
+Total time: 6.371 s
+Total operations: 11012340
+Operations throughput: 1728452 ops/s
 -------------------------------------------------------------------------------
 Phase: FileSync-text(threads:8)
-Average time: 700 ns/op
-Minimal time: 700 ns/op
-Maximal time: 724 ns/op
-Total time: 5.606 s
-Total operations: 8000000
-Operations throughput: 1426888 ops/s
+Average time: 778 ns/op
+Minimal time: 778 ns/op
+Maximal time: 795 ns/op
+Total time: 6.194 s
+Total operations: 7960232
+Operations throughput: 1284963 ops/s
 ===============================================================================
 ```
 
@@ -1151,93 +1259,166 @@ Benchmark report is the following:
 ===============================================================================
 CppBenchmark report. Version 1.0.0.0
 ===============================================================================
-CPU architecutre: Intel(R) Core(TM) i7-4790K CPU @ 4.00GHz
-CPU logical cores: 8
-CPU physical cores: 4
-CPU clock speed: 3.998 GHz
+CPU architecutre: Intel(R) Core(TM) i7-8750H CPU @ 2.20GHz
+CPU logical cores: 12
+CPU physical cores: 6
+CPU clock speed: 2.208 GHz
 CPU Hyper-Threading: enabled
-RAM total: 31.962 GiB
-RAM free: 21.673 GiB
+RAM total: 31.757 GiB
+RAM free: 21.364 GiB
 ===============================================================================
-OS version: Microsoft Windows 8 Enterprise Edition (build 9200), 64-bit
+OS version: Microsoft Windows 8  (build 9200), 64-bit
 OS bits: 64-bit
 Process bits: 64-bit
 Process configuaraion: release
-Local timestamp: Wed Sep 28 22:41:46 2016
-UTC timestamp: Wed Sep 28 19:41:46 2016
+Local timestamp: Wed Mar 27 16:36:29 2019
+UTC timestamp: Wed Mar 27 13:36:29 2019
 ===============================================================================
-Benchmark: FileAsync-binary
+Benchmark: FileAsyncWait-binary
 Attempts: 5
-Operations: 1000000
+Duration: 5 seconds
 -------------------------------------------------------------------------------
-Phase: FileAsync-binary(threads:1)
-Average time: 131 ns/op
-Minimal time: 131 ns/op
-Maximal time: 164 ns/op
-Total time: 131.399 ms
-Total operations: 1000000
-Operations throughput: 7610405 ops/s
+Phase: FileAsyncWait-binary(threads:1)
+Average time: 101 ns/op
+Minimal time: 101 ns/op
+Maximal time: 156 ns/op
+Total time: 4.892 s
+Total operations: 48050088
+Operations throughput: 9821855 ops/s
 -------------------------------------------------------------------------------
-Phase: FileAsync-binary(threads:2)
-Average time: 292 ns/op
-Minimal time: 292 ns/op
-Maximal time: 333 ns/op
-Total time: 584.864 ms
-Total operations: 2000000
-Operations throughput: 3419595 ops/s
+Phase: FileAsyncWait-binary(threads:2)
+Average time: 350 ns/op
+Minimal time: 350 ns/op
+Maximal time: 567 ns/op
+Total time: 2.370 s
+Total operations: 6760258
+Operations throughput: 2852398 ops/s
 -------------------------------------------------------------------------------
-Phase: FileAsync-binary(threads:4)
-Average time: 290 ns/op
-Minimal time: 290 ns/op
-Maximal time: 322 ns/op
-Total time: 1.161 s
-Total operations: 4000000
-Operations throughput: 3442603 ops/s
+Phase: FileAsyncWait-binary(threads:4)
+Average time: 229 ns/op
+Minimal time: 229 ns/op
+Maximal time: 261 ns/op
+Total time: 6.620 s
+Total operations: 28893840
+Operations throughput: 4364315 ops/s
 -------------------------------------------------------------------------------
-Phase: FileAsync-binary(threads:8)
-Average time: 300 ns/op
-Minimal time: 300 ns/op
-Maximal time: 324 ns/op
-Total time: 2.407 s
-Total operations: 8000000
-Operations throughput: 3322879 ops/s
+Phase: FileAsyncWait-binary(threads:8)
+Average time: 379 ns/op
+Minimal time: 379 ns/op
+Maximal time: 440 ns/op
+Total time: 5.670 s
+Total operations: 14934640
+Operations throughput: 2633834 ops/s
 ===============================================================================
-Benchmark: FileAsync-text
+Benchmark: FileAsyncWaitFree-binary
 Attempts: 5
-Operations: 1000000
+Duration: 5 seconds
 -------------------------------------------------------------------------------
-Phase: FileAsync-text(threads:1)
-Average time: 283 ns/op
-Minimal time: 283 ns/op
-Maximal time: 331 ns/op
-Total time: 283.559 ms
-Total operations: 1000000
-Operations throughput: 3526594 ops/s
+Phase: FileAsyncWaitFree-binary(threads:1)
+Average time: 118 ns/op
+Minimal time: 118 ns/op
+Maximal time: 121 ns/op
+Total time: 5.661 s
+Total operations: 47644122
+Operations throughput: 8415222 ops/s
 -------------------------------------------------------------------------------
-Phase: FileAsync-text(threads:2)
-Average time: 539 ns/op
-Minimal time: 539 ns/op
-Maximal time: 591 ns/op
-Total time: 1.079 s
-Total operations: 2000000
-Operations throughput: 1852223 ops/s
+Phase: FileAsyncWaitFree-binary(threads:2)
+Average time: 244 ns/op
+Minimal time: 244 ns/op
+Maximal time: 373 ns/op
+Total time: 3.382 s
+Total operations: 13813918
+Operations throughput: 4083771 ops/s
 -------------------------------------------------------------------------------
-Phase: FileAsync-text(threads:4)
-Average time: 521 ns/op
-Minimal time: 521 ns/op
-Maximal time: 561 ns/op
-Total time: 2.085 s
-Total operations: 4000000
-Operations throughput: 1918385 ops/s
+Phase: FileAsyncWaitFree-binary(threads:4)
+Average time: 243 ns/op
+Minimal time: 243 ns/op
+Maximal time: 254 ns/op
+Total time: 6.496 s
+Total operations: 26651640
+Operations throughput: 4102283 ops/s
 -------------------------------------------------------------------------------
-Phase: FileAsync-text(threads:8)
-Average time: 551 ns/op
-Minimal time: 551 ns/op
-Maximal time: 576 ns/op
-Total time: 4.415 s
-Total operations: 8000000
-Operations throughput: 1811865 ops/s
+Phase: FileAsyncWaitFree-binary(threads:8)
+Average time: 311 ns/op
+Minimal time: 311 ns/op
+Maximal time: 321 ns/op
+Total time: 6.205 s
+Total operations: 19890512
+Operations throughput: 3205152 ops/s
 ===============================================================================
+Benchmark: FileAsyncWait-text
+Attempts: 5
+Duration: 5 seconds
+-------------------------------------------------------------------------------
+Phase: FileAsyncWait-text(threads:1)
+Average time: 425 ns/op
+Minimal time: 425 ns/op
+Maximal time: 463 ns/op
+Total time: 6.564 s
+Total operations: 15436114
+Operations throughput: 2351408 ops/s
+-------------------------------------------------------------------------------
+Phase: FileAsyncWait-text(threads:2)
+Average time: 530 ns/op
+Minimal time: 530 ns/op
+Maximal time: 563 ns/op
+Total time: 4.822 s
+Total operations: 9090630
+Operations throughput: 1884947 ops/s
+-------------------------------------------------------------------------------
+Phase: FileAsyncWait-text(threads:4)
+Average time: 540 ns/op
+Minimal time: 540 ns/op
+Maximal time: 559 ns/op
+Total time: 6.314 s
+Total operations: 11678216
+Operations throughput: 1849562 ops/s
+-------------------------------------------------------------------------------
+Phase: FileAsyncWait-text(threads:8)
+Average time: 624 ns/op
+Minimal time: 624 ns/op
+Maximal time: 659 ns/op
+Total time: 6.041 s
+Total operations: 9676336
+Operations throughput: 1601580 ops/s
+===============================================================================
+Benchmark: FileAsyncWaitFree-text
+Attempts: 5
+Duration: 5 seconds
+-------------------------------------------------------------------------------
+Phase: FileAsyncWaitFree-text(threads:1)
+Average time: 438 ns/op
+Minimal time: 438 ns/op
+Maximal time: 454 ns/op
+Total time: 6.527 s
+Total operations: 14872420
+Operations throughput: 2278352 ops/s
+-------------------------------------------------------------------------------
+Phase: FileAsyncWaitFree-text(threads:2)
+Average time: 501 ns/op
+Minimal time: 501 ns/op
+Maximal time: 574 ns/op
+Total time: 4.599 s
+Total operations: 9168388
+Operations throughput: 1993181 ops/s
+-------------------------------------------------------------------------------
+Phase: FileAsyncWaitFree-text(threads:4)
+Average time: 592 ns/op
+Minimal time: 592 ns/op
+Maximal time: 638 ns/op
+Total time: 6.052 s
+Total operations: 10208464
+Operations throughput: 1686616 ops/s
+-------------------------------------------------------------------------------
+Phase: FileAsyncWaitFree-text(threads:8)
+Average time: 688 ns/op
+Minimal time: 688 ns/op
+Maximal time: 700 ns/op
+Total time: 6.030 s
+Total operations: 8758360
+Operations throughput: 1452460 ops/s
+===============================================================================
+
 ```
 
 ## Benchmark 7: Format in logging thread vs format in background thread
@@ -1248,92 +1429,92 @@ Benchmark report is the following:
 ===============================================================================
 CppBenchmark report. Version 1.0.0.0
 ===============================================================================
-CPU architecutre: Intel(R) Core(TM) i7-4790K CPU @ 4.00GHz
-CPU logical cores: 8
-CPU physical cores: 4
-CPU clock speed: 3.998 GHz
+CPU architecutre: Intel(R) Core(TM) i7-8750H CPU @ 2.20GHz
+CPU logical cores: 12
+CPU physical cores: 6
+CPU clock speed: 2.208 GHz
 CPU Hyper-Threading: enabled
-RAM total: 31.962 GiB
-RAM free: 21.623 GiB
+RAM total: 31.757 GiB
+RAM free: 21.286 GiB
 ===============================================================================
-OS version: Microsoft Windows 8 Enterprise Edition (build 9200), 64-bit
+OS version: Microsoft Windows 8  (build 9200), 64-bit
 OS bits: 64-bit
 Process bits: 64-bit
 Process configuaraion: release
-Local timestamp: Wed Sep 28 22:54:22 2016
-UTC timestamp: Wed Sep 28 19:54:22 2016
+Local timestamp: Wed Mar 27 16:43:04 2019
+UTC timestamp: Wed Mar 27 13:43:04 2019
 ===============================================================================
-Benchmark: PreFormat
+Benchmark: Format(int, double, string)
 Attempts: 5
-Operations: 1000000
+Duration: 5 seconds
 -------------------------------------------------------------------------------
-Phase: PreFormat(threads:1)
-Average time: 234 ns/op
-Minimal time: 234 ns/op
-Maximal time: 245 ns/op
-Total time: 234.626 ms
-Total operations: 1000000
-Operations throughput: 4262095 ops/s
+Phase: Format(int, double, string)(threads:1)
+Average time: 722 ns/op
+Minimal time: 722 ns/op
+Maximal time: 754 ns/op
+Total time: 5.899 s
+Total operations: 8162637
+Operations throughput: 1383683 ops/s
 -------------------------------------------------------------------------------
-Phase: PreFormat(threads:2)
-Average time: 419 ns/op
-Minimal time: 419 ns/op
-Maximal time: 549 ns/op
-Total time: 838.510 ms
-Total operations: 2000000
-Operations throughput: 2385182 ops/s
+Phase: Format(int, double, string)(threads:2)
+Average time: 406 ns/op
+Minimal time: 406 ns/op
+Maximal time: 428 ns/op
+Total time: 5.212 s
+Total operations: 12818384
+Operations throughput: 2458961 ops/s
 -------------------------------------------------------------------------------
-Phase: PreFormat(threads:4)
-Average time: 493 ns/op
-Minimal time: 493 ns/op
-Maximal time: 636 ns/op
-Total time: 1.974 s
-Total operations: 4000000
-Operations throughput: 2025957 ops/s
+Phase: Format(int, double, string)(threads:4)
+Average time: 279 ns/op
+Minimal time: 279 ns/op
+Maximal time: 289 ns/op
+Total time: 6.843 s
+Total operations: 24456284
+Operations throughput: 3573654 ops/s
 -------------------------------------------------------------------------------
-Phase: PreFormat(threads:8)
-Average time: 600 ns/op
-Minimal time: 600 ns/op
-Maximal time: 616 ns/op
-Total time: 4.802 s
-Total operations: 8000000
-Operations throughput: 1665872 ops/s
+Phase: Format(int, double, string)(threads:8)
+Average time: 462 ns/op
+Minimal time: 462 ns/op
+Maximal time: 496 ns/op
+Total time: 6.494 s
+Total operations: 14031432
+Operations throughput: 2160412 ops/s
 ===============================================================================
-Benchmark: PostFormat
+Benchmark: Serialize(int, double, string)
 Attempts: 5
-Operations: 1000000
+Duration: 5 seconds
 -------------------------------------------------------------------------------
-Phase: PostFormat(threads:1)
-Average time: 441 ns/op
-Minimal time: 441 ns/op
-Maximal time: 489 ns/op
-Total time: 441.860 ms
-Total operations: 1000000
-Operations throughput: 2263157 ops/s
+Phase: Serialize(int, double, string)(threads:1)
+Average time: 251 ns/op
+Minimal time: 251 ns/op
+Maximal time: 266 ns/op
+Total time: 3.493 s
+Total operations: 13909437
+Operations throughput: 3981181 ops/s
 -------------------------------------------------------------------------------
-Phase: PostFormat(threads:2)
-Average time: 681 ns/op
-Minimal time: 681 ns/op
-Maximal time: 712 ns/op
-Total time: 1.362 s
-Total operations: 2000000
-Operations throughput: 1468368 ops/s
+Phase: Serialize(int, double, string)(threads:2)
+Average time: 353 ns/op
+Minimal time: 353 ns/op
+Maximal time: 474 ns/op
+Total time: 3.887 s
+Total operations: 11006936
+Operations throughput: 2831139 ops/s
 -------------------------------------------------------------------------------
-Phase: PostFormat(threads:4)
-Average time: 684 ns/op
-Minimal time: 684 ns/op
-Maximal time: 745 ns/op
-Total time: 2.738 s
-Total operations: 4000000
-Operations throughput: 1460445 ops/s
+Phase: Serialize(int, double, string)(threads:4).thread
+Average time: 1.338 mcs/op
+Minimal time: 1.338 mcs/op
+Maximal time: 1.545 mcs/op
+Total time: 4.916 s
+Total operations: 3671994
+Operations throughput: 746838 ops/s
 -------------------------------------------------------------------------------
-Phase: PostFormat(threads:8)
-Average time: 821 ns/op
-Minimal time: 821 ns/op
-Maximal time: 848 ns/op
-Total time: 6.572 s
-Total operations: 8000000
-Operations throughput: 1217128 ops/s
+Phase: Serialize(int, double, string)(threads:8).thread
+Average time: 3.266 mcs/op
+Minimal time: 3.266 mcs/op
+Maximal time: 4.085 mcs/op
+Total time: 4.269 s
+Total operations: 1307225
+Operations throughput: 306147 ops/s
 ===============================================================================
 ```
 
