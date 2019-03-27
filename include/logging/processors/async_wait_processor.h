@@ -56,7 +56,7 @@ public:
     void Flush() override;
 
 private:
-    CppCommon::WaitBatcher<Record> _buffer;
+    CppCommon::WaitBatcher<Record> _queue;
     std::thread _thread;
 
     bool EnqueueRecord(Record& record);

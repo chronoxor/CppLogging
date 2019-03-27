@@ -1,6 +1,6 @@
 /*!
-    \file async_wait_free_buffer.inl
-    \brief Asynchronous wait-free logging buffer inline implementation
+    \file async_wait_free_queue.inl
+    \brief Asynchronous wait-free logging ring queue inline implementation
     \author Ivan Shynkarenka
     \date 04.08.2016
     \copyright MIT License
@@ -13,21 +13,24 @@
 
 namespace CppLogging {
 
-inline AsyncWaitFreeBuffer::AsyncWaitFreeBuffer(size_t capacity) : _capacity(capacity), _mask(capacity - 1), _buffer(new Node[capacity]), _head(0), _tail(0)
+template<typename T>
+inline AsyncWaitFreeQueue<T>::AsyncWaitFreeQueue(size_t capacity) : _capacity(capacity), _mask(capacity - 1), _buffer(new Node[capacity]), _head(0), _tail(0)
 {
-    assert((capacity > 1) && "Ring buffer capacity must be greater than one!");
-    assert(((capacity & (capacity - 1)) == 0) && "Ring buffer capacity must be a power of two!");
+    assert((capacity > 1) && "Ring queue capacity must be greater than one!");
+    assert(((capacity & (capacity - 1)) == 0) && "Ring queue capacity must be a power of two!");
 
     memset(_pad0, 0, sizeof(cache_line_pad));
     memset(_pad1, 0, sizeof(cache_line_pad));
     memset(_pad2, 0, sizeof(cache_line_pad));
+    memset(_pad3, 0, sizeof(cache_line_pad));
 
     // Populate the sequence initial values
     for (size_t i = 0; i < capacity; ++i)
         _buffer[i].sequence.store(i, std::memory_order_relaxed);
 }
 
-inline size_t AsyncWaitFreeBuffer::size() const noexcept
+template<typename T>
+inline size_t AsyncWaitFreeQueue<T>::size() const noexcept
 {
     const size_t head = _head.load(std::memory_order_acquire);
     const size_t tail = _tail.load(std::memory_order_acquire);
@@ -35,7 +38,8 @@ inline size_t AsyncWaitFreeBuffer::size() const noexcept
     return head - tail;
 }
 
-inline bool AsyncWaitFreeBuffer::Enqueue(Record& record)
+template<typename T>
+inline bool AsyncWaitFreeQueue<T>::Enqueue(Record& record)
 {
     size_t head_sequence = _head.load(std::memory_order_relaxed);
 
@@ -75,11 +79,12 @@ inline bool AsyncWaitFreeBuffer::Enqueue(Record& record)
         }
     }
 
-    // Never taken
+    // Never happens...
     return false;
 }
 
-inline bool AsyncWaitFreeBuffer::Dequeue(Record& record)
+template<typename T>
+inline bool AsyncWaitFreeQueue<T>::Dequeue(Record& record)
 {
     size_t tail_sequence = _tail.load(std::memory_order_relaxed);
 
@@ -108,7 +113,7 @@ inline bool AsyncWaitFreeBuffer::Dequeue(Record& record)
         }
         else if (diff < 0)
         {
-            // if seq is less than head seq then it means this slot is full and therefore the buffer is full
+            // If seq is less than head seq then it means this slot is full and therefore the buffer is full
             return false;
         }
         else
@@ -118,7 +123,7 @@ inline bool AsyncWaitFreeBuffer::Dequeue(Record& record)
         }
     }
 
-    // Never taken
+    // Never happens...
     return false;
 }
 

@@ -18,7 +18,7 @@ namespace CppLogging {
 AsyncWaitFreeProcessor::AsyncWaitFreeProcessor(const std::shared_ptr<Layout>& layout, bool discard_on_overflow, size_t capacity, const std::function<void ()>& on_thread_initialize, const std::function<void ()>& on_thread_clenup)
     : Processor(layout),
       _discard_on_overflow(discard_on_overflow),
-      _buffer(capacity)
+      _queue(capacity)
 {
     // Start processing thread
     _thread = CppCommon::Thread::Start([this, on_thread_initialize, on_thread_clenup]() { ProcessBufferedRecords(on_thread_initialize, on_thread_clenup); });
@@ -46,14 +46,14 @@ bool AsyncWaitFreeProcessor::ProcessRecord(Record& record)
 bool AsyncWaitFreeProcessor::EnqueueRecord(bool discard_on_overflow, Record& record)
 {
     // Try to enqueue the given logger record
-    if (!_buffer.Enqueue(record))
+    if (!_queue.Enqueue(record))
     {
         // If the overflow policy is discard logging record, return immediately
         if (discard_on_overflow)
             return false;
 
-        // If the overflow policy is blocking then yield if the buffer is full
-        while (!_buffer.Enqueue(record))
+        // If the overflow policy is blocking then yield if the queue is full
+        while (!_queue.Enqueue(record))
             CppCommon::Thread::Yield();
     }
 
@@ -71,11 +71,12 @@ void AsyncWaitFreeProcessor::ProcessBufferedRecords(const std::function<void ()>
     {
         // Thread local logger record to process
         thread_local Record record;
+        thread_local uint64_t timestamp = 0;
 
         while (true)
         {
-            // Dequeue the next logging record or yield if the buffer is empty
-            while (!_buffer.Dequeue(record))
+            // Dequeue the next logging record or yield if the queue is empty
+            while (!_queue.Dequeue(record))
                 CppCommon::Thread::Yield();
 
             // Handle stop operation record
@@ -92,6 +93,16 @@ void AsyncWaitFreeProcessor::ProcessBufferedRecords(const std::function<void ()>
 
             // Process logging record
             Processor::ProcessRecord(record);
+
+            // Handle auto-flush period
+            if (CppCommon::Timespan((int64_t)(record.timestamp - timestamp)).seconds() > 1)
+            {
+                // Flush the logging processor
+                Processor::Flush();
+            }
+
+            // Cache the record timestamp
+            timestamp = record.timestamp;
         }
     }
     catch (...)

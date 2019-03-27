@@ -11,7 +11,7 @@
 
 #include "logging/processor.h"
 
-#include "logging/processors/async_wait_free_buffer.h"
+#include "logging/processors/async_wait_free_queue.h"
 
 #include <functional>
 
@@ -55,7 +55,7 @@ public:
 
 private:
     bool _discard_on_overflow;
-    AsyncWaitFreeBuffer _buffer;
+    AsyncWaitFreeQueue<Record> _queue;
     std::thread _thread;
 
     bool EnqueueRecord(bool discard_on_overflow, Record& record);
