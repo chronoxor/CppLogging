@@ -15,9 +15,9 @@
 
 namespace CppLogging {
 
-AsyncWaitProcessor::AsyncWaitProcessor(const std::shared_ptr<Layout>& layout, size_t capacity, const std::function<void ()>& on_thread_initialize, const std::function<void ()>& on_thread_clenup)
+AsyncWaitProcessor::AsyncWaitProcessor(const std::shared_ptr<Layout>& layout, size_t capacity, size_t initial, const std::function<void ()>& on_thread_initialize, const std::function<void ()>& on_thread_clenup)
     : Processor(layout),
-      _buffer(capacity)
+      _buffer(capacity, initial)
 {
     // Start processing thread
     _thread = CppCommon::Thread::Start([this, on_thread_initialize, on_thread_clenup]() { ProcessBufferedRecords(on_thread_initialize, on_thread_clenup); });
@@ -45,9 +45,7 @@ bool AsyncWaitProcessor::ProcessRecord(Record& record)
 bool AsyncWaitProcessor::EnqueueRecord(Record& record)
 {
     // Try to enqueue the given logger record
-    while (!_buffer.Enqueue(record))
-        CppCommon::Thread::Yield();
-    return true;
+    return _buffer.Enqueue(record);
 }
 
 void AsyncWaitProcessor::ProcessBufferedRecords(const std::function<void ()>& on_thread_initialize, const std::function<void ()>& on_thread_clenup)
