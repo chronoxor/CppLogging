@@ -1533,42 +1533,42 @@ CPU physical cores: 4
 CPU clock speed: 3.998 GHz
 CPU Hyper-Threading: enabled
 RAM total: 31.962 GiB
-RAM free: 17.744 GiB
+RAM free: 17.160 GiB
 ===============================================================================
 OS version: Microsoft Windows 8 Enterprise Edition (build 9200), 64-bit
 OS bits: 64-bit
 Process bits: 64-bit
 Process configuaraion: release
-Local timestamp: Thu Mar 28 00:02:12 2019
-UTC timestamp: Wed Mar 27 21:02:12 2019
+Local timestamp: Thu Mar 28 00:20:39 2019
+UTC timestamp: Wed Mar 27 21:20:39 2019
 ===============================================================================
 Benchmark: BinaryLayout
 Attempts: 5
 Duration: 5 seconds
 -------------------------------------------------------------------------------
 Phase: BinaryLayout
-Average time: 43 ns/op
-Minimal time: 43 ns/op
-Maximal time: 45 ns/op
-Total time: 2.750 s
-Total operations: 62530720
-Total bytes: 62.678 GiB
-Operations throughput: 22736082 ops/s
-Bytes throughput: 22.802 GiB/s
+Average time: 24 ns/op
+Minimal time: 24 ns/op
+Maximal time: 25 ns/op
+Total time: 2.280 s
+Total operations: 91409302
+Total bytes: 4.437 GiB
+Operations throughput: 40091059 ops/s
+Bytes throughput: 1.964 GiB/s
 ===============================================================================
 Benchmark: TextLayout
 Attempts: 5
 Duration: 5 seconds
 -------------------------------------------------------------------------------
 Phase: TextLayout
-Average time: 11.024 mcs/op
-Minimal time: 11.024 mcs/op
-Maximal time: 11.170 mcs/op
-Total time: 5.000 s
-Total operations: 453619
-Total bytes: 31.594 MiB
-Operations throughput: 90708 ops/s
-Bytes throughput: 6.322 MiB/s
+Average time: 179 ns/op
+Minimal time: 179 ns/op
+Maximal time: 185 ns/op
+Total time: 4.090 s
+Total operations: 22754768
+Total bytes: 1.560 GiB
+Operations throughput: 5562485 ops/s
+Bytes throughput: 387.256 MiB/s
 ===============================================================================
 ```
 
