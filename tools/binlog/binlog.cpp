@@ -140,6 +140,7 @@ int main(int argc, char** argv)
     }
     catch (const std::exception& ex)
     {
-        fatality(ex);
+        std::cerr << ex.what() << std::endl;
+        return -1;
     }
 }
