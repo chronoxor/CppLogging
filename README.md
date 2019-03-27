@@ -1572,7 +1572,7 @@ Bytes throughput: 6.322 MiB/s
 ===============================================================================
 ```
 
-## Benchmark 9: Benchmark 9: Format vs store format
+## Benchmark 9: Format vs store format
 Benchmark source file: [format.cpp](https://github.com/chronoxor/CppLogging/blob/master/performance/format.cpp)
 
 Benchmark report is the following:
