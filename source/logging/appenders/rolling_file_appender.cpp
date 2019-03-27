@@ -293,7 +293,7 @@ public:
             if (_archive)
                 ArchivationStop();
         }
-        catch (CppCommon::FileSystemException&) {}
+        catch (const CppCommon::FileSystemException&) {}
     }
 
     TimeRollingPolicy policy() const
@@ -321,14 +321,14 @@ public:
                 if (_auto_flush)
                     _file.Flush();
             }
-            catch (CppCommon::FileSystemException&)
+            catch (const CppCommon::FileSystemException&)
             {
                 // Try to close the opened file in case of any IO error
                 try
                 {
                     _file.Close();
                 }
-                catch (CppCommon::FileSystemException&) {}
+                catch (const CppCommon::FileSystemException&) {}
             }
         }
     }
@@ -342,14 +342,14 @@ public:
             {
                 _file.Flush();
             }
-            catch (CppCommon::FileSystemException&)
+            catch (const CppCommon::FileSystemException&)
             {
                 // Try to close the opened file in case of any IO error
                 try
                 {
                     _file.Close();
                 }
-                catch (CppCommon::FileSystemException&) {}
+                catch (const CppCommon::FileSystemException&) {}
             }
         }
     }
@@ -404,7 +404,7 @@ private:
 
             return true;
         }
-        catch (CppCommon::FileSystemException&)
+        catch (const CppCommon::FileSystemException&)
         {
             // In case of any IO error reset the retry timestamp and return false!
             _retry = CppCommon::Timestamp::utc();
@@ -901,7 +901,7 @@ public:
             if (_archive)
                 ArchivationStop();
         }
-        catch (CppCommon::FileSystemException&) {}
+        catch (const CppCommon::FileSystemException&) {}
     }
 
     void AppendRecord(Record& record) override
@@ -924,14 +924,14 @@ public:
                 if (_auto_flush)
                     _file.Flush();
             }
-            catch (CppCommon::FileSystemException&)
+            catch (const CppCommon::FileSystemException&)
             {
                 // Try to close the opened file in case of any IO error
                 try
                 {
                     _file.Close();
                 }
-                catch (CppCommon::FileSystemException&) {}
+                catch (const CppCommon::FileSystemException&) {}
             }
         }
     }
@@ -945,14 +945,14 @@ public:
             {
                 _file.Flush();
             }
-            catch (CppCommon::FileSystemException&)
+            catch (const CppCommon::FileSystemException&)
             {
                 // Try to close the opened file in case of any IO error
                 try
                 {
                     _file.Close();
                 }
-                catch (CppCommon::FileSystemException&) {}
+                catch (const CppCommon::FileSystemException&) {}
             }
         }
     }
@@ -1005,7 +1005,7 @@ private:
 
             return true;
         }
-        catch (CppCommon::FileSystemException&)
+        catch (const CppCommon::FileSystemException&)
         {
             // In case of any IO error reset the retry timestamp and return false!
             _retry = CppCommon::Timestamp::utc();

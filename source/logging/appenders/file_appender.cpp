@@ -32,14 +32,14 @@ void FileAppender::AppendRecord(Record& record)
             if (_auto_flush)
                 _file.Flush();
         }
-        catch (CppCommon::FileSystemException&)
+        catch (const CppCommon::FileSystemException&)
         {
             // Try to close the opened file in case of any IO error
             try
             {
                 _file.Close();
             }
-            catch (CppCommon::FileSystemException&) {}
+            catch (const CppCommon::FileSystemException&) {}
         }
     }
 }
@@ -53,14 +53,14 @@ void FileAppender::Flush()
         {
             _file.Flush();
         }
-        catch (CppCommon::FileSystemException&)
+        catch (const CppCommon::FileSystemException&)
         {
             // Try to close the opened file in case of any IO error
             try
             {
                 _file.Close();
             }
-            catch (CppCommon::FileSystemException&) {}
+            catch (const CppCommon::FileSystemException&) {}
         }
     }
 }
@@ -89,7 +89,7 @@ bool FileAppender::PrepareFile()
 
         return true;
     }
-    catch (CppCommon::FileSystemException&)
+    catch (const CppCommon::FileSystemException&)
     {
         // In case of any IO error reset the retry timestamp and return false!
         _retry = CppCommon::Timestamp::utc();
