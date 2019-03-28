@@ -1,7 +1,7 @@
 var searchData=
 [
-  ['_7easyncwaitfreebuffer',['~AsyncWaitFreeBuffer',['../class_cpp_logging_1_1_async_wait_free_buffer.html#a04f40b0cb673c11cdbacf0e46e3bc678',1,'CppLogging::AsyncWaitFreeBuffer']]],
   ['_7easyncwaitfreeprocessor',['~AsyncWaitFreeProcessor',['../class_cpp_logging_1_1_async_wait_free_processor.html#aea1a3bf70ad97191ac876675427fe11c',1,'CppLogging::AsyncWaitFreeProcessor']]],
+  ['_7easyncwaitfreequeue',['~AsyncWaitFreeQueue',['../class_cpp_logging_1_1_async_wait_free_queue.html#a33e7d141a7b4bd72865da88153a9c1ef',1,'CppLogging::AsyncWaitFreeQueue']]],
   ['_7easyncwaitprocessor',['~AsyncWaitProcessor',['../class_cpp_logging_1_1_async_wait_processor.html#abf1c6350e387b4dbdac30111243f5813',1,'CppLogging::AsyncWaitProcessor']]],
   ['_7ebinarylayout',['~BinaryLayout',['../class_cpp_logging_1_1_binary_layout.html#aeaec266fb019fa9ca511112eb04cd62b',1,'CppLogging::BinaryLayout']]],
   ['_7ebufferedprocessor',['~BufferedProcessor',['../class_cpp_logging_1_1_buffered_processor.html#a4519f05ece06dafbb40a10f9bd1bbc6c',1,'CppLogging::BufferedProcessor']]],
