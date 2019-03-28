@@ -552,7 +552,7 @@ private:
         std::string filename;
 
         // Iterate through all placeholders
-        for (auto& placeholder : _placeholders)
+        for (const auto& placeholder : _placeholders)
         {
             switch (placeholder.type)
             {
