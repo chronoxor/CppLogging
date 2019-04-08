@@ -1083,18 +1083,8 @@ RollingFileAppender::RollingFileAppender(const CppCommon::Path& path, const std:
 {
 }
 
-RollingFileAppender::RollingFileAppender(RollingFileAppender&& appender) noexcept : _pimpl(std::move(appender._pimpl))
-{
-}
-
 RollingFileAppender::~RollingFileAppender()
 {
-}
-
-RollingFileAppender& RollingFileAppender::operator=(RollingFileAppender&& appender) noexcept
-{
-    _pimpl = std::move(appender._pimpl);
-    return *this;
 }
 
 void RollingFileAppender::AppendRecord(Record& record)
