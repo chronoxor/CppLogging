@@ -24,11 +24,11 @@ class NullAppender : public Appender
 public:
     NullAppender() = default;
     NullAppender(const NullAppender&) = delete;
-    NullAppender(NullAppender&&) noexcept = default;
+    NullAppender(NullAppender&&) = delete;
     virtual ~NullAppender() = default;
 
     NullAppender& operator=(const NullAppender&) = delete;
-    NullAppender& operator=(NullAppender&&) noexcept = default;
+    NullAppender& operator=(NullAppender&&) = delete;
 
     // Implementation of Appender
     void AppendRecord(Record& record) override {}

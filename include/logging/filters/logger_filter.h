@@ -31,11 +31,11 @@ public:
     */
     explicit LoggerFilter(const std::regex& pattern) : _pattern(pattern) {}
     LoggerFilter(const LoggerFilter&) = delete;
-    LoggerFilter(LoggerFilter&&) noexcept = default;
+    LoggerFilter(LoggerFilter&&) = delete;
     virtual ~LoggerFilter() = default;
 
     LoggerFilter& operator=(const LoggerFilter&) = delete;
-    LoggerFilter& operator=(LoggerFilter&&) noexcept = default;
+    LoggerFilter& operator=(LoggerFilter&&) = delete;
 
     //! Get the logger regular expression pattern
     const std::regex& pattern() const noexcept { return _pattern; }

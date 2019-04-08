@@ -43,11 +43,11 @@ public:
     */
     explicit AsyncWaitFreeProcessor(const std::shared_ptr<Layout>& layout, bool discard_on_overflow = false, size_t capacity = 8192, const std::function<void ()>& on_thread_initialize = [](){}, const std::function<void ()>& on_thread_clenup = [](){});
     AsyncWaitFreeProcessor(const AsyncWaitFreeProcessor&) = delete;
-    AsyncWaitFreeProcessor(AsyncWaitFreeProcessor&&) = default;
+    AsyncWaitFreeProcessor(AsyncWaitFreeProcessor&&) = delete;
     virtual ~AsyncWaitFreeProcessor();
 
     AsyncWaitFreeProcessor& operator=(const AsyncWaitFreeProcessor&) = delete;
-    AsyncWaitFreeProcessor& operator=(AsyncWaitFreeProcessor&&) = default;
+    AsyncWaitFreeProcessor& operator=(AsyncWaitFreeProcessor&&) = delete;
 
     // Implementation of Processor
     bool ProcessRecord(Record& record) override;

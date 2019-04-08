@@ -25,11 +25,11 @@ class ConsoleAppender : public Appender
 public:
     ConsoleAppender() = default;
     ConsoleAppender(const ConsoleAppender&) = delete;
-    ConsoleAppender(ConsoleAppender&&) noexcept = default;
+    ConsoleAppender(ConsoleAppender&&) = delete;
     virtual ~ConsoleAppender() = default;
 
     ConsoleAppender& operator=(const ConsoleAppender&) = delete;
-    ConsoleAppender& operator=(ConsoleAppender&&) noexcept = default;
+    ConsoleAppender& operator=(ConsoleAppender&&) = delete;
 
     // Implementation of Appender
     void AppendRecord(Record& record) override;

@@ -45,11 +45,11 @@ public:
     */
     explicit AsyncWaitProcessor(const std::shared_ptr<Layout>& layout, size_t capacity = 8192, size_t initial = 8192, const std::function<void ()>& on_thread_initialize = [](){}, const std::function<void ()>& on_thread_clenup = [](){});
     AsyncWaitProcessor(const AsyncWaitProcessor&) = delete;
-    AsyncWaitProcessor(AsyncWaitProcessor&&) = default;
+    AsyncWaitProcessor(AsyncWaitProcessor&&) = delete;
     virtual ~AsyncWaitProcessor();
 
     AsyncWaitProcessor& operator=(const AsyncWaitProcessor&) = delete;
-    AsyncWaitProcessor& operator=(AsyncWaitProcessor&&) = default;
+    AsyncWaitProcessor& operator=(AsyncWaitProcessor&&) = delete;
 
     // Implementation of Processor
     bool ProcessRecord(Record& record) override;

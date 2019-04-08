@@ -25,11 +25,11 @@ class EmptyLayout : public Layout
 public:
     EmptyLayout() = default;
     EmptyLayout(const EmptyLayout&) = delete;
-    EmptyLayout(EmptyLayout&&) noexcept = default;
+    EmptyLayout(EmptyLayout&&) = delete;
     virtual ~EmptyLayout() = default;
 
     EmptyLayout& operator=(const EmptyLayout&) = delete;
-    EmptyLayout& operator=(EmptyLayout&&) noexcept = default;
+    EmptyLayout& operator=(EmptyLayout&&) = delete;
 
     // Implementation of Layout
     void LayoutRecord(Record& record) override { record.raw.clear(); }

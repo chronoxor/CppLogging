@@ -31,11 +31,11 @@ public:
     */
     explicit MessageFilter(const std::regex& pattern) : _pattern(pattern) {}
     MessageFilter(const MessageFilter&) = delete;
-    MessageFilter(MessageFilter&&) noexcept = default;
+    MessageFilter(MessageFilter&&) = delete;
     virtual ~MessageFilter() = default;
 
     MessageFilter& operator=(const MessageFilter&) = delete;
-    MessageFilter& operator=(MessageFilter&&) noexcept = default;
+    MessageFilter& operator=(MessageFilter&&) = delete;
 
     //! Get the message regular expression pattern
     const std::regex& pattern() const noexcept { return _pattern; }

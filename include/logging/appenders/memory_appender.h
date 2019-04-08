@@ -29,11 +29,11 @@ public:
     */
     explicit MemoryAppender(size_t capacity = 0) : _buffer(capacity) {}
     MemoryAppender(const MemoryAppender&) = delete;
-    MemoryAppender(MemoryAppender&&) noexcept = default;
+    MemoryAppender(MemoryAppender&&) = delete;
     virtual ~MemoryAppender() = default;
 
     MemoryAppender& operator=(const MemoryAppender&) = delete;
-    MemoryAppender& operator=(MemoryAppender&&) noexcept = default;
+    MemoryAppender& operator=(MemoryAppender&&) = delete;
 
     //! Get memory buffer
     std::vector<uint8_t>& buffer() noexcept { return _buffer; }

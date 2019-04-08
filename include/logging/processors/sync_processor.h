@@ -32,11 +32,11 @@ public:
     */
     explicit SyncProcessor(const std::shared_ptr<Layout>& layout) : Processor(layout) {}
     SyncProcessor(const SyncProcessor&) = delete;
-    SyncProcessor(SyncProcessor&&) noexcept = default;
+    SyncProcessor(SyncProcessor&&) = delete;
     virtual ~SyncProcessor() = default;
 
     SyncProcessor& operator=(const SyncProcessor&) = delete;
-    SyncProcessor& operator=(SyncProcessor&&) noexcept = default;
+    SyncProcessor& operator=(SyncProcessor&&) = delete;
 
     // Implementation of Processor
     bool ProcessRecord(Record& record) override;

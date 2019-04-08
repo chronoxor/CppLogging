@@ -25,11 +25,11 @@ class BinaryLayout : public Layout
 public:
     BinaryLayout() = default;
     BinaryLayout(const BinaryLayout&) = delete;
-    BinaryLayout(BinaryLayout&&) noexcept = default;
+    BinaryLayout(BinaryLayout&&) = delete;
     virtual ~BinaryLayout() = default;
 
     BinaryLayout& operator=(const BinaryLayout&) = delete;
-    BinaryLayout& operator=(BinaryLayout&&) noexcept = default;
+    BinaryLayout& operator=(BinaryLayout&&) = delete;
 
     // Implementation of Layout
     void LayoutRecord(Record& record) override;

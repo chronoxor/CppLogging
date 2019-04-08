@@ -804,18 +804,8 @@ TextLayout::TextLayout(const std::string& layout) : _pimpl(std::make_unique<Impl
 {
 }
 
-TextLayout::TextLayout(TextLayout&& layout) noexcept : _pimpl(std::move(layout._pimpl))
-{
-}
-
 TextLayout::~TextLayout()
 {
-}
-
-TextLayout& TextLayout::operator=(TextLayout&& layout) noexcept
-{
-    _pimpl = std::move(layout._pimpl);
-    return *this;
 }
 
 const std::string& TextLayout::pattern() const noexcept

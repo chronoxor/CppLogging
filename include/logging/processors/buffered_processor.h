@@ -37,11 +37,11 @@ public:
     explicit BufferedProcessor(const std::shared_ptr<Layout>& layout, size_t limit = 65536, size_t capacity = 8192) : Processor(layout), _limit(limit)
     { _buffer.reserve(capacity); }
     BufferedProcessor(const BufferedProcessor&) = delete;
-    BufferedProcessor(BufferedProcessor&&) noexcept = default;
+    BufferedProcessor(BufferedProcessor&&) = delete;
     virtual ~BufferedProcessor() = default;
 
     BufferedProcessor& operator=(const BufferedProcessor&) = delete;
-    BufferedProcessor& operator=(BufferedProcessor&&) noexcept = default;
+    BufferedProcessor& operator=(BufferedProcessor&&) = delete;
 
     // Implementation of Processor
     bool ProcessRecord(Record& record) override;

@@ -27,11 +27,11 @@ class DebugAppender : public Appender
 public:
     DebugAppender() = default;
     DebugAppender(const DebugAppender&) = delete;
-    DebugAppender(DebugAppender&&) noexcept = default;
+    DebugAppender(DebugAppender&&) = delete;
     virtual ~DebugAppender() = default;
 
     DebugAppender& operator=(const DebugAppender&) = delete;
-    DebugAppender& operator=(DebugAppender&&) noexcept = default;
+    DebugAppender& operator=(DebugAppender&&) = delete;
 
     // Implementation of Appender
     void AppendRecord(Record& record) override;

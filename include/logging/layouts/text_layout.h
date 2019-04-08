@@ -53,11 +53,11 @@ public:
     */
     explicit TextLayout(const std::string& pattern = "{UtcDateTime} [{Thread}] {Level} {Logger} - {Message}{EndLine}");
     TextLayout(const TextLayout&) = delete;
-    TextLayout(TextLayout&& layout) noexcept;
+    TextLayout(TextLayout&& layout) = delete;
     virtual ~TextLayout();
 
     TextLayout& operator=(const TextLayout&) = delete;
-    TextLayout& operator=(TextLayout&& layout) noexcept;
+    TextLayout& operator=(TextLayout&& layout) = delete;
 
     //! Get the text layout pattern
     const std::string& pattern() const noexcept;

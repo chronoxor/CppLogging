@@ -24,11 +24,11 @@ class NullLayout : public Layout
 public:
     NullLayout() = default;
     NullLayout(const NullLayout&) = delete;
-    NullLayout(NullLayout&&) noexcept = default;
+    NullLayout(NullLayout&&) = delete;
     virtual ~NullLayout() = default;
 
     NullLayout& operator=(const NullLayout&) = delete;
-    NullLayout& operator=(NullLayout&&) noexcept = default;
+    NullLayout& operator=(NullLayout&&) = delete;
 
     // Implementation of Layout
     void LayoutRecord(Record& record) override {}
