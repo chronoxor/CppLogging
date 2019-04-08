@@ -376,7 +376,7 @@ bool WriteFormatArgument(fmt::v5::basic_writer<fmt::v5::back_insert_range<std::s
         {
             uint64_t value;
             std::memcpy(&value, buffer.data() + argument.offset, sizeof(uint64_t));
-            writer.write_pointer((void*)value);
+            writer.write_pointer((uintptr_t)value, &specs);
             return true;
         }
         case CppLogging::ArgumentType::ARG_CUSTOM:
