@@ -10,7 +10,7 @@ var searchData=
   ['timestamp',['timestamp',['../class_cpp_logging_1_1_record.html#acb824eebe901b423004a65d73dd1ce4d',1,'CppLogging::Record']]],
   ['to',['to',['../class_cpp_logging_1_1_level_filter.html#a49f5195d523f2311507bee63bcbdb861',1,'CppLogging::LevelFilter']]],
   ['toggle',['Toggle',['../class_cpp_logging_1_1_trigger.html#a476aab6d9df45cdf6edd531a8f522628',1,'CppLogging::Trigger']]],
-  ['trigger',['Trigger',['../class_cpp_logging_1_1_trigger.html#add5ecc4976764319b3194165d8b4fc58',1,'CppLogging::Trigger::Trigger(bool state=true)'],['../class_cpp_logging_1_1_trigger.html#a644ce7ddb13f11fb1e5521a4a4a90d8a',1,'CppLogging::Trigger::Trigger(const Trigger &amp;)=delete'],['../class_cpp_logging_1_1_trigger.html#a2539e6a2cf040f16637291727cabd51f',1,'CppLogging::Trigger::Trigger(Trigger &amp;&amp;)=default']]],
+  ['trigger',['Trigger',['../class_cpp_logging_1_1_trigger.html#add5ecc4976764319b3194165d8b4fc58',1,'CppLogging::Trigger::Trigger(bool state=true)'],['../class_cpp_logging_1_1_trigger.html#a644ce7ddb13f11fb1e5521a4a4a90d8a',1,'CppLogging::Trigger::Trigger(const Trigger &amp;)=delete'],['../class_cpp_logging_1_1_trigger.html#aa637dd465ef05fee00c5b3ee9e388abc',1,'CppLogging::Trigger::Trigger(Trigger &amp;&amp;)=delete']]],
   ['trigger',['Trigger',['../class_cpp_logging_1_1_trigger.html',1,'CppLogging']]],
   ['trigger_2eh',['trigger.h',['../trigger_8h.html',1,'']]]
 ];
