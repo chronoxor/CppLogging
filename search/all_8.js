@@ -19,5 +19,5 @@ var searchData=
   ['logger_5ffilter_2ecpp',['logger_filter.cpp',['../logger__filter_8cpp.html',1,'']]],
   ['logger_5ffilter_2eh',['logger_filter.h',['../logger__filter_8h.html',1,'']]],
   ['loggerfilter',['LoggerFilter',['../class_cpp_logging_1_1_logger_filter.html',1,'CppLogging']]],
-  ['loggerfilter',['LoggerFilter',['../class_cpp_logging_1_1_logger_filter.html#ad443fda68370bac29bb4a47fb658024c',1,'CppLogging::LoggerFilter::LoggerFilter(const std::regex &amp;pattern)'],['../class_cpp_logging_1_1_logger_filter.html#adee52e6aa43af9bee7fb1cbfd60cc6db',1,'CppLogging::LoggerFilter::LoggerFilter(const LoggerFilter &amp;)=delete'],['../class_cpp_logging_1_1_logger_filter.html#a2e2883ae711cfef53783e2c558efe2b8',1,'CppLogging::LoggerFilter::LoggerFilter(LoggerFilter &amp;&amp;) noexcept=default']]]
+  ['loggerfilter',['LoggerFilter',['../class_cpp_logging_1_1_logger_filter.html#ad443fda68370bac29bb4a47fb658024c',1,'CppLogging::LoggerFilter::LoggerFilter(const std::regex &amp;pattern)'],['../class_cpp_logging_1_1_logger_filter.html#adee52e6aa43af9bee7fb1cbfd60cc6db',1,'CppLogging::LoggerFilter::LoggerFilter(const LoggerFilter &amp;)=delete'],['../class_cpp_logging_1_1_logger_filter.html#a46f71760b3428cfb7b13f2fa0ecf01a6',1,'CppLogging::LoggerFilter::LoggerFilter(LoggerFilter &amp;&amp;)=delete']]]
 ];
