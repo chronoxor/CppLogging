@@ -31,11 +31,11 @@ public:
     */
     explicit OstreamAppender(std::ostream& stream) : _ostream(stream) {}
     OstreamAppender(const OstreamAppender&) = delete;
-    OstreamAppender(OstreamAppender&&) noexcept = default;
+    OstreamAppender(OstreamAppender&&) = delete;
     virtual ~OstreamAppender() = default;
 
     OstreamAppender& operator=(const OstreamAppender&) = delete;
-    OstreamAppender& operator=(OstreamAppender&&) noexcept = default;
+    OstreamAppender& operator=(OstreamAppender&&) = delete;
 
     // Implementation of Appender
     void AppendRecord(Record& record) override;
