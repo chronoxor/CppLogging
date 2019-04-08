@@ -41,11 +41,11 @@ public:
     */
     explicit AsyncWaitFreeQueue(size_t capacity);
     AsyncWaitFreeQueue(const AsyncWaitFreeQueue&) = delete;
-    AsyncWaitFreeQueue(AsyncWaitFreeQueue&&) = default;
+    AsyncWaitFreeQueue(AsyncWaitFreeQueue&&) = delete;
     ~AsyncWaitFreeQueue() { delete[] _buffer; }
 
     AsyncWaitFreeQueue& operator=(const AsyncWaitFreeQueue&) = delete;
-    AsyncWaitFreeQueue& operator=(AsyncWaitFreeQueue&&) = default;
+    AsyncWaitFreeQueue& operator=(AsyncWaitFreeQueue&&) = delete;
 
     //! Check if the queue is not empty
     explicit operator bool() const noexcept { return !empty(); }
