@@ -6,11 +6,6 @@
     \copyright MIT License
 */
 
-#if defined(_MSC_VER)
-#pragma warning(push)
-#pragma warning(disable: 4702) // C4702: unreachable code
-#endif
-
 namespace CppLogging {
 
 template<typename T>
@@ -128,7 +123,3 @@ inline bool AsyncWaitFreeQueue<T>::Dequeue(Record& record)
 }
 
 } // namespace CppLogging
-
-#if defined(_MSC_VER)
-#pragma warning(pop)
-#endif
