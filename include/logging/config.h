@@ -61,6 +61,9 @@ public:
     */
     static Logger CreateLogger(const std::string& name);
 
+    //! Shutdown all loggers
+    static void Shutdown();
+
 private:
     CppCommon::CriticalSection _lock;
     std::map<std::string, std::shared_ptr<Processor>> _config;

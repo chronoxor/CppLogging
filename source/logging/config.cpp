@@ -68,4 +68,13 @@ Logger Config::CreateLogger(const std::string& name)
         return CreateLogger();
 }
 
+void Config::Shutdown()
+{
+    Config& instance = GetInstance();
+
+    CppCommon::Locker<CppCommon::CriticalSection> locker(instance._lock);
+
+    instance._config.clear();
+}
+
 } // namespace CppLogging
