@@ -34,9 +34,9 @@ inline void Logger::Log(Level level, bool format, std::string_view message, cons
     record.level = level;
     record.logger = _name;
 
-    // Pre-Filter the logging record
+    // Filter the logging record
     if (_sink)
-        if (!_sink->PreFilterRecord(record))
+        if (!_sink->FilterRecord(record))
             return;
 
     // Format or serialize arguments list

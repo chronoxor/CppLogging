@@ -23,20 +23,10 @@ Processor::~Processor()
             processor->Flush();
 }
 
-bool Processor::PreFilterRecord(Record& record)
+bool Processor::FilterRecord(Record& record)
 {
-    // Pre-Filter the given logging record
-    for (auto& filter : _pre_filters)
-        if (filter && !filter->FilterRecord(record))
-            return false;
-
-    return true;
-}
-
-bool Processor::PostFilterRecord(Record& record)
-{
-    // Post-Filter the given logging record
-    for (auto& filter : _post_filters)
+    // Filter the given logging record
+    for (auto& filter : _filters)
         if (filter && !filter->FilterRecord(record))
             return false;
 
@@ -45,8 +35,8 @@ bool Processor::PostFilterRecord(Record& record)
 
 bool Processor::ProcessRecord(Record& record)
 {
-    // Pre-Filter the given logging record
-    if (!PreFilterRecord(record))
+    // Filter the given logging record
+    if (!FilterRecord(record))
         return false;
 
     // Layout the given logging record
@@ -60,12 +50,8 @@ bool Processor::ProcessRecord(Record& record)
 
     // Process the given logging record with sub processors
     for (auto& processor : _processors)
-        if (processor && !processor->ProcessRecord(record))
-            return false;
-
-    // Post-Filter the given logging record
-    if (!PostFilterRecord(record))
-        return false;
+        if (processor)
+            processor->ProcessRecord(record);
 
     return true;
 }
