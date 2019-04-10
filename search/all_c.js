@@ -1,8 +1,12 @@
 var searchData=
 [
   ['pattern',['pattern',['../class_cpp_logging_1_1_logger_filter.html#accb9537a120ad600e204cc62c9907fc2',1,'CppLogging::LoggerFilter::pattern()'],['../class_cpp_logging_1_1_message_filter.html#a5a03b8ce35795c369333ec3f7924ea86',1,'CppLogging::MessageFilter::pattern()'],['../class_cpp_logging_1_1_text_layout.html#ab3e9c2d158ac22b7f9e18a1985998fd1',1,'CppLogging::TextLayout::pattern()']]],
-  ['processor',['Processor',['../class_cpp_logging_1_1_processor.html',1,'CppLogging']]],
-  ['processor',['Processor',['../class_cpp_logging_1_1_processor.html#a2146a25052b050256060dbd231b9a496',1,'CppLogging::Processor::Processor(const std::shared_ptr&lt; Layout &gt; &amp;layout)'],['../class_cpp_logging_1_1_processor.html#a18d2e051692b2ef3096ae5cca6a3ee58',1,'CppLogging::Processor::Processor(const Processor &amp;)=default'],['../class_cpp_logging_1_1_processor.html#af909c31ebb473cad9623ca3b84f8cc91',1,'CppLogging::Processor::Processor(Processor &amp;&amp;) noexcept=default']]],
+  ['positive',['positive',['../class_cpp_logging_1_1_level_filter.html#a7d5e56209c757c9ce5cbd2523eb783e7',1,'CppLogging::LevelFilter::positive()'],['../class_cpp_logging_1_1_logger_filter.html#a711f99f24d5aa36b4db17f8b19011bc3',1,'CppLogging::LoggerFilter::positive()'],['../class_cpp_logging_1_1_message_filter.html#ad1b49b83371fe70dd6b87cd41de38cc9',1,'CppLogging::MessageFilter::positive()']]],
+  ['post_5ffilters',['post_filters',['../class_cpp_logging_1_1_processor.html#a959ac282819697cc66d25cbdce19216b',1,'CppLogging::Processor']]],
+  ['postfilterrecord',['PostFilterRecord',['../class_cpp_logging_1_1_processor.html#aaf12ab3b90bf4f489ada2587347d8eaf',1,'CppLogging::Processor']]],
+  ['pre_5ffilters',['pre_filters',['../class_cpp_logging_1_1_processor.html#a00c10541893bfa40c6742409fa06aea0',1,'CppLogging::Processor']]],
+  ['prefilterrecord',['PreFilterRecord',['../class_cpp_logging_1_1_processor.html#a18a217fca3ce0c407a50b2f6077911ea',1,'CppLogging::Processor']]],
+  ['processor',['Processor',['../class_cpp_logging_1_1_processor.html',1,'CppLogging::Processor'],['../class_cpp_logging_1_1_processor.html#a2146a25052b050256060dbd231b9a496',1,'CppLogging::Processor::Processor(const std::shared_ptr&lt; Layout &gt; &amp;layout)'],['../class_cpp_logging_1_1_processor.html#a18d2e051692b2ef3096ae5cca6a3ee58',1,'CppLogging::Processor::Processor(const Processor &amp;)=default'],['../class_cpp_logging_1_1_processor.html#af909c31ebb473cad9623ca3b84f8cc91',1,'CppLogging::Processor::Processor(Processor &amp;&amp;) noexcept=default']]],
   ['processor_2ecpp',['processor.cpp',['../processor_8cpp.html',1,'']]],
   ['processor_2eh',['processor.h',['../processor_8h.html',1,'']]],
   ['processors',['processors',['../class_cpp_logging_1_1_processor.html#ab4d96b6012bee770a07a3f8a25a836a3',1,'CppLogging::Processor']]],
