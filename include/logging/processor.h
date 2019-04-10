@@ -47,8 +47,6 @@ public:
     std::vector<std::shared_ptr<Filter>>& filters() noexcept { return _filters; }
     //! Get collection of child appenders
     std::vector<std::shared_ptr<Appender>>& appenders() noexcept { return _appenders; }
-    //! Get collection of child stoppers
-    std::vector<std::shared_ptr<Filter>>& stoppers() noexcept { return _stoppers; }
     //! Get collection of child processors
     std::vector<std::shared_ptr<Processor>>& processors() noexcept { return _processors; }
 
@@ -58,13 +56,6 @@ public:
          \return 'true' if the logging record should be processed, 'false' if the logging record was filtered out
     */
     virtual bool FilterRecord(Record& record);
-
-    //! Stop the given logging record
-    /*!
-         \param record - Logging record
-         \return 'true' if the processing of the logging record should be stopped, 'false' if the logging record processing will continue
-    */
-    virtual bool StopRecord(Record& record);
 
     //! Process the given logging record through all child filters, layouts and appenders
     /*!
@@ -88,11 +79,10 @@ public:
     */
     virtual void Flush();
 
-private:
+protected:
     std::shared_ptr<Layout> _layout;
     std::vector<std::shared_ptr<Filter>> _filters;
     std::vector<std::shared_ptr<Appender>> _appenders;
-    std::vector<std::shared_ptr<Filter>> _stoppers;
     std::vector<std::shared_ptr<Processor>> _processors;
 };
 

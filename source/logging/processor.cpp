@@ -33,16 +33,6 @@ bool Processor::FilterRecord(Record& record)
     return true;
 }
 
-bool Processor::StopRecord(Record& record)
-{
-    // Stop the given logging record
-    for (auto& stopper : _stoppers)
-        if (stopper && stopper->FilterRecord(record))
-            return true;
-
-    return false;
-}
-
 bool Processor::ProcessRecord(Record& record)
 {
     // Filter the given logging record
@@ -57,10 +47,6 @@ bool Processor::ProcessRecord(Record& record)
     for (auto& appender : _appenders)
         if (appender)
             appender->AppendRecord(record);
-
-    // Stop the given logging record
-    if (StopRecord(record))
-        return false;
 
     // Process the given logging record with sub processors
     for (auto& processor : _processors)
