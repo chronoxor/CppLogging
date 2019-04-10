@@ -92,6 +92,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="class_cpp_logging_1_1_processor-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">CppLogging::Processor Class Reference</div>  </div>
@@ -111,7 +112,8 @@ Inheritance diagram for CppLogging::Processor:</div>
 <area href="class_cpp_logging_1_1_async_wait_free_processor.html" title="Asynchronous wait-free logging processor. " alt="CppLogging::AsyncWaitFreeProcessor" shape="rect" coords="0,56,231,80"/>
 <area href="class_cpp_logging_1_1_async_wait_processor.html" title="Asynchronous wait logging processor. " alt="CppLogging::AsyncWaitProcessor" shape="rect" coords="241,56,472,80"/>
 <area href="class_cpp_logging_1_1_buffered_processor.html" title="Buffered logging processor. " alt="CppLogging::BufferedProcessor" shape="rect" coords="482,56,713,80"/>
-<area href="class_cpp_logging_1_1_sync_processor.html" title="Synchronous logging processor. " alt="CppLogging::SyncProcessor" shape="rect" coords="723,56,954,80"/>
+<area href="class_cpp_logging_1_1_exclusive_processor.html" title="Exclusive logging processor. " alt="CppLogging::ExclusiveProcessor" shape="rect" coords="723,56,954,80"/>
+<area href="class_cpp_logging_1_1_sync_processor.html" title="Synchronous logging processor. " alt="CppLogging::SyncProcessor" shape="rect" coords="964,56,1195,80"/>
 </map>
  </div></div>
 <table class="memberdecls">
@@ -139,24 +141,29 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:af4d1515ec036a036b3c21377a9c5c91c"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::shared_ptr&lt; <a class="el" href="class_cpp_logging_1_1_appender.html">Appender</a> &gt; &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cpp_logging_1_1_processor.html#af4d1515ec036a036b3c21377a9c5c91c">appenders</a> () noexcept</td></tr>
 <tr class="memdesc:af4d1515ec036a036b3c21377a9c5c91c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get collection of child appenders.  <a href="#af4d1515ec036a036b3c21377a9c5c91c">More...</a><br /></td></tr>
 <tr class="separator:af4d1515ec036a036b3c21377a9c5c91c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a74e05f3f8a41da3c82577ec0449e31c0"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::shared_ptr&lt; <a class="el" href="class_cpp_logging_1_1_filter.html">Filter</a> &gt; &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cpp_logging_1_1_processor.html#a74e05f3f8a41da3c82577ec0449e31c0">stoppers</a> () noexcept</td></tr>
-<tr class="memdesc:a74e05f3f8a41da3c82577ec0449e31c0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get collection of child stoppers.  <a href="#a74e05f3f8a41da3c82577ec0449e31c0">More...</a><br /></td></tr>
-<tr class="separator:a74e05f3f8a41da3c82577ec0449e31c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab4d96b6012bee770a07a3f8a25a836a3"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::shared_ptr&lt; <a class="el" href="class_cpp_logging_1_1_processor.html">Processor</a> &gt; &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cpp_logging_1_1_processor.html#ab4d96b6012bee770a07a3f8a25a836a3">processors</a> () noexcept</td></tr>
 <tr class="memdesc:ab4d96b6012bee770a07a3f8a25a836a3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get collection of child processors.  <a href="#ab4d96b6012bee770a07a3f8a25a836a3">More...</a><br /></td></tr>
 <tr class="separator:ab4d96b6012bee770a07a3f8a25a836a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af9f59eca507780ff1a9a890e1598eccf"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cpp_logging_1_1_processor.html#af9f59eca507780ff1a9a890e1598eccf">FilterRecord</a> (<a class="el" href="class_cpp_logging_1_1_record.html">Record</a> &amp;record)</td></tr>
 <tr class="memdesc:af9f59eca507780ff1a9a890e1598eccf"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="class_cpp_logging_1_1_filter.html" title="Logging filter interface. ">Filter</a> the given logging record.  <a href="#af9f59eca507780ff1a9a890e1598eccf">More...</a><br /></td></tr>
 <tr class="separator:af9f59eca507780ff1a9a890e1598eccf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a436084cf941fc44e033fb4ee584ceb27"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cpp_logging_1_1_processor.html#a436084cf941fc44e033fb4ee584ceb27">StopRecord</a> (<a class="el" href="class_cpp_logging_1_1_record.html">Record</a> &amp;record)</td></tr>
-<tr class="memdesc:a436084cf941fc44e033fb4ee584ceb27"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stop the given logging record.  <a href="#a436084cf941fc44e033fb4ee584ceb27">More...</a><br /></td></tr>
-<tr class="separator:a436084cf941fc44e033fb4ee584ceb27"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a88f9da169cacd30e22600e293d471ad6"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cpp_logging_1_1_processor.html#a88f9da169cacd30e22600e293d471ad6">ProcessRecord</a> (<a class="el" href="class_cpp_logging_1_1_record.html">Record</a> &amp;record)</td></tr>
 <tr class="memdesc:a88f9da169cacd30e22600e293d471ad6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Process the given logging record through all child filters, layouts and appenders.  <a href="#a88f9da169cacd30e22600e293d471ad6">More...</a><br /></td></tr>
 <tr class="separator:a88f9da169cacd30e22600e293d471ad6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac5775e961b086b9cfad49a67bb746f72"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cpp_logging_1_1_processor.html#ac5775e961b086b9cfad49a67bb746f72">Flush</a> ()</td></tr>
 <tr class="memdesc:ac5775e961b086b9cfad49a67bb746f72"><td class="mdescLeft">&#160;</td><td class="mdescRight">Flush the current logging processor.  <a href="#ac5775e961b086b9cfad49a67bb746f72">More...</a><br /></td></tr>
 <tr class="separator:ac5775e961b086b9cfad49a67bb746f72"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
+Protected Attributes</h2></td></tr>
+<tr class="memitem:a49700ff578bb14ee285c9d8cea442358"><td class="memItemLeft" align="right" valign="top">std::shared_ptr&lt; <a class="el" href="class_cpp_logging_1_1_layout.html">Layout</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cpp_logging_1_1_processor.html#a49700ff578bb14ee285c9d8cea442358">_layout</a></td></tr>
+<tr class="separator:a49700ff578bb14ee285c9d8cea442358"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaef53974adcf8fdc7934d4b739082185"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::shared_ptr&lt; <a class="el" href="class_cpp_logging_1_1_filter.html">Filter</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cpp_logging_1_1_processor.html#aaef53974adcf8fdc7934d4b739082185">_filters</a></td></tr>
+<tr class="separator:aaef53974adcf8fdc7934d4b739082185"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1be332fe9c9fc637970fd533f2280a89"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::shared_ptr&lt; <a class="el" href="class_cpp_logging_1_1_appender.html">Appender</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cpp_logging_1_1_processor.html#a1be332fe9c9fc637970fd533f2280a89">_appenders</a></td></tr>
+<tr class="separator:a1be332fe9c9fc637970fd533f2280a89"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab52ee1a818777d9d9d725c74280f102f"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::shared_ptr&lt; <a class="el" href="class_cpp_logging_1_1_processor.html">Processor</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cpp_logging_1_1_processor.html#ab52ee1a818777d9d9d725c74280f102f">_processors</a></td></tr>
+<tr class="separator:ab52ee1a818777d9d9d725c74280f102f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Logging processor interface. </p>
@@ -396,7 +403,7 @@ AsyncProcessor </dd>
 
 <p>Reimplemented in <a class="el" href="class_cpp_logging_1_1_async_wait_processor.html#aebb69b886fcdf7753248e593e5ebb01f">CppLogging::AsyncWaitProcessor</a>, <a class="el" href="class_cpp_logging_1_1_async_wait_free_processor.html#a72bfc1957e1bef6aaf4ea55eef9140ac">CppLogging::AsyncWaitFreeProcessor</a>, <a class="el" href="class_cpp_logging_1_1_buffered_processor.html#a7066881ada040a09270c4f04409d7bb3">CppLogging::BufferedProcessor</a>, and <a class="el" href="class_cpp_logging_1_1_sync_processor.html#a1f2679ef17e459163cf1546b4acfae8a">CppLogging::SyncProcessor</a>.</p>
 
-<p>Definition at line <a class="el" href="processor_8cpp_source.html#l00073">73</a> of file <a class="el" href="processor_8cpp_source.html">processor.cpp</a>.</p>
+<p>Definition at line <a class="el" href="processor_8cpp_source.html#l00059">59</a> of file <a class="el" href="processor_8cpp_source.html">processor.cpp</a>.</p>
 
 </div>
 </div>
@@ -498,7 +505,7 @@ AsyncProcessor </dd>
 
 <p>Get collection of child processors. </p>
 
-<p>Definition at line <a class="el" href="processor_8h_source.html#l00053">53</a> of file <a class="el" href="processor_8h_source.html">processor.h</a>.</p>
+<p>Definition at line <a class="el" href="processor_8h_source.html#l00051">51</a> of file <a class="el" href="processor_8h_source.html">processor.h</a>.</p>
 
 </div>
 </div>
@@ -539,71 +546,98 @@ AsyncProcessor </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>'true' if the logging record was successfully processed, 'false' if the logging record was filtered out </dd></dl>
 
-<p>Reimplemented in <a class="el" href="class_cpp_logging_1_1_async_wait_processor.html#a90bb1d23d56dacc72c82f932bbc45ae5">CppLogging::AsyncWaitProcessor</a>, <a class="el" href="class_cpp_logging_1_1_async_wait_free_processor.html#a0d234980c6e7f86c49efc5d2a010e61e">CppLogging::AsyncWaitFreeProcessor</a>, <a class="el" href="class_cpp_logging_1_1_buffered_processor.html#a30701e34be19af8d41530b9f9d1cf369">CppLogging::BufferedProcessor</a>, and <a class="el" href="class_cpp_logging_1_1_sync_processor.html#a2e953a43ccd47756d430507bf46022ce">CppLogging::SyncProcessor</a>.</p>
-
-<p>Definition at line <a class="el" href="processor_8cpp_source.html#l00046">46</a> of file <a class="el" href="processor_8cpp_source.html">processor.cpp</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a74e05f3f8a41da3c82577ec0449e31c0"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">std::vector&lt;std::shared_ptr&lt;<a class="el" href="class_cpp_logging_1_1_filter.html">Filter</a>&gt; &gt;&amp; CppLogging::Processor::stoppers </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Get collection of child stoppers. </p>
-
-<p>Definition at line <a class="el" href="processor_8h_source.html#l00051">51</a> of file <a class="el" href="processor_8h_source.html">processor.h</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a436084cf941fc44e033fb4ee584ceb27"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool CppLogging::Processor::StopRecord </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="class_cpp_logging_1_1_record.html">Record</a> &amp;&#160;</td>
-          <td class="paramname"><em>record</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Stop the given logging record. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">record</td><td>- Logging record </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>'true' if the processing of the logging record should be stopped, 'false' if the logging record processing will continue </dd></dl>
+<p>Reimplemented in <a class="el" href="class_cpp_logging_1_1_async_wait_processor.html#a90bb1d23d56dacc72c82f932bbc45ae5">CppLogging::AsyncWaitProcessor</a>, <a class="el" href="class_cpp_logging_1_1_async_wait_free_processor.html#a0d234980c6e7f86c49efc5d2a010e61e">CppLogging::AsyncWaitFreeProcessor</a>, <a class="el" href="class_cpp_logging_1_1_buffered_processor.html#a30701e34be19af8d41530b9f9d1cf369">CppLogging::BufferedProcessor</a>, <a class="el" href="class_cpp_logging_1_1_sync_processor.html#a2e953a43ccd47756d430507bf46022ce">CppLogging::SyncProcessor</a>, and <a class="el" href="class_cpp_logging_1_1_exclusive_processor.html#a2ec0f3ed2b19407bb290bf82de5e0661">CppLogging::ExclusiveProcessor</a>.</p>
 
 <p>Definition at line <a class="el" href="processor_8cpp_source.html#l00036">36</a> of file <a class="el" href="processor_8cpp_source.html">processor.cpp</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a class="anchor" id="a1be332fe9c9fc637970fd533f2280a89"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt;std::shared_ptr&lt;<a class="el" href="class_cpp_logging_1_1_appender.html">Appender</a>&gt; &gt; CppLogging::Processor::_appenders</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="processor_8h_source.html#l00085">85</a> of file <a class="el" href="processor_8h_source.html">processor.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="aaef53974adcf8fdc7934d4b739082185"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt;std::shared_ptr&lt;<a class="el" href="class_cpp_logging_1_1_filter.html">Filter</a>&gt; &gt; CppLogging::Processor::_filters</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="processor_8h_source.html#l00084">84</a> of file <a class="el" href="processor_8h_source.html">processor.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a49700ff578bb14ee285c9d8cea442358"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::shared_ptr&lt;<a class="el" href="class_cpp_logging_1_1_layout.html">Layout</a>&gt; CppLogging::Processor::_layout</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="processor_8h_source.html#l00083">83</a> of file <a class="el" href="processor_8h_source.html">processor.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ab52ee1a818777d9d9d725c74280f102f"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt;std::shared_ptr&lt;<a class="el" href="class_cpp_logging_1_1_processor.html">Processor</a>&gt; &gt; CppLogging::Processor::_processors</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Definition at line <a class="el" href="processor_8h_source.html#l00086">86</a> of file <a class="el" href="processor_8h_source.html">processor.h</a>.</p>
 
 </div>
 </div>

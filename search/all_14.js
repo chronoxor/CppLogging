@@ -1,30 +1,4 @@
 var searchData=
 [
-  ['_7easyncwaitfreeprocessor',['~AsyncWaitFreeProcessor',['../class_cpp_logging_1_1_async_wait_free_processor.html#aea1a3bf70ad97191ac876675427fe11c',1,'CppLogging::AsyncWaitFreeProcessor']]],
-  ['_7easyncwaitfreequeue',['~AsyncWaitFreeQueue',['../class_cpp_logging_1_1_async_wait_free_queue.html#a33e7d141a7b4bd72865da88153a9c1ef',1,'CppLogging::AsyncWaitFreeQueue']]],
-  ['_7easyncwaitprocessor',['~AsyncWaitProcessor',['../class_cpp_logging_1_1_async_wait_processor.html#abf1c6350e387b4dbdac30111243f5813',1,'CppLogging::AsyncWaitProcessor']]],
-  ['_7ebinarylayout',['~BinaryLayout',['../class_cpp_logging_1_1_binary_layout.html#aeaec266fb019fa9ca511112eb04cd62b',1,'CppLogging::BinaryLayout']]],
-  ['_7ebufferedprocessor',['~BufferedProcessor',['../class_cpp_logging_1_1_buffered_processor.html#a4519f05ece06dafbb40a10f9bd1bbc6c',1,'CppLogging::BufferedProcessor']]],
-  ['_7econfig',['~Config',['../class_cpp_logging_1_1_config.html#a4f5b9a09720c1a71122aa3d4da508f27',1,'CppLogging::Config']]],
-  ['_7econsoleappender',['~ConsoleAppender',['../class_cpp_logging_1_1_console_appender.html#af6494c8942ce73c437106042740c2a02',1,'CppLogging::ConsoleAppender']]],
-  ['_7edebugappender',['~DebugAppender',['../class_cpp_logging_1_1_debug_appender.html#a84021216a9e86c376aef4f8d8297ba01',1,'CppLogging::DebugAppender']]],
-  ['_7eemptylayout',['~EmptyLayout',['../class_cpp_logging_1_1_empty_layout.html#a650016755f62e6b09e7685930e039057',1,'CppLogging::EmptyLayout']]],
-  ['_7eerrorappender',['~ErrorAppender',['../class_cpp_logging_1_1_error_appender.html#a791f147ab9d3b2f36e22079ed081a419',1,'CppLogging::ErrorAppender']]],
-  ['_7efileappender',['~FileAppender',['../class_cpp_logging_1_1_file_appender.html#a0423c19731d415789dda030a749f4035',1,'CppLogging::FileAppender']]],
-  ['_7elevelfilter',['~LevelFilter',['../class_cpp_logging_1_1_level_filter.html#a773c68b5c3b38e553d4b04915e3db564',1,'CppLogging::LevelFilter']]],
-  ['_7elogger',['~Logger',['../class_cpp_logging_1_1_logger.html#ae942d1dd474621a50870c9124942af1c',1,'CppLogging::Logger']]],
-  ['_7eloggerfilter',['~LoggerFilter',['../class_cpp_logging_1_1_logger_filter.html#ab4f9d323690da99887cc13d0526f4771',1,'CppLogging::LoggerFilter']]],
-  ['_7ememoryappender',['~MemoryAppender',['../class_cpp_logging_1_1_memory_appender.html#a599ee8822f4fd517bf9bb1b99c617d1d',1,'CppLogging::MemoryAppender']]],
-  ['_7emessagefilter',['~MessageFilter',['../class_cpp_logging_1_1_message_filter.html#a87b888b7bfe578ad94b464ff7847fef0',1,'CppLogging::MessageFilter']]],
-  ['_7enullappender',['~NullAppender',['../class_cpp_logging_1_1_null_appender.html#afda8485c6dde9373fbc8627abdfea23d',1,'CppLogging::NullAppender']]],
-  ['_7enulllayout',['~NullLayout',['../class_cpp_logging_1_1_null_layout.html#a3ce1ca5a629e26df7729acfe83d44ab2',1,'CppLogging::NullLayout']]],
-  ['_7eostreamappender',['~OstreamAppender',['../class_cpp_logging_1_1_ostream_appender.html#ab2bd1c440146e2d8ca64ae5e61de3b1d',1,'CppLogging::OstreamAppender']]],
-  ['_7eprocessor',['~Processor',['../class_cpp_logging_1_1_processor.html#aded3ba54d15df4da4952b62d2d82e178',1,'CppLogging::Processor']]],
-  ['_7erecord',['~Record',['../class_cpp_logging_1_1_record.html#a80115bd6070e1d840724b35621047256',1,'CppLogging::Record']]],
-  ['_7erollingfileappender',['~RollingFileAppender',['../class_cpp_logging_1_1_rolling_file_appender.html#ab9c2f25756cab928b1f3917cf0bf0a24',1,'CppLogging::RollingFileAppender']]],
-  ['_7eswitchfilter',['~SwitchFilter',['../class_cpp_logging_1_1_switch_filter.html#a5eef06a186d00b3afda41de510a6d4ce',1,'CppLogging::SwitchFilter']]],
-  ['_7esyncprocessor',['~SyncProcessor',['../class_cpp_logging_1_1_sync_processor.html#ac68d2120077bd70099813252200d10ec',1,'CppLogging::SyncProcessor']]],
-  ['_7esyslogappender',['~SyslogAppender',['../class_cpp_logging_1_1_syslog_appender.html#ae531c3de5acc64c9bb92cbb078c042d4',1,'CppLogging::SyslogAppender']]],
-  ['_7etextlayout',['~TextLayout',['../class_cpp_logging_1_1_text_layout.html#aad7fb5626cfbad4ac0865736ae03fc3c',1,'CppLogging::TextLayout']]],
-  ['_7etrigger',['~Trigger',['../class_cpp_logging_1_1_trigger.html#a7b997a10c01c8696cbf7f22e12be4826',1,'CppLogging::Trigger']]]
+  ['year',['YEAR',['../namespace_cpp_logging.html#a2ae7ad16f5b402d86a07604253464f57ad18101729d290479023d5eceeb29c9cf',1,'CppLogging']]]
 ];

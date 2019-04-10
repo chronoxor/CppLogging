@@ -1,11 +1,17 @@
 var searchData=
 [
-  ['day',['DAY',['../namespace_cpp_logging.html#a2ae7ad16f5b402d86a07604253464f57a5b1d59b5451c06afb65ab1bc2713cfb4',1,'CppLogging']]],
-  ['debug',['Debug',['../class_cpp_logging_1_1_logger.html#a629c8eea867e3da62611c10a2fa98f7f',1,'CppLogging::Logger::Debug()'],['../namespace_cpp_logging.html#ac4e889a814b82af010ef93be2e618f3badc30ec20708ef7b0f641ef78b7880a15',1,'CppLogging::DEBUG()']]],
-  ['debug_5fappender_2ecpp',['debug_appender.cpp',['../debug__appender_8cpp.html',1,'']]],
-  ['debug_5fappender_2eh',['debug_appender.h',['../debug__appender_8h.html',1,'']]],
-  ['debugappender',['DebugAppender',['../class_cpp_logging_1_1_debug_appender.html#a904ca30b987c25394616706f2f61093f',1,'CppLogging::DebugAppender::DebugAppender()=default'],['../class_cpp_logging_1_1_debug_appender.html#aa86c3ffb7964bacfafbc7590048c9848',1,'CppLogging::DebugAppender::DebugAppender(const DebugAppender &amp;)=delete'],['../class_cpp_logging_1_1_debug_appender.html#a50bdb07295d55f08c2a50ff0527b4503',1,'CppLogging::DebugAppender::DebugAppender(DebugAppender &amp;&amp;)=delete']]],
-  ['debugappender',['DebugAppender',['../class_cpp_logging_1_1_debug_appender.html',1,'CppLogging']]],
-  ['dequeue',['Dequeue',['../class_cpp_logging_1_1_async_wait_free_queue.html#ac11860cfc8a710bd7b2fa6129eb0144f',1,'CppLogging::AsyncWaitFreeQueue']]],
-  ['disable',['Disable',['../class_cpp_logging_1_1_trigger.html#afa07373f15ec3ecd7618d391059d4b07',1,'CppLogging::Trigger']]]
+  ['capacity',['capacity',['../class_cpp_logging_1_1_async_wait_free_queue.html#ad87c7d3413b507b3f1b34c99a5eaea88',1,'CppLogging::AsyncWaitFreeQueue']]],
+  ['clear',['Clear',['../class_cpp_logging_1_1_record.html#a329f4aee55d7a67be3f313449b4bdf21',1,'CppLogging::Record']]],
+  ['config',['Config',['../class_cpp_logging_1_1_config.html',1,'CppLogging']]],
+  ['config',['Config',['../class_cpp_logging_1_1_logger.html#ac3da7e21a05bf8852638db7e4dd1b81a',1,'CppLogging::Logger::Config()'],['../class_cpp_logging_1_1_config.html#a36b0110d0dab4d9ff1a273ee527b03d8',1,'CppLogging::Config::Config(const Config &amp;)=delete'],['../class_cpp_logging_1_1_config.html#a33aed3ee45a629bf472d9ab5f4c2a0c5',1,'CppLogging::Config::Config(Config &amp;&amp;)=delete']]],
+  ['config_2ecpp',['config.cpp',['../config_8cpp.html',1,'']]],
+  ['config_2eh',['config.h',['../config_8h.html',1,'']]],
+  ['configlogger',['ConfigLogger',['../class_cpp_logging_1_1_config.html#aa3e1df3aa623bada0b5523294e9fde14',1,'CppLogging::Config::ConfigLogger(const std::shared_ptr&lt; Processor &gt; &amp;sink)'],['../class_cpp_logging_1_1_config.html#a8c0cea746d092d4e48ed10796fa7cea1',1,'CppLogging::Config::ConfigLogger(const std::string &amp;name, const std::shared_ptr&lt; Processor &gt; &amp;sink)']]],
+  ['console_5fappender_2ecpp',['console_appender.cpp',['../console__appender_8cpp.html',1,'']]],
+  ['console_5fappender_2eh',['console_appender.h',['../console__appender_8h.html',1,'']]],
+  ['consoleappender',['ConsoleAppender',['../class_cpp_logging_1_1_console_appender.html',1,'CppLogging']]],
+  ['consoleappender',['ConsoleAppender',['../class_cpp_logging_1_1_console_appender.html#a8fc33b92a7b3afbaef95c9177cb38395',1,'CppLogging::ConsoleAppender::ConsoleAppender()=default'],['../class_cpp_logging_1_1_console_appender.html#abf43385479fc72767fa9c06730aa681c',1,'CppLogging::ConsoleAppender::ConsoleAppender(const ConsoleAppender &amp;)=delete'],['../class_cpp_logging_1_1_console_appender.html#abe3c8a1e55294e9d6a4c6a27e66cc23e',1,'CppLogging::ConsoleAppender::ConsoleAppender(ConsoleAppender &amp;&amp;)=delete']]],
+  ['cpplogging',['CppLogging',['../namespace_cpp_logging.html',1,'']]],
+  ['createlogger',['CreateLogger',['../class_cpp_logging_1_1_config.html#ab6c2a747bf48db5424a1a1839b7588bf',1,'CppLogging::Config::CreateLogger()'],['../class_cpp_logging_1_1_config.html#a15f113b33935765efb2e48d13badc88e',1,'CppLogging::Config::CreateLogger(const std::string &amp;name)']]],
+  ['c_2b_2b_20logging_20library',['C++ Logging Library',['../index.html',1,'']]]
 ];
