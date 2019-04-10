@@ -59,19 +59,21 @@ void AsyncWaitProcessor::ProcessBufferedRecords(const std::function<void ()>& on
     {
         // Thread local logger records to process
         thread_local std::vector<Record> records;
-        thread_local uint64_t timestamp = 0;
+        thread_local uint64_t previous = 0;
 
         // Reserve initial space for logging records
         records.reserve(_queue.capacity());
 
         while (true)
         {
-            // Dequeue the next logging record or yield if the queue is empty
+            // Dequeue the next logging record
             if (!_queue.Dequeue(records))
                 return;
 
+            // Current timestamp
+            uint64_t current = 0;
+
             // Process all logging records
-            uint64_t record_timestamp = 0;
             for (auto& record : records)
             {
                 // Handle stop operation record
@@ -90,19 +92,19 @@ void AsyncWaitProcessor::ProcessBufferedRecords(const std::function<void ()>& on
                 Processor::ProcessRecord(record);
 
                 // Find the latest record timestamp
-                if (record.timestamp > record_timestamp)
-                    record_timestamp = record.timestamp;
+                if (record.timestamp > current)
+                    current = record.timestamp;
             }
 
             // Handle auto-flush period
-            if (CppCommon::Timespan((int64_t)(record_timestamp - timestamp)).seconds() > 1)
+            if (CppCommon::Timespan((int64_t)(current - previous)).seconds() > 1)
             {
                 // Flush the logging processor
                 Processor::Flush();
-            }
 
-            // Cache the record timestamp
-            timestamp = record_timestamp;
+                // Update the previous timestamp
+                previous = current;
+            }
         }
     }
     catch (...)

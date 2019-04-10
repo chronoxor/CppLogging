@@ -71,38 +71,55 @@ void AsyncWaitFreeProcessor::ProcessBufferedRecords(const std::function<void ()>
     {
         // Thread local logger record to process
         thread_local Record record;
-        thread_local uint64_t timestamp = 0;
+        thread_local uint64_t previous = 0;
 
         while (true)
         {
-            // Dequeue the next logging record or yield if the queue is empty
-            while (!_queue.Dequeue(record))
-                CppCommon::Thread::Yield();
+            // Try to dequeue the next logging record
+            const bool empty = !_queue.Dequeue(record);
 
-            // Handle stop operation record
-            if (record.timestamp == 0)
-                return;
+            // Current timestamp
+            uint64_t current;
 
-            // Handle flush operation record
-            if (record.timestamp == 1)
+            if (!empty)
             {
-                // Flush the logging processor
-                Processor::Flush();
-                continue;
-            }
+                // Handle stop operation record
+                if (record.timestamp == 0)
+                    return;
 
-            // Process logging record
-            Processor::ProcessRecord(record);
+                // Handle flush operation record
+                if (record.timestamp == 1)
+                {
+                    // Flush the logging processor
+                    Processor::Flush();
+                    continue;
+                }
+
+                // Process logging record
+                Processor::ProcessRecord(record);
+
+                // Update the current timestamp
+                current = record.timestamp;
+            }
+            else
+            {
+                // Update the current timestamp
+                current = CppCommon::Timestamp::utc();
+            }
 
             // Handle auto-flush period
-            if (CppCommon::Timespan((int64_t)(record.timestamp - timestamp)).seconds() > 1)
+            if (CppCommon::Timespan((int64_t)(current - previous)).seconds() > 1)
             {
                 // Flush the logging processor
                 Processor::Flush();
+
+                // Update the previous timestamp
+                previous = current;
             }
 
-            // Cache the record timestamp
-            timestamp = record.timestamp;
+            // Sleep for a while if the queue was empty
+            if (empty)
+                CppCommon::Thread::Sleep(100);
         }
     }
     catch (...)
