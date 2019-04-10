@@ -389,18 +389,35 @@ private:
             if (_file.IsFileReadOpened())
                 _file.Close();
 
-            // 4. Open the file for writing
+            // 4. Truncate rolling timestamp according to the time rolling policy
+            switch (_policy)
+            {
+                case TimeRollingPolicy::SECOND:
+                    timestamp = (timestamp / 1000000000ull) * 1000000000ull;
+                    break;
+                case TimeRollingPolicy::MINUTE:
+                    timestamp = (timestamp / (60 * 1000000000ull)) * (60 * 1000000000ull);
+                    break;
+                case TimeRollingPolicy::HOUR:
+                    timestamp = (timestamp / (60 * 60 * 1000000000ull)) * (60 * 60 * 1000000000ull);
+                    break;
+                default:
+                    timestamp = (timestamp / (24 * 60 * 60 * 1000000000ull)) * (24 * 60 * 60 * 1000000000ull);
+                    break;
+            }
+
+            // 5. Open the file for writing
             _file = PrepareFilePath(CppCommon::Timestamp(timestamp));
             _file.OpenOrCreate(false, true, _truncate);
 
-            // 5. Reset the written bytes counter
+            // 6. Reset the written bytes counter
             _written = 0;
 
-            // 6. Reset the retry timestamp
+            // 7. Reset the retry timestamp
             _retry = 0;
 
-            // 7. Reset the rolling timestamp with a second precision
-            _rollstamp = (timestamp / 1000000000) * 1000000000;
+            // 8. Reset the rolling timestamp
+            _rollstamp = timestamp;
 
             return true;
         }
