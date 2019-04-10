@@ -12,7 +12,8 @@ namespace CppLogging {
 
 bool MessageFilter::FilterRecord(Record& record)
 {
-    return std::regex_match(record.message, _pattern);
+    bool result = std::regex_match(record.message, _pattern);
+    return _positive ? result : !result;
 }
 
 } // namespace CppLogging

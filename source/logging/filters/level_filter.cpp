@@ -10,14 +10,16 @@
 
 namespace CppLogging {
 
-void LevelFilter::Update(Level level)
+void LevelFilter::Update(Level level, bool positive)
 {
+    _positive = positive;
     _from = Level::NONE;
     _to = level;
 }
 
-void LevelFilter::Update(Level from, Level to)
+void LevelFilter::Update(Level from, Level to, bool positive)
 {
+    _positive = positive;
     if (from <= to)
     {
         _from = from;
@@ -32,7 +34,10 @@ void LevelFilter::Update(Level from, Level to)
 
 bool LevelFilter::FilterRecord(Record& record)
 {
-    return ((record.level >= _from) && (record.level <= _to));
+    if (_positive)
+        return ((record.level >= _from) && (record.level <= _to));
+    else
+        return ((record.level < _from) || (record.level > _to));
 }
 
 } // namespace CppLogging

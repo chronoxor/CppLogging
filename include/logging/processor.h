@@ -43,19 +43,27 @@ public:
 
     //! Get the logging processor layout
     std::shared_ptr<Layout>& layout() noexcept { return _layout; }
-    //! Get collection of child filters
-    std::vector<std::shared_ptr<Filter>>& filters() noexcept { return _filters; }
+    //! Get collection of child pre-filters
+    std::vector<std::shared_ptr<Filter>>& pre_filters() noexcept { return _pre_filters; }
+    //! Get collection of child post-filters
+    std::vector<std::shared_ptr<Filter>>& post_filters() noexcept { return _post_filters; }
     //! Get collection of child appenders
     std::vector<std::shared_ptr<Appender>>& appenders() noexcept { return _appenders; }
     //! Get collection of child processors
     std::vector<std::shared_ptr<Processor>>& processors() noexcept { return _processors; }
 
-    //! Filter the given logging record
+    //! Pre-Filter the given logging record
     /*!
          \param record - Logging record
          \return 'true' if the logging record should be processed, 'false' if the logging record was filtered out
     */
-    virtual bool FilterRecord(Record& record);
+    virtual bool PreFilterRecord(Record& record);
+    //! Post-Filter the given logging record
+    /*!
+         \param record - Logging record
+         \return 'true' if the logging record should be processed, 'false' if the logging record was filtered out
+    */
+    virtual bool PostFilterRecord(Record& record);
 
     //! Process the given logging record through all child filters, layouts and appenders
     /*!
@@ -81,7 +89,8 @@ public:
 
 private:
     std::shared_ptr<Layout> _layout;
-    std::vector<std::shared_ptr<Filter>> _filters;
+    std::vector<std::shared_ptr<Filter>> _pre_filters;
+    std::vector<std::shared_ptr<Filter>> _post_filters;
     std::vector<std::shared_ptr<Appender>> _appenders;
     std::vector<std::shared_ptr<Processor>> _processors;
 };
