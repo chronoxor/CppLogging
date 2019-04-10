@@ -38,9 +38,9 @@ bool Processor::StopRecord(Record& record)
     // Stop the given logging record
     for (auto& stopper : _stoppers)
         if (stopper && stopper->FilterRecord(record))
-            return false;
+            return true;
 
-    return true;
+    return false;
 }
 
 bool Processor::ProcessRecord(Record& record)
