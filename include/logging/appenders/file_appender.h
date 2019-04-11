@@ -46,7 +46,7 @@ public:
     void Flush() override;
 
 private:
-    CppCommon::Timestamp _retry;
+    CppCommon::Timestamp _retry{0};
     CppCommon::File _file;
     bool _truncate;
     bool _auto_flush;

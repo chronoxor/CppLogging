@@ -33,8 +33,7 @@ public:
     static const std::string ARCHIVE_EXTENSION;
 
     Impl(RollingFileAppender& appender, const CppCommon::Path& path, bool archive, bool truncate, bool auto_flush)
-        : _appender(appender), _path(path), _archive(archive), _truncate(truncate), _auto_flush(auto_flush),
-          _retry(0), _file(), _written(0)
+        : _appender(appender), _path(path), _archive(archive), _truncate(truncate), _auto_flush(auto_flush)
     {
     }
 
@@ -50,9 +49,9 @@ protected:
     bool _truncate;
     bool _auto_flush;
 
-    CppCommon::Timestamp _retry;
+    CppCommon::Timestamp _retry{0};
     CppCommon::File _file;
-    size_t _written;
+    size_t _written{0};
 
     void CloseFile()
     {
@@ -217,7 +216,7 @@ class TimePolicyImpl : public RollingFileAppender::Impl
 public:
     TimePolicyImpl(RollingFileAppender& appender, const CppCommon::Path& path, TimeRollingPolicy policy, const std::string& pattern, bool archive, bool truncate, bool auto_flush)
         : RollingFileAppender::Impl(appender, path, archive, truncate, auto_flush),
-          _policy(policy), _pattern(pattern), _rollstamp(0), _rolldelay(0)
+          _policy(policy), _pattern(pattern)
     {
         if (_archive)
             ArchivationStart();
@@ -358,8 +357,9 @@ private:
     TimeRollingPolicy _policy;
     std::string _pattern;
     std::vector<Placeholder> _placeholders;
-    CppCommon::Timestamp _rollstamp;
-    CppCommon::Timespan _rolldelay;
+    CppCommon::Timestamp _rollstamp{0};
+    CppCommon::Timespan _rolldelay{0};
+    bool _first{true};
 
     bool PrepareFile(uint64_t timestamp)
     {
@@ -389,22 +389,30 @@ private:
             if (_file.IsFileReadOpened())
                 _file.Close();
 
+            uint64_t rollstamp = timestamp;
+
             // 4. Truncate rolling timestamp according to the time rolling policy
             switch (_policy)
             {
                 case TimeRollingPolicy::SECOND:
-                    timestamp = (timestamp / 1000000000ull) * 1000000000ull;
+                    rollstamp = (rollstamp / 1000000000ull) * 1000000000ull;
                     break;
                 case TimeRollingPolicy::MINUTE:
-                    timestamp = (timestamp / (60 * 1000000000ull)) * (60 * 1000000000ull);
+                    rollstamp = (rollstamp / (60 * 1000000000ull)) * (60 * 1000000000ull);
                     break;
                 case TimeRollingPolicy::HOUR:
-                    timestamp = (timestamp / (60 * 60 * 1000000000ull)) * (60 * 60 * 1000000000ull);
+                    rollstamp = (rollstamp / (60 * 60 * 1000000000ull)) * (60 * 60 * 1000000000ull);
                     break;
                 default:
-                    timestamp = (timestamp / (24 * 60 * 60 * 1000000000ull)) * (24 * 60 * 60 * 1000000000ull);
+                    rollstamp = (rollstamp / (24 * 60 * 60 * 1000000000ull)) * (24 * 60 * 60 * 1000000000ull);
                     break;
             }
+
+            // Reset the flag for the first rolling file
+            if (_first)
+                _first = false;
+            else
+                timestamp = rollstamp;
 
             // 5. Open the file for writing
             _file = PrepareFilePath(CppCommon::Timestamp(timestamp));
@@ -417,7 +425,7 @@ private:
             _retry = 0;
 
             // 8. Reset the rolling timestamp
-            _rollstamp = timestamp;
+            _rollstamp = rollstamp;
 
             return true;
         }

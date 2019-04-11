@@ -12,7 +12,7 @@
 
 namespace CppLogging {
 
-Logger::Logger() : _name(), _sink(Config::CreateLogger()._sink)
+Logger::Logger() : _sink(Config::CreateLogger()._sink)
 {
 }
 
