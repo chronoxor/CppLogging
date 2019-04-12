@@ -20,7 +20,7 @@ AsyncWaitProcessor::AsyncWaitProcessor(const std::shared_ptr<Layout>& layout, si
       _queue(capacity, initial)
 {
     // Start processing thread
-    _thread = CppCommon::Thread::Start([this, on_thread_initialize, on_thread_clenup]() { ProcessBufferedRecords(on_thread_initialize, on_thread_clenup); });
+    _thread = CppCommon::Thread::Start([this, on_thread_initialize, on_thread_clenup]() { ProcessThread(on_thread_initialize, on_thread_clenup); });
 }
 
 AsyncWaitProcessor::~AsyncWaitProcessor()
@@ -48,7 +48,7 @@ bool AsyncWaitProcessor::EnqueueRecord(Record& record)
     return _queue.Enqueue(record);
 }
 
-void AsyncWaitProcessor::ProcessBufferedRecords(const std::function<void ()>& on_thread_initialize, const std::function<void ()>& on_thread_clenup)
+void AsyncWaitProcessor::ProcessThread(const std::function<void ()>& on_thread_initialize, const std::function<void ()>& on_thread_clenup)
 {
     // Call the thread initialize handler
     assert((on_thread_initialize) && "Thread initialize handler must be valid!");

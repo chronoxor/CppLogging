@@ -144,7 +144,7 @@ protected:
     void ArchivationStart()
     {
         // Start archivation thread
-        _archive_thread = CppCommon::Thread::Start([this]() { Archivation(); });
+        _archive_thread = CppCommon::Thread::Start([this]() { ArchivationThread(); });
     }
 
     void ArchivationStop()
@@ -154,7 +154,7 @@ protected:
         _archive_thread.join();
     }
 
-    void Archivation()
+    void ArchivationThread()
     {
         // Call initialize archivation thread handler
         _appender.onArchiveThreadInitialize();

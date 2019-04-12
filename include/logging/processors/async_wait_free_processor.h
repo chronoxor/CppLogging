@@ -59,7 +59,7 @@ private:
     std::thread _thread;
 
     bool EnqueueRecord(bool discard_on_overflow, Record& record);
-    void ProcessBufferedRecords(const std::function<void ()>& on_thread_initialize, const std::function<void ()>& on_thread_clenup);
+    void ProcessThread(const std::function<void ()>& on_thread_initialize, const std::function<void ()>& on_thread_clenup);
 };
 
 } // namespace CppLogging
