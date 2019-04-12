@@ -59,7 +59,7 @@ public:
          using the following placeholders:
          - {UtcDateTime} / {LocalDateTime} - converted to the UTC/local date & time (e.g. "1997-07-16T192030Z" / "1997-07-16T192030+0100")
          - {UtcDate} / {LocalDate} - converted to the UTC/local date (e.g. "1997-07-16")
-         - {Time} / {LocalTime} - converted to the UTC/local time (e.g. "192030Z" / "192030+0100")
+         - {UtcTime} / {LocalTime} - converted to the UTC/local time (e.g. "192030Z" / "192030+0100")
          - {UtcYear} / {LocalYear} - converted to the UTC/local four-digits year (e.g. "1997")
          - {UtcMonth} / {LocalMonth} - converted to the UTC/local two-digits month (e.g. "07")
          - {UtcDay} / {LocalDay} - converted to the UTC/local two-digits day (e.g. "16")
