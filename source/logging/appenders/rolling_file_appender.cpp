@@ -385,13 +385,9 @@ private:
             if ((CppCommon::Timestamp::utc() - _retry).milliseconds() < 100)
                 return false;
 
-            // 3. If the file is opened for reading close it
-            if (_file.IsFileReadOpened())
-                _file.Close();
-
             uint64_t rollstamp = timestamp;
 
-            // 4. Truncate rolling timestamp according to the time rolling policy
+            // 3. Truncate rolling timestamp according to the time rolling policy
             switch (_policy)
             {
                 case TimeRollingPolicy::SECOND:
@@ -408,23 +404,32 @@ private:
                     break;
             }
 
-            // Reset the flag for the first rolling file
+            // 4. Reset the flag for the first rolling file
             if (_first)
                 _first = false;
             else
                 timestamp = rollstamp;
 
-            // 5. Open the file for writing
+            // 5. If the file is opened for reading close it
+            if (_file.IsFileReadOpened())
+                _file.Close();
+
+            // 6. Prepare the actual rolling file path
             _file = PrepareFilePath(CppCommon::Timestamp(timestamp));
+
+            // 7. Create the parent directory tree
+            CppCommon::Directory::CreateTree(_file.parent());
+
+            // 8. Open or create the rolling file
             _file.OpenOrCreate(false, true, _truncate);
 
-            // 6. Reset the written bytes counter
+            // 9. Reset the written bytes counter
             _written = 0;
 
-            // 7. Reset the retry timestamp
+            // 10. Reset the retry timestamp
             _retry = 0;
 
-            // 8. Reset the rolling timestamp
+            // 11. Reset the rolling timestamp
             _rollstamp = rollstamp;
 
             return true;
@@ -769,9 +774,6 @@ private:
             }
         }
 
-        // Create directory tree
-        CppCommon::Directory::CreateTree(_path);
-
         return CppCommon::Path(_path / filename);
     }
 
@@ -1018,14 +1020,19 @@ private:
             if (_file.IsFileReadOpened())
                 _file.Close();
 
-            // 4. Open the file for writing
+            // 4. Prepare the actual rolling file path
             _file = PrepareFilePath();
+
+            // 5. Create the parent directory tree
+            CppCommon::Directory::CreateTree(_file.parent());
+
+            // 6. Open or create the rolling file
             _file.OpenOrCreate(false, true, _truncate);
 
-            // 5. Reset the written bytes counter
+            // 7. Reset the written bytes counter
             _written = 0;
 
-            // 6. Reset the retry timestamp
+            // 8. Reset the retry timestamp
             _retry = 0;
 
             return true;
