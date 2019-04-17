@@ -71,12 +71,12 @@ void AsyncWaitFreeProcessor::ProcessThread(const std::function<void ()>& on_thre
     {
         // Thread local logger record to process
         thread_local Record record;
-        thread_local uint64_t previous = 0;
+        thread_local uint64_t previous = CppCommon::Timestamp::utc();
 
         while (true)
         {
             // Try to dequeue the next logging record
-            const bool empty = !_queue.Dequeue(record);
+            bool empty = !_queue.Dequeue(record);
 
             // Current timestamp
             uint64_t current;
