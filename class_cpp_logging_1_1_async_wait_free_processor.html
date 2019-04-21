@@ -114,9 +114,9 @@ Inheritance diagram for CppLogging::AsyncWaitFreeProcessor:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a82fb3839d0625c091b0eca9a9e4012ad"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cpp_logging_1_1_async_wait_free_processor.html#a82fb3839d0625c091b0eca9a9e4012ad">AsyncWaitFreeProcessor</a> (const std::shared_ptr&lt; <a class="el" href="class_cpp_logging_1_1_layout.html">Layout</a> &gt; &amp;<a class="el" href="class_cpp_logging_1_1_processor.html#aec80c32251dbb72e48da1a335013c32e">layout</a>, bool autostart=true, bool discard_on_overflow=false, size_t capacity=8192, const std::function&lt; void()&gt; &amp;on_thread_initialize=[](){}, const std::function&lt; void()&gt; &amp;on_thread_clenup=[](){})</td></tr>
-<tr class="memdesc:a82fb3839d0625c091b0eca9a9e4012ad"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize asynchronous processor with a given layout interface, overflow policy and buffer capacity.  <a href="#a82fb3839d0625c091b0eca9a9e4012ad">More...</a><br /></td></tr>
-<tr class="separator:a82fb3839d0625c091b0eca9a9e4012ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a54eb2be2d42b4fb83b5f6f3756c9c871"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cpp_logging_1_1_async_wait_free_processor.html#a54eb2be2d42b4fb83b5f6f3756c9c871">AsyncWaitFreeProcessor</a> (const std::shared_ptr&lt; <a class="el" href="class_cpp_logging_1_1_layout.html">Layout</a> &gt; &amp;<a class="el" href="class_cpp_logging_1_1_processor.html#aec80c32251dbb72e48da1a335013c32e">layout</a>, bool autostart=true, size_t capacity=8192, bool discard=false, const std::function&lt; void()&gt; &amp;on_thread_initialize=[](){}, const std::function&lt; void()&gt; &amp;on_thread_clenup=[](){})</td></tr>
+<tr class="memdesc:a54eb2be2d42b4fb83b5f6f3756c9c871"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize asynchronous processor with a given layout interface, overflow policy and buffer capacity.  <a href="#a54eb2be2d42b4fb83b5f6f3756c9c871">More...</a><br /></td></tr>
+<tr class="separator:a54eb2be2d42b4fb83b5f6f3756c9c871"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a13a14fbe971ff869a20d21163ee91cd1"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cpp_logging_1_1_async_wait_free_processor.html#a13a14fbe971ff869a20d21163ee91cd1">AsyncWaitFreeProcessor</a> (const <a class="el" href="class_cpp_logging_1_1_async_wait_free_processor.html">AsyncWaitFreeProcessor</a> &amp;)=delete</td></tr>
 <tr class="separator:a13a14fbe971ff869a20d21163ee91cd1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab3919105efc07a9bbd49aebf6b492c3f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cpp_logging_1_1_async_wait_free_processor.html#ab3919105efc07a9bbd49aebf6b492c3f">AsyncWaitFreeProcessor</a> (<a class="el" href="class_cpp_logging_1_1_async_wait_free_processor.html">AsyncWaitFreeProcessor</a> &amp;&amp;)=delete</td></tr>
@@ -195,7 +195,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Definition at line <a class="el" href="async__wait__free__processor_8h_source.html#l00033">33</a> of file <a class="el" href="async__wait__free__processor_8h_source.html">async_wait_free_processor.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a class="anchor" id="a82fb3839d0625c091b0eca9a9e4012ad"></a>
+<a class="anchor" id="a54eb2be2d42b4fb83b5f6f3756c9c871"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -217,14 +217,14 @@ Additional Inherited Members</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">bool&#160;</td>
-          <td class="paramname"><em>discard_on_overflow</em> = <code>false</code>, </td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>capacity</em> = <code>8192</code>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">size_t&#160;</td>
-          <td class="paramname"><em>capacity</em> = <code>8192</code>, </td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>discard</em> = <code>false</code>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -256,8 +256,8 @@ Additional Inherited Members</h2></td></tr>
   <table class="params">
     <tr><td class="paramname">layout</td><td>- Logging layout interface </td></tr>
     <tr><td class="paramname">autostart</td><td>- Auto-start the logging processor (default is true) </td></tr>
-    <tr><td class="paramname">discard_on_overflow</td><td>- Discard logging records on buffer overflow or block and wait (default is false) </td></tr>
     <tr><td class="paramname">capacity</td><td>- Buffer capacity in logging records (default is 8192) </td></tr>
+    <tr><td class="paramname">discard</td><td>- Discard logging records on buffer overflow or block and wait (default is false) </td></tr>
     <tr><td class="paramname">on_thread_initialize</td><td>- Thread initialize handler can be used to initialize priority or affinity of the logging thread (default does nothing) </td></tr>
     <tr><td class="paramname">on_thread_clenup</td><td>- Thread cleanup handler can be used to cleanup priority or affinity of the logging thread (default does nothing) </td></tr>
   </table>
