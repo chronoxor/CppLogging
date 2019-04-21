@@ -15,17 +15,43 @@
 
 namespace CppLogging {
 
-AsyncWaitFreeProcessor::AsyncWaitFreeProcessor(const std::shared_ptr<Layout>& layout, bool discard_on_overflow, size_t capacity, const std::function<void ()>& on_thread_initialize, const std::function<void ()>& on_thread_clenup)
+AsyncWaitFreeProcessor::AsyncWaitFreeProcessor(const std::shared_ptr<Layout>& layout, bool discard_on_overflow, size_t capacity, bool started, const std::function<void ()>& on_thread_initialize, const std::function<void ()>& on_thread_clenup)
     : Processor(layout),
       _discard_on_overflow(discard_on_overflow),
-      _queue(capacity)
+      _queue(capacity),
+      _on_thread_initialize(on_thread_initialize),
+      _on_thread_clenup(on_thread_clenup)
 {
-    // Start processing thread
-    _thread = CppCommon::Thread::Start([this, on_thread_initialize, on_thread_clenup]() { ProcessThread(on_thread_initialize, on_thread_clenup); });
+    // Auto-start the logging processor
+    if (started)
+        Start();
 }
 
 AsyncWaitFreeProcessor::~AsyncWaitFreeProcessor()
 {
+    // Stop the logging processor
+    if (IsStarted())
+        Stop();
+}
+
+bool AsyncWaitFreeProcessor::Start()
+{
+    assert(!IsStarted() && "Logging processor is already started!");
+    if (IsStarted())
+        return false;
+
+    // Start processing thread
+    _started = true;
+    _thread = CppCommon::Thread::Start([this]() { ProcessThread(_on_thread_initialize, _on_thread_clenup); });
+    return true;
+}
+
+bool AsyncWaitFreeProcessor::Stop()
+{
+    assert(IsStarted() && "Logging processor is not started!");
+    if (!IsStarted())
+        return false;
+
     // Thread local stop operation record
     thread_local Record stop;
 
@@ -34,11 +60,17 @@ AsyncWaitFreeProcessor::~AsyncWaitFreeProcessor()
     EnqueueRecord(false, stop);
 
     // Wait for processing thread
+    _started = false;
     _thread.join();
+    return true;
 }
 
 bool AsyncWaitFreeProcessor::ProcessRecord(Record& record)
 {
+    // Check if the logging processor started
+    if (!IsStarted())
+        return true;
+
     // Enqueue the given logger record
     return EnqueueRecord(_discard_on_overflow, record);
 }
@@ -73,7 +105,7 @@ void AsyncWaitFreeProcessor::ProcessThread(const std::function<void ()>& on_thre
         thread_local Record record;
         thread_local uint64_t previous = CppCommon::Timestamp::utc();
 
-        while (true)
+        while (_started)
         {
             // Try to dequeue the next logging record
             bool empty = !_queue.Dequeue(record);
@@ -135,6 +167,10 @@ void AsyncWaitFreeProcessor::ProcessThread(const std::function<void ()>& on_thre
 
 void AsyncWaitFreeProcessor::Flush()
 {
+    // Check if the logging processor started
+    if (!IsStarted())
+        return;
+
     // Thread local flush operation record
     thread_local Record flush;
 

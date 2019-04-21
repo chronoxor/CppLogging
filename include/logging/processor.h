@@ -50,6 +50,20 @@ public:
     //! Get collection of child processors
     std::vector<std::shared_ptr<Processor>>& processors() noexcept { return _processors; }
 
+    //! Is the logging processor started?
+    bool IsStarted() const noexcept { return _started; }
+
+    //! Start the logging processor
+    /*!
+         \return 'true' if the logging processor was successfully started, 'false' if the logging processor failed to start
+    */
+    virtual bool Start();
+    //! Stop the logging processor
+    /*!
+         \return 'true' if the logging processor was successfully stopped, 'false' if the logging processor failed to stop
+    */
+    virtual bool Stop();
+
     //! Filter the given logging record
     /*!
          \param record - Logging record
@@ -80,6 +94,7 @@ public:
     virtual void Flush();
 
 protected:
+    std::atomic<bool> _started{true};
     std::shared_ptr<Layout> _layout;
     std::vector<std::shared_ptr<Filter>> _filters;
     std::vector<std::shared_ptr<Appender>> _appenders;

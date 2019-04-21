@@ -15,16 +15,42 @@
 
 namespace CppLogging {
 
-AsyncWaitProcessor::AsyncWaitProcessor(const std::shared_ptr<Layout>& layout, size_t capacity, size_t initial, const std::function<void ()>& on_thread_initialize, const std::function<void ()>& on_thread_clenup)
+AsyncWaitProcessor::AsyncWaitProcessor(const std::shared_ptr<Layout>& layout, size_t capacity, size_t initial, bool started, const std::function<void ()>& on_thread_initialize, const std::function<void ()>& on_thread_clenup)
     : Processor(layout),
-      _queue(capacity, initial)
+      _queue(capacity, initial),
+      _on_thread_initialize(on_thread_initialize),
+      _on_thread_clenup(on_thread_clenup)
 {
-    // Start processing thread
-    _thread = CppCommon::Thread::Start([this, on_thread_initialize, on_thread_clenup]() { ProcessThread(on_thread_initialize, on_thread_clenup); });
+    // Auto-start the logging processor
+    if (started)
+        Start();
 }
 
 AsyncWaitProcessor::~AsyncWaitProcessor()
 {
+    // Stop the logging processor
+    if (IsStarted())
+        Stop();
+}
+
+bool AsyncWaitProcessor::Start()
+{
+    assert(!IsStarted() && "Logging processor is already started!");
+    if (IsStarted())
+        return false;
+
+    // Start processing thread
+    _started = true;
+    _thread = CppCommon::Thread::Start([this]() { ProcessThread(_on_thread_initialize, _on_thread_clenup); });
+    return true;
+}
+
+bool AsyncWaitProcessor::Stop()
+{
+    assert(IsStarted() && "Logging processor is not started!");
+    if (!IsStarted())
+        return false;
+
     // Thread local stop operation record
     thread_local Record stop;
 
@@ -33,11 +59,17 @@ AsyncWaitProcessor::~AsyncWaitProcessor()
     EnqueueRecord(stop);
 
     // Wait for processing thread
+    _started = false;
     _thread.join();
+    return true;
 }
 
 bool AsyncWaitProcessor::ProcessRecord(Record& record)
 {
+    // Check if the logging processor started
+    if (!IsStarted())
+        return true;
+
     // Enqueue the given logger record
     return EnqueueRecord(record);
 }
@@ -64,7 +96,7 @@ void AsyncWaitProcessor::ProcessThread(const std::function<void ()>& on_thread_i
         // Reserve initial space for logging records
         records.reserve(_queue.capacity());
 
-        while (true)
+        while (_started)
         {
             // Dequeue the next logging record
             if (!_queue.Dequeue(records))
@@ -120,6 +152,10 @@ void AsyncWaitProcessor::ProcessThread(const std::function<void ()>& on_thread_i
 
 void AsyncWaitProcessor::Flush()
 {
+    // Check if the logging processor started
+    if (!IsStarted())
+        return;
+
     // Thread local flush operation record
     thread_local Record flush;
 

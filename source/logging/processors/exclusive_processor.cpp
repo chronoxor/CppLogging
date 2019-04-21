@@ -12,6 +12,10 @@ namespace CppLogging {
 
 bool ExclusiveProcessor::ProcessRecord(Record& record)
 {
+    // Check if the logging processor started
+    if (!IsStarted())
+        return true;
+
     // Filter the given logging record
     if (!FilterRecord(record))
         return true;

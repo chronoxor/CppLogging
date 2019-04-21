@@ -8,6 +8,8 @@
 
 #include "logging/processor.h"
 
+#include <cassert>
+
 namespace CppLogging {
 
 Processor::~Processor()
@@ -21,6 +23,30 @@ Processor::~Processor()
     for (auto& processor : _processors)
         if (processor)
             processor->Flush();
+
+    // Stop the logging processor
+    if (IsStarted())
+        Stop();
+}
+
+bool Processor::Start()
+{
+    assert(!IsStarted() && "Logging processor is already started!");
+    if (IsStarted())
+        return false;
+
+    _started = true;
+    return true;
+}
+
+bool Processor::Stop()
+{
+    assert(IsStarted() && "Logging processor is not started!");
+    if (!IsStarted())
+        return false;
+
+    _started = false;
+    return true;
 }
 
 bool Processor::FilterRecord(Record& record)
@@ -35,6 +61,10 @@ bool Processor::FilterRecord(Record& record)
 
 bool Processor::ProcessRecord(Record& record)
 {
+    // Check if the logging processor started
+    if (!IsStarted())
+        return true;
+
     // Filter the given logging record
     if (!FilterRecord(record))
         return true;
@@ -58,6 +88,10 @@ bool Processor::ProcessRecord(Record& record)
 
 void Processor::Flush()
 {
+    // Check if the logging processor started
+    if (!IsStarted())
+        return;
+
     // Flush all appenders
     for (auto& appender : _appenders)
         if (appender)
