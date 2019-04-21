@@ -131,8 +131,11 @@ Static Public Member Functions</h2></td></tr>
 <tr class="memitem:a15f113b33935765efb2e48d13badc88e"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_cpp_logging_1_1_logger.html">Logger</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cpp_logging_1_1_config.html#a15f113b33935765efb2e48d13badc88e">CreateLogger</a> (const std::string &amp;name)</td></tr>
 <tr class="memdesc:a15f113b33935765efb2e48d13badc88e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create named logger.  <a href="#a15f113b33935765efb2e48d13badc88e">More...</a><br /></td></tr>
 <tr class="separator:a15f113b33935765efb2e48d13badc88e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8adf1cc3c422b5a6abda03aeea980a12"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cpp_logging_1_1_config.html#a8adf1cc3c422b5a6abda03aeea980a12">Setup</a> ()</td></tr>
+<tr class="memdesc:a8adf1cc3c422b5a6abda03aeea980a12"><td class="mdescLeft">&#160;</td><td class="mdescRight">Setup the logging infrastructure.  <a href="#a8adf1cc3c422b5a6abda03aeea980a12">More...</a><br /></td></tr>
+<tr class="separator:a8adf1cc3c422b5a6abda03aeea980a12"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2218c74ee4f25fe9f4963d1caa1ef160"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cpp_logging_1_1_config.html#a2218c74ee4f25fe9f4963d1caa1ef160">Shutdown</a> ()</td></tr>
-<tr class="memdesc:a2218c74ee4f25fe9f4963d1caa1ef160"><td class="mdescLeft">&#160;</td><td class="mdescRight">Shutdown all loggers.  <a href="#a2218c74ee4f25fe9f4963d1caa1ef160">More...</a><br /></td></tr>
+<tr class="memdesc:a2218c74ee4f25fe9f4963d1caa1ef160"><td class="mdescLeft">&#160;</td><td class="mdescRight">Shutdown the logging infrastructure.  <a href="#a2218c74ee4f25fe9f4963d1caa1ef160">More...</a><br /></td></tr>
 <tr class="separator:a2218c74ee4f25fe9f4963d1caa1ef160"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
@@ -239,7 +242,7 @@ Static Public Member Functions</h2></td></tr>
 </dl>
 <dl><dt><b>Examples: </b></dt><dd><a class="el" href="async_8cpp-example.html#a1">async.cpp</a>, <a class="el" href="console_8cpp-example.html#a0">console.cpp</a>, <a class="el" href="file_8cpp-example.html#a0">file.cpp</a>, <a class="el" href="sync_8cpp-example.html#a0">sync.cpp</a>, and <a class="el" href="syslog_8cpp-example.html#a0">syslog.cpp</a>.</dd>
 </dl>
-<p>Definition at line <a class="el" href="config_8cpp_source.html#l00022">22</a> of file <a class="el" href="config_8cpp_source.html">config.cpp</a>.</p>
+<p>Definition at line <a class="el" href="config_8cpp_source.html#l00019">19</a> of file <a class="el" href="config_8cpp_source.html">config.cpp</a>.</p>
 
 </div>
 </div>
@@ -284,7 +287,7 @@ Static Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="config_8cpp_source.html#l00031">31</a> of file <a class="el" href="config_8cpp_source.html">config.cpp</a>.</p>
+<p>Definition at line <a class="el" href="config_8cpp_source.html#l00028">28</a> of file <a class="el" href="config_8cpp_source.html">config.cpp</a>.</p>
 
 </div>
 </div>
@@ -313,7 +316,7 @@ Static Public Member Functions</h2></td></tr>
 <p>If the default logger was not configured before it will be automatically configured to a one with <a class="el" href="class_cpp_logging_1_1_text_layout.html" title="Text layout. ">TextLayout</a> and <a class="el" href="class_cpp_logging_1_1_console_appender.html" title="Console (stdout) appender. ">ConsoleAppender</a>.</p>
 <dl class="section return"><dt>Returns</dt><dd>Created instance of the default logger </dd></dl>
 
-<p>Definition at line <a class="el" href="config_8cpp_source.html#l00040">40</a> of file <a class="el" href="config_8cpp_source.html">config.cpp</a>.</p>
+<p>Definition at line <a class="el" href="config_8cpp_source.html#l00037">37</a> of file <a class="el" href="config_8cpp_source.html">config.cpp</a>.</p>
 
 </div>
 </div>
@@ -349,7 +352,7 @@ Static Public Member Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Created instance of the named logger </dd></dl>
 
-<p>Definition at line <a class="el" href="config_8cpp_source.html#l00058">58</a> of file <a class="el" href="config_8cpp_source.html">config.cpp</a>.</p>
+<p>Definition at line <a class="el" href="config_8cpp_source.html#l00055">55</a> of file <a class="el" href="config_8cpp_source.html">config.cpp</a>.</p>
 
 </div>
 </div>
@@ -401,6 +404,33 @@ Static Public Member Functions</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="a8adf1cc3c422b5a6abda03aeea980a12"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void CppLogging::Config::Setup </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Setup the logging infrastructure. </p>
+
+<p>Definition at line <a class="el" href="config_8cpp_source.html#l00068">68</a> of file <a class="el" href="config_8cpp_source.html">config.cpp</a>.</p>
+
+</div>
+</div>
 <a class="anchor" id="a2218c74ee4f25fe9f4963d1caa1ef160"></a>
 <div class="memitem">
 <div class="memproto">
@@ -422,9 +452,9 @@ Static Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Shutdown all loggers. </p>
+<p>Shutdown the logging infrastructure. </p>
 
-<p>Definition at line <a class="el" href="config_8cpp_source.html#l00071">71</a> of file <a class="el" href="config_8cpp_source.html">config.cpp</a>.</p>
+<p>Definition at line <a class="el" href="config_8cpp_source.html#l00086">86</a> of file <a class="el" href="config_8cpp_source.html">config.cpp</a>.</p>
 
 </div>
 </div>

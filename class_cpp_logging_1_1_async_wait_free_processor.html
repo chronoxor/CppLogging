@@ -114,9 +114,9 @@ Inheritance diagram for CppLogging::AsyncWaitFreeProcessor:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a2bd13cb124125d043551c8e7cb0a64c7"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cpp_logging_1_1_async_wait_free_processor.html#a2bd13cb124125d043551c8e7cb0a64c7">AsyncWaitFreeProcessor</a> (const std::shared_ptr&lt; <a class="el" href="class_cpp_logging_1_1_layout.html">Layout</a> &gt; &amp;<a class="el" href="class_cpp_logging_1_1_processor.html#aec80c32251dbb72e48da1a335013c32e">layout</a>, bool discard_on_overflow=false, size_t capacity=8192, const std::function&lt; void()&gt; &amp;on_thread_initialize=[](){}, const std::function&lt; void()&gt; &amp;on_thread_clenup=[](){})</td></tr>
-<tr class="memdesc:a2bd13cb124125d043551c8e7cb0a64c7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize asynchronous processor with a given layout interface, overflow policy and buffer capacity.  <a href="#a2bd13cb124125d043551c8e7cb0a64c7">More...</a><br /></td></tr>
-<tr class="separator:a2bd13cb124125d043551c8e7cb0a64c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9b02e104dc204439263a22db29cd06b0"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cpp_logging_1_1_async_wait_free_processor.html#a9b02e104dc204439263a22db29cd06b0">AsyncWaitFreeProcessor</a> (const std::shared_ptr&lt; <a class="el" href="class_cpp_logging_1_1_layout.html">Layout</a> &gt; &amp;<a class="el" href="class_cpp_logging_1_1_processor.html#aec80c32251dbb72e48da1a335013c32e">layout</a>, bool discard_on_overflow=false, size_t capacity=8192, bool started=true, const std::function&lt; void()&gt; &amp;on_thread_initialize=[](){}, const std::function&lt; void()&gt; &amp;on_thread_clenup=[](){})</td></tr>
+<tr class="memdesc:a9b02e104dc204439263a22db29cd06b0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize asynchronous processor with a given layout interface, overflow policy and buffer capacity.  <a href="#a9b02e104dc204439263a22db29cd06b0">More...</a><br /></td></tr>
+<tr class="separator:a9b02e104dc204439263a22db29cd06b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a13a14fbe971ff869a20d21163ee91cd1"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cpp_logging_1_1_async_wait_free_processor.html#a13a14fbe971ff869a20d21163ee91cd1">AsyncWaitFreeProcessor</a> (const <a class="el" href="class_cpp_logging_1_1_async_wait_free_processor.html">AsyncWaitFreeProcessor</a> &amp;)=delete</td></tr>
 <tr class="separator:a13a14fbe971ff869a20d21163ee91cd1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab3919105efc07a9bbd49aebf6b492c3f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cpp_logging_1_1_async_wait_free_processor.html#ab3919105efc07a9bbd49aebf6b492c3f">AsyncWaitFreeProcessor</a> (<a class="el" href="class_cpp_logging_1_1_async_wait_free_processor.html">AsyncWaitFreeProcessor</a> &amp;&amp;)=delete</td></tr>
@@ -127,6 +127,12 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:ad1adb0d2c2b96917db6c16112fb4868b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad0c22183b751b1310eae72f21b9d3b17"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_cpp_logging_1_1_async_wait_free_processor.html">AsyncWaitFreeProcessor</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cpp_logging_1_1_async_wait_free_processor.html#ad0c22183b751b1310eae72f21b9d3b17">operator=</a> (<a class="el" href="class_cpp_logging_1_1_async_wait_free_processor.html">AsyncWaitFreeProcessor</a> &amp;&amp;)=delete</td></tr>
 <tr class="separator:ad0c22183b751b1310eae72f21b9d3b17"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad7a7e4510cd938a7181ce78abcf07a03"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cpp_logging_1_1_async_wait_free_processor.html#ad7a7e4510cd938a7181ce78abcf07a03">Start</a> () override</td></tr>
+<tr class="memdesc:ad7a7e4510cd938a7181ce78abcf07a03"><td class="mdescLeft">&#160;</td><td class="mdescRight">Start the logging processor.  <a href="#ad7a7e4510cd938a7181ce78abcf07a03">More...</a><br /></td></tr>
+<tr class="separator:ad7a7e4510cd938a7181ce78abcf07a03"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa7af076614a25b46d24485d79c9a61d8"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cpp_logging_1_1_async_wait_free_processor.html#aa7af076614a25b46d24485d79c9a61d8">Stop</a> () override</td></tr>
+<tr class="memdesc:aa7af076614a25b46d24485d79c9a61d8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stop the logging processor.  <a href="#aa7af076614a25b46d24485d79c9a61d8">More...</a><br /></td></tr>
+<tr class="separator:aa7af076614a25b46d24485d79c9a61d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0d234980c6e7f86c49efc5d2a010e61e"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cpp_logging_1_1_async_wait_free_processor.html#a0d234980c6e7f86c49efc5d2a010e61e">ProcessRecord</a> (<a class="el" href="class_cpp_logging_1_1_record.html">Record</a> &amp;record) override</td></tr>
 <tr class="memdesc:a0d234980c6e7f86c49efc5d2a010e61e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Process the given logging record through all child filters, layouts and appenders.  <a href="#a0d234980c6e7f86c49efc5d2a010e61e">More...</a><br /></td></tr>
 <tr class="separator:a0d234980c6e7f86c49efc5d2a010e61e"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -159,6 +165,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ab4d96b6012bee770a07a3f8a25a836a3 inherit pub_methods_class_cpp_logging_1_1_processor"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::shared_ptr&lt; <a class="el" href="class_cpp_logging_1_1_processor.html">Processor</a> &gt; &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cpp_logging_1_1_processor.html#ab4d96b6012bee770a07a3f8a25a836a3">processors</a> () noexcept</td></tr>
 <tr class="memdesc:ab4d96b6012bee770a07a3f8a25a836a3 inherit pub_methods_class_cpp_logging_1_1_processor"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get collection of child processors.  <a href="#ab4d96b6012bee770a07a3f8a25a836a3">More...</a><br /></td></tr>
 <tr class="separator:ab4d96b6012bee770a07a3f8a25a836a3 inherit pub_methods_class_cpp_logging_1_1_processor"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad549276271ad426982a75dcaf96d88a1 inherit pub_methods_class_cpp_logging_1_1_processor"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cpp_logging_1_1_processor.html#ad549276271ad426982a75dcaf96d88a1">IsStarted</a> () const noexcept</td></tr>
+<tr class="memdesc:ad549276271ad426982a75dcaf96d88a1 inherit pub_methods_class_cpp_logging_1_1_processor"><td class="mdescLeft">&#160;</td><td class="mdescRight">Is the logging processor started?  <a href="#ad549276271ad426982a75dcaf96d88a1">More...</a><br /></td></tr>
+<tr class="separator:ad549276271ad426982a75dcaf96d88a1 inherit pub_methods_class_cpp_logging_1_1_processor"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af9f59eca507780ff1a9a890e1598eccf inherit pub_methods_class_cpp_logging_1_1_processor"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cpp_logging_1_1_processor.html#af9f59eca507780ff1a9a890e1598eccf">FilterRecord</a> (<a class="el" href="class_cpp_logging_1_1_record.html">Record</a> &amp;record)</td></tr>
 <tr class="memdesc:af9f59eca507780ff1a9a890e1598eccf inherit pub_methods_class_cpp_logging_1_1_processor"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="class_cpp_logging_1_1_filter.html" title="Logging filter interface. ">Filter</a> the given logging record.  <a href="#af9f59eca507780ff1a9a890e1598eccf">More...</a><br /></td></tr>
 <tr class="separator:af9f59eca507780ff1a9a890e1598eccf inherit pub_methods_class_cpp_logging_1_1_processor"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -166,6 +175,8 @@ Public Member Functions</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
 Additional Inherited Members</h2></td></tr>
 <tr class="inherit_header pro_attribs_class_cpp_logging_1_1_processor"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_class_cpp_logging_1_1_processor')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="class_cpp_logging_1_1_processor.html">CppLogging::Processor</a></td></tr>
+<tr class="memitem:a911e46ccd6dc5664e81ff16bd6d23df8 inherit pro_attribs_class_cpp_logging_1_1_processor"><td class="memItemLeft" align="right" valign="top">std::atomic&lt; bool &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cpp_logging_1_1_processor.html#a911e46ccd6dc5664e81ff16bd6d23df8">_started</a> {true}</td></tr>
+<tr class="separator:a911e46ccd6dc5664e81ff16bd6d23df8 inherit pro_attribs_class_cpp_logging_1_1_processor"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a49700ff578bb14ee285c9d8cea442358 inherit pro_attribs_class_cpp_logging_1_1_processor"><td class="memItemLeft" align="right" valign="top">std::shared_ptr&lt; <a class="el" href="class_cpp_logging_1_1_layout.html">Layout</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cpp_logging_1_1_processor.html#a49700ff578bb14ee285c9d8cea442358">_layout</a></td></tr>
 <tr class="separator:a49700ff578bb14ee285c9d8cea442358 inherit pro_attribs_class_cpp_logging_1_1_processor"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaef53974adcf8fdc7934d4b739082185 inherit pro_attribs_class_cpp_logging_1_1_processor"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::shared_ptr&lt; <a class="el" href="class_cpp_logging_1_1_filter.html">Filter</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cpp_logging_1_1_processor.html#aaef53974adcf8fdc7934d4b739082185">_filters</a></td></tr>
@@ -184,7 +195,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Definition at line <a class="el" href="async__wait__free__processor_8h_source.html#l00033">33</a> of file <a class="el" href="async__wait__free__processor_8h_source.html">async_wait_free_processor.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a class="anchor" id="a2bd13cb124125d043551c8e7cb0a64c7"></a>
+<a class="anchor" id="a9b02e104dc204439263a22db29cd06b0"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -208,6 +219,12 @@ Additional Inherited Members</h2></td></tr>
           <td></td>
           <td class="paramtype">size_t&#160;</td>
           <td class="paramname"><em>capacity</em> = <code>8192</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>started</em> = <code>true</code>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -240,6 +257,7 @@ Additional Inherited Members</h2></td></tr>
     <tr><td class="paramname">layout</td><td>- Logging layout interface </td></tr>
     <tr><td class="paramname">discard_on_overflow</td><td>- Discard logging records on buffer overflow or block and wait (default is false) </td></tr>
     <tr><td class="paramname">capacity</td><td>- Buffer capacity in logging records (default is 8192) </td></tr>
+    <tr><td class="paramname">started</td><td>- Auto-start the logging processor (default is true) </td></tr>
     <tr><td class="paramname">on_thread_initialize</td><td>- Thread initialize handler can be used to initialize priority or affinity of the logging thread (default does nothing) </td></tr>
     <tr><td class="paramname">on_thread_clenup</td><td>- Thread cleanup handler can be used to cleanup priority or affinity of the logging thread (default does nothing) </td></tr>
   </table>
@@ -319,7 +337,7 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="async__wait__free__processor_8cpp_source.html#l00027">27</a> of file <a class="el" href="async__wait__free__processor_8cpp_source.html">async_wait_free_processor.cpp</a>.</p>
+<p>Definition at line <a class="el" href="async__wait__free__processor_8cpp_source.html#l00030">30</a> of file <a class="el" href="async__wait__free__processor_8cpp_source.html">async_wait_free_processor.cpp</a>.</p>
 
 </div>
 </div>
@@ -353,7 +371,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="class_cpp_logging_1_1_processor.html#ac5775e961b086b9cfad49a67bb746f72">CppLogging::Processor</a>.</p>
 
-<p>Definition at line <a class="el" href="async__wait__free__processor_8cpp_source.html#l00136">136</a> of file <a class="el" href="async__wait__free__processor_8cpp_source.html">async_wait_free_processor.cpp</a>.</p>
+<p>Definition at line <a class="el" href="async__wait__free__processor_8cpp_source.html#l00168">168</a> of file <a class="el" href="async__wait__free__processor_8cpp_source.html">async_wait_free_processor.cpp</a>.</p>
 
 </div>
 </div>
@@ -444,7 +462,67 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="class_cpp_logging_1_1_processor.html#a88f9da169cacd30e22600e293d471ad6">CppLogging::Processor</a>.</p>
 
-<p>Definition at line <a class="el" href="async__wait__free__processor_8cpp_source.html#l00040">40</a> of file <a class="el" href="async__wait__free__processor_8cpp_source.html">async_wait_free_processor.cpp</a>.</p>
+<p>Definition at line <a class="el" href="async__wait__free__processor_8cpp_source.html#l00068">68</a> of file <a class="el" href="async__wait__free__processor_8cpp_source.html">async_wait_free_processor.cpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ad7a7e4510cd938a7181ce78abcf07a03"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool CppLogging::AsyncWaitFreeProcessor::Start </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Start the logging processor. </p>
+<dl class="section return"><dt>Returns</dt><dd>'true' if the logging processor was successfully started, 'false' if the logging processor failed to start </dd></dl>
+
+<p>Reimplemented from <a class="el" href="class_cpp_logging_1_1_processor.html#ae8fc009eaf0abee9d35149b7fb843644">CppLogging::Processor</a>.</p>
+
+<p>Definition at line <a class="el" href="async__wait__free__processor_8cpp_source.html#l00037">37</a> of file <a class="el" href="async__wait__free__processor_8cpp_source.html">async_wait_free_processor.cpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="aa7af076614a25b46d24485d79c9a61d8"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool CppLogging::AsyncWaitFreeProcessor::Stop </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Stop the logging processor. </p>
+<dl class="section return"><dt>Returns</dt><dd>'true' if the logging processor was successfully stopped, 'false' if the logging processor failed to stop </dd></dl>
+
+<p>Reimplemented from <a class="el" href="class_cpp_logging_1_1_processor.html#a594956b2df0f40d1ebed0fb0d1cffbcc">CppLogging::Processor</a>.</p>
+
+<p>Definition at line <a class="el" href="async__wait__free__processor_8cpp_source.html#l00049">49</a> of file <a class="el" href="async__wait__free__processor_8cpp_source.html">async_wait_free_processor.cpp</a>.</p>
 
 </div>
 </div>
