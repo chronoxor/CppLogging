@@ -78,7 +78,7 @@ void Config::Setup()
     std::swap(instance._working, instance._config);
 
     // Start all working logger processors
-    for (auto& processor : _working)
+    for (auto& processor : instance._working)
         if (processor.second)
             processor.second->Start();
 }
@@ -90,7 +90,7 @@ void Config::Shutdown()
     CppCommon::Locker<CppCommon::CriticalSection> locker(instance._lock);
 
     // Flush and stop all working logger processors
-    for (auto& processor : _working)
+    for (auto& processor : instance._working)
     {
         if (processor.second)
         {
