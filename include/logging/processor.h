@@ -34,12 +34,12 @@ public:
          \param layout - Logging layout interface
     */
     explicit Processor(const std::shared_ptr<Layout>& layout) : _layout(layout) {}
-    Processor(const Processor&) = default;
-    Processor(Processor&&) noexcept = default;
+    Processor(const Processor&) = delete;
+    Processor(Processor&&) noexcept = delete;
     virtual ~Processor();
 
-    Processor& operator=(const Processor&) = default;
-    Processor& operator=(Processor&&) noexcept = default;
+    Processor& operator=(const Processor&) = delete;
+    Processor& operator=(Processor&&) noexcept = delete;
 
     //! Get the logging processor layout
     std::shared_ptr<Layout>& layout() noexcept { return _layout; }
