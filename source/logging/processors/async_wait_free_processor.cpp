@@ -15,9 +15,9 @@
 
 namespace CppLogging {
 
-AsyncWaitFreeProcessor::AsyncWaitFreeProcessor(const std::shared_ptr<Layout>& layout, bool autostart, bool discard_on_overflow, size_t capacity, const std::function<void ()>& on_thread_initialize, const std::function<void ()>& on_thread_clenup)
+AsyncWaitFreeProcessor::AsyncWaitFreeProcessor(const std::shared_ptr<Layout>& layout, bool autostart, size_t capacity, bool discard, const std::function<void ()>& on_thread_initialize, const std::function<void ()>& on_thread_clenup)
     : Processor(layout),
-      _discard_on_overflow(discard_on_overflow),
+      _discard(discard),
       _queue(capacity),
       _on_thread_initialize(on_thread_initialize),
       _on_thread_clenup(on_thread_clenup)
@@ -70,16 +70,16 @@ bool AsyncWaitFreeProcessor::ProcessRecord(Record& record)
         return true;
 
     // Enqueue the given logger record
-    return EnqueueRecord(_discard_on_overflow, record);
+    return EnqueueRecord(_discard, record);
 }
 
-bool AsyncWaitFreeProcessor::EnqueueRecord(bool discard_on_overflow, Record& record)
+bool AsyncWaitFreeProcessor::EnqueueRecord(bool discard, Record& record)
 {
     // Try to enqueue the given logger record
     if (!_queue.Enqueue(record))
     {
         // If the overflow policy is discard logging record, return immediately
-        if (discard_on_overflow)
+        if (discard)
             return false;
 
         // If the overflow policy is blocking then yield if the queue is full

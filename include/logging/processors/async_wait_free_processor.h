@@ -37,12 +37,12 @@ public:
     /*!
          \param layout - Logging layout interface
          \param autostart - Auto-start the logging processor (default is true)
-         \param discard_on_overflow - Discard logging records on buffer overflow or block and wait (default is false)
          \param capacity - Buffer capacity in logging records (default is 8192)
+         \param discard - Discard logging records on buffer overflow or block and wait (default is false)
          \param on_thread_initialize - Thread initialize handler can be used to initialize priority or affinity of the logging thread (default does nothing)
          \param on_thread_clenup - Thread cleanup handler can be used to cleanup priority or affinity of the logging thread (default does nothing)
     */
-    explicit AsyncWaitFreeProcessor(const std::shared_ptr<Layout>& layout, bool autostart = true, bool discard_on_overflow = false, size_t capacity = 8192, const std::function<void ()>& on_thread_initialize = [](){}, const std::function<void ()>& on_thread_clenup = [](){});
+    explicit AsyncWaitFreeProcessor(const std::shared_ptr<Layout>& layout, bool autostart = true, size_t capacity = 8192, bool discard = false, const std::function<void ()>& on_thread_initialize = [](){}, const std::function<void ()>& on_thread_clenup = [](){});
     AsyncWaitFreeProcessor(const AsyncWaitFreeProcessor&) = delete;
     AsyncWaitFreeProcessor(AsyncWaitFreeProcessor&&) = delete;
     virtual ~AsyncWaitFreeProcessor();
@@ -57,13 +57,13 @@ public:
     void Flush() override;
 
 private:
-    bool _discard_on_overflow;
+    bool _discard;
     AsyncWaitFreeQueue<Record> _queue;
     std::thread _thread;
     std::function<void ()> _on_thread_initialize;
     std::function<void ()> _on_thread_clenup;
 
-    bool EnqueueRecord(bool discard_on_overflow, Record& record);
+    bool EnqueueRecord(bool discard, Record& record);
     void ProcessThread(const std::function<void ()>& on_thread_initialize, const std::function<void ()>& on_thread_clenup);
 };
 
