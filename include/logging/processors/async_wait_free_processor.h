@@ -36,13 +36,13 @@ public:
     //! Initialize asynchronous processor with a given layout interface, overflow policy and buffer capacity
     /*!
          \param layout - Logging layout interface
+         \param autostart - Auto-start the logging processor (default is true)
          \param discard_on_overflow - Discard logging records on buffer overflow or block and wait (default is false)
          \param capacity - Buffer capacity in logging records (default is 8192)
-         \param started - Auto-start the logging processor (default is true)
          \param on_thread_initialize - Thread initialize handler can be used to initialize priority or affinity of the logging thread (default does nothing)
          \param on_thread_clenup - Thread cleanup handler can be used to cleanup priority or affinity of the logging thread (default does nothing)
     */
-    explicit AsyncWaitFreeProcessor(const std::shared_ptr<Layout>& layout, bool discard_on_overflow = false, size_t capacity = 8192, bool started = true, const std::function<void ()>& on_thread_initialize = [](){}, const std::function<void ()>& on_thread_clenup = [](){});
+    explicit AsyncWaitFreeProcessor(const std::shared_ptr<Layout>& layout, bool autostart = true, bool discard_on_overflow = false, size_t capacity = 8192, const std::function<void ()>& on_thread_initialize = [](){}, const std::function<void ()>& on_thread_clenup = [](){});
     AsyncWaitFreeProcessor(const AsyncWaitFreeProcessor&) = delete;
     AsyncWaitFreeProcessor(AsyncWaitFreeProcessor&&) = delete;
     virtual ~AsyncWaitFreeProcessor();
