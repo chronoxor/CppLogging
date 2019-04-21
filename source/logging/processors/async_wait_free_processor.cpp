@@ -36,7 +36,6 @@ AsyncWaitFreeProcessor::~AsyncWaitFreeProcessor()
 
 bool AsyncWaitFreeProcessor::Start()
 {
-    assert(!IsStarted() && "Logging processor is already started!");
     if (IsStarted())
         return false;
 
@@ -48,7 +47,6 @@ bool AsyncWaitFreeProcessor::Start()
 
 bool AsyncWaitFreeProcessor::Stop()
 {
-    assert(IsStarted() && "Logging processor is not started!");
     if (!IsStarted())
         return false;
 

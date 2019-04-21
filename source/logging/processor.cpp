@@ -8,8 +8,6 @@
 
 #include "logging/processor.h"
 
-#include <cassert>
-
 namespace CppLogging {
 
 Processor::~Processor()
@@ -31,7 +29,6 @@ Processor::~Processor()
 
 bool Processor::Start()
 {
-    assert(!IsStarted() && "Logging processor is already started!");
     if (IsStarted())
         return false;
 
@@ -41,7 +38,6 @@ bool Processor::Start()
 
 bool Processor::Stop()
 {
-    assert(IsStarted() && "Logging processor is not started!");
     if (!IsStarted())
         return false;
 
