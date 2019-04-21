@@ -114,9 +114,9 @@ Inheritance diagram for CppLogging::AsyncWaitProcessor:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a5b78ef1439bce0a8c7e1b698f705986d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cpp_logging_1_1_async_wait_processor.html#a5b78ef1439bce0a8c7e1b698f705986d">AsyncWaitProcessor</a> (const std::shared_ptr&lt; <a class="el" href="class_cpp_logging_1_1_layout.html">Layout</a> &gt; &amp;<a class="el" href="class_cpp_logging_1_1_processor.html#aec80c32251dbb72e48da1a335013c32e">layout</a>, size_t capacity=8192, size_t initial=8192, bool started=true, const std::function&lt; void()&gt; &amp;on_thread_initialize=[](){}, const std::function&lt; void()&gt; &amp;on_thread_clenup=[](){})</td></tr>
-<tr class="memdesc:a5b78ef1439bce0a8c7e1b698f705986d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize asynchronous processor with a given layout interface.  <a href="#a5b78ef1439bce0a8c7e1b698f705986d">More...</a><br /></td></tr>
-<tr class="separator:a5b78ef1439bce0a8c7e1b698f705986d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af8e236abbbe46247c834e25a134448c1"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cpp_logging_1_1_async_wait_processor.html#af8e236abbbe46247c834e25a134448c1">AsyncWaitProcessor</a> (const std::shared_ptr&lt; <a class="el" href="class_cpp_logging_1_1_layout.html">Layout</a> &gt; &amp;<a class="el" href="class_cpp_logging_1_1_processor.html#aec80c32251dbb72e48da1a335013c32e">layout</a>, bool autostart=true, size_t capacity=8192, size_t initial=8192, const std::function&lt; void()&gt; &amp;on_thread_initialize=[](){}, const std::function&lt; void()&gt; &amp;on_thread_clenup=[](){})</td></tr>
+<tr class="memdesc:af8e236abbbe46247c834e25a134448c1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize asynchronous processor with a given layout interface.  <a href="#af8e236abbbe46247c834e25a134448c1">More...</a><br /></td></tr>
+<tr class="separator:af8e236abbbe46247c834e25a134448c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7f2a848626345abdff61afc5ae024714"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cpp_logging_1_1_async_wait_processor.html#a7f2a848626345abdff61afc5ae024714">AsyncWaitProcessor</a> (const <a class="el" href="class_cpp_logging_1_1_async_wait_processor.html">AsyncWaitProcessor</a> &amp;)=delete</td></tr>
 <tr class="separator:a7f2a848626345abdff61afc5ae024714"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a187f795b0cf8cc82cee71a424774dcf7"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cpp_logging_1_1_async_wait_processor.html#a187f795b0cf8cc82cee71a424774dcf7">AsyncWaitProcessor</a> (<a class="el" href="class_cpp_logging_1_1_async_wait_processor.html">AsyncWaitProcessor</a> &amp;&amp;)=delete</td></tr>
@@ -195,7 +195,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Definition at line <a class="el" href="async__wait__processor_8h_source.html#l00035">35</a> of file <a class="el" href="async__wait__processor_8h_source.html">async_wait_processor.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a class="anchor" id="a5b78ef1439bce0a8c7e1b698f705986d"></a>
+<a class="anchor" id="af8e236abbbe46247c834e25a134448c1"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -211,6 +211,12 @@ Additional Inherited Members</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>autostart</em> = <code>true</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
           <td class="paramtype">size_t&#160;</td>
           <td class="paramname"><em>capacity</em> = <code>8192</code>, </td>
         </tr>
@@ -219,12 +225,6 @@ Additional Inherited Members</h2></td></tr>
           <td></td>
           <td class="paramtype">size_t&#160;</td>
           <td class="paramname"><em>initial</em> = <code>8192</code>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">bool&#160;</td>
-          <td class="paramname"><em>started</em> = <code>true</code>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -255,9 +255,9 @@ Additional Inherited Members</h2></td></tr>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">layout</td><td>- Logging layout interface </td></tr>
+    <tr><td class="paramname">autostart</td><td>- Auto-start the logging processor (default is true) </td></tr>
     <tr><td class="paramname">capacity</td><td>- Buffer capacity in logging records (0 for unlimited capacity, default is 8192) </td></tr>
     <tr><td class="paramname">initial</td><td>- Buffer initial capacity in logging records (default is 8192) </td></tr>
-    <tr><td class="paramname">started</td><td>- Auto-start the logging processor (default is true) </td></tr>
     <tr><td class="paramname">on_thread_initialize</td><td>- Thread initialize handler can be used to initialize priority or affinity of the logging thread (default does nothing) </td></tr>
     <tr><td class="paramname">on_thread_clenup</td><td>- Thread cleanup handler can be used to cleanup priority or affinity of the logging thread (default does nothing) </td></tr>
   </table>
