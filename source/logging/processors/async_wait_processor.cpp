@@ -21,6 +21,8 @@ AsyncWaitProcessor::AsyncWaitProcessor(const std::shared_ptr<Layout>& layout, bo
       _on_thread_initialize(on_thread_initialize),
       _on_thread_clenup(on_thread_clenup)
 {
+    _started = false;
+
     // Auto-start the logging processor
     if (autostart)
         Start();
