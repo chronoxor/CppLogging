@@ -71,9 +71,6 @@ void Config::Setup()
 
     CppCommon::Locker<CppCommon::CriticalSection> locker(instance._lock);
 
-    // Shutdown working logger processors
-    Shutdown();
-
     // Update working logger processors map
     std::swap(instance._working, instance._config);
 
