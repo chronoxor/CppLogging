@@ -41,9 +41,12 @@ bool AsyncWaitFreeProcessor::Start()
     if (IsStarted())
         return false;
 
+    if (!Processor::Start())
+        return false;
+
     // Start processing thread
-    _started = true;
     _thread = CppCommon::Thread::Start([this]() { ProcessThread(_on_thread_initialize, _on_thread_clenup); });
+
     return true;
 }
 
@@ -60,9 +63,9 @@ bool AsyncWaitFreeProcessor::Stop()
     EnqueueRecord(false, stop);
 
     // Wait for processing thread
-    _started = false;
     _thread.join();
-    return true;
+
+    return Processor::Stop();
 }
 
 bool AsyncWaitFreeProcessor::ProcessRecord(Record& record)
