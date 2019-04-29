@@ -38,9 +38,6 @@ AsyncWaitFreeProcessor::~AsyncWaitFreeProcessor()
 
 bool AsyncWaitFreeProcessor::Start()
 {
-    if (IsStarted())
-        return false;
-
     if (!Processor::Start())
         return false;
 

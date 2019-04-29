@@ -29,9 +29,6 @@ Processor::~Processor()
 
 bool Processor::Start()
 {
-    if (IsStarted())
-        return false;
-
     // Start logging layout
     if (_layout && !_layout->IsStarted())
         if (!_layout->Start())
@@ -55,15 +52,15 @@ bool Processor::Start()
             if (!processor->Start())
                 return false;
 
+    if (IsStarted())
+        return false;
+
     _started = true;
     return true;
 }
 
 bool Processor::Stop()
 {
-    if (!IsStarted())
-        return false;
-
     // Stop logging layout
     if (_layout && _layout->IsStarted())
         if (!_layout->Stop())
@@ -86,6 +83,9 @@ bool Processor::Stop()
         if (processor && processor->IsStarted())
             if (!processor->Stop())
                 return false;
+
+    if (!IsStarted())
+        return false;
 
     _started = false;
     return true;
