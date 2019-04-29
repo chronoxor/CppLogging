@@ -21,6 +21,7 @@
 #include "minizip/iowin32.h"
 #endif
 
+#include <atomic>
 #include <cassert>
 
 namespace CppLogging {
@@ -32,12 +33,48 @@ class RollingFileAppender::Impl
 public:
     static const std::string ARCHIVE_EXTENSION;
 
-    Impl(RollingFileAppender& appender, const CppCommon::Path& path, bool archive, bool truncate, bool auto_flush)
+    Impl(RollingFileAppender& appender, const CppCommon::Path& path, bool archive, bool truncate, bool auto_flush, bool auto_start)
         : _appender(appender), _path(path), _archive(archive), _truncate(truncate), _auto_flush(auto_flush)
     {
+        // Start the rolling file appender
+        if (auto_start)
+            Start();
     }
 
-    virtual ~Impl() = default;
+    virtual ~Impl()
+    {
+        // Stop the rolling file appender
+        if (IsStarted())
+            Stop();
+    }
+
+    virtual bool IsStarted() const noexcept { return _started; }
+
+    virtual bool Start()
+    {
+        if (IsStarted())
+            return false;
+
+        if (_archive)
+            ArchivationStart();
+
+        _started = true;
+        return true;
+    }
+
+    virtual bool Stop()
+    {
+        if (!IsStarted())
+            return false;
+
+        CloseFile();
+
+        if (_archive)
+            ArchivationStop();
+
+        _started = false;
+        return true;
+    }
 
     virtual void AppendRecord(Record& record) = 0;
     virtual void Flush() = 0;
@@ -49,23 +86,29 @@ protected:
     bool _truncate;
     bool _auto_flush;
 
+    std::atomic<bool> _started{false};
     CppCommon::Timestamp _retry{0};
     CppCommon::File _file;
     size_t _written{0};
 
-    void CloseFile()
+    bool CloseFile()
     {
-        // Check if the file is already opened for writing
-        if (_file.IsFileWriteOpened())
+        try
         {
-            // Flush & close the file
-            _file.Flush();
-            _file.Close();
+            // Check if the file is already opened for writing
+            if (_file.IsFileWriteOpened())
+            {
+                // Flush & close the file
+                _file.Flush();
+                _file.Close();
 
-            // Archive the file
-            if (_archive)
-                ArchiveQueue(_file);
+                // Archive the file
+                if (_archive)
+                    ArchiveQueue(_file);
+            }
+            return true;
         }
+        catch (const CppCommon::FileSystemException&) { return false; }
     }
 
     std::thread _archive_thread;
@@ -214,13 +257,10 @@ class TimePolicyImpl : public RollingFileAppender::Impl
     };
 
 public:
-    TimePolicyImpl(RollingFileAppender& appender, const CppCommon::Path& path, TimeRollingPolicy policy, const std::string& pattern, bool archive, bool truncate, bool auto_flush)
-        : RollingFileAppender::Impl(appender, path, archive, truncate, auto_flush),
+    TimePolicyImpl(RollingFileAppender& appender, const CppCommon::Path& path, TimeRollingPolicy policy, const std::string& pattern, bool archive, bool truncate, bool auto_flush, bool auto_start)
+        : RollingFileAppender::Impl(appender, path, archive, truncate, auto_flush, auto_start),
           _policy(policy), _pattern(pattern)
     {
-        if (_archive)
-            ArchivationStart();
-
         std::string placeholder;
         std::string subpattern;
 
@@ -284,16 +324,7 @@ public:
         }
     }
 
-    virtual ~TimePolicyImpl()
-    {
-        try
-        {
-            CloseFile();
-            if (_archive)
-                ArchivationStop();
-        }
-        catch (const CppCommon::FileSystemException&) {}
-    }
+    virtual ~TimePolicyImpl() = default;
 
     TimeRollingPolicy policy() const
     {
@@ -904,8 +935,8 @@ private:
 class SizePolicyImpl : public RollingFileAppender::Impl
 {
 public:
-    SizePolicyImpl(RollingFileAppender& appender, const CppCommon::Path& path, const std::string& filename, const std::string& extension, size_t size, size_t backups, bool archive, bool truncate, bool auto_flush)
-        : RollingFileAppender::Impl(appender, path, archive, truncate, auto_flush),
+    SizePolicyImpl(RollingFileAppender& appender, const CppCommon::Path& path, const std::string& filename, const std::string& extension, size_t size, size_t backups, bool archive, bool truncate, bool auto_flush, bool auto_start)
+        : RollingFileAppender::Impl(appender, path, archive, truncate, auto_flush, auto_start),
           _filename(filename), _extension(extension), _size(size), _backups(backups)
     {
         assert((size > 0) && "Size limit should be greater than zero!");
@@ -915,21 +946,9 @@ public:
         assert((backups > 0) && "Backups count should be greater than zero!");
         if (backups <= 0)
             throwex CppCommon::ArgumentException("Backups count should be greater than zero!");
-
-        if (_archive)
-            ArchivationStart();
     }
 
-    virtual ~SizePolicyImpl()
-    {
-        try
-        {
-            CloseFile();
-            if (_archive)
-                ArchivationStop();
-        }
-        catch (const CppCommon::FileSystemException&) {}
-    }
+    virtual ~SizePolicyImpl() = default;
 
     void AppendRecord(Record& record) override
     {
@@ -1105,18 +1124,33 @@ private:
 
 //! @endcond
 
-RollingFileAppender::RollingFileAppender(const CppCommon::Path& path, TimeRollingPolicy policy, const std::string& pattern, bool archive, bool truncate, bool auto_flush)
-    : _pimpl(std::make_unique<TimePolicyImpl>(*this, path, policy, pattern, archive, truncate, auto_flush))
+RollingFileAppender::RollingFileAppender(const CppCommon::Path& path, TimeRollingPolicy policy, const std::string& pattern, bool archive, bool truncate, bool auto_flush, bool auto_start)
+    : _pimpl(std::make_unique<TimePolicyImpl>(*this, path, policy, pattern, archive, truncate, auto_flush, auto_start))
 {
 }
 
-RollingFileAppender::RollingFileAppender(const CppCommon::Path& path, const std::string& filename, const std::string& extension, size_t size, size_t backups, bool archive, bool truncate, bool auto_flush)
-    : _pimpl(std::make_unique<SizePolicyImpl>(*this, path, filename, extension, size, backups, archive, truncate, auto_flush))
+RollingFileAppender::RollingFileAppender(const CppCommon::Path& path, const std::string& filename, const std::string& extension, size_t size, size_t backups, bool archive, bool truncate, bool auto_flush, bool auto_start)
+    : _pimpl(std::make_unique<SizePolicyImpl>(*this, path, filename, extension, size, backups, archive, truncate, auto_flush, auto_start))
 {
 }
 
 RollingFileAppender::~RollingFileAppender()
 {
+}
+
+bool RollingFileAppender::IsStarted() const noexcept
+{
+    return _pimpl->IsStarted();
+}
+
+bool RollingFileAppender::Start()
+{
+    return _pimpl->Start();
+}
+
+bool RollingFileAppender::Stop()
+{
+    return _pimpl->Stop();
 }
 
 void RollingFileAppender::AppendRecord(Record& record)

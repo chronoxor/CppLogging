@@ -9,6 +9,7 @@
 #ifndef CPPLOGGING_APPENDER_H
 #define CPPLOGGING_APPENDER_H
 
+#include "logging/element.h"
 #include "logging/record.h"
 
 namespace CppLogging {
@@ -28,7 +29,7 @@ namespace CppLogging {
     \see RollingFileAppender
     \see SysLogAppender
 */
-class Appender
+class Appender : public Element
 {
 public:
     //! Append the given logging record

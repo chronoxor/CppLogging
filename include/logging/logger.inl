@@ -34,20 +34,22 @@ inline void Logger::Log(Level level, bool format, std::string_view message, cons
     record.level = level;
     record.logger = _name;
 
-    // Filter the logging record
-    if (_sink)
+    // Check for valid and started logging sink
+    if (_sink && _sink->IsStarted())
+    {
+        // Filter the logging record
         if (!_sink->FilterRecord(record))
             return;
 
-    // Format or serialize arguments list
-    if (format)
-        record.Format(message, args...);
-    else
-        record.StoreFormat(message, args...);
+        // Format or serialize arguments list
+        if (format)
+            record.Format(message, args...);
+        else
+            record.StoreFormat(message, args...);
 
-    // Process the logging record
-    if (_sink)
+        // Process the logging record
         _sink->ProcessRecord(record);
+    }
 }
 
 template <typename... Args>
@@ -86,7 +88,7 @@ inline void Logger::Fatal(std::string_view fatal, const Args&... args)
 
 inline void Logger::Flush()
 {
-    if (_sink)
+    if (_sink && _sink->IsStarted())
         _sink->Flush();
 }
 

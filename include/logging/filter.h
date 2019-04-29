@@ -9,6 +9,7 @@
 #ifndef CPPLOGGING_FILTER_H
 #define CPPLOGGING_FILTER_H
 
+#include "logging/element.h"
 #include "logging/record.h"
 
 namespace CppLogging {
@@ -19,11 +20,12 @@ namespace CppLogging {
     performs some checks to detect if the record should be filered
     out and not processed anymore.
 
+    \see SwitchFilter
     \see LoggerFilter
     \see LevelFilter
     \see MessageFilter
 */
-class Filter
+class Filter : public Element
 {
 public:
     //! Filter the given logging record

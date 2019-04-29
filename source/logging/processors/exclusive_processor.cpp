@@ -21,17 +21,17 @@ bool ExclusiveProcessor::ProcessRecord(Record& record)
         return true;
 
     // Layout the given logging record
-    if (_layout)
+    if (_layout && _layout->IsStarted())
         _layout->LayoutRecord(record);
 
     // Append the given logging record
     for (auto& appender : _appenders)
-        if (appender)
+        if (appender && appender->IsStarted())
             appender->AppendRecord(record);
 
     // Process the given logging record with sub processors
     for (auto& processor : _processors)
-        if (processor && !processor->ProcessRecord(record))
+        if (processor && processor->IsStarted() && !processor->ProcessRecord(record))
             return false;
 
     // Logging record was exclusively processed!

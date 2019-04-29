@@ -15,7 +15,7 @@
 
 namespace CppLogging {
 
-AsyncWaitFreeProcessor::AsyncWaitFreeProcessor(const std::shared_ptr<Layout>& layout, bool autostart, size_t capacity, bool discard, const std::function<void ()>& on_thread_initialize, const std::function<void ()>& on_thread_clenup)
+AsyncWaitFreeProcessor::AsyncWaitFreeProcessor(const std::shared_ptr<Layout>& layout, bool auto_start, size_t capacity, bool discard, const std::function<void ()>& on_thread_initialize, const std::function<void ()>& on_thread_clenup)
     : Processor(layout),
       _discard(discard),
       _queue(capacity),
@@ -24,8 +24,8 @@ AsyncWaitFreeProcessor::AsyncWaitFreeProcessor(const std::shared_ptr<Layout>& la
 {
     _started = false;
 
-    // Auto-start the logging processor
-    if (autostart)
+    // Start the logging processor
+    if (auto_start)
         Start();
 }
 

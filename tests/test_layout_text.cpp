@@ -18,7 +18,6 @@ TEST_CASE("Text layout", "[CppLogging]")
     record.level = Level::WARN;
     record.logger = "Test logger";
     record.message = "Test message";
-    record.buffer.resize(1024, 123);
 
     TextLayout layout1;
     layout1.LayoutRecord(record);

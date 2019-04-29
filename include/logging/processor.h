@@ -25,8 +25,9 @@ namespace CppLogging {
     \see SyncProcessor
     \see AsyncProcessor
     \see BufferedProcessor
+    \see ExclusiveProcessor
 */
-class Processor
+class Processor : public Element
 {
 public:
     //! Initialize logging processor with a given layout interface
@@ -51,18 +52,18 @@ public:
     std::vector<std::shared_ptr<Processor>>& processors() noexcept { return _processors; }
 
     //! Is the logging processor started?
-    bool IsStarted() const noexcept { return _started; }
+    bool IsStarted() const noexcept override { return _started; }
 
     //! Start the logging processor
     /*!
          \return 'true' if the logging processor was successfully started, 'false' if the logging processor failed to start
     */
-    virtual bool Start();
+    bool Start() override;
     //! Stop the logging processor
     /*!
          \return 'true' if the logging processor was successfully stopped, 'false' if the logging processor failed to stop
     */
-    virtual bool Stop();
+    bool Stop() override;
 
     //! Filter the given logging record
     /*!
