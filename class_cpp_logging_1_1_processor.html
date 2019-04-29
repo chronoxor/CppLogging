@@ -109,11 +109,12 @@ Inheritance diagram for CppLogging::Processor:</div>
  <div class="center">
   <img src="class_cpp_logging_1_1_processor.png" usemap="#CppLogging::Processor_map" alt=""/>
   <map id="CppLogging::Processor_map" name="CppLogging::Processor_map">
-<area href="class_cpp_logging_1_1_async_wait_free_processor.html" title="Asynchronous wait-free logging processor. " alt="CppLogging::AsyncWaitFreeProcessor" shape="rect" coords="0,56,231,80"/>
-<area href="class_cpp_logging_1_1_async_wait_processor.html" title="Asynchronous wait logging processor. " alt="CppLogging::AsyncWaitProcessor" shape="rect" coords="241,56,472,80"/>
-<area href="class_cpp_logging_1_1_buffered_processor.html" title="Buffered logging processor. " alt="CppLogging::BufferedProcessor" shape="rect" coords="482,56,713,80"/>
-<area href="class_cpp_logging_1_1_exclusive_processor.html" title="Exclusive logging processor. " alt="CppLogging::ExclusiveProcessor" shape="rect" coords="723,56,954,80"/>
-<area href="class_cpp_logging_1_1_sync_processor.html" title="Synchronous logging processor. " alt="CppLogging::SyncProcessor" shape="rect" coords="964,56,1195,80"/>
+<area href="class_cpp_logging_1_1_element.html" title="Logging element interface. " alt="CppLogging::Element" shape="rect" coords="482,0,713,24"/>
+<area href="class_cpp_logging_1_1_async_wait_free_processor.html" title="Asynchronous wait-free logging processor. " alt="CppLogging::AsyncWaitFreeProcessor" shape="rect" coords="0,112,231,136"/>
+<area href="class_cpp_logging_1_1_async_wait_processor.html" title="Asynchronous wait logging processor. " alt="CppLogging::AsyncWaitProcessor" shape="rect" coords="241,112,472,136"/>
+<area href="class_cpp_logging_1_1_buffered_processor.html" title="Buffered logging processor. " alt="CppLogging::BufferedProcessor" shape="rect" coords="482,112,713,136"/>
+<area href="class_cpp_logging_1_1_exclusive_processor.html" title="Exclusive logging processor. " alt="CppLogging::ExclusiveProcessor" shape="rect" coords="723,112,954,136"/>
+<area href="class_cpp_logging_1_1_sync_processor.html" title="Synchronous logging processor. " alt="CppLogging::SyncProcessor" shape="rect" coords="964,112,1195,136"/>
 </map>
  </div></div>
 <table class="memberdecls">
@@ -144,15 +145,15 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ab4d96b6012bee770a07a3f8a25a836a3"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::shared_ptr&lt; <a class="el" href="class_cpp_logging_1_1_processor.html">Processor</a> &gt; &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cpp_logging_1_1_processor.html#ab4d96b6012bee770a07a3f8a25a836a3">processors</a> () noexcept</td></tr>
 <tr class="memdesc:ab4d96b6012bee770a07a3f8a25a836a3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get collection of child processors.  <a href="#ab4d96b6012bee770a07a3f8a25a836a3">More...</a><br /></td></tr>
 <tr class="separator:ab4d96b6012bee770a07a3f8a25a836a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad549276271ad426982a75dcaf96d88a1"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cpp_logging_1_1_processor.html#ad549276271ad426982a75dcaf96d88a1">IsStarted</a> () const noexcept</td></tr>
-<tr class="memdesc:ad549276271ad426982a75dcaf96d88a1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Is the logging processor started?  <a href="#ad549276271ad426982a75dcaf96d88a1">More...</a><br /></td></tr>
-<tr class="separator:ad549276271ad426982a75dcaf96d88a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae8fc009eaf0abee9d35149b7fb843644"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cpp_logging_1_1_processor.html#ae8fc009eaf0abee9d35149b7fb843644">Start</a> ()</td></tr>
-<tr class="memdesc:ae8fc009eaf0abee9d35149b7fb843644"><td class="mdescLeft">&#160;</td><td class="mdescRight">Start the logging processor.  <a href="#ae8fc009eaf0abee9d35149b7fb843644">More...</a><br /></td></tr>
-<tr class="separator:ae8fc009eaf0abee9d35149b7fb843644"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a594956b2df0f40d1ebed0fb0d1cffbcc"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cpp_logging_1_1_processor.html#a594956b2df0f40d1ebed0fb0d1cffbcc">Stop</a> ()</td></tr>
-<tr class="memdesc:a594956b2df0f40d1ebed0fb0d1cffbcc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stop the logging processor.  <a href="#a594956b2df0f40d1ebed0fb0d1cffbcc">More...</a><br /></td></tr>
-<tr class="separator:a594956b2df0f40d1ebed0fb0d1cffbcc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acb403093781f7f3a61570dedf28f55ad"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cpp_logging_1_1_processor.html#acb403093781f7f3a61570dedf28f55ad">IsStarted</a> () const noexceptoverride</td></tr>
+<tr class="memdesc:acb403093781f7f3a61570dedf28f55ad"><td class="mdescLeft">&#160;</td><td class="mdescRight">Is the logging processor started?  <a href="#acb403093781f7f3a61570dedf28f55ad">More...</a><br /></td></tr>
+<tr class="separator:acb403093781f7f3a61570dedf28f55ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a890cd951deb843ca67f7cf1103268686"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cpp_logging_1_1_processor.html#a890cd951deb843ca67f7cf1103268686">Start</a> () override</td></tr>
+<tr class="memdesc:a890cd951deb843ca67f7cf1103268686"><td class="mdescLeft">&#160;</td><td class="mdescRight">Start the logging processor.  <a href="#a890cd951deb843ca67f7cf1103268686">More...</a><br /></td></tr>
+<tr class="separator:a890cd951deb843ca67f7cf1103268686"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6a860edbaf5fa1333805b74c12af8b8a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cpp_logging_1_1_processor.html#a6a860edbaf5fa1333805b74c12af8b8a">Stop</a> () override</td></tr>
+<tr class="memdesc:a6a860edbaf5fa1333805b74c12af8b8a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stop the logging processor.  <a href="#a6a860edbaf5fa1333805b74c12af8b8a">More...</a><br /></td></tr>
+<tr class="separator:a6a860edbaf5fa1333805b74c12af8b8a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af9f59eca507780ff1a9a890e1598eccf"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_cpp_logging_1_1_processor.html#af9f59eca507780ff1a9a890e1598eccf">FilterRecord</a> (<a class="el" href="class_cpp_logging_1_1_record.html">Record</a> &amp;record)</td></tr>
 <tr class="memdesc:af9f59eca507780ff1a9a890e1598eccf"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="class_cpp_logging_1_1_filter.html" title="Logging filter interface. ">Filter</a> the given logging record.  <a href="#af9f59eca507780ff1a9a890e1598eccf">More...</a><br /></td></tr>
 <tr class="separator:af9f59eca507780ff1a9a890e1598eccf"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -184,9 +185,11 @@ Protected Attributes</h2></td></tr>
 <dd>
 AsyncProcessor </dd>
 <dd>
-<a class="el" href="class_cpp_logging_1_1_buffered_processor.html" title="Buffered logging processor. ">BufferedProcessor</a> </dd></dl>
+<a class="el" href="class_cpp_logging_1_1_buffered_processor.html" title="Buffered logging processor. ">BufferedProcessor</a> </dd>
+<dd>
+<a class="el" href="class_cpp_logging_1_1_exclusive_processor.html" title="Exclusive logging processor. ">ExclusiveProcessor</a> </dd></dl>
 
-<p>Definition at line <a class="el" href="processor_8h_source.html#l00029">29</a> of file <a class="el" href="processor_8h_source.html">processor.h</a>.</p>
+<p>Definition at line <a class="el" href="processor_8h_source.html#l00030">30</a> of file <a class="el" href="processor_8h_source.html">processor.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="a2146a25052b050256060dbd231b9a496"></a>
 <div class="memitem">
@@ -218,7 +221,7 @@ AsyncProcessor </dd>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="processor_8h_source.html#l00036">36</a> of file <a class="el" href="processor_8h_source.html">processor.h</a>.</p>
+<p>Definition at line <a class="el" href="processor_8h_source.html#l00037">37</a> of file <a class="el" href="processor_8h_source.html">processor.h</a>.</p>
 
 </div>
 </div>
@@ -319,7 +322,7 @@ AsyncProcessor </dd>
 
 <p>Get collection of child appenders. </p>
 
-<p>Definition at line <a class="el" href="processor_8h_source.html#l00049">49</a> of file <a class="el" href="processor_8h_source.html">processor.h</a>.</p>
+<p>Definition at line <a class="el" href="processor_8h_source.html#l00050">50</a> of file <a class="el" href="processor_8h_source.html">processor.h</a>.</p>
 
 </div>
 </div>
@@ -354,7 +357,7 @@ AsyncProcessor </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>'true' if the logging record should be processed, 'false' if the logging record was filtered out </dd></dl>
 
-<p>Definition at line <a class="el" href="processor_8cpp_source.html#l00048">48</a> of file <a class="el" href="processor_8cpp_source.html">processor.cpp</a>.</p>
+<p>Definition at line <a class="el" href="processor_8cpp_source.html#l00094">94</a> of file <a class="el" href="processor_8cpp_source.html">processor.cpp</a>.</p>
 
 </div>
 </div>
@@ -381,7 +384,7 @@ AsyncProcessor </dd>
 
 <p>Get collection of child filters. </p>
 
-<p>Definition at line <a class="el" href="processor_8h_source.html#l00047">47</a> of file <a class="el" href="processor_8h_source.html">processor.h</a>.</p>
+<p>Definition at line <a class="el" href="processor_8h_source.html#l00048">48</a> of file <a class="el" href="processor_8h_source.html">processor.h</a>.</p>
 
 </div>
 </div>
@@ -414,11 +417,11 @@ AsyncProcessor </dd>
 
 <p>Reimplemented in <a class="el" href="class_cpp_logging_1_1_async_wait_processor.html#aebb69b886fcdf7753248e593e5ebb01f">CppLogging::AsyncWaitProcessor</a>, <a class="el" href="class_cpp_logging_1_1_async_wait_free_processor.html#a72bfc1957e1bef6aaf4ea55eef9140ac">CppLogging::AsyncWaitFreeProcessor</a>, <a class="el" href="class_cpp_logging_1_1_buffered_processor.html#a7066881ada040a09270c4f04409d7bb3">CppLogging::BufferedProcessor</a>, and <a class="el" href="class_cpp_logging_1_1_sync_processor.html#a1f2679ef17e459163cf1546b4acfae8a">CppLogging::SyncProcessor</a>.</p>
 
-<p>Definition at line <a class="el" href="processor_8cpp_source.html#l00085">85</a> of file <a class="el" href="processor_8cpp_source.html">processor.cpp</a>.</p>
+<p>Definition at line <a class="el" href="processor_8cpp_source.html#l00131">131</a> of file <a class="el" href="processor_8cpp_source.html">processor.cpp</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="ad549276271ad426982a75dcaf96d88a1"></a>
+<a class="anchor" id="acb403093781f7f3a61570dedf28f55ad"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -434,14 +437,16 @@ AsyncProcessor </dd>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span><span class="mlabel">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
 <p>Is the logging processor started? </p>
 
-<p>Definition at line <a class="el" href="processor_8h_source.html#l00054">54</a> of file <a class="el" href="processor_8h_source.html">processor.h</a>.</p>
+<p>Reimplemented from <a class="el" href="class_cpp_logging_1_1_element.html#af6d8906d2a726c1e3702761d1358d243">CppLogging::Element</a>.</p>
+
+<p>Definition at line <a class="el" href="processor_8h_source.html#l00055">55</a> of file <a class="el" href="processor_8h_source.html">processor.h</a>.</p>
 
 </div>
 </div>
@@ -468,7 +473,7 @@ AsyncProcessor </dd>
 
 <p>Get the logging processor layout. </p>
 
-<p>Definition at line <a class="el" href="processor_8h_source.html#l00045">45</a> of file <a class="el" href="processor_8h_source.html">processor.h</a>.</p>
+<p>Definition at line <a class="el" href="processor_8h_source.html#l00046">46</a> of file <a class="el" href="processor_8h_source.html">processor.h</a>.</p>
 
 </div>
 </div>
@@ -543,7 +548,7 @@ AsyncProcessor </dd>
 
 <p>Get collection of child processors. </p>
 
-<p>Definition at line <a class="el" href="processor_8h_source.html#l00051">51</a> of file <a class="el" href="processor_8h_source.html">processor.h</a>.</p>
+<p>Definition at line <a class="el" href="processor_8h_source.html#l00052">52</a> of file <a class="el" href="processor_8h_source.html">processor.h</a>.</p>
 
 </div>
 </div>
@@ -586,11 +591,11 @@ AsyncProcessor </dd>
 
 <p>Reimplemented in <a class="el" href="class_cpp_logging_1_1_async_wait_processor.html#a90bb1d23d56dacc72c82f932bbc45ae5">CppLogging::AsyncWaitProcessor</a>, <a class="el" href="class_cpp_logging_1_1_async_wait_free_processor.html#a0d234980c6e7f86c49efc5d2a010e61e">CppLogging::AsyncWaitFreeProcessor</a>, <a class="el" href="class_cpp_logging_1_1_buffered_processor.html#a30701e34be19af8d41530b9f9d1cf369">CppLogging::BufferedProcessor</a>, <a class="el" href="class_cpp_logging_1_1_sync_processor.html#a2e953a43ccd47756d430507bf46022ce">CppLogging::SyncProcessor</a>, and <a class="el" href="class_cpp_logging_1_1_exclusive_processor.html#a2ec0f3ed2b19407bb290bf82de5e0661">CppLogging::ExclusiveProcessor</a>.</p>
 
-<p>Definition at line <a class="el" href="processor_8cpp_source.html#l00058">58</a> of file <a class="el" href="processor_8cpp_source.html">processor.cpp</a>.</p>
+<p>Definition at line <a class="el" href="processor_8cpp_source.html#l00104">104</a> of file <a class="el" href="processor_8cpp_source.html">processor.cpp</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="ae8fc009eaf0abee9d35149b7fb843644"></a>
+<a class="anchor" id="a890cd951deb843ca67f7cf1103268686"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -606,7 +611,7 @@ AsyncProcessor </dd>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -614,13 +619,15 @@ AsyncProcessor </dd>
 <p>Start the logging processor. </p>
 <dl class="section return"><dt>Returns</dt><dd>'true' if the logging processor was successfully started, 'false' if the logging processor failed to start </dd></dl>
 
+<p>Reimplemented from <a class="el" href="class_cpp_logging_1_1_element.html#ab3705da8c6e40212e552ab6523b7b716">CppLogging::Element</a>.</p>
+
 <p>Reimplemented in <a class="el" href="class_cpp_logging_1_1_async_wait_processor.html#ae9c3a990aa955fe8652e22fabfe7e0a1">CppLogging::AsyncWaitProcessor</a>, and <a class="el" href="class_cpp_logging_1_1_async_wait_free_processor.html#ad7a7e4510cd938a7181ce78abcf07a03">CppLogging::AsyncWaitFreeProcessor</a>.</p>
 
 <p>Definition at line <a class="el" href="processor_8cpp_source.html#l00030">30</a> of file <a class="el" href="processor_8cpp_source.html">processor.cpp</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a594956b2df0f40d1ebed0fb0d1cffbcc"></a>
+<a class="anchor" id="a6a860edbaf5fa1333805b74c12af8b8a"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -636,7 +643,7 @@ AsyncProcessor </dd>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -644,9 +651,11 @@ AsyncProcessor </dd>
 <p>Stop the logging processor. </p>
 <dl class="section return"><dt>Returns</dt><dd>'true' if the logging processor was successfully stopped, 'false' if the logging processor failed to stop </dd></dl>
 
+<p>Reimplemented from <a class="el" href="class_cpp_logging_1_1_element.html#a2df96707cb59c56b79207791d4d91f41">CppLogging::Element</a>.</p>
+
 <p>Reimplemented in <a class="el" href="class_cpp_logging_1_1_async_wait_processor.html#aec2b288b8e3d81360bdf3a3be4a1b231">CppLogging::AsyncWaitProcessor</a>, and <a class="el" href="class_cpp_logging_1_1_async_wait_free_processor.html#aa7af076614a25b46d24485d79c9a61d8">CppLogging::AsyncWaitFreeProcessor</a>.</p>
 
-<p>Definition at line <a class="el" href="processor_8cpp_source.html#l00039">39</a> of file <a class="el" href="processor_8cpp_source.html">processor.cpp</a>.</p>
+<p>Definition at line <a class="el" href="processor_8cpp_source.html#l00062">62</a> of file <a class="el" href="processor_8cpp_source.html">processor.cpp</a>.</p>
 
 </div>
 </div>
@@ -669,7 +678,7 @@ AsyncProcessor </dd>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="processor_8h_source.html#l00100">100</a> of file <a class="el" href="processor_8h_source.html">processor.h</a>.</p>
+<p>Definition at line <a class="el" href="processor_8h_source.html#l00101">101</a> of file <a class="el" href="processor_8h_source.html">processor.h</a>.</p>
 
 </div>
 </div>
@@ -691,7 +700,7 @@ AsyncProcessor </dd>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="processor_8h_source.html#l00099">99</a> of file <a class="el" href="processor_8h_source.html">processor.h</a>.</p>
+<p>Definition at line <a class="el" href="processor_8h_source.html#l00100">100</a> of file <a class="el" href="processor_8h_source.html">processor.h</a>.</p>
 
 </div>
 </div>
@@ -713,7 +722,7 @@ AsyncProcessor </dd>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="processor_8h_source.html#l00098">98</a> of file <a class="el" href="processor_8h_source.html">processor.h</a>.</p>
+<p>Definition at line <a class="el" href="processor_8h_source.html#l00099">99</a> of file <a class="el" href="processor_8h_source.html">processor.h</a>.</p>
 
 </div>
 </div>
@@ -735,7 +744,7 @@ AsyncProcessor </dd>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="processor_8h_source.html#l00101">101</a> of file <a class="el" href="processor_8h_source.html">processor.h</a>.</p>
+<p>Definition at line <a class="el" href="processor_8h_source.html#l00102">102</a> of file <a class="el" href="processor_8h_source.html">processor.h</a>.</p>
 
 </div>
 </div>
@@ -757,7 +766,7 @@ AsyncProcessor </dd>
 </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="processor_8h_source.html#l00097">97</a> of file <a class="el" href="processor_8h_source.html">processor.h</a>.</p>
+<p>Definition at line <a class="el" href="processor_8h_source.html#l00098">98</a> of file <a class="el" href="processor_8h_source.html">processor.h</a>.</p>
 
 </div>
 </div>
