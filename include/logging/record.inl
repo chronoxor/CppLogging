@@ -174,6 +174,25 @@ inline void SerializeArgument(Record& record, uint64_t argument)
     std::memcpy(record.buffer.data() + record.buffer.size() - size, &argument, size);
 }
 
+#if defined(__APPLE__)
+
+// Workaround for MacOS issue with template specialization for size_t
+// https://stackoverflow.com/questions/11603818/why-is-there-ambiguity-between-uint32-t-and-uint64-t-when-using-size-t-on-mac-os
+inline void SerializeArgument(Record& record, size_t argument)
+{
+    uint64_t arg = argument;
+
+    // Append the argument type
+    record.buffer.emplace_back((uint8_t)ArgumentType::ARG_UINT64);
+
+    // Append the argument value
+    size_t size = sizeof(arg);
+    record.buffer.resize(record.buffer.size() + size);
+    std::memcpy(record.buffer.data() + record.buffer.size() - size, &arg, size);
+}
+
+#endif
+
 inline void SerializeArgument(Record& record, float argument)
 {
     // Append the argument type
