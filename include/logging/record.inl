@@ -322,7 +322,9 @@ template <typename T>
 inline void SerializeArgument(Record& record, const T& argument)
 {
     // Serialize the custom argument
-    record << argument;
+    std::ostringstream ss;
+    ss << argument;
+    SerializeArgument(record, ss.str());
 }
 
 template <typename T, typename... Args>
