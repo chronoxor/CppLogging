@@ -154,6 +154,10 @@ void AsyncWaitFreeProcessor::ProcessThread(const std::function<void ()>& on_thre
                 CppCommon::Thread::Sleep(100);
         }
     }
+    catch (const std::exception& ex)
+    {
+        fatality(ex);
+    }
     catch (...)
     {
         fatality("Asynchronous wait-free logging processor terminated!");

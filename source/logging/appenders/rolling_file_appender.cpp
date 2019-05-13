@@ -208,6 +208,10 @@ protected:
             while (_archive_queue.Dequeue(path))
                 ArchiveFile(path, "");
         }
+        catch (const std::exception& ex)
+        {
+            fatality(ex);
+        }
         catch (...)
         {
             fatality("Archivation thread terminated!");

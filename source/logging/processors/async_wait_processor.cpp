@@ -139,6 +139,10 @@ void AsyncWaitProcessor::ProcessThread(const std::function<void ()>& on_thread_i
             }
         }
     }
+    catch (const std::exception& ex)
+    {
+        fatality(ex);
+    }
     catch (...)
     {
         fatality("Asynchronous wait logging processor terminated!");
