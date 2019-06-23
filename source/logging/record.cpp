@@ -269,7 +269,7 @@ bool ParseName(std::string_view::iterator& it, const std::string_view::iterator&
     return true;
 }
 
-bool WriteFormatArgument(fmt::v5::basic_writer<fmt::v5::back_insert_range<std::string>>& writer, const fmt::v5::format_specs& specs, const Argument& argument, const std::vector<uint8_t> buffer)
+bool WriteFormatArgument(fmt::v5::basic_writer<fmt::internal::buffer_range<char>>& writer, const fmt::v5::format_specs& specs, const Argument& argument, const std::vector<uint8_t> buffer)
 {
     switch (argument.type)
     {
@@ -780,7 +780,8 @@ std::string Record::RestoreFormat(std::string_view pattern, const std::vector<ui
             specs.precision = precision;
             specs.type = type;
 
-            fmt::v5::basic_writer<fmt::v5::back_insert_range<std::string>> writer(result);
+            fmt::internal::container_buffer<std::string> container(result);
+            fmt::basic_writer<fmt::internal::buffer_range<char>> writer(container);
 
             // Get the format argument
             Argument argument;
