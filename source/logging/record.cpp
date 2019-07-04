@@ -6,7 +6,13 @@
     \copyright MIT License
 */
 
-#if defined(_MSC_VER)
+#if defined(__clang__)
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations" // clang: warning: 'function': was declared deprecated
+#elif defined(__GNUC__)
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations" // GCC: warning: 'function': was declared deprecated
+#elif defined(_MSC_VER)
 #pragma warning(push)
 #pragma warning(disable: 4996) // C4996: 'function': was declared deprecated
 #endif
@@ -823,6 +829,10 @@ std::string Record::RestoreFormat(std::string_view pattern, const std::vector<ui
 
 } // namespace CppLogging
 
-#if defined(_MSC_VER)
+#if defined(__clang__)
+#pragma clang diagnostic pop
+#elif defined(__GNUC__)
+#pragma GCC diagnostic pop
+#elif defined(_MSC_VER)
 #pragma warning(pop)
 #endif
