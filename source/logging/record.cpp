@@ -280,7 +280,7 @@ bool ParseName(std::string_view::iterator& it, const std::string_view::iterator&
     return true;
 }
 
-bool WriteFormatArgument(fmt::writer& writer, const fmt::v5::format_specs& specs, const Argument& argument, const std::vector<uint8_t> buffer)
+bool WriteFormatArgument(fmt::writer& writer, const fmt::format_specs& specs, const Argument& argument, const std::vector<uint8_t> buffer)
 {
     switch (argument.type)
     {
@@ -510,7 +510,7 @@ std::string Record::RestoreFormat(std::string_view pattern, const std::vector<ui
             bool argument_precision = false;
             size_t argument_precision_index = 0;
             std::string argument_precision_name;
-            fmt::v5::alignment align_type = fmt::v5::alignment::ALIGN_DEFAULT;
+            fmt::alignment align_type = fmt::alignment::ALIGN_DEFAULT;
             char align_fill = ' ';
             int flags = 0;
             size_t width = 0;
@@ -547,21 +547,21 @@ std::string Record::RestoreFormat(std::string_view pattern, const std::vector<ui
                     switch (align_ch)
                     {
                         case '<':
-                            align_type = fmt::v5::alignment::ALIGN_LEFT;
+                            align_type = fmt::alignment::ALIGN_LEFT;
                             break;
                         case '>':
-                            align_type = fmt::v5::alignment::ALIGN_RIGHT;
+                            align_type = fmt::alignment::ALIGN_RIGHT;
                             break;
                         case '=':
-                            align_type = fmt::v5::alignment::ALIGN_NUMERIC;
+                            align_type = fmt::alignment::ALIGN_NUMERIC;
                             break;
                         case '^':
-                            align_type = fmt::v5::alignment::ALIGN_CENTER;
+                            align_type = fmt::alignment::ALIGN_CENTER;
                             break;
                         default:
                             break;
                     }
-                    if (align_type != fmt::v5::alignment::ALIGN_DEFAULT)
+                    if (align_type != fmt::alignment::ALIGN_DEFAULT)
                     {
                         if (align_index > 0)
                         {
@@ -587,15 +587,15 @@ std::string Record::RestoreFormat(std::string_view pattern, const std::vector<ui
                     switch (current)
                     {
                         case '+':
-                            flags |= fmt::v5::SIGN_FLAG | fmt::v5::PLUS_FLAG;
+                            flags |= fmt::SIGN_FLAG | fmt::PLUS_FLAG;
                             ++it;
                             break;
                         case '-':
-                            flags |= fmt::v5::MINUS_FLAG;
+                            flags |= fmt::MINUS_FLAG;
                             ++it;
                             break;
                         case ' ':
-                            flags |= fmt::v5::SIGN_FLAG;
+                            flags |= fmt::SIGN_FLAG;
                             ++it;
                             break;
                         default:
@@ -609,7 +609,7 @@ std::string Record::RestoreFormat(std::string_view pattern, const std::vector<ui
                     current = *it;
                     if (current == '#')
                     {
-                        flags |= fmt::v5::HASH_FLAG;
+                        flags |= fmt::HASH_FLAG;
                         ++it;
                     }
                 }
@@ -620,7 +620,7 @@ std::string Record::RestoreFormat(std::string_view pattern, const std::vector<ui
                     current = *it;
                     if (current == '0')
                     {
-                        align_type = fmt::v5::ALIGN_NUMERIC;
+                        align_type = fmt::ALIGN_NUMERIC;
                         align_fill = '0';
                         ++it;
                     }
@@ -783,7 +783,7 @@ std::string Record::RestoreFormat(std::string_view pattern, const std::vector<ui
                 return std::string(pattern);
             }
 
-            fmt::v5::format_specs specs;
+            fmt::format_specs specs;
             specs.align_ = align_type;
             specs.fill_ = align_fill;
             specs.flags = (uint_least8_t)flags;
