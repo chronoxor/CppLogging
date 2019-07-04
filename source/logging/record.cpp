@@ -6,6 +6,11 @@
     \copyright MIT License
 */
 
+#if defined(_MSC_VER)
+#pragma warning(push)
+#pragma warning(disable: 4996) // C4996: 'function': was declared deprecated
+#endif
+
 #include "logging/record.h"
 
 #include <map>
@@ -269,7 +274,7 @@ bool ParseName(std::string_view::iterator& it, const std::string_view::iterator&
     return true;
 }
 
-bool WriteFormatArgument(fmt::v5::basic_writer<fmt::internal::buffer_range<char>>& writer, const fmt::v5::format_specs& specs, const Argument& argument, const std::vector<uint8_t> buffer)
+bool WriteFormatArgument(fmt::writer& writer, const fmt::v5::format_specs& specs, const Argument& argument, const std::vector<uint8_t> buffer)
 {
     switch (argument.type)
     {
@@ -781,7 +786,7 @@ std::string Record::RestoreFormat(std::string_view pattern, const std::vector<ui
             specs.type = type;
 
             fmt::internal::container_buffer<std::string> container(result);
-            fmt::basic_writer<fmt::internal::buffer_range<char>> writer(container);
+            fmt::writer writer(container);
 
             // Get the format argument
             Argument argument;
@@ -817,3 +822,7 @@ std::string Record::RestoreFormat(std::string_view pattern, const std::vector<ui
 }
 
 } // namespace CppLogging
+
+#if defined(_MSC_VER)
+#pragma warning(pop)
+#endif
