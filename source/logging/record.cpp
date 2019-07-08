@@ -280,7 +280,7 @@ bool ParseName(std::string_view::iterator& it, const std::string_view::iterator&
     return true;
 }
 
-bool WriteFormatArgument(fmt::writer& writer, const fmt::format_specs& specs, const Argument& argument, const std::vector<uint8_t> buffer)
+bool WriteFormatArgument(fmt::writer& writer, const fmt::writer::format_specs& specs, const Argument& argument, const std::vector<uint8_t> buffer)
 {
     switch (argument.type)
     {
@@ -288,7 +288,7 @@ bool WriteFormatArgument(fmt::writer& writer, const fmt::format_specs& specs, co
         {
             uint8_t value;
             std::memcpy(&value, buffer.data() + argument.offset, sizeof(uint8_t));
-            writer.write(value != 0, specs);
+            writer.write_int(value != 0, specs);
             return true;
         }
         case CppLogging::ArgumentType::ARG_CHAR:
@@ -309,56 +309,56 @@ bool WriteFormatArgument(fmt::writer& writer, const fmt::format_specs& specs, co
         {
             int8_t value;
             std::memcpy(&value, buffer.data() + argument.offset, sizeof(int8_t));
-            writer.write(value, specs);
+            writer.write_int(value, specs);
             return true;
         }
         case CppLogging::ArgumentType::ARG_UINT8:
         {
             uint8_t value;
             std::memcpy(&value, buffer.data() + argument.offset, sizeof(uint8_t));
-            writer.write(value, specs);
+            writer.write_int(value, specs);
             return true;
         }
         case CppLogging::ArgumentType::ARG_INT16:
         {
             int16_t value;
             std::memcpy(&value, buffer.data() + argument.offset, sizeof(int16_t));
-            writer.write(value, specs);
+            writer.write_int(value, specs);
             return true;
         }
         case CppLogging::ArgumentType::ARG_UINT16:
         {
             uint16_t value;
             std::memcpy(&value, buffer.data() + argument.offset, sizeof(uint16_t));
-            writer.write(value, specs);
+            writer.write_int(value, specs);
             return true;
         }
         case CppLogging::ArgumentType::ARG_INT32:
         {
             int32_t value;
             std::memcpy(&value, buffer.data() + argument.offset, sizeof(int32_t));
-            writer.write(value, specs);
+            writer.write_int(value, specs);
             return true;
         }
         case CppLogging::ArgumentType::ARG_UINT32:
         {
             uint32_t value;
             std::memcpy(&value, buffer.data() + argument.offset, sizeof(uint32_t));
-            writer.write(value, specs);
+            writer.write_int(value, specs);
             return true;
         }
         case CppLogging::ArgumentType::ARG_INT64:
         {
             int64_t value;
             std::memcpy(&value, buffer.data() + argument.offset, sizeof(int64_t));
-            writer.write(value, specs);
+            writer.write_int(value, specs);
             return true;
         }
         case CppLogging::ArgumentType::ARG_UINT64:
         {
             uint64_t value;
             std::memcpy(&value, buffer.data() + argument.offset, sizeof(uint64_t));
-            writer.write(value, specs);
+            writer.write_int(value, specs);
             return true;
         }
         case CppLogging::ArgumentType::ARG_FLOAT:
@@ -510,9 +510,10 @@ std::string Record::RestoreFormat(std::string_view pattern, const std::vector<ui
             bool argument_precision = false;
             size_t argument_precision_index = 0;
             std::string argument_precision_name;
-            fmt::alignment align_type = fmt::alignment::ALIGN_DEFAULT;
+            fmt::align_t align_type = fmt::align_t::none;
+            bool align_alt = false;
             char align_fill = ' ';
-            int flags = 0;
+            fmt::sign_t sign = fmt::sign_t::none;
             size_t width = 0;
             int precision = -1;
             char type = 0;
@@ -547,21 +548,21 @@ std::string Record::RestoreFormat(std::string_view pattern, const std::vector<ui
                     switch (align_ch)
                     {
                         case '<':
-                            align_type = fmt::alignment::ALIGN_LEFT;
+                            align_type = fmt::align_t::left;
                             break;
                         case '>':
-                            align_type = fmt::alignment::ALIGN_RIGHT;
+                            align_type = fmt::align_t::right;
                             break;
                         case '=':
-                            align_type = fmt::alignment::ALIGN_NUMERIC;
+                            align_type = fmt::align_t::numeric;
                             break;
                         case '^':
-                            align_type = fmt::alignment::ALIGN_CENTER;
+                            align_type = fmt::align_t::center;
                             break;
                         default:
                             break;
                     }
-                    if (align_type != fmt::alignment::ALIGN_DEFAULT)
+                    if (align_type != fmt::align_t::none)
                     {
                         if (align_index > 0)
                         {
@@ -587,15 +588,15 @@ std::string Record::RestoreFormat(std::string_view pattern, const std::vector<ui
                     switch (current)
                     {
                         case '+':
-                            flags |= fmt::SIGN_FLAG | fmt::PLUS_FLAG;
+                            sign = fmt::sign_t::plus;
                             ++it;
                             break;
                         case '-':
-                            flags |= fmt::MINUS_FLAG;
+                            sign = fmt::sign_t::minus;
                             ++it;
                             break;
                         case ' ':
-                            flags |= fmt::SIGN_FLAG;
+                            sign = fmt::sign_t::space;
                             ++it;
                             break;
                         default:
@@ -609,7 +610,7 @@ std::string Record::RestoreFormat(std::string_view pattern, const std::vector<ui
                     current = *it;
                     if (current == '#')
                     {
-                        flags |= fmt::HASH_FLAG;
+                        align_alt = true;
                         ++it;
                     }
                 }
@@ -620,7 +621,7 @@ std::string Record::RestoreFormat(std::string_view pattern, const std::vector<ui
                     current = *it;
                     if (current == '0')
                     {
-                        align_type = fmt::ALIGN_NUMERIC;
+                        align_type = fmt::align_t::numeric;
                         align_fill = '0';
                         ++it;
                     }
@@ -784,10 +785,11 @@ std::string Record::RestoreFormat(std::string_view pattern, const std::vector<ui
             }
 
             fmt::format_specs specs;
-            specs.align_ = align_type;
-            specs.fill_ = align_fill;
-            specs.flags = (uint_least8_t)flags;
-            specs.width_ = (unsigned)width;
+            specs.align = align_type;
+            specs.alt = align_alt;
+            specs.fill[0] = align_fill;
+            specs.sign = sign;
+            specs.width = (unsigned)width;
             specs.precision = precision;
             specs.type = type;
 
