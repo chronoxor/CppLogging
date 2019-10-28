@@ -369,7 +369,7 @@ public:
 
     void Flush() override
     {
-        if (PrepareFile(CppCommon::Timestamp::utc()))
+        if (FlushFile(CppCommon::Timestamp::utc()))
         {
             // Try to flush the opened file
             try
@@ -396,7 +396,7 @@ private:
     CppCommon::Timespan _rolldelay{0};
     bool _first{true};
 
-    bool PrepareFile(uint64_t timestamp)
+    bool FlushFile(uint64_t timestamp)
     {
         try
         {
@@ -415,6 +415,23 @@ private:
                 if (_archive)
                     ArchiveQueue(_file);
             }
+        }
+        catch (const CppCommon::FileSystemException&)
+        {
+            // In case of any IO error reset the retry timestamp and return false!
+            _retry = CppCommon::Timestamp::utc();
+        }
+
+        return false;
+    }
+
+    bool PrepareFile(uint64_t timestamp)
+    {
+        try
+        {
+            // 1. Flush the rolling file
+            if (FlushFile(timestamp))
+                return true;
 
             // 2. Check retry timestamp if 100ms elapsed after the last attempt
             if ((CppCommon::Timestamp::utc() - _retry).milliseconds() < 100)
@@ -988,7 +1005,7 @@ public:
 
     void Flush() override
     {
-        if (PrepareFile(0))
+        if (FlushFile(0))
         {
             // Try to flush the opened file
             try
@@ -1013,7 +1030,7 @@ private:
     size_t _size;
     size_t _backups;
 
-    bool PrepareFile(size_t size)
+    bool FlushFile(size_t size)
     {
         try
         {
@@ -1034,6 +1051,23 @@ private:
                 else
                     RollBackup(_file);
             }
+        }
+        catch (const CppCommon::FileSystemException&)
+        {
+            // In case of any IO error reset the retry timestamp and return false!
+            _retry = CppCommon::Timestamp::utc();
+        }
+
+        return false;
+    }
+
+    bool PrepareFile(size_t size)
+    {
+        try
+        {
+            // 1. Flush the rolling file
+            if (FlushFile(size))
+                return true;
 
             // 2. Check retry timestamp if 100ms elapsed after the last attempt
             if ((CppCommon::Timestamp::utc() - _retry).milliseconds() < 100)
