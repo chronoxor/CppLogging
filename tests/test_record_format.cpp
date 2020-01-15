@@ -52,18 +52,18 @@ private:
 };
 
 template <typename... Args>
-std::string format(std::string_view pattern, const Args&... args)
+std::string format(std::string_view pattern, Args&&... args)
 {
     Record record;
-    record.Format(pattern, args...);
+    record.Format(pattern, std::forward<Args>(args)...);
     return record.message;
 }
 
 template <typename... Args>
-std::string store(std::string_view pattern, const Args&... args)
+std::string store(std::string_view pattern, Args&&... args)
 {
     Record record;
-    record.StoreFormat(pattern, args...);
+    record.StoreFormat(pattern, std::forward<Args>(args)...);
     record.message = record.RestoreFormat();
     return record.message;
 }
