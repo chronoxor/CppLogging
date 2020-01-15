@@ -46,7 +46,7 @@ public:
          \param args - Format arguments
     */
     template <typename... Args>
-    void Debug(std::string_view debug, const Args&... args);
+    void Debug(std::string_view debug, Args&&... args);
 
     //! Log information message with format arguments
     /*!
@@ -54,7 +54,7 @@ public:
          \param args - Format arguments
     */
     template <typename... Args>
-    void Info(std::string_view info, const Args&... args);
+    void Info(std::string_view info, Args&&... args);
 
     //! Log warning message with format arguments
     /*!
@@ -62,7 +62,7 @@ public:
          \param args - Format arguments
     */
     template <typename... Args>
-    void Warn(std::string_view warn, const Args&... args);
+    void Warn(std::string_view warn, Args&&... args);
 
     //! Log error message with format arguments
     /*!
@@ -70,7 +70,7 @@ public:
          \param args - Format arguments
     */
     template <typename... Args>
-    void Error(std::string_view error, const Args&... args);
+    void Error(std::string_view error, Args&&... args);
 
     //! Log fatal message with format arguments
     /*!
@@ -78,7 +78,7 @@ public:
          \param args - Format arguments
     */
     template <typename... Args>
-    void Fatal(std::string_view fatal, const Args&... args);
+    void Fatal(std::string_view fatal, Args&&... args);
 
     //! Flush the current logger
     void Flush();
@@ -105,7 +105,7 @@ private:
          \param args - Format arguments list
     */
     template <typename... Args>
-    void Log(Level level, bool format, std::string_view message, const Args&... args);
+    void Log(Level level, bool format, std::string_view message, Args&&... args);
 };
 
 } // namespace CppLogging

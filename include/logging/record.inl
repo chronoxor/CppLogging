@@ -326,24 +326,24 @@ inline void SerializeArgument(Record& record, const T& argument)
 }
 
 template <typename T, typename... Args>
-inline void SerializeArgument(Record& record, const T& argument, const Args&... args)
+inline void SerializeArgument(Record& record, const T& argument, Args&&... args)
 {
     SerializeArgument(record, argument);
-    SerializeArgument(record, args...);
+    SerializeArgument(record, std::forward<Args>(args)...);
 }
 
 template <typename... Args>
-inline Record& Record::Format(std::string_view pattern, const Args&... args)
+inline Record& Record::Format(std::string_view pattern, Args&&... args)
 {
-    message = CppCommon::format(pattern, args...);
+    message = CppCommon::format(pattern, std::forward<Args>(args)...);
     return *this;
 }
 
 template <typename... Args>
-inline Record& Record::StoreFormat(std::string_view pattern, const Args&... args)
+inline Record& Record::StoreFormat(std::string_view pattern, Args&&... args)
 {
     message = pattern;
-    SerializeArgument(*this, args...);
+    SerializeArgument(*this, std::forward<Args>(args)...);
     return *this;
 }
 
@@ -357,7 +357,7 @@ inline Record& Record::StoreCustom(const Arg& arg)
 }
 
 template <typename... Args>
-inline Record& Record::StoreCustomFormat(std::string_view pattern, const Args&... args)
+inline Record& Record::StoreCustomFormat(std::string_view pattern, Args&&... args)
 {
     // Append the argument type
     buffer.emplace_back((uint8_t)ArgumentType::ARG_CUSTOM);
@@ -378,7 +378,7 @@ inline Record& Record::StoreCustomFormat(std::string_view pattern, const Args&..
     std::memcpy(buffer.data() + buffer.size() - size, pattern.data(), size);
 
     // Serialize arguments
-    SerializeArgument(*this, args...);
+    SerializeArgument(*this, std::forward<Args>(args)...);
 
     size = buffer.size() - offset;
     std::memcpy(buffer.data() + offset, &size, sizeof(uint32_t));
@@ -398,18 +398,18 @@ inline size_t Record::StoreListBegin()
 }
 
 template <typename... Args>
-inline Record& Record::StoreList(const Args&... args)
+inline Record& Record::StoreList(Args&&... args)
 {
     // Serialize list arguments
-    SerializeArgument(*this, args...);
+    SerializeArgument(*this, std::forward<Args>(args)...);
 
     return *this;
 }
 
 template <typename... Args>
-inline Record& Record::StoreListFormat(std::string_view pattern, const Args&... args)
+inline Record& Record::StoreListFormat(std::string_view pattern, Args&&... args)
 {
-    return StoreCustomFormat(pattern, args...);
+    return StoreCustomFormat(pattern, std::forward<Args>(args)...);
 }
 
 inline Record& Record::StoreListEnd(size_t begin)

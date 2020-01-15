@@ -18,7 +18,7 @@ inline Logger::~Logger()
 }
 
 template <typename... Args>
-inline void Logger::Log(Level level, bool format, std::string_view message, const Args&... args)
+inline void Logger::Log(Level level, bool format, std::string_view message, Args&&... args)
 {
     // Thread local thread Id
     thread_local uint64_t thread = CppCommon::Thread::CurrentThreadId();
@@ -43,9 +43,9 @@ inline void Logger::Log(Level level, bool format, std::string_view message, cons
 
         // Format or serialize arguments list
         if (format)
-            record.Format(message, args...);
+            record.Format(message, std::forward<Args>(args)...);
         else
-            record.StoreFormat(message, args...);
+            record.StoreFormat(message, std::forward<Args>(args)...);
 
         // Process the logging record
         _sink->ProcessRecord(record);
@@ -53,37 +53,37 @@ inline void Logger::Log(Level level, bool format, std::string_view message, cons
 }
 
 template <typename... Args>
-inline void Logger::Debug(std::string_view debug, const Args&... args)
+inline void Logger::Debug(std::string_view debug, Args&&... args)
 {
 #if defined(NDEBUG)
     // Log nothing in release mode...
 #else
-    Log(Level::DEBUG, false, debug, args...);
+    Log(Level::DEBUG, false, debug, std::forward<Args>(args)...);
 #endif
 }
 
 template <typename... Args>
-inline void Logger::Info(std::string_view info, const Args&... args)
+inline void Logger::Info(std::string_view info, Args&&... args)
 {
-    Log(Level::INFO, false, info, args...);
+    Log(Level::INFO, false, info, std::forward<Args>(args)...);
 }
 
 template <typename... Args>
-inline void Logger::Warn(std::string_view warn, const Args&... args)
+inline void Logger::Warn(std::string_view warn, Args&&... args)
 {
-    Log(Level::WARN, false, warn, args...);
+    Log(Level::WARN, false, warn, std::forward<Args>(args)...);
 }
 
 template <typename... Args>
-inline void Logger::Error(std::string_view error, const Args&... args)
+inline void Logger::Error(std::string_view error, Args&&... args)
 {
-    Log(Level::ERROR, false, error, args...);
+    Log(Level::ERROR, false, error, std::forward<Args>(args)...);
 }
 
 template <typename... Args>
-inline void Logger::Fatal(std::string_view fatal, const Args&... args)
+inline void Logger::Fatal(std::string_view fatal, Args&&... args)
 {
-    Log(Level::FATAL, false, fatal, args...);
+    Log(Level::FATAL, false, fatal, std::forward<Args>(args)...);
 }
 
 inline void Logger::Flush()

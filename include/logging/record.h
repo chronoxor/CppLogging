@@ -69,24 +69,24 @@ public:
 
     //! Format message and its arguments
     template <typename... Args>
-    Record& Format(std::string_view pattern, const Args&... args);
+    Record& Format(std::string_view pattern, Args&&... args);
 
     //! Store format message and its arguments
     template <typename... Args>
-    Record& StoreFormat(std::string_view pattern, const Args&... args);
+    Record& StoreFormat(std::string_view pattern, Args&&... args);
 
     //! Store custom format message and its arguments
     template <typename Arg>
     Record& StoreCustom(const Arg& arg);
     template <typename... Args>
-    Record& StoreCustomFormat(std::string_view pattern, const Args&... args);
+    Record& StoreCustomFormat(std::string_view pattern, Args&&... args);
 
     //! Store list format message
     size_t StoreListBegin();
     template <typename... Args>
-    Record& StoreList(const Args&... args);
+    Record& StoreList(Args&&... args);
     template <typename... Args>
-    Record& StoreListFormat(std::string_view pattern, const Args&... args);
+    Record& StoreListFormat(std::string_view pattern, Args&&... args);
     Record& StoreListEnd(size_t begin);
 
     //! Restore format message and its arguments
