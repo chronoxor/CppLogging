@@ -298,12 +298,12 @@ inline void SerializeArgument(Record& record, const T* argument)
 }
 
 template <typename T>
-inline void SerializeArgument(Record& record, const fmt::internal::named_arg<T, char>& argument)
+inline void SerializeArgument(Record& record, const fmt::internal::named_arg<char, T>& argument)
 {
     // Append the argument type
     record.buffer.emplace_back((uint8_t)ArgumentType::ARG_NAMEDARG);
 
-    uint32_t length = (uint32_t)argument.name.size();
+    uint32_t length = (uint32_t)strlen(argument.name);
 
     // Append the argument name length
     size_t size = sizeof(length);
@@ -313,7 +313,7 @@ inline void SerializeArgument(Record& record, const fmt::internal::named_arg<T, 
     // Append the argument name value
     size = length;
     record.buffer.resize(record.buffer.size() + size);
-    std::memcpy(record.buffer.data() + record.buffer.size() - size, argument.name.data(), size);
+    std::memcpy(record.buffer.data() + record.buffer.size() - size, argument.name, size);
 
     SerializeArgument(record, argument.value);
 }

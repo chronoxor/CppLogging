@@ -20,6 +20,7 @@ protected:
         auto binary_sink = std::make_shared<AsyncWaitProcessor>(std::make_shared<BinaryLayout>());
         binary_sink->appenders().push_back(std::make_shared<FileAppender>(File("test.bin.log")));
         Config::ConfigLogger("binary", binary_sink);
+        Config::Startup();
     }
 
     ~BinaryWaitConfigFixture()
@@ -36,6 +37,7 @@ protected:
         auto binary_sink = std::make_shared<AsyncWaitFreeProcessor>(std::make_shared<BinaryLayout>());
         binary_sink->appenders().push_back(std::make_shared<FileAppender>(File("test.bin.log")));
         Config::ConfigLogger("binary", binary_sink);
+        Config::Startup();
     }
 
     ~BinaryWaitFreeConfigFixture()
@@ -52,6 +54,7 @@ protected:
         auto text_sink = std::make_shared<AsyncWaitProcessor>(std::make_shared<TextLayout>());
         text_sink->appenders().push_back(std::make_shared<FileAppender>(File("test.log")));
         Config::ConfigLogger("text", text_sink);
+        Config::Startup();
     }
 
     ~TextWaitConfigFixture()
@@ -68,6 +71,7 @@ protected:
         auto text_sink = std::make_shared<AsyncWaitFreeProcessor>(std::make_shared<TextLayout>());
         text_sink->appenders().push_back(std::make_shared<FileAppender>(File("test.log")));
         Config::ConfigLogger("text", text_sink);
+        Config::Startup();
     }
 
     ~TextWaitFreeConfigFixture()

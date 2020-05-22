@@ -10,15 +10,11 @@
 #define CPPLOGGING_RECORD_H
 
 #include "logging/level.h"
-#include "memory/memory.h"
 #include "string/format.h"
 #include "threads/thread.h"
-#include "time/timestamp.h"
 
-#include <cassert>
 #include <string>
 #include <vector>
-#include <utility>
 
 namespace CppLogging {
 
@@ -93,7 +89,7 @@ public:
     std::string RestoreFormat() const { return RestoreFormat(message, buffer, 0, buffer.size()); }
 
     //! Restore format of the custom data type
-    static std::string RestoreFormat(std::string_view pattern, const std::vector<uint8_t> buffer, size_t offset, size_t size);
+    static std::string RestoreFormat(std::string_view pattern, const std::vector<uint8_t>& buffer, size_t offset, size_t size);
 
     //! Clear logging record
     void Clear();

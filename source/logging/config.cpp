@@ -65,7 +65,7 @@ Logger Config::CreateLogger(const std::string& name)
         return CreateLogger();
 }
 
-void Config::Setup()
+void Config::Startup()
 {
     Config& instance = GetInstance();
 
@@ -78,6 +78,9 @@ void Config::Setup()
     for (auto& processor : instance._working)
         if (processor.second)
             processor.second->Start();
+
+    // Clear config logger processors map
+    instance._config.clear();
 }
 
 void Config::Shutdown()

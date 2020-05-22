@@ -17,6 +17,7 @@ protected:
         auto binary_sink = std::make_shared<Processor>(std::make_shared<BinaryLayout>());
         binary_sink->appenders().push_back(std::make_shared<NullAppender>());
         Config::ConfigLogger("binary", binary_sink);
+        Config::Startup();
     }
 };
 
@@ -28,6 +29,7 @@ protected:
         auto text_sink = std::make_shared<Processor>(std::make_shared<TextLayout>());
         text_sink->appenders().push_back(std::make_shared<NullAppender>());
         Config::ConfigLogger("text", text_sink);
+        Config::Startup();
     }
 };
 

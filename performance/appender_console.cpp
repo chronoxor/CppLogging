@@ -17,6 +17,7 @@ protected:
         auto sink = std::make_shared<Processor>(std::make_shared<TextLayout>());
         sink->appenders().push_back(std::make_shared<ConsoleAppender>());
         Config::ConfigLogger("test", sink);
+        Config::Startup();
     }
 };
 

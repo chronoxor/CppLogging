@@ -61,8 +61,8 @@ public:
     */
     static Logger CreateLogger(const std::string& name);
 
-    //! Setup the logging infrastructure
-    static void Setup();
+    //! Startup the logging infrastructure
+    static void Startup();
     //! Shutdown the logging infrastructure
     static void Shutdown();
 

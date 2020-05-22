@@ -23,6 +23,9 @@ void ConfigureLogger()
 
     // Configure example logger
     CppLogging::Config::ConfigLogger("example", sink);
+
+    // Startup the logging infrastructure
+    CppLogging::Config::Startup();
 }
 
 int main(int argc, char** argv)
