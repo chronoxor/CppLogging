@@ -328,7 +328,12 @@ public:
         }
     }
 
-    virtual ~TimePolicyImpl() = default;
+    virtual ~TimePolicyImpl()
+    {
+        // Stop the rolling file appender
+        if (IsStarted())
+            Stop();
+    }
 
     TimeRollingPolicy policy() const
     {
@@ -969,7 +974,12 @@ public:
             throwex CppCommon::ArgumentException("Backups count should be greater than zero!");
     }
 
-    virtual ~SizePolicyImpl() = default;
+    virtual ~SizePolicyImpl()
+    {
+        // Stop the rolling file appender
+        if (IsStarted())
+            Stop();
+    }
 
     void AppendRecord(Record& record) override
     {
