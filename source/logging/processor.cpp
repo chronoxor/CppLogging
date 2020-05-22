@@ -8,6 +8,8 @@
 
 #include "logging/processor.h"
 
+#include <cassert>
+
 namespace CppLogging {
 
 Processor::~Processor()
@@ -29,6 +31,10 @@ Processor::~Processor()
 
 bool Processor::Start()
 {
+    assert(!IsStarted() && "Processor is already started!");
+    if (IsStarted())
+        return false;
+
     // Start logging layout
     if (_layout && !_layout->IsStarted())
         if (!_layout->Start())
@@ -53,11 +59,16 @@ bool Processor::Start()
                 return false;
 
     _started = true;
+
     return true;
 }
 
 bool Processor::Stop()
 {
+    assert(IsStarted() && "Processor is not started!");
+    if (!IsStarted())
+        return false;
+
     // Stop logging layout
     if (_layout && _layout->IsStarted())
         if (!_layout->Stop())
@@ -85,6 +96,7 @@ bool Processor::Stop()
         return false;
 
     _started = false;
+
     return true;
 }
 

@@ -76,7 +76,7 @@ void Config::Startup()
 
     // Start all working logger processors
     for (auto& processor : instance._working)
-        if (processor.second)
+        if (processor.second && !processor.second->IsStarted())
             processor.second->Start();
 
     // Clear config logger processors map
@@ -92,7 +92,7 @@ void Config::Shutdown()
     // Flush and stop all working logger processors
     for (auto& processor : instance._working)
     {
-        if (processor.second)
+        if (processor.second && processor.second->IsStarted())
         {
             processor.second->Flush();
             processor.second->Stop();
