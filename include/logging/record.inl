@@ -298,7 +298,7 @@ inline void SerializeArgument(Record& record, const T* argument)
 }
 
 template <typename T>
-inline void SerializeArgument(Record& record, const fmt::internal::named_arg<char, T>& argument)
+inline void SerializeArgument(Record& record, const fmt::detail::named_arg<char, T>& argument)
 {
     // Append the argument type
     record.buffer.emplace_back((uint8_t)ArgumentType::ARG_NAMEDARG);
