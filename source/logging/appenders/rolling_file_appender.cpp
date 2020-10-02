@@ -1173,42 +1173,35 @@ private:
 //! @endcond
 
 RollingFileAppender::RollingFileAppender(const CppCommon::Path& path, TimeRollingPolicy policy, const std::string& pattern, bool archive, bool truncate, bool auto_flush, bool auto_start)
-    : _pimpl(std::make_unique<TimePolicyImpl>(*this, path, policy, pattern, archive, truncate, auto_flush, auto_start))
 {
+    // Check implementation storage parameters
+    static_assert((sizeof(Impl) <= StorageSize), "RollingFileAppender::StorageSize must be increased!");
+    static_assert((StorageAlign == alignof(Impl)), "RollingFileAppender::StorageAlign must be adjusted!");
+
+    // Create the implementation instance
+    new(&_storage)Impl(*this, path, policy, pattern, archive, truncate, auto_flush, auto_start);
 }
 
 RollingFileAppender::RollingFileAppender(const CppCommon::Path& path, const std::string& filename, const std::string& extension, size_t size, size_t backups, bool archive, bool truncate, bool auto_flush, bool auto_start)
-    : _pimpl(std::make_unique<SizePolicyImpl>(*this, path, filename, extension, size, backups, archive, truncate, auto_flush, auto_start))
 {
+    // Check implementation storage parameters
+    static_assert((sizeof(Impl) <= StorageSize), "RollingFileAppender::StorageSize must be increased!");
+    static_assert((StorageAlign == alignof(Impl)), "RollingFileAppender::StorageAlign must be adjusted!");
+
+    // Create the implementation instance
+    new(&_storage)Impl(*this, path, filename, extension, size, backups, archive, truncate, auto_flush, auto_start);
 }
 
 RollingFileAppender::~RollingFileAppender()
 {
+    // Delete the implementation instance
+    reinterpret_cast<Impl*>(&_storage)->~Impl();
 }
 
-bool RollingFileAppender::IsStarted() const noexcept
-{
-    return _pimpl->IsStarted();
-}
-
-bool RollingFileAppender::Start()
-{
-    return _pimpl->Start();
-}
-
-bool RollingFileAppender::Stop()
-{
-    return _pimpl->Stop();
-}
-
-void RollingFileAppender::AppendRecord(Record& record)
-{
-    _pimpl->AppendRecord(record);
-}
-
-void RollingFileAppender::Flush()
-{
-    _pimpl->Flush();
-}
+bool RollingFileAppender::IsStarted() const noexcept { return impl().IsStarted(); }
+bool RollingFileAppender::Start() { return impl().Start(); }
+bool RollingFileAppender::Stop() { return impl().Stop(); }
+void RollingFileAppender::AppendRecord(Record& record) { impl().AppendRecord(record); }
+void RollingFileAppender::Flush() { impl().Flush(); }
 
 } // namespace CppLogging

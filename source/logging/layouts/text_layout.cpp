@@ -800,22 +800,24 @@ private:
 
 //! @endcond
 
-TextLayout::TextLayout(const std::string& layout) : _pimpl(std::make_unique<Impl>(layout))
+TextLayout::TextLayout(const std::string& layout)
 {
+    // Check implementation storage parameters
+    static_assert((sizeof(Impl) <= StorageSize), "TextLayout::StorageSize must be increased!");
+    static_assert((StorageAlign == alignof(Impl)), "TextLayout::StorageAlign must be adjusted!");
+
+    // Create the implementation instance
+    new(&_storage)Impl(layout);
 }
 
 TextLayout::~TextLayout()
 {
+    // Delete the implementation instance
+    reinterpret_cast<Impl*>(&_storage)->~Impl();
 }
 
-const std::string& TextLayout::pattern() const noexcept
-{
-    return _pimpl->pattern();
-}
+const std::string& TextLayout::pattern() const noexcept { return impl().pattern(); }
 
-void TextLayout::LayoutRecord(Record& record)
-{
-    _pimpl->LayoutRecord(record);
-}
+void TextLayout::LayoutRecord(Record& record) { impl().LayoutRecord(record); }
 
 } // namespace CppLogging
