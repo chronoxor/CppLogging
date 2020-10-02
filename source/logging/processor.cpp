@@ -54,7 +54,7 @@ bool Processor::Start()
 
     // Start logging processors
     for (auto& processor : _processors)
-        if (processor)
+        if (processor && !processor->IsStarted())
             if (!processor->Start())
                 return false;
 
@@ -91,9 +91,6 @@ bool Processor::Stop()
         if (processor && processor->IsStarted())
             if (!processor->Stop())
                 return false;
-
-    if (!IsStarted())
-        return false;
 
     _started = false;
 
