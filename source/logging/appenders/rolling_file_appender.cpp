@@ -1175,8 +1175,8 @@ private:
 RollingFileAppender::RollingFileAppender(const CppCommon::Path& path, TimeRollingPolicy policy, const std::string& pattern, bool archive, bool truncate, bool auto_flush, bool auto_start)
 {
     // Check implementation storage parameters
-    static_assert((sizeof(Impl) <= StorageSize), "RollingFileAppender::StorageSize must be increased!");
-    static_assert((alignof(Impl) == StorageAlign), "RollingFileAppender::StorageAlign must be adjusted!");
+    static_assert((StorageSize >= sizeof(Impl)), "RollingFileAppender::StorageSize must be increased!");
+    static_assert((StorageAlign % alignof(Impl) == 0), "RollingFileAppender::StorageAlign must be adjusted!");
 
     // Create the implementation instance
     new(&_storage)TimePolicyImpl(*this, path, policy, pattern, archive, truncate, auto_flush, auto_start);
@@ -1185,8 +1185,8 @@ RollingFileAppender::RollingFileAppender(const CppCommon::Path& path, TimeRollin
 RollingFileAppender::RollingFileAppender(const CppCommon::Path& path, const std::string& filename, const std::string& extension, size_t size, size_t backups, bool archive, bool truncate, bool auto_flush, bool auto_start)
 {
     // Check implementation storage parameters
-    static_assert((sizeof(Impl) <= StorageSize), "RollingFileAppender::StorageSize must be increased!");
-    static_assert((alignof(Impl) == StorageAlign), "RollingFileAppender::StorageAlign must be adjusted!");
+    static_assert((StorageSize >= sizeof(Impl)), "RollingFileAppender::StorageSize must be increased!");
+    static_assert((StorageAlign % alignof(Impl) == 0), "RollingFileAppender::StorageAlign must be adjusted!");
 
     // Create the implementation instance
     new(&_storage)SizePolicyImpl(*this, path, filename, extension, size, backups, archive, truncate, auto_flush, auto_start);

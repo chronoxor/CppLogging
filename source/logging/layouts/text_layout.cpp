@@ -803,8 +803,8 @@ private:
 TextLayout::TextLayout(const std::string& layout)
 {
     // Check implementation storage parameters
-    static_assert((sizeof(Impl) <= StorageSize), "TextLayout::StorageSize must be increased!");
-    static_assert((alignof(Impl) == StorageAlign), "TextLayout::StorageAlign must be adjusted!");
+    static_assert((StorageSize >= sizeof(Impl)), "TextLayout::StorageSize must be increased!");
+    static_assert((StorageAlign % alignof(Impl) == 0), "TextLayout::StorageAlign must be adjusted!");
 
     // Create the implementation instance
     new(&_storage)Impl(layout);
