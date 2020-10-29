@@ -15,6 +15,7 @@
 #include "time/timezone.h"
 #include "utility/countof.h"
 #include "utility/resource.h"
+#include "utility/validate_aligned_storage.h"
 
 #include "minizip/zip.h"
 #if defined(_WIN32) || defined(_WIN64)
@@ -1175,8 +1176,9 @@ private:
 RollingFileAppender::RollingFileAppender(const CppCommon::Path& path, TimeRollingPolicy policy, const std::string& pattern, bool archive, bool truncate, bool auto_flush, bool auto_start)
 {
     // Check implementation storage parameters
+    [[maybe_unused]] CppCommon::ValidateAlignedStorage<StorageSize, StorageAlign, sizeof(Impl), alignof(Impl)> _;
     static_assert((StorageSize >= sizeof(Impl)), "RollingFileAppender::StorageSize must be increased!");
-    static_assert((StorageAlign % alignof(Impl) == 0), "RollingFileAppender::StorageAlign must be adjusted!");
+    static_assert(((StorageAlign % alignof(Impl)) == 0), "RollingFileAppender::StorageAlign must be adjusted!");
 
     // Create the implementation instance
     new(&_storage)TimePolicyImpl(*this, path, policy, pattern, archive, truncate, auto_flush, auto_start);
@@ -1185,8 +1187,9 @@ RollingFileAppender::RollingFileAppender(const CppCommon::Path& path, TimeRollin
 RollingFileAppender::RollingFileAppender(const CppCommon::Path& path, const std::string& filename, const std::string& extension, size_t size, size_t backups, bool archive, bool truncate, bool auto_flush, bool auto_start)
 {
     // Check implementation storage parameters
+    [[maybe_unused]] CppCommon::ValidateAlignedStorage<StorageSize, StorageAlign, sizeof(Impl), alignof(Impl)> _;
     static_assert((StorageSize >= sizeof(Impl)), "RollingFileAppender::StorageSize must be increased!");
-    static_assert((StorageAlign % alignof(Impl) == 0), "RollingFileAppender::StorageAlign must be adjusted!");
+    static_assert(((StorageAlign % alignof(Impl)) == 0), "RollingFileAppender::StorageAlign must be adjusted!");
 
     // Create the implementation instance
     new(&_storage)SizePolicyImpl(*this, path, filename, extension, size, backups, archive, truncate, auto_flush, auto_start);

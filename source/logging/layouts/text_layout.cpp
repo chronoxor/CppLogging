@@ -11,6 +11,7 @@
 #include "system/environment.h"
 #include "time/timezone.h"
 #include "utility/countof.h"
+#include "utility/validate_aligned_storage.h"
 
 #include <vector>
 
@@ -803,8 +804,9 @@ private:
 TextLayout::TextLayout(const std::string& layout)
 {
     // Check implementation storage parameters
+    [[maybe_unused]] CppCommon::ValidateAlignedStorage<StorageSize, StorageAlign, sizeof(Impl), alignof(Impl)> _;
     static_assert((StorageSize >= sizeof(Impl)), "TextLayout::StorageSize must be increased!");
-    static_assert((StorageAlign % alignof(Impl) == 0), "TextLayout::StorageAlign must be adjusted!");
+    static_assert(((StorageAlign % alignof(Impl)) == 0), "TextLayout::StorageAlign must be adjusted!");
 
     // Create the implementation instance
     new(&_storage)Impl(layout);
