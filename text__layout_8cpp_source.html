@@ -867,8 +867,8 @@ $(function() {
 <div class="line"><a name="l00803"></a><span class="lineno"><a class="line" href="class_cpp_logging_1_1_text_layout.html#ae2a4ca241c2cc54df25a30287255ef22">  803</a></span>&#160;<a class="code" href="class_cpp_logging_1_1_text_layout.html#ae2a4ca241c2cc54df25a30287255ef22">TextLayout::TextLayout</a>(<span class="keyword">const</span> std::string&amp; layout)</div>
 <div class="line"><a name="l00804"></a><span class="lineno">  804</span>&#160;{</div>
 <div class="line"><a name="l00805"></a><span class="lineno">  805</span>&#160;    <span class="comment">// Check implementation storage parameters</span></div>
-<div class="line"><a name="l00806"></a><span class="lineno">  806</span>&#160;    static_assert((<span class="keyword">sizeof</span>(Impl) &lt;= StorageSize), <span class="stringliteral">&quot;TextLayout::StorageSize must be increased!&quot;</span>);</div>
-<div class="line"><a name="l00807"></a><span class="lineno">  807</span>&#160;    static_assert((<span class="keyword">alignof</span>(Impl) == StorageAlign), <span class="stringliteral">&quot;TextLayout::StorageAlign must be adjusted!&quot;</span>);</div>
+<div class="line"><a name="l00806"></a><span class="lineno">  806</span>&#160;    static_assert((StorageSize &gt;= <span class="keyword">sizeof</span>(Impl)), <span class="stringliteral">&quot;TextLayout::StorageSize must be increased!&quot;</span>);</div>
+<div class="line"><a name="l00807"></a><span class="lineno">  807</span>&#160;    static_assert((StorageAlign % <span class="keyword">alignof</span>(Impl) == 0), <span class="stringliteral">&quot;TextLayout::StorageAlign must be adjusted!&quot;</span>);</div>
 <div class="line"><a name="l00808"></a><span class="lineno">  808</span>&#160; </div>
 <div class="line"><a name="l00809"></a><span class="lineno">  809</span>&#160;    <span class="comment">// Create the implementation instance</span></div>
 <div class="line"><a name="l00810"></a><span class="lineno">  810</span>&#160;    <span class="keyword">new</span>(&amp;_storage)Impl(layout);</div>
