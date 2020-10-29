@@ -804,7 +804,7 @@ private:
 TextLayout::TextLayout(const std::string& layout)
 {
     // Check implementation storage parameters
-    [[maybe_unused]] CppCommon::ValidateAlignedStorage<StorageSize, StorageAlign, sizeof(Impl), alignof(Impl)> _;
+    [[maybe_unused]] CppCommon::ValidateAlignedStorage<sizeof(Impl), alignof(Impl), StorageSize, StorageAlign> _;
     static_assert((StorageSize >= sizeof(Impl)), "TextLayout::StorageSize must be increased!");
     static_assert(((StorageAlign % alignof(Impl)) == 0), "TextLayout::StorageAlign must be adjusted!");
 

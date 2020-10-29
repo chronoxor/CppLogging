@@ -1176,7 +1176,7 @@ private:
 RollingFileAppender::RollingFileAppender(const CppCommon::Path& path, TimeRollingPolicy policy, const std::string& pattern, bool archive, bool truncate, bool auto_flush, bool auto_start)
 {
     // Check implementation storage parameters
-    [[maybe_unused]] CppCommon::ValidateAlignedStorage<StorageSize, StorageAlign, sizeof(Impl), alignof(Impl)> _;
+    [[maybe_unused]] CppCommon::ValidateAlignedStorage<sizeof(Impl), alignof(Impl), StorageSize, StorageAlign> _;
     static_assert((StorageSize >= sizeof(Impl)), "RollingFileAppender::StorageSize must be increased!");
     static_assert(((StorageAlign % alignof(Impl)) == 0), "RollingFileAppender::StorageAlign must be adjusted!");
 
@@ -1187,7 +1187,7 @@ RollingFileAppender::RollingFileAppender(const CppCommon::Path& path, TimeRollin
 RollingFileAppender::RollingFileAppender(const CppCommon::Path& path, const std::string& filename, const std::string& extension, size_t size, size_t backups, bool archive, bool truncate, bool auto_flush, bool auto_start)
 {
     // Check implementation storage parameters
-    [[maybe_unused]] CppCommon::ValidateAlignedStorage<StorageSize, StorageAlign, sizeof(Impl), alignof(Impl)> _;
+    [[maybe_unused]] CppCommon::ValidateAlignedStorage<sizeof(Impl), alignof(Impl), StorageSize, StorageAlign> _;
     static_assert((StorageSize >= sizeof(Impl)), "RollingFileAppender::StorageSize must be increased!");
     static_assert(((StorageAlign % alignof(Impl)) == 0), "RollingFileAppender::StorageAlign must be adjusted!");
 
