@@ -1,11 +1,11 @@
 # CppLogging
 
-[![Linux build status](https://img.shields.io/travis/chronoxor/CppLogging/master.svg?label=Linux)](https://travis-ci.com/chronoxor/CppLogging)
-[![OSX build status](https://img.shields.io/travis/chronoxor/CppLogging/master.svg?label=OSX)](https://travis-ci.com/chronoxor/CppLogging)
-[![Cygwin build status](https://img.shields.io/appveyor/ci/chronoxor/CppLogging/master.svg?label=Cygwin)](https://ci.appveyor.com/project/chronoxor/CppLogging)
-[![MSYS2 build status](https://img.shields.io/appveyor/ci/chronoxor/CppLogging/master.svg?label=MSYS2)](https://ci.appveyor.com/project/chronoxor/CppLogging)
-[![MinGW build status](https://img.shields.io/appveyor/ci/chronoxor/CppLogging/master.svg?label=MinGW)](https://ci.appveyor.com/project/chronoxor/CppLogging)
-[![Windows build status](https://img.shields.io/appveyor/ci/chronoxor/CppLogging/master.svg?label=Windows)](https://ci.appveyor.com/project/chronoxor/CppLogging)
+[![Linux build status](https://img.shields.io/travis/com/chronoxor/CppLogging/master?label=Linux)](https://travis-ci.com/chronoxor/CppLogging)
+[![OSX build status](https://img.shields.io/travis/com/chronoxor/CppLogging/master?label=OSX)](https://travis-ci.com/chronoxor/CppLogging)
+[![Cygwin build status](https://img.shields.io/appveyor/build/chronoxor/CppLogging/master?label=Cygwin)](https://ci.appveyor.com/project/chronoxor/CppLogging)
+[![MSYS2 build status](https://img.shields.io/appveyor/build/chronoxor/CppLogging/master?label=MSYS2)](https://ci.appveyor.com/project/chronoxor/CppLogging)
+[![MinGW build status](https://img.shields.io/appveyor/build/chronoxor/CppLogging/master?label=MinGW)](https://ci.appveyor.com/project/chronoxor/CppLogging)
+[![Windows build status](https://img.shields.io/appveyor/build/chronoxor/CppLogging/master?label=Windows)](https://ci.appveyor.com/project/chronoxor/CppLogging)
 
 C++ Logging Library provides functionality to log different events with a high
 throughput in multithreaded environment into different sinks (console, files,
