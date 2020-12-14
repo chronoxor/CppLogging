@@ -42,9 +42,9 @@ endif()
 include_directories(SYSTEM "${CMAKE_CURRENT_SOURCE_DIR}/modules")
 
 # Library
-file(GLOB_RECURSE LIB_HEADER_FILES "include/*.h")
-file(GLOB_RECURSE LIB_INLINE_FILES "include/*.inl")
-file(GLOB_RECURSE LIB_SOURCE_FILES "source/*.cpp")
+file(GLOB_RECURSE LIB_HEADER_FILES "include/*.h" "source/*.h")
+file(GLOB_RECURSE LIB_INLINE_FILES "include/*.inl" "source/*.inl")
+file(GLOB_RECURSE LIB_SOURCE_FILES "include/*.cpp" "source/*.cpp")
 add_library(cpplogging ${LIB_HEADER_FILES} ${LIB_INLINE_FILES} ${LIB_SOURCE_FILES} ${MINIZIP_FILES})
 if(MSVC)
   # C4067: unexpected tokens following preprocessor directive - expected a newline
