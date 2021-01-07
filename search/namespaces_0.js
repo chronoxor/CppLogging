@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['cpplogging_255',['CppLogging',['../namespace_cpp_logging.html',1,'']]]
+  ['cpplogging_257',['CppLogging',['../namespace_cpp_logging.html',1,'']]]
 ];
