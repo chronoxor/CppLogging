@@ -1,11 +1,14 @@
 # CppLogging
 
-[![Linux build status](https://img.shields.io/travis/com/chronoxor/CppLogging/master?label=Linux)](https://travis-ci.com/chronoxor/CppLogging)
-[![OSX build status](https://img.shields.io/travis/com/chronoxor/CppLogging/master?label=OSX)](https://travis-ci.com/chronoxor/CppLogging)
-[![Cygwin build status](https://img.shields.io/appveyor/build/chronoxor/CppLogging/master?label=Cygwin)](https://ci.appveyor.com/project/chronoxor/CppLogging)
-[![MSYS2 build status](https://img.shields.io/appveyor/build/chronoxor/CppLogging/master?label=MSYS2)](https://ci.appveyor.com/project/chronoxor/CppLogging)
-[![MinGW build status](https://img.shields.io/appveyor/build/chronoxor/CppLogging/master?label=MinGW)](https://ci.appveyor.com/project/chronoxor/CppLogging)
-[![Windows build status](https://img.shields.io/appveyor/build/chronoxor/CppLogging/master?label=Windows)](https://ci.appveyor.com/project/chronoxor/CppLogging)
+![Linux (clang)](https://github.com/chronoxor/CppLogging/actions/workflows/build-linux-clang.yml/badge.svg)
+![Linux (gcc)](https://github.com/chronoxor/CppLogging/actions/workflows/build-linux-gcc.yml/badge.svg)
+<br/>
+![MacOS](https://github.com/chronoxor/CppLogging/actions/workflows/build-macos.yml/badge.svg)
+<br/>
+![Windows (Cygwin)](https://github.com/chronoxor/CppLogging/actions/workflows/build-windows-cygwin.yml/badge.svg)
+![Windows (MinGW)](https://github.com/chronoxor/CppLogging/actions/workflows/build-windows-mingw.yml/badge.svg)
+![Windows (MSYS2)](https://github.com/chronoxor/CppLogging/actions/workflows/build-windows-msys2.yml/badge.svg)
+![Windows (Visual Studio)](https://github.com/chronoxor/CppLogging/actions/workflows/build-windows-msvc.yml/badge.svg)
 
 C++ Logging Library provides functionality to log different events with a high
 throughput in multithreaded environment into different sinks (console, files,
@@ -699,7 +702,7 @@ Benchmark source file: [appender_null.cpp](https://github.com/chronoxor/CppLoggi
 Benchmark report is the following:
 ```
 ===============================================================================
-CppBenchmark report. Version 1.0.0.0
+CppLogging report. Version 1.0.0.0
 ===============================================================================
 CPU architecutre: Intel(R) Core(TM) i7-4790K CPU @ 4.00GHz
 CPU logical cores: 8

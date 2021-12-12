@@ -64,12 +64,12 @@ public:
     bool IsFormatStored() const noexcept { return !buffer.empty(); }
 
     //! Format message and its arguments
-    template <typename... Args>
-    Record& Format(std::string_view pattern, Args&&... args);
+    template <typename... T>
+    Record& Format(fmt::format_string<T...> pattern, T&&... args);
 
     //! Store format message and its arguments
-    template <typename... Args>
-    Record& StoreFormat(std::string_view pattern, Args&&... args);
+    template <typename... T>
+    Record& StoreFormat(fmt::format_string<T...> pattern, T&&... args);
 
     //! Store custom format message and its arguments
     template <typename Arg>

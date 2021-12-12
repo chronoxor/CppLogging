@@ -38,47 +38,74 @@ public:
     Logger& operator=(const Logger&) = default;
     Logger& operator=(Logger&&) = default;
 
+    //! Log debug message
+    /*!
+         Will log only in debug mode!
+
+         \param message - Debug message
+    */
+    void Debug(std::string_view message);
     //! Log debug message with format arguments
     /*!
          Will log only in debug mode!
 
-         \param debug - Debug message
+         \param message - Debug message
          \param args - Format arguments
     */
-    template <typename... Args>
-    void Debug(std::string_view debug, Args&&... args);
+    template <typename... T>
+    void Debug(fmt::format_string<T...> message, T&&... args);
 
+    //! Log information message
+    /*!
+         \param message - Information message
+    */
+    void Info(std::string_view message);
     //! Log information message with format arguments
     /*!
-         \param info - Information message
+         \param message - Information message
          \param args - Format arguments
     */
-    template <typename... Args>
-    void Info(std::string_view info, Args&&... args);
+    template <typename... T>
+    void Info(fmt::format_string<T...> message, T&&... args);
 
+    //! Log warning message
+    /*!
+         \param message - Warning message
+    */
+    void Warn(std::string_view message);
     //! Log warning message with format arguments
     /*!
-         \param warn - Warning message
+         \param message - Warning message
          \param args - Format arguments
     */
-    template <typename... Args>
-    void Warn(std::string_view warn, Args&&... args);
+    template <typename... T>
+    void Warn(fmt::format_string<T...> message, T&&... args);
 
+    //! Log error message
+    /*!
+         \param message - Error message
+    */
+    void Error(std::string_view message);
     //! Log error message with format arguments
     /*!
-         \param error - Error message
+         \param message - Error message
          \param args - Format arguments
     */
-    template <typename... Args>
-    void Error(std::string_view error, Args&&... args);
+    template <typename... T>
+    void Error(fmt::format_string<T...> message, T&&... args);
 
+    //! Log fatal message
+    /*!
+         \param message - Fatal message
+    */
+    void Fatal(std::string_view message);
     //! Log fatal message with format arguments
     /*!
-         \param fatal - Fatal message
+         \param message - Fatal message
          \param args - Format arguments
     */
-    template <typename... Args>
-    void Fatal(std::string_view fatal, Args&&... args);
+    template <typename... T>
+    void Fatal(fmt::format_string<T...> message, T&&... args);
 
     //! Flush the current logger
     void Flush();
@@ -97,6 +124,13 @@ private:
     */
     explicit Logger(const std::string& name, const std::shared_ptr<Processor>& sink);
 
+    //! Log the given message with a given level
+    /*!
+         \param level - Logging level
+         \param message - Logging message
+    */
+    void Log(Level level, std::string_view message);
+
     //! Log the given message with a given level and format arguments list
     /*!
          \param level - Logging level
@@ -104,8 +138,8 @@ private:
          \param message - Logging message
          \param args - Format arguments list
     */
-    template <typename... Args>
-    void Log(Level level, bool format, std::string_view message, Args&&... args);
+    template <typename... T>
+    void Log(Level level, bool format, fmt::format_string<T...> message, T&&... args);
 };
 
 } // namespace CppLogging

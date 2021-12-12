@@ -51,19 +51,19 @@ private:
     int _hours, _minutes, _seconds;
 };
 
-template <typename... Args>
-std::string format(std::string_view pattern, Args&&... args)
+template <typename... T>
+std::string format(fmt::format_string<T...> pattern, T&&... args)
 {
     Record record;
-    record.Format(pattern, std::forward<Args>(args)...);
+    record.Format(pattern, std::forward<T>(args)...);
     return record.message;
 }
 
-template <typename... Args>
-std::string store(std::string_view pattern, Args&&... args)
+template <typename... T>
+std::string store(fmt::format_string<T...> pattern, T&&... args)
 {
     Record record;
-    record.StoreFormat(pattern, std::forward<Args>(args)...);
+    record.StoreFormat(pattern, std::forward<T>(args)...);
     record.message = record.RestoreFormat();
     return record.message;
 }
@@ -90,7 +90,6 @@ TEST_CASE("Format message", "[CppLogging]")
     REQUIRE(format("The date is {}", Date(2012, 12, 9)) == "The date is 2012-12-9");
     REQUIRE(format("The datetime is {}", DateTime(Date(2012, 12, 9), 13, 15, 57)) == "The datetime is 2012-12-9 13:15:57");
     REQUIRE(format("Elapsed time: {s:.2f} seconds", "s"_a = 1.23) == "Elapsed time: 1.23 seconds");
-    REQUIRE(format("The answer is {}"_format(42)) == "The answer is 42");
 }
 
 TEST_CASE("Store message", "[CppLogging]")
@@ -113,5 +112,4 @@ TEST_CASE("Store message", "[CppLogging]")
     REQUIRE(store("The date is {}", Date(2012, 12, 9)) == "The date is 2012-12-9");
     REQUIRE(store("The datetime is {}", DateTime(Date(2012, 12, 9), 13, 15, 57)) == "The datetime is 2012-12-9 13:15:57");
     REQUIRE(store("Elapsed time: {s:.2f} seconds", "s"_a = 1.23) == "Elapsed time: 1.23 seconds");
-    REQUIRE(store("The answer is {}"_format(42)) == "The answer is 42");
 }

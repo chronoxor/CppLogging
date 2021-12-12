@@ -36,7 +36,7 @@ private:
 BENCHMARK_THREADS_FIXTURE(BinaryConfigFixture, "Format(int, double, string)", settings)
 {
     thread_local Logger logger = Config::CreateLogger("binary");
-    logger.Info("Test {}.{}.{} message"_format(context.metrics().total_operations(), context.metrics().total_operations() / 1000.0, context.name()));
+    logger.Info(CppCommon::format("Test {}.{}.{} message", context.metrics().total_operations(), context.metrics().total_operations() / 1000.0, context.name()));
 }
 
 BENCHMARK_THREADS_FIXTURE(BinaryConfigFixture, "Serialize(int, double, string)", settings)

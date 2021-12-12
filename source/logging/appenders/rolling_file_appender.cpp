@@ -1162,12 +1162,12 @@ private:
 
     CppCommon::Path PrepareFilePath()
     {
-        return CppCommon::Path(_path / "{}.{}"_format(_filename, _extension));
+        return CppCommon::Path(_path / CppCommon::format("{}.{}", _filename, _extension));
     }
 
     CppCommon::Path PrepareFilePath(size_t backup)
     {
-        return CppCommon::Path(_path / "{}.{}.{}"_format(_filename, backup, _extension));
+        return CppCommon::Path(_path / CppCommon::format("{}.{}.{}", _filename, backup, _extension));
     }
 };
 

@@ -318,6 +318,27 @@ inline void SerializeArgument(Record& record, const fmt::detail::named_arg<char,
     SerializeArgument(record, argument.value);
 }
 
+template <typename T, typename Char, size_t N, fmt::detail_exported::fixed_string<Char, N> Str>
+inline void SerializeArgument(Record& record, const fmt::detail::statically_named_arg<T, Char, N, Str>& argument)
+{
+    // Append the argument type
+    record.buffer.emplace_back((uint8_t)ArgumentType::ARG_NAMEDARG);
+
+    uint32_t length = (uint32_t)strlen(argument.name);
+
+    // Append the argument name length
+    size_t size = sizeof(length);
+    record.buffer.resize(record.buffer.size() + size);
+    std::memcpy(record.buffer.data() + record.buffer.size() - size, &length, size);
+
+    // Append the argument name value
+    size = length;
+    record.buffer.resize(record.buffer.size() + size);
+    std::memcpy(record.buffer.data() + record.buffer.size() - size, argument.name, size);
+
+    SerializeArgument(record, argument.value);
+}
+
 template <typename T>
 inline void SerializeArgument(Record& record, const T& argument)
 {
@@ -332,18 +353,19 @@ inline void SerializeArgument(Record& record, const T& argument, Args&&... args)
     SerializeArgument(record, std::forward<Args>(args)...);
 }
 
-template <typename... Args>
-inline Record& Record::Format(std::string_view pattern, Args&&... args)
+template <typename... T>
+inline Record& Record::Format(fmt::format_string<T...> pattern, T&&... args)
 {
-    message = CppCommon::format(pattern, std::forward<Args>(args)...);
+    message = CppCommon::format(pattern, std::forward<T>(args)...);
     return *this;
 }
 
-template <typename... Args>
-inline Record& Record::StoreFormat(std::string_view pattern, Args&&... args)
+template <typename... T>
+inline Record& Record::StoreFormat(fmt::format_string<T...> pattern, T&&... args)
 {
-    message = pattern;
-    SerializeArgument(*this, std::forward<Args>(args)...);
+    fmt::string_view view = pattern;
+    message.assign(view.begin(), view.end());
+    SerializeArgument(*this, std::forward<T>(args)...);
     return *this;
 }
 
