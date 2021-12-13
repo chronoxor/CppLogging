@@ -37,29 +37,34 @@ AsyncWaitProcessor::~AsyncWaitProcessor()
 
 bool AsyncWaitProcessor::Start()
 {
+    bool started = IsStarted();
+
     if (!Processor::Start())
         return false;
 
-    // Start processing thread
-    _thread = CppCommon::Thread::Start([this]() { ProcessThread(_on_thread_initialize, _on_thread_clenup); });
+    if (!started)
+    {
+        // Start processing thread
+        _thread = CppCommon::Thread::Start([this]() { ProcessThread(_on_thread_initialize, _on_thread_clenup); });
+    }
 
     return true;
 }
 
 bool AsyncWaitProcessor::Stop()
 {
-    if (!IsStarted())
-        return false;
+    if (IsStarted())
+    {
+        // Thread local stop operation record
+        thread_local Record stop;
 
-    // Thread local stop operation record
-    thread_local Record stop;
+        // Enqueue stop operation record
+        stop.timestamp = 0;
+        EnqueueRecord(stop);
 
-    // Enqueue stop operation record
-    stop.timestamp = 0;
-    EnqueueRecord(stop);
-
-    // Wait for processing thread
-    _thread.join();
+        // Wait for processing thread
+        _thread.join();
+    }
 
     return Processor::Stop();
 }

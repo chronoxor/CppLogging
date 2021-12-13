@@ -12,50 +12,46 @@ using namespace CppLogging;
 
 const auto settings = CppBenchmark::Settings().ThreadsRange(1, 8, [](int from, int to, int& result) { int r = result; result *= 2; return r; });
 
-class BinaryConfigFixture
+class LogConfigFixture
 {
 protected:
-    BinaryConfigFixture()
+    LogConfigFixture()
     {
-        auto binary_sink = std::make_shared<SyncProcessor>(std::make_shared<BinaryLayout>());
-        binary_sink->appenders().push_back(std::make_shared<FileAppender>(File("test.bin.log")));
-        Config::ConfigLogger("binary", binary_sink);
+        auto sync_binary_sink = std::make_shared<SyncProcessor>(std::make_shared<BinaryLayout>());
+        sync_binary_sink->appenders().push_back(std::make_shared<FileAppender>(_binary_file));
+        Config::ConfigLogger("sync-binary", sync_binary_sink);
+
+        auto sync_text_sink = std::make_shared<SyncProcessor>(std::make_shared<TextLayout>());
+        sync_text_sink->appenders().push_back(std::make_shared<FileAppender>(_text_file));
+        Config::ConfigLogger("sync-text", sync_text_sink);
+
         Config::Startup();
     }
 
-    ~BinaryConfigFixture()
+    ~LogConfigFixture()
     {
-        File::Remove("test.bin.log");
+        Config::Shutdown();
+        if (_binary_file.IsFileExists())
+            File::Remove(_binary_file);
+        if (_text_file.IsFileExists())
+            File::Remove(_text_file);
     }
+
+private:
+    File _binary_file{"test.bin.log"};
+    File _text_file{"test.log"};
 };
 
-class TextConfigFixture
+BENCHMARK_THREADS_FIXTURE(LogConfigFixture, "FileSync-binary", settings)
 {
-protected:
-    TextConfigFixture()
-    {
-        auto text_sink = std::make_shared<SyncProcessor>(std::make_shared<TextLayout>());
-        text_sink->appenders().push_back(std::make_shared<FileAppender>(File("test.log")));
-        Config::ConfigLogger("text", text_sink);
-        Config::Startup();
-    }
-
-    ~TextConfigFixture()
-    {
-        File::Remove("test.log");
-    }
-};
-
-BENCHMARK_THREADS_FIXTURE(BinaryConfigFixture, "FileSync-binary", settings)
-{
-    thread_local Logger logger = Config::CreateLogger("binary");
-    logger.Info("Test message");
+    thread_local Logger logger = Config::CreateLogger("sync-binary");
+    logger.Info("Test message {}-{}-{}", context.metrics().total_operations(), context.metrics().total_operations() / 1000.0, context.name());
 }
 
-BENCHMARK_THREADS_FIXTURE(TextConfigFixture, "FileSync-text", settings)
+BENCHMARK_THREADS_FIXTURE(LogConfigFixture, "FileSync-text", settings)
 {
-    thread_local Logger logger = Config::CreateLogger("text");
-    logger.Info("Test message");
+    thread_local Logger logger = Config::CreateLogger("sync-text");
+    logger.Info("Test message {}-{}-{}", context.metrics().total_operations(), context.metrics().total_operations() / 1000.0, context.name());
 }
 
 BENCHMARK_MAIN()

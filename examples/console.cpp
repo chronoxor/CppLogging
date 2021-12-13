@@ -16,8 +16,8 @@ void ConfigureLogger()
     // Add console appender
     sink->appenders().push_back(std::make_shared<CppLogging::ConsoleAppender>());
 
-    // Configure example logger
-    CppLogging::Config::ConfigLogger("example", sink);
+    // Configure default logger
+    CppLogging::Config::ConfigLogger(sink);
 
     // Startup the logging infrastructure
     CppLogging::Config::Startup();
@@ -28,8 +28,8 @@ int main(int argc, char** argv)
     // Configure logger
     ConfigureLogger();
 
-    // Create example logger
-    CppLogging::Logger logger("example");
+    // Create default logger
+    CppLogging::Logger logger;
 
     // Log some messages with different level
     logger.Debug("Debug message");

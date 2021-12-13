@@ -35,7 +35,7 @@ int main(int argc, char** argv)
 
     std::cout << "Press Enter to stop..." << std::endl;
 
-    int concurrency = 4;
+    int concurrency = 1;
 
     // Start some threads
     std::atomic<bool> stop(false);

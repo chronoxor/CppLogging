@@ -9,10 +9,10 @@
 
 using namespace CppLogging;
 
-class ConsoleConfigFixture
+class ConsoleConfigFixture : public virtual CppBenchmark::Fixture
 {
 protected:
-    ConsoleConfigFixture()
+    void Initialize(CppBenchmark::Context& context) override
     {
         auto sink = std::make_shared<Processor>(std::make_shared<TextLayout>());
         sink->appenders().push_back(std::make_shared<ConsoleAppender>());

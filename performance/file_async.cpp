@@ -12,96 +12,72 @@ using namespace CppLogging;
 
 const auto settings = CppBenchmark::Settings().ThreadsRange(1, 8, [](int from, int to, int& result) { int r = result; result *= 2; return r; });
 
-class BinaryWaitConfigFixture
+class LogConfigFixture
 {
 protected:
-    BinaryWaitConfigFixture()
+    LogConfigFixture()
     {
-        auto binary_sink = std::make_shared<AsyncWaitProcessor>(std::make_shared<BinaryLayout>());
-        binary_sink->appenders().push_back(std::make_shared<FileAppender>(File("test.bin.log")));
-        Config::ConfigLogger("binary", binary_sink);
+        auto async_wait_binary_sink = std::make_shared<AsyncWaitProcessor>(std::make_shared<BinaryLayout>());
+        async_wait_binary_sink->appenders().push_back(std::make_shared<FileAppender>(_binary_file_1));
+        Config::ConfigLogger("async-wait-binary", async_wait_binary_sink);
+
+        auto async_wait_free_binary_sink = std::make_shared<AsyncWaitFreeProcessor>(std::make_shared<BinaryLayout>());
+        async_wait_free_binary_sink->appenders().push_back(std::make_shared<FileAppender>(_binary_file_2));
+        Config::ConfigLogger("async-wait-free-binary", async_wait_free_binary_sink);
+
+        auto async_wait_text_sink = std::make_shared<AsyncWaitProcessor>(std::make_shared<TextLayout>());
+        async_wait_text_sink->appenders().push_back(std::make_shared<FileAppender>(_text_file_1));
+        Config::ConfigLogger("async-wait-text", async_wait_text_sink);
+
+        auto async_wait_free_text_sink = std::make_shared<AsyncWaitProcessor>(std::make_shared<TextLayout>());
+        async_wait_free_text_sink->appenders().push_back(std::make_shared<FileAppender>(_text_file_2));
+        Config::ConfigLogger("async-wait-free-text", async_wait_free_text_sink);
+
         Config::Startup();
     }
 
-    ~BinaryWaitConfigFixture()
+    ~LogConfigFixture()
     {
-        File::Remove("test.bin.log");
+        Config::Shutdown();
+        if (_binary_file_1.IsFileExists())
+            File::Remove(_binary_file_1);
+        if (_binary_file_2.IsFileExists())
+            File::Remove(_binary_file_2);
+        if (_text_file_1.IsFileExists())
+            File::Remove(_text_file_1);
+        if (_text_file_2.IsFileExists())
+            File::Remove(_text_file_2);
     }
+
+private:
+    File _binary_file_1{"test1.bin.log"};
+    File _binary_file_2{"test2.bin.log"};
+    File _text_file_1{"test1.log"};
+    File _text_file_2{"test2.log"};
 };
 
-class BinaryWaitFreeConfigFixture
+BENCHMARK_THREADS_FIXTURE(LogConfigFixture, "FileAsyncWait-binary", settings)
 {
-protected:
-    BinaryWaitFreeConfigFixture()
-    {
-        auto binary_sink = std::make_shared<AsyncWaitFreeProcessor>(std::make_shared<BinaryLayout>());
-        binary_sink->appenders().push_back(std::make_shared<FileAppender>(File("test.bin.log")));
-        Config::ConfigLogger("binary", binary_sink);
-        Config::Startup();
-    }
-
-    ~BinaryWaitFreeConfigFixture()
-    {
-        File::Remove("test.bin.log");
-    }
-};
-
-class TextWaitConfigFixture
-{
-protected:
-    TextWaitConfigFixture()
-    {
-        auto text_sink = std::make_shared<AsyncWaitProcessor>(std::make_shared<TextLayout>());
-        text_sink->appenders().push_back(std::make_shared<FileAppender>(File("test.log")));
-        Config::ConfigLogger("text", text_sink);
-        Config::Startup();
-    }
-
-    ~TextWaitConfigFixture()
-    {
-        File::Remove("test.log");
-    }
-};
-
-class TextWaitFreeConfigFixture
-{
-protected:
-    TextWaitFreeConfigFixture()
-    {
-        auto text_sink = std::make_shared<AsyncWaitFreeProcessor>(std::make_shared<TextLayout>());
-        text_sink->appenders().push_back(std::make_shared<FileAppender>(File("test.log")));
-        Config::ConfigLogger("text", text_sink);
-        Config::Startup();
-    }
-
-    ~TextWaitFreeConfigFixture()
-    {
-        File::Remove("test.log");
-    }
-};
-
-BENCHMARK_THREADS_FIXTURE(BinaryWaitConfigFixture, "FileAsyncWait-binary", settings)
-{
-    thread_local Logger logger = Config::CreateLogger("binary");
-    logger.Info("Test message");
+    thread_local Logger logger = Config::CreateLogger("async-wait-binary");
+    logger.Info("Test message {}-{}-{}", context.metrics().total_operations(), context.metrics().total_operations() / 1000.0, context.name());
 }
 
-BENCHMARK_THREADS_FIXTURE(BinaryWaitFreeConfigFixture, "FileAsyncWaitFree-binary", settings)
+BENCHMARK_THREADS_FIXTURE(LogConfigFixture, "FileAsyncWaitFree-binary", settings)
 {
-    thread_local Logger logger = Config::CreateLogger("binary");
-    logger.Info("Test message");
+    thread_local Logger logger = Config::CreateLogger("async-wait-free-binary");
+    logger.Info("Test message {}-{}-{}", context.metrics().total_operations(), context.metrics().total_operations() / 1000.0, context.name());
 }
 
-BENCHMARK_THREADS_FIXTURE(TextWaitConfigFixture, "FileAsyncWait-text", settings)
+BENCHMARK_THREADS_FIXTURE(LogConfigFixture, "FileAsyncWait-text", settings)
 {
-    thread_local Logger logger = Config::CreateLogger("text");
-    logger.Info("Test message");
+    thread_local Logger logger = Config::CreateLogger("async-wait-text");
+    logger.Info("Test message {}-{}-{}", context.metrics().total_operations(), context.metrics().total_operations() / 1000.0, context.name());
 }
 
-BENCHMARK_THREADS_FIXTURE(TextWaitFreeConfigFixture, "FileAsyncWaitFree-text", settings)
+BENCHMARK_THREADS_FIXTURE(LogConfigFixture, "FileAsyncWaitFree-text", settings)
 {
-    thread_local Logger logger = Config::CreateLogger("text");
-    logger.Info("Test message");
+    thread_local Logger logger = Config::CreateLogger("async-wait-free-text");
+    logger.Info("Test message {}-{}-{}", context.metrics().total_operations(), context.metrics().total_operations() / 1000.0, context.name());
 }
 
 BENCHMARK_MAIN()

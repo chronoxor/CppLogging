@@ -10,38 +10,48 @@
 using namespace CppCommon;
 using namespace CppLogging;
 
-class BinaryConfigFixture
+class BinaryConfigFixture : public virtual CppBenchmark::Fixture
 {
 protected:
-    BinaryConfigFixture()
+    void Initialize(CppBenchmark::Context& context) override
     {
         auto binary_sink = std::make_shared<Processor>(std::make_shared<BinaryLayout>());
-        binary_sink->appenders().push_back(std::make_shared<FileAppender>(File("test.bin.log")));
+        binary_sink->appenders().push_back(std::make_shared<FileAppender>(_file));
         Config::ConfigLogger("binary", binary_sink);
         Config::Startup();
     }
 
-    ~BinaryConfigFixture()
+    void Cleanup(CppBenchmark::Context& context) override
     {
-        File::Remove("test.bin.log");
+        Config::Shutdown();
+        if (_file.IsFileExists())
+            File::Remove(_file);
     }
+
+private:
+    File _file{"test.bin.log"};
 };
 
-class TextConfigFixture
+class TextConfigFixture : public virtual CppBenchmark::Fixture
 {
 protected:
-    TextConfigFixture()
+    void Initialize(CppBenchmark::Context& context) override
     {
         auto text_sink = std::make_shared<Processor>(std::make_shared<TextLayout>());
-        text_sink->appenders().push_back(std::make_shared<FileAppender>(File("test.log")));
+        text_sink->appenders().push_back(std::make_shared<FileAppender>(_file));
         Config::ConfigLogger("text", text_sink);
         Config::Startup();
     }
 
-    ~TextConfigFixture()
+    void Cleanup(CppBenchmark::Context& context) override
     {
-        File::Remove("test.log");
+        Config::Shutdown();
+        if (_file.IsFileExists())
+            File::Remove(_file);
     }
+
+private:
+    File _file{"test.log"};
 };
 
 BENCHMARK_FIXTURE(BinaryConfigFixture, "FileAppender-binary")

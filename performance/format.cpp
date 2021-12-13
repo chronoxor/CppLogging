@@ -26,14 +26,14 @@ BENCHMARK("Format(int, double, string)")
 {
     static Record record;
     record.Clear();
-    record.Format("test {}.{}.{} test", context.metrics().total_operations(), context.metrics().total_operations() / 1000.0, context.name());
+    record.Format("test {}-{}-{} test", context.metrics().total_operations(), context.metrics().total_operations() / 1000.0, context.name());
 }
 
 BENCHMARK("StoreFormat(int, double, string)")
 {
     static Record record;
     record.Clear();
-    record.StoreFormat("test {}.{}.{} test", context.metrics().total_operations(), context.metrics().total_operations() / 1000.0, context.name());
+    record.StoreFormat("test {}-{}-{} test", context.metrics().total_operations(), context.metrics().total_operations() / 1000.0, context.name());
 }
 
 BENCHMARK_MAIN()

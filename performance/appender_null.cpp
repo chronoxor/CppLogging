@@ -9,10 +9,10 @@
 
 using namespace CppLogging;
 
-class BinaryConfigFixture
+class BinaryConfigFixture : public virtual CppBenchmark::Fixture
 {
 protected:
-    BinaryConfigFixture()
+    void Initialize(CppBenchmark::Context& context) override
     {
         auto binary_sink = std::make_shared<Processor>(std::make_shared<BinaryLayout>());
         binary_sink->appenders().push_back(std::make_shared<NullAppender>());
@@ -21,10 +21,10 @@ protected:
     }
 };
 
-class TextConfigFixture
+class TextConfigFixture : public virtual CppBenchmark::Fixture
 {
 protected:
-    TextConfigFixture()
+    void Initialize(CppBenchmark::Context& context) override
     {
         auto text_sink = std::make_shared<Processor>(std::make_shared<TextLayout>());
         text_sink->appenders().push_back(std::make_shared<NullAppender>());
