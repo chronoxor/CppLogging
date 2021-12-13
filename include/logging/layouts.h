@@ -12,6 +12,7 @@
 #include "logging/layouts/null_layout.h"
 #include "logging/layouts/empty_layout.h"
 #include "logging/layouts/binary_layout.h"
+#include "logging/layouts/hash_layout.h"
 #include "logging/layouts/text_layout.h"
 
 #endif // CPPLOGGING_LAYOUTS_H
