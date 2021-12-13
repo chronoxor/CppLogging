@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['warn_401',['Warn',['../class_cpp_logging_1_1_logger.html#ab66d1e6b9e2a825658801b3a63e37caa',1,'CppLogging::Logger::Warn(std::string_view message)'],['../class_cpp_logging_1_1_logger.html#aceb70f1ef7e6dd4b3d9d3a19e6a9a78f',1,'CppLogging::Logger::Warn(fmt::format_string&lt; T... &gt; message, T &amp;&amp;... args)']]]
+  ['update_410',['Update',['../class_cpp_logging_1_1_level_filter.html#ae0c18280fc0c4b3b910e4c91dddab5b2',1,'CppLogging::LevelFilter::Update(Level level, bool positive=true)'],['../class_cpp_logging_1_1_level_filter.html#a613e6c1921b87b41ef82a4b8aeba9942',1,'CppLogging::LevelFilter::Update(Level from, Level to, bool positive=true)'],['../class_cpp_logging_1_1_switch_filter.html#a212f19c0bc775a6b877c026b2cd5728c',1,'CppLogging::SwitchFilter::Update()'],['../class_cpp_logging_1_1_logger.html#ae0513995cc4acc8757837219cbcec616',1,'CppLogging::Logger::Update()']]]
 ];

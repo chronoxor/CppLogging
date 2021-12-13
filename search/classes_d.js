@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['textlayout_253',['TextLayout',['../class_cpp_logging_1_1_text_layout.html',1,'CppLogging']]],
-  ['trigger_254',['Trigger',['../class_cpp_logging_1_1_trigger.html',1,'CppLogging']]]
+  ['switchfilter_256',['SwitchFilter',['../class_cpp_logging_1_1_switch_filter.html',1,'CppLogging']]],
+  ['syncprocessor_257',['SyncProcessor',['../class_cpp_logging_1_1_sync_processor.html',1,'CppLogging']]],
+  ['syslogappender_258',['SyslogAppender',['../class_cpp_logging_1_1_syslog_appender.html',1,'CppLogging']]]
 ];
