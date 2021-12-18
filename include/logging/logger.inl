@@ -17,37 +17,6 @@ inline Logger::~Logger()
     Flush();
 }
 
-inline void Logger::Log(Level level, std::string_view message)
-{
-    // Thread local thread Id
-    thread_local uint64_t thread = CppCommon::Thread::CurrentThreadId();
-    // Thread local instance of the logging record
-    thread_local Record record;
-
-    // Clear the logging record
-    record.Clear();
-
-    // Fill necessary fields of the logging record
-    record.timestamp = CppCommon::Timestamp::utc();
-    record.thread = thread;
-    record.level = level;
-    record.logger = _name;
-
-    // Check for valid and started logging sink
-    if (_sink && _sink->IsStarted())
-    {
-        // Filter the logging record
-        if (!_sink->FilterRecord(record))
-            return;
-
-        // Store log message
-        record.message = message;
-
-        // Process the logging record
-        _sink->ProcessRecord(record);
-    }
-}
-
 template <typename... T>
 inline void Logger::Log(Level level, bool format, fmt::format_string<T...> message, T&&... args)
 {
@@ -83,15 +52,6 @@ inline void Logger::Log(Level level, bool format, fmt::format_string<T...> messa
     }
 }
 
-inline void Logger::Debug(std::string_view message)
-{
-#if defined(NDEBUG)
-    // Log nothing in release mode...
-#else
-    Log(Level::DEBUG, message);
-#endif
-}
-
 template <typename... T>
 inline void Logger::Debug(fmt::format_string<T...> message, T&&... args)
 {
@@ -102,20 +62,10 @@ inline void Logger::Debug(fmt::format_string<T...> message, T&&... args)
 #endif
 }
 
-inline void Logger::Info(std::string_view message)
-{
-    Log(Level::INFO, message);
-}
-
 template <typename... T>
 inline void Logger::Info(fmt::format_string<T...> message, T&&... args)
 {
     Log(Level::INFO, false, message, std::forward<T>(args)...);
-}
-
-inline void Logger::Warn(std::string_view message)
-{
-    Log(Level::WARN, message);
 }
 
 template <typename... T>
@@ -124,20 +74,10 @@ inline void Logger::Warn(fmt::format_string<T...> message, T&&... args)
     Log(Level::WARN, false, message, std::forward<T>(args)...);
 }
 
-inline void Logger::Error(std::string_view message)
-{
-    Log(Level::ERROR, message);
-}
-
 template <typename... T>
 inline void Logger::Error(fmt::format_string<T...> message, T&&... args)
 {
     Log(Level::ERROR, false, message, std::forward<T>(args)...);
-}
-
-inline void Logger::Fatal(std::string_view message)
-{
-    Log(Level::FATAL, message);
 }
 
 template <typename... T>

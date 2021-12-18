@@ -44,7 +44,7 @@ public:
 
          \param message - Debug message
     */
-    void Debug(std::string_view message);
+    void Debug(std::string_view message) { Debug("{}", message); }
     //! Log debug message with format arguments
     /*!
          Will log only in debug mode!
@@ -59,7 +59,7 @@ public:
     /*!
          \param message - Information message
     */
-    void Info(std::string_view message);
+    void Info(std::string_view message) { Info("{}", message); }
     //! Log information message with format arguments
     /*!
          \param message - Information message
@@ -72,7 +72,7 @@ public:
     /*!
          \param message - Warning message
     */
-    void Warn(std::string_view message);
+    void Warn(std::string_view message) { Warn("{}", message); }
     //! Log warning message with format arguments
     /*!
          \param message - Warning message
@@ -85,7 +85,7 @@ public:
     /*!
          \param message - Error message
     */
-    void Error(std::string_view message);
+    void Error(std::string_view message) { Error("{}", message); }
     //! Log error message with format arguments
     /*!
          \param message - Error message
@@ -98,7 +98,7 @@ public:
     /*!
          \param message - Fatal message
     */
-    void Fatal(std::string_view message);
+    void Fatal(std::string_view message) { Fatal("{}", message); }
     //! Log fatal message with format arguments
     /*!
          \param message - Fatal message
@@ -123,13 +123,6 @@ private:
          \param sink - Logger sink processor
     */
     explicit Logger(const std::string& name, const std::shared_ptr<Processor>& sink);
-
-    //! Log the given message with a given level
-    /*!
-         \param level - Logging level
-         \param message - Logging message
-    */
-    void Log(Level level, std::string_view message);
 
     //! Log the given message with a given level and format arguments list
     /*!
