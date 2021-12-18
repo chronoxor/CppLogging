@@ -47,7 +47,7 @@ processors (sync, async), filters, layouts (binary, text) and appenders.
     * [Binary log reader](#binary-log-reader)
 
 # Features
-* Cross platform (Linux, OSX, Windows)
+* Cross platform (Linux, MacOS, Windows)
 * Optimized for performance
 * Binary & text layouts
 * Synchronous logging
@@ -62,7 +62,7 @@ processors (sync, async), filters, layouts (binary, text) and appenders.
 
 # Requirements
 * Linux (binutils-dev uuid-dev)
-* OSX
+* MacOS
 * Windows 10
 * [cmake](https://www.cmake.org)
 * [gcc](https://gcc.gnu.org)
@@ -98,7 +98,7 @@ cd build
 ./unix.sh
 ```
 
-### OSX
+### MacOS
 ```shell
 cd build
 ./unix.sh
