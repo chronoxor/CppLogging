@@ -67,8 +67,8 @@ std::unordered_map<uint32_t, std::string> ReadHashlog(const std::unique_ptr<Read
         uint32_t hash;
         if (hashlog->Read(&hash, sizeof(uint32_t)) != sizeof(uint32_t))
             return hashmap;
-        uint32_t length;
-        if (hashlog->Read(&length, sizeof(uint32_t)) != sizeof(uint32_t))
+        uint16_t length;
+        if (hashlog->Read(&length, sizeof(uint16_t)) != sizeof(uint16_t))
             return hashmap;
         std::vector<uint8_t> buffer(length);
         if (hashlog->Read(buffer.data(), length) != length)
