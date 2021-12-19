@@ -34,18 +34,21 @@ void BinaryLayout::LayoutRecord(Record& record)
     std::memcpy(buffer, &record.level, sizeof(Level));
     buffer += sizeof(Level);
 
+    // Serialize the logger name
     uint8_t logger_size = (uint8_t)record.logger.size();
     std::memcpy(buffer, &logger_size, sizeof(uint8_t));
     buffer += sizeof(uint8_t);
     std::memcpy(buffer, record.logger.data(), record.logger.size());
     buffer += record.logger.size();
 
+    // Serialize the logging message
     uint16_t message_size = (uint16_t)record.message.size();
     std::memcpy(buffer, &message_size, sizeof(uint16_t));
     buffer += sizeof(uint16_t);
     std::memcpy(buffer, record.message.data(), record.message.size());
     buffer += record.message.size();
 
+    // Serialize the logging buffer
     uint32_t buffer_size = (uint32_t)record.buffer.size();
     std::memcpy(buffer, &buffer_size, sizeof(uint32_t));
     buffer += sizeof(uint32_t);

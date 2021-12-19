@@ -110,18 +110,21 @@ bool InputRecord(Reader& input, Record& record, const std::unordered_map<uint32_
     std::memcpy(&record.level, buffer, sizeof(Level));
     buffer += sizeof(Level);
 
+    // Deserialize the logging message
     uint8_t logger_size;
     std::memcpy(&logger_size, buffer, sizeof(uint8_t));
     buffer += sizeof(uint8_t);
     record.logger.insert(record.logger.begin(), buffer, buffer + logger_size);
     buffer += logger_size;
 
+    // Deserialize the logging message hash
     uint32_t message_hash;
     std::memcpy(&message_hash, buffer, sizeof(uint32_t));
     buffer += sizeof(uint32_t);
     const auto& message = hashmap.find(message_hash);
     record.message.assign((message != hashmap.end()) ? message->second : format("0x{:X}",  message_hash));
 
+    // Deserialize the logging buffer
     uint32_t buffer_size;
     std::memcpy(&buffer_size, buffer, sizeof(uint32_t));
     buffer += sizeof(uint32_t);

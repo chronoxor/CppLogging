@@ -55,18 +55,21 @@ bool InputRecord(Reader& input, Record& record)
     std::memcpy(&record.level, buffer, sizeof(Level));
     buffer += sizeof(Level);
 
+    // Deserialize the logger name
     uint8_t logger_size;
     std::memcpy(&logger_size, buffer, sizeof(uint8_t));
     buffer += sizeof(uint8_t);
     record.logger.insert(record.logger.begin(), buffer, buffer + logger_size);
     buffer += logger_size;
 
+    // Deserialize the logging message
     uint16_t message_size;
     std::memcpy(&message_size, buffer, sizeof(uint16_t));
     buffer += sizeof(uint16_t);
     record.message.insert(record.message.begin(), buffer, buffer + message_size);
     buffer += message_size;
 
+    // Deserialize the logging buffer
     uint32_t buffer_size;
     std::memcpy(&buffer_size, buffer, sizeof(uint32_t));
     buffer += sizeof(uint32_t);

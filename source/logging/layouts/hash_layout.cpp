@@ -48,16 +48,19 @@ void HashLayout::LayoutRecord(Record& record)
     std::memcpy(buffer, &record.level, sizeof(Level));
     buffer += sizeof(Level);
 
+    // Serialize the logger name
     uint8_t logger_size = (uint8_t)record.logger.size();
     std::memcpy(buffer, &logger_size, sizeof(uint8_t));
     buffer += sizeof(uint8_t);
     std::memcpy(buffer, record.logger.data(), record.logger.size());
     buffer += record.logger.size();
 
+    // Serialize the logging message hash
     uint32_t message_hash = Hash(record.message);
     std::memcpy(buffer, &message_hash, sizeof(uint32_t));
     buffer += sizeof(uint32_t);
 
+    // Serialize the logging buffer
     uint32_t buffer_size = (uint32_t)record.buffer.size();
     std::memcpy(buffer, &buffer_size, sizeof(uint32_t));
     buffer += sizeof(uint32_t);
