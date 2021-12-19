@@ -17,14 +17,13 @@ __author__ = "Ivan Shynkarenka"
 __email__ = "chronoxor@gmail.com"
 __license__ = "MIT License"
 __url__ = "https://github.com/chronoxor/CppLogging/scripts/hashlog-map"
-__version__ = "1.2.0.0"
+__version__ = "1.3.0.0"
 
 
 class HashLogContext(object):
     def __init__(self, path):
         self.hash = dict()
         self.path = os.path.abspath(path)
-        print("Working path: %s" % self.path)
 
     def hash_fnv1a_32(self, message):
         FNV_PRIME = 16777619
@@ -60,15 +59,30 @@ class HashLogContext(object):
         path = os.path.abspath(path)
         path = os.path.join(path, ".hashlog")
 
-        # Write the current hash table into the binary file
+        # Write the current hash map into the binary file
         print("Generating .hashlog file", end="...")
-        with open(path, 'wb') as hashlog:
+        with open(path, "wb") as hashlog:
+            hashlog.write(struct.pack("<I", len(self.hash)))
             for hash, message in self.hash.items():
                 data = bytearray(message.encode("utf-8"))
-                hashlog.write(struct.pack('<I', hash))
-                hashlog.write(struct.pack('<I', len(data)))
+                hashlog.write(struct.pack("<I", hash))
+                hashlog.write(struct.pack("<I", len(data)))
                 hashlog.write(data)
         print("Done!")
+
+    def view(self, path):
+        path = os.path.abspath(path)
+        path = os.path.join(path, ".hashlog")
+
+        # Read the binary file with hash map
+        with open(path, "rb") as hashlog:
+            size = struct.unpack("<I", hashlog.read(4))[0]
+            for _ in range(size):
+                hash = struct.unpack("<I", hashlog.read(4))[0]
+                length = struct.unpack("<I", hashlog.read(4))[0]
+                data = hashlog.read(length)
+                message = data.decode("utf-8")
+                print('0x%08X: %s' % (hash, message))
 
 
 def show_help():
@@ -77,6 +91,7 @@ def show_help():
     print("\thelp - show this help")
     print("\tversion - show version")
     print("\tgenerate - generate .hashlog")
+    print("\tview - view .hashlog")
     sys.exit(1)
 
 
@@ -104,6 +119,8 @@ def main():
     if sys.argv[1] == "generate":
         context.discover(path)
         context.generate(path)
+    elif sys.argv[1] == "view":
+        context.view(path)
     else:
         print("Unknown command: %s" % sys.argv[1])
         return -1
