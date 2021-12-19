@@ -25,7 +25,61 @@
 using namespace CppCommon;
 using namespace CppLogging;
 
-bool InputRecord(Reader& input, Record& record)
+std::unique_ptr<Reader> FindHashlog(const Path& current)
+{
+    // Try to find .hashlog in the current path
+    Path hashlog = current.IsRegularFile() ? current : (current / ".hashlog");
+    if (hashlog.IsExists())
+    {
+        File* file = new File(hashlog);
+        file->Open(true, false);
+        return std::unique_ptr<Reader>(file);
+    }
+
+    // Try to find .hashlog in the parent path
+    Path parent = current.parent();
+    if (parent)
+        return FindHashlog(parent);
+
+    // Cannot find .hashlog file
+    return nullptr;
+}
+
+std::unordered_map<uint32_t, std::string> ReadHashlog(const std::unique_ptr<Reader>& hashlog)
+{
+    std::unordered_map<uint32_t, std::string> hashmap;
+
+    // Check if .hashlog is avaliable
+    if (!hashlog)
+        return hashmap;
+
+    // Read the hash map size
+    uint32_t size;
+    if (hashlog->Read(&size, sizeof(uint32_t)) != sizeof(uint32_t))
+        return hashmap;
+
+    hashmap.reserve(size);
+
+    // Read the hash map content
+    while (size-- > 0)
+    {
+        uint32_t hash;
+        if (hashlog->Read(&hash, sizeof(uint32_t)) != sizeof(uint32_t))
+            return hashmap;
+        uint32_t length;
+        if (hashlog->Read(&length, sizeof(uint32_t)) != sizeof(uint32_t))
+            return hashmap;
+        std::vector<uint8_t> buffer(length);
+        if (hashlog->Read(buffer.data(), length) != length)
+            return hashmap;
+        std::string message(buffer.begin(), buffer.end());
+        hashmap[hash] = message;
+    }
+
+    return hashmap;
+}
+
+bool InputRecord(Reader& input, Record& record, const std::unordered_map<uint32_t, std::string>& hashmap)
 {
     // Clear the logging record
     record.Clear();
@@ -64,7 +118,8 @@ bool InputRecord(Reader& input, Record& record)
     uint32_t message_hash;
     std::memcpy(&message_hash, buffer, sizeof(uint32_t));
     buffer += sizeof(uint32_t);
-    record.message.assign(std::to_string(message_hash));
+    const auto& message = hashmap.find(message_hash);
+    record.message.assign((message != hashmap.end()) ? message->second : format("0x{:X}",  message_hash));
 
     uint32_t buffer_size;
     std::memcpy(&buffer_size, buffer, sizeof(uint32_t));
@@ -97,6 +152,7 @@ int main(int argc, char** argv)
 {
     auto parser = optparse::OptionParser().version(version);
 
+    parser.add_option("-x", "--hashlog").dest("hashlog").help("Hashlog file name");
     parser.add_option("-i", "--input").dest("input").help("Input file name");
     parser.add_option("-o", "--output").dest("output").help("Output file name");
 
@@ -111,6 +167,14 @@ int main(int argc, char** argv)
 
     try
     {
+        // Open the hashlog file
+        std::unique_ptr<Reader> hashlog = FindHashlog(Path::current());
+        if (options.is_set("hashlog"))
+            hashlog = FindHashlog(Path(options.get("hashlog")));
+
+        // Read .hashlog file and fill the logging messages hash map
+        std::unordered_map<uint32_t, std::string> hashmap = ReadHashlog(hashlog);
+
         // Open the input file or stdin
         std::unique_ptr<Reader> input(new StdInput());
         if (options.is_set("input"))
@@ -131,7 +195,7 @@ int main(int argc, char** argv)
 
         // Process all logging record
         Record record;
-        while (InputRecord(*input, record))
+        while (InputRecord(*input, record, hashmap))
             if (!OutputRecord(*output, record))
                 break;
 

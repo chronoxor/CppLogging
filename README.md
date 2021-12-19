@@ -14,7 +14,7 @@ C++ Logging Library provides functionality to log different events with a high
 throughput in multithreaded environment into different sinks (console, files,
 rolling files, syslog, etc.). Logging configuration is very flexible and gives
 functionality to build flexible logger hierarchy with combination of logging
-processors (sync, async), filters, layouts (binary, text) and appenders.
+processors (sync, async), filters, layouts (binary, hash, text) and appenders.
 
 [CppLogging API reference](https://chronoxor.github.io/CppLogging/index.html)
 

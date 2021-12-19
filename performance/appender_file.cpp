@@ -32,6 +32,28 @@ private:
     File _file{"test.bin.log"};
 };
 
+class HashConfigFixture : public virtual CppBenchmark::Fixture
+{
+protected:
+    void Initialize(CppBenchmark::Context& context) override
+    {
+        auto hash_sink = std::make_shared<Processor>(std::make_shared<HashLayout>());
+        hash_sink->appenders().push_back(std::make_shared<FileAppender>(_file));
+        Config::ConfigLogger("hash", hash_sink);
+        Config::Startup();
+    }
+
+    void Cleanup(CppBenchmark::Context& context) override
+    {
+        Config::Shutdown();
+        if (_file.IsFileExists())
+            File::Remove(_file);
+    }
+
+private:
+    File _file{"test.hash.log"};
+};
+
 class TextConfigFixture : public virtual CppBenchmark::Fixture
 {
 protected:
@@ -57,6 +79,12 @@ private:
 BENCHMARK_FIXTURE(BinaryConfigFixture, "FileAppender-binary")
 {
     static Logger logger = Config::CreateLogger("binary");
+    logger.Info("Test message");
+}
+
+BENCHMARK_FIXTURE(HashConfigFixture, "FileAppender-hash")
+{
+    static Logger logger = Config::CreateLogger("hash");
     logger.Info("Test message");
 }
 
