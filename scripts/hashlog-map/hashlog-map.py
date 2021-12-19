@@ -2,8 +2,8 @@
 # -*- coding: utf-8 -*-
 
 """
-Make hashlog tool is used to parse C++ source files for logging messages
-and create corresponding .hashlog binary file
+Hashlog map generate tool is used to parse C++ source files for logging format messages
+and create the corresponding .hashlog binary file
 """
 
 import codecs
@@ -16,8 +16,8 @@ import sys
 __author__ = "Ivan Shynkarenka"
 __email__ = "chronoxor@gmail.com"
 __license__ = "MIT License"
-__url__ = "https://github.com/chronoxor/CppLogging/tools/make-hashlog"
-__version__ = "1.1.0.0"
+__url__ = "https://github.com/chronoxor/CppLogging/scripts/hashlog-map"
+__version__ = "1.2.0.0"
 
 
 class HashLogContext(object):
@@ -72,11 +72,11 @@ class HashLogContext(object):
 
 
 def show_help():
-    print("usage: make-hashlog command")
+    print("usage: hashlog-map command")
     print("Supported commands:")
     print("\thelp - show this help")
     print("\tversion - show version")
-    print("\tdiscover - discover source files")
+    print("\tgenerate - generate .hashlog")
     sys.exit(1)
 
 
@@ -101,7 +101,7 @@ def main():
     # Create hash log context
     context = HashLogContext(path)
 
-    if sys.argv[1] == "discover":
+    if sys.argv[1] == "generate":
         context.discover(path)
         context.generate(path)
     else:

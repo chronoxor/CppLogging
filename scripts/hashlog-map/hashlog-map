@@ -1,4 +1,4 @@
 #!/bin/bash
 set -e
 curdir=`dirname $0`
-python3 $curdir/make-hashlog.py $*
+python3 $curdir/hashlog-map.py $*
