@@ -17,7 +17,7 @@ __author__ = "Ivan Shynkarenka"
 __email__ = "chronoxor@gmail.com"
 __license__ = "MIT License"
 __url__ = "https://github.com/chronoxor/CppLogging/scripts/hashlog-map"
-__version__ = "1.3.0.0"
+__version__ = "1.4.0.0"
 
 
 class HashLogContext(object):
@@ -54,6 +54,11 @@ class HashLogContext(object):
                     if hash not in self.hash:
                         print('Discovered logging message: "%s" with hash = 0x%08X' % (message, hash))
                         self.hash[hash] = message
+                    elif message != self.hash[hash]:
+                        print("Collision detected!", file=sys.stderr)
+                        print('Previous logging message: "%s" with hash = 0x%08X' % (self.hash[hash], hash), file=sys.stderr)
+                        print('Conflict logging message: "%s" with hash = 0x%08X' % (message, hash), file=sys.stderr)
+                        raise Exception("Collision detected!")
 
     def generate(self, path):
         path = os.path.abspath(path)
