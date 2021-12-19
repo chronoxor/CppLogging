@@ -17,7 +17,7 @@ __author__ = "Ivan Shynkarenka"
 __email__ = "chronoxor@gmail.com"
 __license__ = "MIT License"
 __url__ = "https://github.com/chronoxor/CppLogging/scripts/hashlog-map"
-__version__ = "1.4.0.0"
+__version__ = "1.5.0.0"
 
 
 class HashLogContext(object):
@@ -71,7 +71,7 @@ class HashLogContext(object):
             for hash, message in self.hash.items():
                 data = bytearray(message.encode("utf-8"))
                 hashlog.write(struct.pack("<I", hash))
-                hashlog.write(struct.pack("<I", len(data)))
+                hashlog.write(struct.pack("<H", len(data)))
                 hashlog.write(data)
         print("Done!")
 
@@ -84,7 +84,7 @@ class HashLogContext(object):
             size = struct.unpack("<I", hashlog.read(4))[0]
             for _ in range(size):
                 hash = struct.unpack("<I", hashlog.read(4))[0]
-                length = struct.unpack("<I", hashlog.read(4))[0]
+                length = struct.unpack("<H", hashlog.read(2))[0]
                 data = hashlog.read(length)
                 message = data.decode("utf-8")
                 print('0x%08X: %s' % (hash, message))
