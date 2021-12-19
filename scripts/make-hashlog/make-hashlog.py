@@ -17,7 +17,7 @@ __author__ = "Ivan Shynkarenka"
 __email__ = "chronoxor@gmail.com"
 __license__ = "MIT License"
 __url__ = "https://github.com/chronoxor/CppLogging/tools/make-hashlog"
-__version__ = "1.0.0.0"
+__version__ = "1.1.0.0"
 
 
 class HashLogContext(object):
