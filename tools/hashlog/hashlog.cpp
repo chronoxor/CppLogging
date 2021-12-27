@@ -137,7 +137,7 @@ Path UnzipFile(const Path& path)
     fill_win32_filefunc64W(&ffunc);
     unzf = unzOpen2_64(path.wstring().c_str(), &ffunc);
 #else
-    unzf = unzOpen2_64(path.string().c_str());
+    unzf = unzOpen64(path.string().c_str());
 #endif
     if (unzf == nullptr)
         throwex FileSystemException("Cannot open a zip archive!").Attach(path);
@@ -208,7 +208,7 @@ Path UnzipFile(const Path& path)
         throwex FileSystemException("Cannot close the zip archive!").Attach(path);
     unzip.release();
 
-    return destination;
+    return std::move(destination);
 }
 
 bool InputRecord(Reader& input, Record& record)
