@@ -1660,10 +1660,10 @@ Operations throughput: 29570995 ops/s
 # Tools
 
 ## Binary log reader
-Binary log reader is used to convert binary logs ('.bin.log' files) to the
-human-readable text format. By default it reads binary stream from 'stdin' and
-outputs converted text to 'stdout'. However it is possible to provide explicit
-input/output file names using command line arguments:
+Binary log reader is used to convert binary logs ('*.bin.log',  '*.bin.log.zip'
+files) to the human-readable text format. By default  it  reads  binary  stream
+from 'stdin' and outputs converted text to 'stdout'. However it is possible  to
+provide explicit input/output file names using command line arguments:
 
 ```shell
 Usage: binlog [options]

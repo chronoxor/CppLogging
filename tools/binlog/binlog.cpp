@@ -10,9 +10,16 @@
 #include "logging/layouts/text_layout.h"
 #include "logging/version.h"
 
+#include "../source/logging/appenders/minizip/unzip.h"
+#if defined(_WIN32) || defined(_WIN64)
+#include "../source/logging/appenders/minizip/iowin32.h"
+#endif
+
 #include "errors/fatal.h"
 #include "filesystem/file.h"
 #include "system/stream.h"
+#include "utility/countof.h"
+#include "utility/resource.h"
 
 #include <cstdio>
 #include <cstring>
@@ -24,6 +31,89 @@
 
 using namespace CppCommon;
 using namespace CppLogging;
+
+Path UnzipFile(const Path& path)
+{
+    // Open a zip archive
+    unzFile unzf;
+#if defined(_WIN32) || defined(_WIN64)
+    zlib_filefunc64_def ffunc;
+    fill_win32_filefunc64W(&ffunc);
+    unzf = unzOpen2_64(path.wstring().c_str(), &ffunc);
+#else
+    unzf = unzOpen2_64(path.string().c_str());
+#endif
+    if (unzf == nullptr)
+        throwex FileSystemException("Cannot open a zip archive!").Attach(path);
+
+    // Smart resource cleaner pattern
+    auto unzip = resource(unzf, [](unzFile handle) { unzClose(handle); });
+
+    File destination(path + ".tmp");
+
+    // Open the destination file for writing
+    destination.Create(false, true);
+
+    // Get info about the zip archive
+    unz_global_info global_info;
+    int result = unzGetGlobalInfo(unzf, &global_info);
+    if (result != UNZ_OK)
+        throwex FileSystemException("Cannot read a zip archive global info!").Attach(path);
+
+    // Loop to extract all files from the zip archive
+    uLong i;
+    for (i = 0; i < global_info.number_entry; ++i)
+    {
+        unz_file_info file_info;
+        char filename[1024];
+
+        // Get info about the current file in the zip archive
+        result = unzGetCurrentFileInfo(unzf, &file_info, filename, (unsigned)countof(filename), NULL, 0, NULL, 0);
+        if (result != UNZ_OK)
+            throwex FileSystemException("Cannot read a zip archive file info!").Attach(path);
+
+        // Check if this entry is a file
+        const size_t filename_length = strlen(filename);
+        if (filename[filename_length - 1] != '/')
+        {
+            // Open the current file in the zip archive
+            result = unzOpenCurrentFile(unzf);
+            if (result != UNZ_OK)
+                throwex FileSystemException("Cannot open a current file in the zip archive!").Attach(path);
+
+            // Smart resource cleaner pattern
+            auto unzip_file = resource(unzf, [](unzFile handle) { unzCloseCurrentFile(handle); });
+
+            // Read data from the current file in the zip archive
+            do
+            {
+                uint8_t buffer[16384];
+                result = unzReadCurrentFile(unzf, buffer, (unsigned)countof(buffer));
+                if (result > 0)
+                    destination.Write(buffer, (size_t)result);
+                else if (result < 0)
+                    throwex FileSystemException("Cannot read the current file from the zip archive!").Attach(path);
+            } while (result != UNZ_EOF);
+
+            // Close the current file in the zip archive
+            result = unzCloseCurrentFile(unzf);
+            if (result != UNZ_OK)
+                throwex FileSystemException("Cannot close the current file in the zip archive!").Attach(path);
+            unzip_file.release();
+        }
+    }
+
+    // Close the destination file
+    destination.Close();
+
+    // Close the zip archive
+    result = unzClose(unzf);
+    if (result != UNZ_OK)
+        throwex FileSystemException("Cannot close the zip archive!").Attach(path);
+    unzip.release();
+
+    return destination;
+}
 
 bool InputRecord(Reader& input, Record& record)
 {
@@ -115,11 +205,16 @@ int main(int argc, char** argv)
 
     try
     {
+        Path temp_file;
+
         // Open the input file or stdin
         std::unique_ptr<Reader> input(new StdInput());
         if (options.is_set("input"))
         {
-            File* file = new File(Path(options.get("input")));
+            Path path(options.get("input"));
+            if (path.IsRegularFile() && (path.extension() == ".zip"))
+                temp_file = path = UnzipFile(path);
+            File* file = new File(path);
             file->Open(true, false);
             input.reset(file);
         }
@@ -133,11 +228,15 @@ int main(int argc, char** argv)
             output.reset(file);
         }
 
-        // Process all logging record
+        // Process all logging records
         Record record;
         while (InputRecord(*input, record))
             if (!OutputRecord(*output, record))
                 break;
+
+        // Delete temporary file
+        if (temp_file)
+            Path::Remove(temp_file);
 
         return 0;
     }
