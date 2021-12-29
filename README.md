@@ -28,11 +28,12 @@ processors (sync, async), filters, layouts (binary, hash, text) and appenders.
     * [Example 3: Configure custom logger with text layout and console appender](#example-3-configure-custom-logger-with-text-layout-and-console-appender)
     * [Example 4: Configure custom logger with text layout and syslog appender](#example-4-configure-custom-logger-with-text-layout-and-syslog-appender)
     * [Example 5: Configure custom logger with binary layout and file appender](#example-5-configure-custom-logger-with-binary-layout-and-file-appender)
-    * [Example 6: Configure logger with custom text layout pattern](#example-6-configure-logger-with-custom-text-layout-pattern)
-    * [Example 7: Configure rolling file appender with time-based policy](#example-7-configure-rolling-file-appender-with-time-based-policy)
-    * [Example 8: Configure rolling file appender with size-based policy](#example-8-configure-rolling-file-appender-with-size-based-policy)
-    * [Example 9: Multithreaded logging with synchronous processor](#example-9-multithreaded-logging-with-synchronous-processor)
-    * [Example 10: Multithreaded logging with asynchronous processor](#example-10-multithreaded-logging-with-asynchronous-processor)
+    * [Example 6: Configure custom logger with hash layout and file appender](#example-6-configure-custom-logger-with-hash-layout-and-file-appender)
+    * [Example 7: Configure logger with custom text layout pattern](#example-7-configure-logger-with-custom-text-layout-pattern)
+    * [Example 8: Configure rolling file appender with time-based policy](#example-8-configure-rolling-file-appender-with-time-based-policy)
+    * [Example 9: Configure rolling file appender with size-based policy](#example-9-configure-rolling-file-appender-with-size-based-policy)
+    * [Example 10: Multithreaded logging with synchronous processor](#example-10-multithreaded-logging-with-synchronous-processor)
+    * [Example 11: Multithreaded logging with asynchronous processor](#example-11-multithreaded-logging-with-asynchronous-processor)
   * [Logging benchmarks](#logging-benchmarks)
     * [Benchmark 1: Null appender](#benchmark-1-null-appender)
     * [Benchmark 2: File appender](#benchmark-2-file-appender)
@@ -41,7 +42,7 @@ processors (sync, async), filters, layouts (binary, hash, text) and appenders.
     * [Benchmark 5: Synchronous processor with file appender](#benchmark-5-synchronous-processor-with-file-appender)
     * [Benchmark 6: Asynchronous processor with file appender](#benchmark-6-asynchronous-processor-with-file-appender)
     * [Benchmark 7: Format in logging thread vs binary serialization without format](#benchmark-7-format-in-logging-thread-vs-binary-serialization-without-format)
-    * [Benchmark 8: Binary layout vs text layout](#benchmark-8-binary-layout-vs-text-layout)
+    * [Benchmark 8: Binary layout vs hash layout vs text layout](#benchmark-8-binary-layout-vs-hash-layout-vs-text-layout)
     * [Benchmark 9: Format vs store format](#benchmark-9-format-vs-store-format)
   * [Tools](#tools)
     * [Binary log reader](#binary-log-reader)
@@ -51,7 +52,7 @@ processors (sync, async), filters, layouts (binary, hash, text) and appenders.
 # Features
 * Cross platform (Linux, MacOS, Windows)
 * Optimized for performance
-* Binary & text layouts
+* Binary, hash & text layouts
 * Synchronous logging
 * Asynchronous logging
 * Flexible configuration and logger processing hierarchy
@@ -59,6 +60,7 @@ processors (sync, async), filters, layouts (binary, hash, text) and appenders.
 * Logging levels (debug, info, warning, error, fatal)
 * Logging filters (by level, by logger name, by message pattern)
 * Format logging records using [{fmt} library](http://fmtlib.net)
+* Hash layout using [32-bit FNV-1a string hashing](https://en.wikipedia.org/wiki/Fowler%E2%80%93Noll%E2%80%93Vo_hash_function#FNV-1a_hash)
 * Log files rolling policies (time-based, size-bases)
 * Log files Zip archivation
 
@@ -379,7 +381,48 @@ int main(int argc, char** argv)
 }
 ```
 
-## Example 6: Configure logger with custom text layout pattern
+## Example 6: Configure custom logger with hash layout and file appender
+This example shows how to configure a custom logger with a given name to
+perform logging with a hash layout and file appender sink:
+
+```c++
+#include "logging/config.h"
+#include "logging/logger.h"
+
+void ConfigureLogger()
+{
+    // Create default logging sink processor with a hash layout
+    auto sink = std::make_shared<CppLogging::Processor>(std::make_shared<CppLogging::HashLayout>());
+    // Add file appender
+    sink->appenders().push_back(std::make_shared<CppLogging::FileAppender>("file.hash.log"));
+
+    // Configure example logger
+    CppLogging::Config::ConfigLogger("example", sink);
+
+    // Startup the logging infrastructure
+    CppLogging::Config::Startup();
+}
+
+int main(int argc, char** argv)
+{
+    // Configure logger
+    ConfigureLogger();
+
+    // Create example logger
+    CppLogging::Logger logger("example");
+
+    // Log some messages with different level
+    logger.Debug("Debug message {}", 1);
+    logger.Info("Info message {}", 2);
+    logger.Warn("Warning message {}", 3);
+    logger.Error("Error message {}", 4);
+    logger.Fatal("Fatal message {}", 5);
+
+    return 0;
+}
+```
+
+## Example 7: Configure logger with custom text layout pattern
 Text layout message is flexible to customize with layout pattern. Text layout
 pattern is a string with a special placeholders provided inside curly brackets
 ("{}").
@@ -441,7 +484,7 @@ int main(int argc, char** argv)
 }
 ```
 
-## Example 7: Configure rolling file appender with time-based policy
+## Example 8: Configure rolling file appender with time-based policy
 Time-based rolling policy will create a new logging file to write into using
 a special pattern (contains date & time placeholders).
 
@@ -492,7 +535,7 @@ int main(int argc, char** argv)
 }
 ```
 
-## Example 8: Configure rolling file appender with size-based policy
+## Example 9: Configure rolling file appender with size-based policy
 Size-based rolling policy will create a new logging file to write when the
 current file size exceeded size limit. Logging backups are indexed and its
 count could be limited as well.
@@ -541,7 +584,7 @@ int main(int argc, char** argv)
 }
 ```
 
-## Example 9: Multithreaded logging with synchronous processor
+## Example 10: Multithreaded logging with synchronous processor
 Synchronous processor uses critical-section lock to avoid multiple
 threads from logging at the same time (logging threads are waiting
 until critical-section is released).
@@ -621,7 +664,7 @@ int main(int argc, char** argv)
 }
 ```
 
-## Example 10: Multithreaded logging with asynchronous processor
+## Example 11: Multithreaded logging with asynchronous processor
 Asynchronous processor uses lock-free queue to collect logging records from
 multiple threads at the same time.
 
@@ -1533,56 +1576,70 @@ Operations throughput: 2049912 ops/s
 ===============================================================================
 ```
 
-## Benchmark 8: Binary layout vs text layout
+## Benchmark 8: Binary layout vs hash layout vs text layout
 Benchmark source file: [layout.cpp](https://github.com/chronoxor/CppLogging/blob/master/performance/layout.cpp)
 
 Benchmark report is the following:
 ```
 ===============================================================================
-CppBenchmark report. Version 1.0.0.0
+CppBenchmark report. Version 1.0.2.0
 ===============================================================================
-CPU architecutre: Intel(R) Core(TM) i7-4790K CPU @ 4.00GHz
+CPU architecture: Intel(R) Core(TM) i7-4790K CPU @ 4.00GHz
 CPU logical cores: 8
 CPU physical cores: 4
 CPU clock speed: 3.998 GHz
 CPU Hyper-Threading: enabled
 RAM total: 31.962 GiB
-RAM free: 17.160 GiB
+RAM free: 19.664 GiB
 ===============================================================================
 OS version: Microsoft Windows 8 Enterprise Edition (build 9200), 64-bit
 OS bits: 64-bit
 Process bits: 64-bit
-Process configuaraion: release
-Local timestamp: Thu Mar 28 00:20:39 2019
-UTC timestamp: Wed Mar 27 21:20:39 2019
+Process configuration: release
+Local timestamp: Wed Dec 29 03:57:38 2021
+UTC timestamp: Wed Dec 29 00:57:38 2021
 ===============================================================================
 Benchmark: BinaryLayout
 Attempts: 5
 Duration: 5 seconds
 -------------------------------------------------------------------------------
 Phase: BinaryLayout
-Average time: 24 ns/op
-Minimal time: 24 ns/op
-Maximal time: 25 ns/op
-Total time: 2.280 s
-Total operations: 91409302
-Total bytes: 4.437 GiB
-Operations throughput: 40091059 ops/s
-Bytes throughput: 1.964 GiB/s
+Average time: 55 ns/op
+Minimal time: 65 ns/op
+Maximal time: 66 ns/op
+Total time: 2.602 s
+Total operations: 47082888
+Total bytes: 3.834 GiB
+Operations throughput: 18088810 ops/s
+Bytes throughput: 1.476 GiB/s
+===============================================================================
+Benchmark: HashLayout
+Attempts: 5
+Duration: 5 seconds
+-------------------------------------------------------------------------------
+Phase: HashLayout
+Average time: 80 ns/op
+Minimal time: 96 ns/op
+Maximal time: 96 ns/op
+Total time: 3.057 s
+Total operations: 38025560
+Total bytes: 2.127 GiB
+Operations throughput: 12435583 ops/s
+Bytes throughput: 711.583 MiB/s
 ===============================================================================
 Benchmark: TextLayout
 Attempts: 5
 Duration: 5 seconds
 -------------------------------------------------------------------------------
 Phase: TextLayout
-Average time: 179 ns/op
-Minimal time: 179 ns/op
-Maximal time: 185 ns/op
-Total time: 4.090 s
-Total operations: 22754768
-Total bytes: 1.560 GiB
-Operations throughput: 5562485 ops/s
-Bytes throughput: 387.256 MiB/s
+Average time: 645 ns/op
+Minimal time: 774 ns/op
+Maximal time: 780 ns/op
+Total time: 4.632 s
+Total operations: 7171461
+Total bytes: 640.004 MiB
+Operations throughput: 1548184 ops/s
+Bytes throughput: 138.168 MiB/s
 ===============================================================================
 ```
 
