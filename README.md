@@ -45,6 +45,8 @@ processors (sync, async), filters, layouts (binary, hash, text) and appenders.
     * [Benchmark 9: Format vs store format](#benchmark-9-format-vs-store-format)
   * [Tools](#tools)
     * [Binary log reader](#binary-log-reader)
+    * [Hash log reader](#hash-log-reader)
+    * [Hash log builder](#hash-log-builder)
 
 # Features
 * Cross platform (Linux, MacOS, Windows)
@@ -1660,10 +1662,10 @@ Operations throughput: 29570995 ops/s
 # Tools
 
 ## Binary log reader
-Binary log reader is used to convert binary logs ('*.bin.log',  '*.bin.log.zip'
+Binary log reader is used to  convert  binary  logs  (*.bin.log,  *.bin.log.zip
 files) to the human-readable text format. By default  it  reads  binary  stream
 from 'stdin' and outputs converted text to 'stdout'. However it is possible  to
-provide explicit input/output file names using command line arguments:
+provide explicit input/output file names using command line arguments.
 
 ```shell
 Usage: binlog [options]
@@ -1676,5 +1678,96 @@ Options:
                         Input file name
   -o OUTPUT, --output=OUTPUT
                         Output file name
+```
 
+## Hash log reader
+Hash log reader is used to convert hash logs (*.hash.log, *.hash.log.zip files)
+to the human-readable text format. By  default  it  reads  binary  stream  from
+'stdin' and outputs converted text to  'stdout'.  However  it  is  possible  to
+provide explicit input/output file names using command line arguments.
+
+```shell
+Usage: hashlog [options]
+
+Options:
+  --version             show program's version number and exit
+  -h, --help            show this help message and exit
+  -x HASHLOG, --hashlog=HASHLOG
+                        Hashlog file name
+  -i INPUT, --input=INPUT
+                        Input file name
+  -o OUTPUT, --output=OUTPUT
+                        Output file name
+  -u UPDATE, --update=UPDATE
+                        Update .hashlog
+```
+
+Hash log depends on .hashlog map file. If hashlog file  name  is  not  provided
+explicitly with '--hashlog' parameter the tool will search  for  .hashlog  file
+started from the current directory and go up to the parent directory hierarchy.
+
+If .hashlog map file was not found or some hash code & string pair  is  missing
+then text log will contain the hash code in the corresponding place.
+
+Hash log reader could  be  used  to  update  .hashlog  file  from  binary  logs
+('*.bin.log', '*.bin.log.zip' files). In this case '--update' parameter  should
+be used with binary logs. It will read all available strings,  calculate  their
+hash codes and update .hashlog with new hash code & string pairs.
+
+```shell
+hashlog.exe -x .hashlog -u file.bin.log
+Discovered logging message: "example" with hash = 0x8BF23EA1
+Discovered logging message: "Info message {}" with hash = 0x513AEC0A
+Discovered logging message: "Warning message {}" with hash = 0xF7854660
+Discovered logging message: "Error message {}" with hash = 0x665B8AC6
+Discovered logging message: "Fatal message {}" with hash = 0x77CD9E8E
+```
+
+## Hash log builder
+Hash log builder python script is used to parse C++ source files  (*.h,  *.inl,
+*.cpp) for logging messages, calculate their hash codes and  generate  .hashlog
+map file.
+
+```shell
+usage: hashlog-map command
+Supported commands:
+        help - show this help
+        version - show version
+        generate - generate .hashlog
+        view - view .hashlog
+```
+
+Hash log builder python script can be installed using python pip:
+```shell
+pip3 install hashlog-map
+```
+
+For example for the following C++ code:
+```c++
+logger.Debug("Debug message {}", 1);
+logger.Info("Info message {}", 2);
+logger.Warn("Warning message {}", 3);
+logger.Error("Error message {}", 4);
+logger.Fatal("Fatal message {}", 5);
+```
+
+Generated .hashlog will be:
+```shell
+hashlog-map generate
+Discovered logging message: "Debug message {}" with hash = 0xEC3CF96D
+Discovered logging message: "Info message {}" with hash = 0x513AEC0A
+Discovered logging message: "Warning message {}" with hash = 0xF7854660
+Discovered logging message: "Error message {}" with hash = 0x665B8AC6
+Discovered logging message: "Fatal message {}" with hash = 0x77CD9E8E
+```
+
+It is possible to shop .hashlog content in human readable  format  with  'view'
+command:
+```shell
+hashlog-map view
+0xEC3CF96D: Debug message {}
+0x513AEC0A: Info message {}
+0xF7854660: Warning message {}
+0x665B8AC6: Error message {}
+0x77CD9E8E: Fatal message {}
 ```

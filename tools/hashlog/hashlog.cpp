@@ -56,10 +56,14 @@ std::unordered_map<uint32_t, std::string> ReadHashlog(const Path& path)
 
     File hashlog(path);
 
+    // Check if .hashlog is exists
+    if (!hashlog.IsExists())
+        return hashmap;
+
     // Open .hashlog file
     hashlog.Open(true, false);
 
-    // Check if .hashlog is avaliable
+    // Check if .hashlog is opened
     if (!hashlog)
         return hashmap;
 
@@ -395,7 +399,11 @@ int main(int argc, char** argv)
         // Open the hashlog file
         Path hashlog = FindHashlog(Path::current());
         if (options.is_set("hashlog"))
-            hashlog = FindHashlog(Path(options.get("hashlog")));
+        {
+            hashlog = Path(options.get("hashlog"));
+            if (hashlog.IsDirectory())
+                hashlog = FindHashlog(hashlog);
+        }
 
         // Read .hashlog file and fill the logging messages hash map
         std::unordered_map<uint32_t, std::string> hashmap = ReadHashlog(hashlog);
