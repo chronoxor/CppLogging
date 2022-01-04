@@ -8,7 +8,7 @@
 ![Windows (Cygwin)](https://github.com/chronoxor/CppLogging/actions/workflows/build-windows-cygwin.yml/badge.svg)
 ![Windows (MinGW)](https://github.com/chronoxor/CppLogging/actions/workflows/build-windows-mingw.yml/badge.svg)
 ![Windows (MSYS2)](https://github.com/chronoxor/CppLogging/actions/workflows/build-windows-msys2.yml/badge.svg)
-![Windows (Visual Studio)](https://github.com/chronoxor/CppLogging/actions/workflows/build-windows-msvc.yml/badge.svg)
+![Windows (Visual Studio)](https://github.com/chronoxor/CppLogging/actions/workflows/build-windows-vs.yml/badge.svg)
 
 C++ Logging Library provides functionality to log different events with a high
 throughput in multithreaded environment into different sinks (console, files,
