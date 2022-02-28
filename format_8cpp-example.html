@@ -76,8 +76,9 @@ $(function() {
 <div class="line"><span class="keyword">public</span>:</div>
 <div class="line">    Date(<span class="keywordtype">int</span> year, <span class="keywordtype">int</span> month, <span class="keywordtype">int</span> day) : _year(year), _month(month), _day(day) {}</div>
 <div class="line"> </div>
-<div class="line">    <span class="keyword">friend</span> std::ostream&amp; operator&lt;&lt;(std::ostream&amp; os, <span class="keyword">const</span> Date&amp; date)</div>
-<div class="line">    { <span class="keywordflow">return</span> os &lt;&lt; date._year &lt;&lt; <span class="charliteral">&#39;-&#39;</span> &lt;&lt; date._month &lt;&lt; <span class="charliteral">&#39;-&#39;</span> &lt;&lt; date._day; }</div>
+<div class="line">    <span class="keywordtype">int</span> year()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> _year; }</div>
+<div class="line">    <span class="keywordtype">int</span> month()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> _month; }</div>
+<div class="line">    <span class="keywordtype">int</span> day()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> _day; }</div>
 <div class="line"> </div>
 <div class="line">    <span class="keyword">friend</span> <a name="_a0"></a><a class="code" href="class_cpp_logging_1_1_record.html">CppLogging::Record</a>&amp; operator&lt;&lt;(<a class="code" href="class_cpp_logging_1_1_record.html">CppLogging::Record</a>&amp; record, <span class="keyword">const</span> Date&amp; date)</div>
 <div class="line">    { <span class="keywordflow">return</span> record.<a name="a1"></a><a class="code" href="class_cpp_logging_1_1_record.html#a67daa0b4db91202655ba7c23dd386c9d">StoreCustomFormat</a>(<span class="stringliteral">&quot;{}-{}-{}&quot;</span>, date._year, date._month, date._day); }</div>
@@ -86,13 +87,27 @@ $(function() {
 <div class="line">    <span class="keywordtype">int</span> _year, _month, _day;</div>
 <div class="line">};</div>
 <div class="line"> </div>
+<div class="line"><span class="keyword">template</span> &lt;&gt;</div>
+<div class="line"><span class="keyword">struct </span>fmt::formatter&lt;Date&gt;</div>
+<div class="line">{</div>
+<div class="line">     constexpr <span class="keyword">auto</span> parse(format_parse_context&amp; ctx) -&gt; decltype(ctx.begin()) { <span class="keywordflow">return</span> ctx.begin(); }</div>
+<div class="line"> </div>
+<div class="line">    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> FormatContext&gt;</div>
+<div class="line">    <span class="keyword">auto</span> format(<span class="keyword">const</span> Date&amp; date, FormatContext&amp; ctx) -&gt; decltype(ctx.out())</div>
+<div class="line">    {</div>
+<div class="line">        <span class="keywordflow">return</span> format_to(ctx.out(), <span class="stringliteral">&quot;{}-{}-{}&quot;</span>, date.year(), date.month(), date.day());</div>
+<div class="line">    }</div>
+<div class="line">};</div>
+<div class="line"> </div>
 <div class="line"><span class="keyword">class </span>DateTime</div>
 <div class="line">{</div>
 <div class="line"><span class="keyword">public</span>:</div>
 <div class="line">    DateTime(Date date, <span class="keywordtype">int</span> hours, <span class="keywordtype">int</span> minutes, <span class="keywordtype">int</span> seconds) : _date(date), _hours(hours), _minutes(minutes), _seconds(seconds) {}</div>
 <div class="line"> </div>
-<div class="line">    <span class="keyword">friend</span> std::ostream&amp; operator&lt;&lt;(std::ostream&amp; os, <span class="keyword">const</span> DateTime&amp; datetime)</div>
-<div class="line">    { <span class="keywordflow">return</span> os &lt;&lt; datetime._date &lt;&lt; <span class="stringliteral">&quot; &quot;</span> &lt;&lt; datetime._hours &lt;&lt; <span class="charliteral">&#39;:&#39;</span> &lt;&lt; datetime._minutes &lt;&lt; <span class="charliteral">&#39;:&#39;</span> &lt;&lt; datetime._seconds; }</div>
+<div class="line">    Date date()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> _date; }</div>
+<div class="line">    <span class="keywordtype">int</span> hours()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> _hours; }</div>
+<div class="line">    <span class="keywordtype">int</span> minutes()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> _minutes; }</div>
+<div class="line">    <span class="keywordtype">int</span> seconds()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> _seconds; }</div>
 <div class="line"> </div>
 <div class="line">    <span class="keyword">friend</span> <a class="code" href="class_cpp_logging_1_1_record.html">CppLogging::Record</a>&amp; operator&lt;&lt;(<a class="code" href="class_cpp_logging_1_1_record.html">CppLogging::Record</a>&amp; record, <span class="keyword">const</span> DateTime&amp; datetime)</div>
 <div class="line">    {</div>
@@ -110,6 +125,18 @@ $(function() {
 <div class="line"><span class="keyword">private</span>:</div>
 <div class="line">    Date _date;</div>
 <div class="line">    <span class="keywordtype">int</span> _hours, _minutes, _seconds;</div>
+<div class="line">};</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">template</span> &lt;&gt;</div>
+<div class="line"><span class="keyword">struct </span>fmt::formatter&lt;DateTime&gt;</div>
+<div class="line">{</div>
+<div class="line">     constexpr <span class="keyword">auto</span> parse(format_parse_context&amp; ctx) -&gt; decltype(ctx.begin()) { <span class="keywordflow">return</span> ctx.begin(); }</div>
+<div class="line"> </div>
+<div class="line">    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> FormatContext&gt;</div>
+<div class="line">    <span class="keyword">auto</span> format(<span class="keyword">const</span> DateTime&amp; datetime, FormatContext&amp; ctx) -&gt; decltype(ctx.out())</div>
+<div class="line">    {</div>
+<div class="line">        <span class="keywordflow">return</span> format_to(ctx.out(), <span class="stringliteral">&quot;{} {}:{}:{}&quot;</span>, datetime.date(), datetime.hours(), datetime.minutes(), datetime.seconds());</div>
+<div class="line">    }</div>
 <div class="line">};</div>
 <div class="line"> </div>
 <div class="line"><span class="keywordtype">int</span> main(<span class="keywordtype">int</span> argc, <span class="keywordtype">char</span>** argv)</div>
