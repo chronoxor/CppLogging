@@ -44,7 +44,7 @@ public:
 
          \param message - Debug message
     */
-    void Debug(std::string_view message) { Debug("{}", message); }
+    void Debug(std::string_view message) const { Debug("{}", message); }
     //! Log debug message with format arguments
     /*!
          Will log only in debug mode!
@@ -53,59 +53,59 @@ public:
          \param args - Format arguments
     */
     template <typename... T>
-    void Debug(fmt::format_string<T...> message, T&&... args);
+    void Debug(fmt::format_string<T...> message, T&&... args) const;
 
     //! Log information message
     /*!
          \param message - Information message
     */
-    void Info(std::string_view message) { Info("{}", message); }
+    void Info(std::string_view message) const { Info("{}", message); }
     //! Log information message with format arguments
     /*!
          \param message - Information message
          \param args - Format arguments
     */
     template <typename... T>
-    void Info(fmt::format_string<T...> message, T&&... args);
+    void Info(fmt::format_string<T...> message, T&&... args) const;
 
     //! Log warning message
     /*!
          \param message - Warning message
     */
-    void Warn(std::string_view message) { Warn("{}", message); }
+    void Warn(std::string_view message) const { Warn("{}", message); }
     //! Log warning message with format arguments
     /*!
          \param message - Warning message
          \param args - Format arguments
     */
     template <typename... T>
-    void Warn(fmt::format_string<T...> message, T&&... args);
+    void Warn(fmt::format_string<T...> message, T&&... args) const;
 
     //! Log error message
     /*!
          \param message - Error message
     */
-    void Error(std::string_view message) { Error("{}", message); }
+    void Error(std::string_view message) const { Error("{}", message); }
     //! Log error message with format arguments
     /*!
          \param message - Error message
          \param args - Format arguments
     */
     template <typename... T>
-    void Error(fmt::format_string<T...> message, T&&... args);
+    void Error(fmt::format_string<T...> message, T&&... args) const;
 
     //! Log fatal message
     /*!
          \param message - Fatal message
     */
-    void Fatal(std::string_view message) { Fatal("{}", message); }
+    void Fatal(std::string_view message) const { Fatal("{}", message); }
     //! Log fatal message with format arguments
     /*!
          \param message - Fatal message
          \param args - Format arguments
     */
     template <typename... T>
-    void Fatal(fmt::format_string<T...> message, T&&... args);
+    void Fatal(fmt::format_string<T...> message, T&&... args) const;
 
     //! Flush the current logger
     void Flush();
@@ -132,7 +132,7 @@ private:
          \param args - Format arguments list
     */
     template <typename... T>
-    void Log(Level level, bool format, fmt::format_string<T...> message, T&&... args);
+    void Log(Level level, bool format, fmt::format_string<T...> message, T&&... args) const;
 };
 
 } // namespace CppLogging

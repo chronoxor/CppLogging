@@ -18,7 +18,7 @@ inline Logger::~Logger()
 }
 
 template <typename... T>
-inline void Logger::Log(Level level, bool format, fmt::format_string<T...> message, T&&... args)
+inline void Logger::Log(Level level, bool format, fmt::format_string<T...> message, T&&... args) const
 {
     // Thread local thread Id
     thread_local uint64_t thread = CppCommon::Thread::CurrentThreadId();
@@ -53,7 +53,7 @@ inline void Logger::Log(Level level, bool format, fmt::format_string<T...> messa
 }
 
 template <typename... T>
-inline void Logger::Debug(fmt::format_string<T...> message, T&&... args)
+inline void Logger::Debug(fmt::format_string<T...> message, T&&... args) const
 {
 #if defined(NDEBUG)
     // Log nothing in release mode...
@@ -63,25 +63,25 @@ inline void Logger::Debug(fmt::format_string<T...> message, T&&... args)
 }
 
 template <typename... T>
-inline void Logger::Info(fmt::format_string<T...> message, T&&... args)
+inline void Logger::Info(fmt::format_string<T...> message, T&&... args) const
 {
     Log(Level::INFO, false, message, std::forward<T>(args)...);
 }
 
 template <typename... T>
-inline void Logger::Warn(fmt::format_string<T...> message, T&&... args)
+inline void Logger::Warn(fmt::format_string<T...> message, T&&... args) const
 {
     Log(Level::WARN, false, message, std::forward<T>(args)...);
 }
 
 template <typename... T>
-inline void Logger::Error(fmt::format_string<T...> message, T&&... args)
+inline void Logger::Error(fmt::format_string<T...> message, T&&... args) const
 {
     Log(Level::ERROR, false, message, std::forward<T>(args)...);
 }
 
 template <typename... T>
-inline void Logger::Fatal(fmt::format_string<T...> message, T&&... args)
+inline void Logger::Fatal(fmt::format_string<T...> message, T&&... args) const
 {
     Log(Level::FATAL, false, message, std::forward<T>(args)...);
 }
