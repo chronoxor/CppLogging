@@ -539,7 +539,7 @@ private:
             {
                 cache_seconds = seconds;
 
-                // Update time zone cache values
+                // Update timezone cache values
                 if (cache_timezone_required || !cache_initizlied)
                 {
                     CppCommon::Timezone local;
@@ -733,7 +733,7 @@ private:
                 }
                 case PlaceholderType::UtcTimezone:
                 {
-                    // Output UTC time zone string
+                    // Output UTC timezone string
                     filename.insert(filename.end(), std::begin(cache_utc_timezone_str), std::end(cache_utc_timezone_str) - 1);
                     break;
                 }
@@ -822,7 +822,7 @@ private:
                 }
                 case PlaceholderType::LocalTimezone:
                 {
-                    // Output local time zone string
+                    // Output local timezone string
                     filename.insert(filename.end(), std::begin(cache_local_timezone_str), std::end(cache_local_timezone_str) - 1);
                     // Set the corresponding cache required flag
                     cache_time_required = true;
