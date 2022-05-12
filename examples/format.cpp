@@ -32,7 +32,7 @@ struct fmt::formatter<Date>
     template <typename FormatContext>
     auto format(const Date& date, FormatContext& ctx) -> decltype(ctx.out())
     {
-        return format_to(ctx.out(), "{}-{}-{}", date.year(), date.month(), date.day());
+        return fmt::format_to(ctx.out(), "{}-{}-{}", date.year(), date.month(), date.day());
     }
 };
 
@@ -72,7 +72,7 @@ struct fmt::formatter<DateTime>
     template <typename FormatContext>
     auto format(const DateTime& datetime, FormatContext& ctx) -> decltype(ctx.out())
     {
-        return format_to(ctx.out(), "{} {}:{}:{}", datetime.date(), datetime.hours(), datetime.minutes(), datetime.seconds());
+        return fmt::format_to(ctx.out(), "{} {}:{}:{}", datetime.date(), datetime.hours(), datetime.minutes(), datetime.seconds());
     }
 };
 
