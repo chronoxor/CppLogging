@@ -348,15 +348,15 @@ bool UpdateHashmap(std::unordered_map<uint32_t, std::string>& hashmap, std::stri
 {
     if (hashmap.find(message_hash) == hashmap.end())
     {
-        std::cout << format("Discovered logging message: \"{}\" with hash = 0x{:08X}", message, message_hash) << std::endl;
+        std::cout << fmt::format("Discovered logging message: \"{}\" with hash = 0x{:08X}", message, message_hash) << std::endl;
         hashmap[message_hash] = message;
         return true;
     }
     else if (message != hashmap[message_hash])
     {
-        std::cerr << format("Collision detected!") << std::endl;
-        std::cerr << format("Previous logging message: \"{}\" with hash = 0x{:08X}", hashmap[message_hash], message_hash) << std::endl;
-        std::cerr << format("Conflict logging message: \"{}\" with hash = 0x{:08X}", message, message_hash) << std::endl;
+        std::cerr << fmt::format("Collision detected!") << std::endl;
+        std::cerr << fmt::format("Previous logging message: \"{}\" with hash = 0x{:08X}", hashmap[message_hash], message_hash) << std::endl;
+        std::cerr << fmt::format("Conflict logging message: \"{}\" with hash = 0x{:08X}", message, message_hash) << std::endl;
         throwex Exception("Collision detected!");
     }
 
