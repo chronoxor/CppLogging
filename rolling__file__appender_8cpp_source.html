@@ -604,7 +604,7 @@ $(function() {
 <div class="line"><a name="l00539"></a><span class="lineno">  539</span>&#160;            {</div>
 <div class="line"><a name="l00540"></a><span class="lineno">  540</span>&#160;                cache_seconds = seconds;</div>
 <div class="line"><a name="l00541"></a><span class="lineno">  541</span>&#160; </div>
-<div class="line"><a name="l00542"></a><span class="lineno">  542</span>&#160;                <span class="comment">// Update time zone cache values</span></div>
+<div class="line"><a name="l00542"></a><span class="lineno">  542</span>&#160;                <span class="comment">// Update timezone cache values</span></div>
 <div class="line"><a name="l00543"></a><span class="lineno">  543</span>&#160;                <span class="keywordflow">if</span> (cache_timezone_required || !cache_initizlied)</div>
 <div class="line"><a name="l00544"></a><span class="lineno">  544</span>&#160;                {</div>
 <div class="line"><a name="l00545"></a><span class="lineno">  545</span>&#160;                    CppCommon::Timezone local;</div>
@@ -798,7 +798,7 @@ $(function() {
 <div class="line"><a name="l00733"></a><span class="lineno">  733</span>&#160;                }</div>
 <div class="line"><a name="l00734"></a><span class="lineno">  734</span>&#160;                <span class="keywordflow">case</span> PlaceholderType::UtcTimezone:</div>
 <div class="line"><a name="l00735"></a><span class="lineno">  735</span>&#160;                {</div>
-<div class="line"><a name="l00736"></a><span class="lineno">  736</span>&#160;                    <span class="comment">// Output UTC time zone string</span></div>
+<div class="line"><a name="l00736"></a><span class="lineno">  736</span>&#160;                    <span class="comment">// Output UTC timezone string</span></div>
 <div class="line"><a name="l00737"></a><span class="lineno">  737</span>&#160;                    filename.insert(filename.end(), std::begin(cache_utc_timezone_str), std::end(cache_utc_timezone_str) - 1);</div>
 <div class="line"><a name="l00738"></a><span class="lineno">  738</span>&#160;                    <span class="keywordflow">break</span>;</div>
 <div class="line"><a name="l00739"></a><span class="lineno">  739</span>&#160;                }</div>
@@ -887,7 +887,7 @@ $(function() {
 <div class="line"><a name="l00822"></a><span class="lineno">  822</span>&#160;                }</div>
 <div class="line"><a name="l00823"></a><span class="lineno">  823</span>&#160;                <span class="keywordflow">case</span> PlaceholderType::LocalTimezone:</div>
 <div class="line"><a name="l00824"></a><span class="lineno">  824</span>&#160;                {</div>
-<div class="line"><a name="l00825"></a><span class="lineno">  825</span>&#160;                    <span class="comment">// Output local time zone string</span></div>
+<div class="line"><a name="l00825"></a><span class="lineno">  825</span>&#160;                    <span class="comment">// Output local timezone string</span></div>
 <div class="line"><a name="l00826"></a><span class="lineno">  826</span>&#160;                    filename.insert(filename.end(), std::begin(cache_local_timezone_str), std::end(cache_local_timezone_str) - 1);</div>
 <div class="line"><a name="l00827"></a><span class="lineno">  827</span>&#160;                    <span class="comment">// Set the corresponding cache required flag</span></div>
 <div class="line"><a name="l00828"></a><span class="lineno">  828</span>&#160;                    cache_time_required = <span class="keyword">true</span>;</div>
