@@ -318,8 +318,6 @@ inline void SerializeArgument(Record& record, const fmt::detail::named_arg<char,
     SerializeArgument(record, argument.value);
 }
 
-#if FMT_USE_NONTYPE_TEMPLATE_PARAMETERS
-
 template <typename T, typename Char, size_t N, fmt::detail_exported::fixed_string<Char, N> Str>
 inline void SerializeArgument(Record& record, const fmt::detail::statically_named_arg<T, Char, N, Str>& argument)
 {
@@ -340,8 +338,6 @@ inline void SerializeArgument(Record& record, const fmt::detail::statically_name
 
     SerializeArgument(record, argument.value);
 }
-
-#endif
 
 template <typename T>
 inline void SerializeArgument(Record& record, const T& argument)
