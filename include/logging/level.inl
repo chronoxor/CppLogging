@@ -1,5 +1,5 @@
 /*!
-    \file level.h
+    \file level.inl
     \brief Logging level inline implementation
     \author Ivan Shynkarenka
     \date 08.07.2016
