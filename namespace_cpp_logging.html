@@ -203,7 +203,7 @@ Enumerations</h2></td></tr>
 <a class="el" href="namespace_cpp_logging.html#ac4e889a814b82af010ef93be2e618f3ba5fb1f955b45e38e31789286a1790398d">Level::ALL</a> = 0xFF
 <br />
  }</td></tr>
-<tr class="memdesc:ac4e889a814b82af010ef93be2e618f3b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Logging level enumeration.  <a href="namespace_cpp_logging.html#ac4e889a814b82af010ef93be2e618f3b">More...</a><br /></td></tr>
+<tr class="memdesc:ac4e889a814b82af010ef93be2e618f3b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Logging level.  <a href="namespace_cpp_logging.html#ac4e889a814b82af010ef93be2e618f3b">More...</a><br /></td></tr>
 <tr class="separator:ac4e889a814b82af010ef93be2e618f3b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad0a038e772114c7703cd5a26060453d5"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_cpp_logging.html#ad0a038e772114c7703cd5a26060453d5">ArgumentType</a> : uint8_t { <br />
 &#160;&#160;<a class="el" href="namespace_cpp_logging.html#ad0a038e772114c7703cd5a26060453d5a54541431724aad8311ebd33006d26660">ArgumentType::ARG_UNKNOWN</a>, 
@@ -235,6 +235,14 @@ Enumerations</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
+<tr class="memitem:a956bd224f5dec3857ff387f0bf3d5eb9"><td class="memTemplParams" colspan="2">template&lt;class TOutputStream &gt; </td></tr>
+<tr class="memitem:a956bd224f5dec3857ff387f0bf3d5eb9"><td class="memTemplItemLeft" align="right" valign="top">TOutputStream &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_cpp_logging.html#a956bd224f5dec3857ff387f0bf3d5eb9">operator&lt;&lt;</a> (TOutputStream &amp;stream, <a class="el" href="namespace_cpp_logging.html#a2ae7ad16f5b402d86a07604253464f57">TimeRollingPolicy</a> policy)</td></tr>
+<tr class="memdesc:a956bd224f5dec3857ff387f0bf3d5eb9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stream output: Time rolling policy.  <a href="namespace_cpp_logging.html#a956bd224f5dec3857ff387f0bf3d5eb9">More...</a><br /></td></tr>
+<tr class="separator:a956bd224f5dec3857ff387f0bf3d5eb9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5e86e3576a78d45930a1311847b8786c"><td class="memTemplParams" colspan="2">template&lt;class TOutputStream &gt; </td></tr>
+<tr class="memitem:a5e86e3576a78d45930a1311847b8786c"><td class="memTemplItemLeft" align="right" valign="top">TOutputStream &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_cpp_logging.html#a5e86e3576a78d45930a1311847b8786c">operator&lt;&lt;</a> (TOutputStream &amp;stream, <a class="el" href="namespace_cpp_logging.html#ac4e889a814b82af010ef93be2e618f3b">Level</a> level)</td></tr>
+<tr class="memdesc:a5e86e3576a78d45930a1311847b8786c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stream output: Logging level.  <a href="namespace_cpp_logging.html#a5e86e3576a78d45930a1311847b8786c">More...</a><br /></td></tr>
+<tr class="separator:a5e86e3576a78d45930a1311847b8786c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adb49911690ca0cfe1f7d387a6ffee5e5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_cpp_logging.html#adb49911690ca0cfe1f7d387a6ffee5e5">SerializeArgument</a> (<a class="el" href="class_cpp_logging_1_1_record.html">Record</a> &amp;record)</td></tr>
 <tr class="separator:adb49911690ca0cfe1f7d387a6ffee5e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0ce263fa455a186de2fb5edcb93dbfab"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_cpp_logging.html#a0ce263fa455a186de2fb5edcb93dbfab">SerializeArgument</a> (<a class="el" href="class_cpp_logging_1_1_record.html">Record</a> &amp;record, bool argument)</td></tr>
@@ -361,7 +369,7 @@ Variables</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Logging level enumeration. </p>
+<p>Logging level. </p>
 <table class="fieldtable">
 <tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="ac4e889a814b82af010ef93be2e618f3bab50339a10e1de285ac99d4c3990b8693"></a>NONE&#160;</td><td class="fielddoc"><p>Log nothing. </p>
 </td></tr>
@@ -424,6 +432,108 @@ Variables</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Function Documentation</h2>
+<a id="a5e86e3576a78d45930a1311847b8786c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5e86e3576a78d45930a1311847b8786c">&#9670;&nbsp;</a></span>operator&lt;&lt;() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class TOutputStream &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">TOutputStream &amp; CppLogging::operator&lt;&lt; </td>
+          <td>(</td>
+          <td class="paramtype">TOutputStream &amp;&#160;</td>
+          <td class="paramname"><em>stream</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespace_cpp_logging.html#ac4e889a814b82af010ef93be2e618f3b">Level</a>&#160;</td>
+          <td class="paramname"><em>level</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Stream output: Logging level. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">stream</td><td>- Output stream </td></tr>
+    <tr><td class="paramname">level</td><td>- Logging level </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Output stream </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="level_8inl_source.html#l00012">12</a> of file <a class="el" href="level_8inl_source.html">level.inl</a>.</p>
+
+</div>
+</div>
+<a id="a956bd224f5dec3857ff387f0bf3d5eb9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a956bd224f5dec3857ff387f0bf3d5eb9">&#9670;&nbsp;</a></span>operator&lt;&lt;() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class TOutputStream &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">TOutputStream &amp; CppLogging::operator&lt;&lt; </td>
+          <td>(</td>
+          <td class="paramtype">TOutputStream &amp;&#160;</td>
+          <td class="paramname"><em>stream</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespace_cpp_logging.html#a2ae7ad16f5b402d86a07604253464f57">TimeRollingPolicy</a>&#160;</td>
+          <td class="paramname"><em>policy</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Stream output: Time rolling policy. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">stream</td><td>- Output stream </td></tr>
+    <tr><td class="paramname">policy</td><td>- Time rolling policy </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Output stream </dd></dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="format_8cpp-example.html#a1">format.cpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="rolling__file__appender_8inl_source.html#l00012">12</a> of file <a class="el" href="rolling__file__appender_8inl_source.html">rolling_file_appender.inl</a>.</p>
+
+</div>
+</div>
 <a id="adb49911690ca0cfe1f7d387a6ffee5e5"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#adb49911690ca0cfe1f7d387a6ffee5e5">&#9670;&nbsp;</a></span>SerializeArgument() <span class="overload">[1/22]</span></h2>
 

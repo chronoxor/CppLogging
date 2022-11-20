@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.17"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>CppLogging: include/logging/level.h Source File</title>
+<title>CppLogging: include/logging/level.inl Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -68,44 +68,52 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="headertitle">
-<div class="title">level.h</div>  </div>
+<div class="title">level.inl</div>  </div>
 </div><!--header-->
 <div class="contents">
-<a href="level_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160; </div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#ifndef CPPLOGGING_LEVEL_H</span></div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#define CPPLOGGING_LEVEL_H</span></div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160; </div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &lt;cstdint&gt;</span></div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160; </div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespace_cpp_logging.html">CppLogging</a> {</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160; </div>
-<div class="line"><a name="l00017"></a><span class="lineno"><a class="line" href="namespace_cpp_logging.html#ac4e889a814b82af010ef93be2e618f3b">   17</a></span>&#160;<span class="keyword">enum class</span> <a class="code" href="namespace_cpp_logging.html#ac4e889a814b82af010ef93be2e618f3b">Level</a> : uint8_t</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;{</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    <a class="code" href="namespace_cpp_logging.html#ac4e889a814b82af010ef93be2e618f3bab50339a10e1de285ac99d4c3990b8693">NONE</a>  = 0x00,   </div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    <a class="code" href="namespace_cpp_logging.html#ac4e889a814b82af010ef93be2e618f3ba19da7170bea36556dde582519795f3fc">FATAL</a> = 0x1F,   </div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    <a class="code" href="namespace_cpp_logging.html#ac4e889a814b82af010ef93be2e618f3babb1ca97ec761fc37101737ba0aa2e7c5">ERROR</a> = 0x3F,   </div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    <a class="code" href="namespace_cpp_logging.html#ac4e889a814b82af010ef93be2e618f3ba32bd8a1db2275458673903bdb84cb277">WARN</a>  = 0x7F,   </div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    <a class="code" href="namespace_cpp_logging.html#ac4e889a814b82af010ef93be2e618f3ba551b723eafd6a31d444fcb2f5920fbd3">INFO</a>  = 0x9F,   </div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    <a class="code" href="namespace_cpp_logging.html#ac4e889a814b82af010ef93be2e618f3badc30ec20708ef7b0f641ef78b7880a15">DEBUG</a> = 0xBF,   </div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <a class="code" href="namespace_cpp_logging.html#ac4e889a814b82af010ef93be2e618f3ba5fb1f955b45e38e31789286a1790398d">ALL</a>   = 0xFF    </div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;};</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160; </div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> TOutputStream&gt;</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;TOutputStream&amp; <a class="code" href="namespace_cpp_logging.html#a956bd224f5dec3857ff387f0bf3d5eb9">operator&lt;&lt;</a>(TOutputStream&amp; stream, <a class="code" href="namespace_cpp_logging.html#ac4e889a814b82af010ef93be2e618f3b">Level</a> level);</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; </div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;} <span class="comment">// namespace CppLogging</span></div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; </div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="level_8inl.html">level.inl</a>&quot;</span></div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160; </div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="preprocessor">#endif // CPPLOGGING_LEVEL_H</span></div>
+<a href="level_8inl.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160; </div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespace_cpp_logging.html">CppLogging</a> {</div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160; </div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> TOutputStream&gt;</div>
+<div class="line"><a name="l00012"></a><span class="lineno"><a class="line" href="namespace_cpp_logging.html#a5e86e3576a78d45930a1311847b8786c">   12</a></span>&#160;<span class="keyword">inline</span> TOutputStream&amp; <a class="code" href="namespace_cpp_logging.html#a956bd224f5dec3857ff387f0bf3d5eb9">operator&lt;&lt;</a>(TOutputStream&amp; stream, <a class="code" href="namespace_cpp_logging.html#ac4e889a814b82af010ef93be2e618f3b">Level</a> level)</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;{</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    <span class="keywordflow">switch</span> (level)</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    {</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;        <span class="keywordflow">case</span> <a class="code" href="namespace_cpp_logging.html#ac4e889a814b82af010ef93be2e618f3bab50339a10e1de285ac99d4c3990b8693">Level::NONE</a>:</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;            stream &lt;&lt; <span class="stringliteral">&quot;None&quot;</span>;</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;            <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;        <span class="keywordflow">case</span> <a class="code" href="namespace_cpp_logging.html#ac4e889a814b82af010ef93be2e618f3ba19da7170bea36556dde582519795f3fc">Level::FATAL</a>:</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;            stream &lt;&lt; <span class="stringliteral">&quot;Fatal&quot;</span>;</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;            <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;        <span class="keywordflow">case</span> <a class="code" href="namespace_cpp_logging.html#ac4e889a814b82af010ef93be2e618f3babb1ca97ec761fc37101737ba0aa2e7c5">Level::ERROR</a>:</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;            stream &lt;&lt; <span class="stringliteral">&quot;Error&quot;</span>;</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;            <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;        <span class="keywordflow">case</span> <a class="code" href="namespace_cpp_logging.html#ac4e889a814b82af010ef93be2e618f3ba32bd8a1db2275458673903bdb84cb277">Level::WARN</a>:</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;            stream &lt;&lt; <span class="stringliteral">&quot;Warn&quot;</span>;</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;            <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;        <span class="keywordflow">case</span> <a class="code" href="namespace_cpp_logging.html#ac4e889a814b82af010ef93be2e618f3ba551b723eafd6a31d444fcb2f5920fbd3">Level::INFO</a>:</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;            stream &lt;&lt; <span class="stringliteral">&quot;Info&quot;</span>;</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;            <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;        <span class="keywordflow">case</span> <a class="code" href="namespace_cpp_logging.html#ac4e889a814b82af010ef93be2e618f3badc30ec20708ef7b0f641ef78b7880a15">Level::DEBUG</a>:</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;            stream &lt;&lt; <span class="stringliteral">&quot;Debug&quot;</span>;</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;            <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;        <span class="keywordflow">case</span> <a class="code" href="namespace_cpp_logging.html#ac4e889a814b82af010ef93be2e618f3ba5fb1f955b45e38e31789286a1790398d">Level::ALL</a>:</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;            stream &lt;&lt; <span class="stringliteral">&quot;All&quot;</span>;</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;            <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;        <span class="keywordflow">default</span>:</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;            stream &lt;&lt; <span class="stringliteral">&quot;&lt;unknown&gt;&quot;</span>;</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;            <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    }</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <span class="keywordflow">return</span> stream;</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;}</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; </div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;} <span class="comment">// namespace CppLogging</span></div>
 </div><!-- fragment --></div><!-- contents -->
 <div class="ttc" id="anamespace_cpp_logging_html_ac4e889a814b82af010ef93be2e618f3ba5fb1f955b45e38e31789286a1790398d"><div class="ttname"><a href="namespace_cpp_logging.html#ac4e889a814b82af010ef93be2e618f3ba5fb1f955b45e38e31789286a1790398d">CppLogging::Level::ALL</a></div><div class="ttdeci">@ ALL</div><div class="ttdoc">Log everything.</div></div>
 <div class="ttc" id="anamespace_cpp_logging_html_a956bd224f5dec3857ff387f0bf3d5eb9"><div class="ttname"><a href="namespace_cpp_logging.html#a956bd224f5dec3857ff387f0bf3d5eb9">CppLogging::operator&lt;&lt;</a></div><div class="ttdeci">TOutputStream &amp; operator&lt;&lt;(TOutputStream &amp;stream, TimeRollingPolicy policy)</div><div class="ttdoc">Stream output: Time rolling policy.</div><div class="ttdef"><b>Definition:</b> <a href="rolling__file__appender_8inl_source.html#l00012">rolling_file_appender.inl:12</a></div></div>
 <div class="ttc" id="anamespace_cpp_logging_html_ac4e889a814b82af010ef93be2e618f3babb1ca97ec761fc37101737ba0aa2e7c5"><div class="ttname"><a href="namespace_cpp_logging.html#ac4e889a814b82af010ef93be2e618f3babb1ca97ec761fc37101737ba0aa2e7c5">CppLogging::Level::ERROR</a></div><div class="ttdeci">@ ERROR</div><div class="ttdoc">Log errors.</div></div>
 <div class="ttc" id="anamespace_cpp_logging_html_ac4e889a814b82af010ef93be2e618f3b"><div class="ttname"><a href="namespace_cpp_logging.html#ac4e889a814b82af010ef93be2e618f3b">CppLogging::Level</a></div><div class="ttdeci">Level</div><div class="ttdoc">Logging level.</div><div class="ttdef"><b>Definition:</b> <a href="level_8h_source.html#l00017">level.h:17</a></div></div>
 <div class="ttc" id="anamespace_cpp_logging_html"><div class="ttname"><a href="namespace_cpp_logging.html">CppLogging</a></div><div class="ttdoc">C++ Logging project definitions.</div><div class="ttdef"><b>Definition:</b> <a href="appender_8h_source.html#l00015">appender.h:15</a></div></div>
-<div class="ttc" id="alevel_8inl_html"><div class="ttname"><a href="level_8inl.html">level.inl</a></div></div>
 <div class="ttc" id="anamespace_cpp_logging_html_ac4e889a814b82af010ef93be2e618f3ba32bd8a1db2275458673903bdb84cb277"><div class="ttname"><a href="namespace_cpp_logging.html#ac4e889a814b82af010ef93be2e618f3ba32bd8a1db2275458673903bdb84cb277">CppLogging::Level::WARN</a></div><div class="ttdeci">@ WARN</div><div class="ttdoc">Log warnings.</div></div>
 <div class="ttc" id="anamespace_cpp_logging_html_ac4e889a814b82af010ef93be2e618f3badc30ec20708ef7b0f641ef78b7880a15"><div class="ttname"><a href="namespace_cpp_logging.html#ac4e889a814b82af010ef93be2e618f3badc30ec20708ef7b0f641ef78b7880a15">CppLogging::Level::DEBUG</a></div><div class="ttdeci">@ DEBUG</div><div class="ttdoc">Log debug.</div></div>
 <div class="ttc" id="anamespace_cpp_logging_html_ac4e889a814b82af010ef93be2e618f3bab50339a10e1de285ac99d4c3990b8693"><div class="ttname"><a href="namespace_cpp_logging.html#ac4e889a814b82af010ef93be2e618f3bab50339a10e1de285ac99d4c3990b8693">CppLogging::Level::NONE</a></div><div class="ttdeci">@ NONE</div><div class="ttdoc">Log nothing.</div></div>
