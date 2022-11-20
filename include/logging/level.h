@@ -1,6 +1,6 @@
 /*!
     \file level.h
-    \brief Logging level enumeration definition
+    \brief Logging level definition
     \author Ivan Shynkarenka
     \date 08.07.2016
     \copyright MIT License
@@ -13,7 +13,7 @@
 
 namespace CppLogging {
 
-//! Logging level enumeration
+//! Logging level
 enum class Level : uint8_t
 {
     NONE  = 0x00,   //!< Log nothing
@@ -25,6 +25,17 @@ enum class Level : uint8_t
     ALL   = 0xFF    //!< Log everything
 };
 
+//! Stream output: Logging level
+/*!
+    \param stream - Output stream
+    \param level - Logging level
+    \return Output stream
+*/
+template <class TOutputStream>
+TOutputStream& operator<<(TOutputStream& stream, Level level);
+
 } // namespace CppLogging
+
+#include "level.inl"
 
 #endif // CPPLOGGING_LEVEL_H

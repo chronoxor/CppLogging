@@ -28,6 +28,15 @@ enum class TimeRollingPolicy
     SECOND      //!< Second rolling policy
 };
 
+//! Stream output: Time rolling policy
+/*!
+    \param stream - Output stream
+    \param policy - Time rolling policy
+    \return Output stream
+*/
+template <class TOutputStream>
+TOutputStream& operator<<(TOutputStream& stream, TimeRollingPolicy policy);
+
 //! Rolling file appender
 /*!
     Rolling file appender writes the given logging record into the file
@@ -137,5 +146,7 @@ private:
 };
 
 } // namespace CppLogging
+
+#include "rolling_file_appender.inl"
 
 #endif // CPPLOGGING_APPENDERS_ROLLING_FILE_APPENDER_H
