@@ -61,6 +61,7 @@ if(CYGWIN OR MINGW)
 endif()
 target_include_directories(cpplogging PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/include")
 target_link_libraries(cpplogging ${LINKLIBS} zlib)
+target_compile_features(cpplogging PUBLIC cxx_std_17)
 list(APPEND INSTALL_TARGETS cpplogging)
 list(APPEND LINKLIBS cpplogging)
 

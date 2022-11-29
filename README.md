@@ -73,6 +73,7 @@ processors (sync, async), filters, layouts (binary, hash, text) and appenders.
 * [git](https://git-scm.com)
 * [gil](https://github.com/chronoxor/gil.git)
 * [python3](https://www.python.org)
+* C++17 standard supported
 
 Optional:
 * [clang](https://clang.llvm.org)
