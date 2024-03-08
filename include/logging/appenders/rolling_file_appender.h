@@ -140,7 +140,7 @@ private:
     Impl& impl() noexcept { return reinterpret_cast<Impl&>(_storage); }
     const Impl& impl() const noexcept { return reinterpret_cast<Impl const&>(_storage); }
 
-    static const size_t StorageSize = 600;
+    static const size_t StorageSize = 608;
     static const size_t StorageAlign = 8;
     alignas(StorageAlign) std::byte _storage[StorageSize];
 };
