@@ -90,12 +90,12 @@ $(function() {
 <div class="line"><span class="keyword">template</span> &lt;&gt;</div>
 <div class="line"><span class="keyword">struct </span>fmt::formatter&lt;Date&gt;</div>
 <div class="line">{</div>
-<div class="line">     constexpr <span class="keyword">auto</span> parse(format_parse_context&amp; ctx) -&gt; decltype(ctx.begin()) { <span class="keywordflow">return</span> ctx.begin(); }</div>
+<div class="line">    constexpr <span class="keyword">auto</span> parse(format_parse_context&amp; ctx) -&gt; decltype(ctx.begin()) { <span class="keywordflow">return</span> ctx.begin(); }</div>
 <div class="line"> </div>
-<div class="line">    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> FormatContext&gt;</div>
-<div class="line">    <span class="keyword">auto</span> format(<span class="keyword">const</span> Date&amp; date, FormatContext&amp; ctx) -&gt; decltype(ctx.out())</div>
+<div class="line">    <span class="keyword">auto</span> format(<span class="keyword">const</span> Date&amp; date, format_context&amp; ctx) <span class="keyword">const</span> -&gt; decltype(ctx.out())</div>
 <div class="line">    {</div>
-<div class="line">        <span class="keywordflow">return</span> fmt::format_to(ctx.out(), <span class="stringliteral">&quot;{}-{}-{}&quot;</span>, date.year(), date.month(), date.day());</div>
+<div class="line">        fmt::format_to(ctx.out(), <span class="stringliteral">&quot;{}-{}-{}&quot;</span>, date.year(), date.month(), date.day());</div>
+<div class="line">        <span class="keywordflow">return</span> ctx.out();</div>
 <div class="line">    }</div>
 <div class="line">};</div>
 <div class="line"> </div>
@@ -130,12 +130,12 @@ $(function() {
 <div class="line"><span class="keyword">template</span> &lt;&gt;</div>
 <div class="line"><span class="keyword">struct </span>fmt::formatter&lt;DateTime&gt;</div>
 <div class="line">{</div>
-<div class="line">     constexpr <span class="keyword">auto</span> parse(format_parse_context&amp; ctx) -&gt; decltype(ctx.begin()) { <span class="keywordflow">return</span> ctx.begin(); }</div>
+<div class="line">    constexpr <span class="keyword">auto</span> parse(format_parse_context&amp; ctx) -&gt; decltype(ctx.begin()) { <span class="keywordflow">return</span> ctx.begin(); }</div>
 <div class="line"> </div>
-<div class="line">    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> FormatContext&gt;</div>
-<div class="line">    <span class="keyword">auto</span> format(<span class="keyword">const</span> DateTime&amp; datetime, FormatContext&amp; ctx) -&gt; decltype(ctx.out())</div>
+<div class="line">    <span class="keyword">auto</span> format(<span class="keyword">const</span> DateTime&amp; datetime, format_context&amp; ctx) <span class="keyword">const</span> -&gt; decltype(ctx.out())</div>
 <div class="line">    {</div>
-<div class="line">        <span class="keywordflow">return</span> fmt::format_to(ctx.out(), <span class="stringliteral">&quot;{} {}:{}:{}&quot;</span>, datetime.date(), datetime.hours(), datetime.minutes(), datetime.seconds());</div>
+<div class="line">        fmt::format_to(ctx.out(), <span class="stringliteral">&quot;{} {}:{}:{}&quot;</span>, datetime.date(), datetime.hours(), datetime.minutes(), datetime.seconds());</div>
+<div class="line">        <span class="keywordflow">return</span> ctx.out();</div>
 <div class="line">    }</div>
 <div class="line">};</div>
 <div class="line"> </div>
