@@ -31,7 +31,7 @@ GitHub: https://github.com/chronoxor/CppLogging
 namespace CppLogging {
 
 //! Project version
-const char version[] = "1.0.4.0";
+const char version[] = "1.0.5.0";
 
 } // namespace CppLogging
 
