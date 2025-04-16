@@ -320,8 +320,8 @@ inline void SerializeArgument(Record& record, const fmt::detail::named_arg<char,
 
 #if FMT_USE_NONTYPE_TEMPLATE_ARGS
 
-template <typename T, typename Char, size_t N, fmt::detail_exported::fixed_string<Char, N> Str>
-inline void SerializeArgument(Record& record, const fmt::detail::statically_named_arg<T, Char, N, Str>& argument)
+template <typename T, typename Char, size_t N, fmt::detail::fixed_string<Char, N> Str>
+inline void SerializeArgument(Record& record, const fmt::detail::static_named_arg<T, Char, N, Str>& argument)
 {
     // Append the argument type
     record.buffer.emplace_back((uint8_t)ArgumentType::ARG_NAMEDARG);
