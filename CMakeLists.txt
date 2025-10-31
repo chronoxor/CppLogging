@@ -29,8 +29,14 @@ include(SystemInformation)
 # Modules
 add_subdirectory("modules")
 
+# Find nlohmann/json library
+include("${CMAKE_CURRENT_SOURCE_DIR}/modules/nlohmann_json.cmake")
+
+# Find OpenSSL library
+include("${CMAKE_CURRENT_SOURCE_DIR}/modules/openssl.cmake")
+
 # Link libraries
-list(APPEND LINKLIBS cppcommon)
+list(APPEND LINKLIBS cppcommon nlohmann_json ${OPENSSL_LIBRARIES})
 
 # Support zlib/contrib/minizip
 file(GLOB_RECURSE MINIZIP_FILES "source/logging/appenders/minizip/*.c")
@@ -58,6 +64,10 @@ else()
 endif()
 if(CYGWIN OR MINGW)
   target_compile_definitions(cpplogging PRIVATE USE_FILE32API=1)
+endif()
+if(WIN32)
+  target_compile_definitions(cpplogging PRIVATE WIN32_LEAN_AND_MEAN NOMINMAX)
+  target_link_libraries(cpplogging PRIVATE pdh)
 endif()
 target_include_directories(cpplogging PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/include")
 target_link_libraries(cpplogging ${LINKLIBS} zlib)
