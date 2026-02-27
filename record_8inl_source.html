@@ -493,7 +493,7 @@ $(function() {
 <div class="foldopen" id="foldopen00368" data-start="{" data-end="}">
 <div class="line"><a id="l00368" name="l00368"></a><span class="lineno"><a class="line" href="class_cpp_logging_1_1_record.html#af7c1f4162a9cbcf84d1e37877f39b00d">  368</a></span><span class="keyword">inline</span> <a class="code hl_function" href="class_cpp_logging_1_1_record.html#a9869b96b578bbb85709cdaec079526ee">Record</a>&amp; <a class="code hl_function" href="class_cpp_logging_1_1_record.html#af7c1f4162a9cbcf84d1e37877f39b00d">Record::StoreFormat</a>(fmt::format_string&lt;T...&gt; pattern, T&amp;&amp;... args)</div>
 <div class="line"><a id="l00369" name="l00369"></a><span class="lineno">  369</span>{</div>
-<div class="line"><a id="l00370" name="l00370"></a><span class="lineno">  370</span>    fmt::string_view view = pattern;</div>
+<div class="line"><a id="l00370" name="l00370"></a><span class="lineno">  370</span>    <span class="keyword">const</span> fmt::string_view&amp; view = pattern.get();</div>
 <div class="line"><a id="l00371" name="l00371"></a><span class="lineno">  371</span>    <a class="code hl_variable" href="class_cpp_logging_1_1_record.html#a5633a400f28f8b80878eb0979e128668">message</a>.assign(view.begin(), view.end());</div>
 <div class="line"><a id="l00372" name="l00372"></a><span class="lineno">  372</span>    <a class="code hl_function" href="namespace_cpp_logging.html#adb49911690ca0cfe1f7d387a6ffee5e5">SerializeArgument</a>(*<span class="keyword">this</span>, std::forward&lt;T&gt;(args)...);</div>
 <div class="line"><a id="l00373" name="l00373"></a><span class="lineno">  373</span>    <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
