@@ -61,7 +61,7 @@ if(CYGWIN OR MINGW)
   target_compile_definitions(cpplogging PRIVATE USE_FILE32API=1)
 endif()
 target_include_directories(cpplogging PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/include")
-target_link_libraries(cpplogging ${LINKLIBS} zlib)
+target_link_libraries(cpplogging ${LINKLIBS} zlibstatic)
 list(APPEND INSTALL_TARGETS cpplogging)
 list(APPEND LINKLIBS cpplogging)
 
